@@ -1,0 +1,10 @@
+<div class='setting-bg'>
+<b>補上您的起床紀錄</b>
+<% form_tag :action => 'create' do %>
+  <%= datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year %>
+  <%= submit_tag "設定完成" %>
+  <%= link_to_cancel %>
+<% end %>
+</div>
+<hr>
+<br />

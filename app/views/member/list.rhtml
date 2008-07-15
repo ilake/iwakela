@@ -1,0 +1,94 @@
+<%#= include_jq4r %>
+<div id="month-form">    
+  <% form_tag :controller => 'member', :action => 'list', :id => @user do %>
+    <%= render :partial => 'shared/date_select' %>
+  <% end %>
+</div>
+<div class="clear"></div>
+  <br />
+<div>
+  <%= render :partial => 'show_graph' %>
+</div>
+<div id="remote"></div>
+<% unless is_owner?(@user)%>
+  <div class='group_feature'>
+    <%= link_to "#{@user.name}的個人檔案", :controller => 'user', :action => 'show', :id => @user.id %>
+    <%= @user.profile.others %>
+  </div>
+<br />
+<hr>
+<% end %>
+
+<% if is_owner?(@user)%>
+  <div class='group_feature'>
+    <span>
+      <%= jquery_link_to_remote "設定目標時間", :update => 'remote', :url => {:action => 'target_time_now'} %>
+    </span>
+    <span>
+      <%= jquery_link_to_remote "補上起床時間", :update => 'remote', :url => {:action => 'new'} %>
+    </span>
+  </div>
+<% end %>
+<table>  
+  <thead>
+    <th>起床時間</th>
+    <th>給今天的一句話...</th>
+    <th>今日目標...</th>
+    <% if is_owner?(@user)%>
+    <th></th>
+    <% end %>
+    <th>回</th>
+    <% if is_owner?(@user)%>
+      <th>刪</th>
+    <% end %>
+  </thead>
+  <% @records.each do |record|  %>
+    <% unless record.success %>
+      <tr class = target_fail>
+    <% else %>
+      <tr>
+    <% end %>
+        <td class='todo_time'>
+          <%= record_flag(record.state)%>
+          <%= exact_datetime_string(record.todo_time)%>
+          (<%= week_day(record.todo_time.wday)%>)
+        <% if is_owner?(@user)%>
+          <%=jquery_link_to_remote image_tag("pencil.png",
+                                             :border => "0",
+                                             :mouseover => image_path("pencil_over.png")),
+                                             :update => 'remote',
+                                             :url => {:action => 'edit_time', :id => record.id}
+        %>
+        <% end %>
+        </td>
+        </td>
+        <td class='diary'>
+          <%=link_to_diary(record, record.content) %>
+          <% if is_owner?(@user)%>
+            <%=jquery_link_to_remote image_tag("pencil.png",
+                                               :border => "0",
+                                               :mouseover => image_path("pencil_over.png")),
+                                               :update => 'remote',
+                                               :url => {:action => 'write_diary', :id => record.id}
+          %>
+          <% end %>
+        </td>
+        <td class='goal'><%=record.com_goal%></td>
+        <% if is_owner?(@user)%>
+        <td><%=jquery_link_to_remote image_tag("todo.png",
+                                               :border => "0",
+                                               :mouseover => image_path("todo_over.png")),
+                                               :update => 'remote',
+                                               :url => {:controller => 'goals', :action => 'create', :id => record.id}
+        %></td>
+        <% end %>
+        <td class='rsp'><%=record.comments.size%></td>
+        <% if is_owner?(@user)%>
+          <td><%=link_to_delete('member', record.id)%></td>
+        <% end %>
+  </tr>
+<% end %>
+  <tr>
+  </tr>
+</table>
+<%= will_paginate @records %>

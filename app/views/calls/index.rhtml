@@ -1,0 +1,19 @@
+<div>
+  <%= link_to '請叫我起床', :controller => 'calls', :action => 'new' %>
+</div>
+<br />
+<% @calls.each do |c|%>
+  <div class='call_block'>
+    <div class='call_state'>
+      <%= state_image(c.accepter, 'checkmark.png', 'helpmark.png')%>
+    </div>
+    <div class='call_data'>
+      <div>
+        <%= need_accepter(c.demander, c.id) %> 希望 <%= exact_datetime_string(c.time) %>起床,
+        <%= need_accepter(c.accepter, c.id) %>可以叫你起床
+      </div>
+      <div><%= link_to c.title, :action => 'show', :id => c.id %></div>
+    </div>
+  </div>
+  <div class='clear'></div>
+<% end %>

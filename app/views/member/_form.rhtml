@@ -1,0 +1,4 @@
+<label for="diary">編輯起床時間</label><br />
+<p><%= datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year %></p>
+<label for="diary">給今天的一句話</label><br />
+<p><%= text_area 'record', 'content', :rows => '4', :cols => '60' %></p>

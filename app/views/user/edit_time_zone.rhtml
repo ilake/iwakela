@@ -1,0 +1,6 @@
+<% form_for :user, @me, :url => {:action => 'edit', :id => @me.id} do |f|%>
+  時區:<br />
+  <%= f.time_zone_select :time_zone, nil, :default => "Taipei" %>
+  <%= submit_tag "變更"%>
+  <%= link_to '取消', :controller => 'member', :action => 'list', :id => @me %>
+<% end %>

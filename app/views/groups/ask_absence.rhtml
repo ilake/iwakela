@@ -1,0 +1,10 @@
+<h1>我要請假</h1>
+<% form_tag :action => 'absence', :id => params[:id] do %>
+  <%= error_messages_for 'group' %>
+
+  <p><label for="group_absence">勾選之後, 就是一直維持請假</label><br/>
+    <%= check_box_tag :absence %>:我要請假</p>
+
+  <%= submit_tag "確定完成" %>
+  <%= link_to '取消', :action => 'index' %>
+<% end %>

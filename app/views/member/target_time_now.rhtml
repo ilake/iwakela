@@ -1,0 +1,45 @@
+<div class='setting-bg'>
+<b>我的起床目標時間</b>
+<p>
+<div id = "select">
+  <% form_tag :action => 'target_time_now' do |f|%>
+      每天
+
+      <%= select_hour Time.now %>時
+      <%= select_minute Time.now %>分
+      <%= submit_tag "設定完成" %>
+      <%= link_to_cancel  %>
+  <% end %>
+</div>
+</p>
+<br />
+<hr>
+<p>
+  可設定一個禮拜內不同起床時間, 如果這邊有設定就是以這邊的目標為準
+<div id = "select">
+  <% form_tag :controller => 'targets', :action => 'target_time_week' do |f|%>
+      每週
+      <%= select_week %>
+      <%= select_hour Time.now %>時
+      <%= select_minute Time.now %>分
+      <%= submit_tag "設定完成" %>
+      <%= link_to_cancel %>
+    <% end %>
+    <table>
+      <th>星期</th>
+      <th>起床目標時間</th>
+      <th>刪除</th>
+      <% @me.targets.find(:all, :order => 'week').each do |t|%>
+      <tr>
+        <td><%= AllHelper::WEEK_DAYS[t.week] %></td>
+        <td><%= extract_target_time(t.todo_target_time)%></td>
+        <td><%= link_to_delete('targets', t.id)%> </td>
+      </tr>
+    <% end %>
+    </table>
+</div>
+</p>
+</div>
+<hr>
+<br />
+

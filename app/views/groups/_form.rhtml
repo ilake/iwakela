@@ -1,0 +1,15 @@
+  <p><label for="group_title">團名(必填, 最多十個字)</label><br/>
+    <%= text_field 'group', 'name' %></p>
+
+  <p><label for="group_condition">希望團員的條件(必填, 例如希望是幾點起床的, 最多300字)</label><br/>
+    <%= text_area 'group', 'condition', :rows => '4', :cols => '40'  %></p>
+
+  <p><label for="group_board">公告欄</label><br/>
+    <%= text_area 'group', 'board', :rows => '4', :cols => '40'  %></p>
+
+  <p><label for="group_user_num">團員人數上限(必填, 目前最多30人)</label><br/>
+    <%= text_field 'group', 'user_num' %></p>
+
+
+  <p><label for="group_user_num">私人團體(團員通通需由團長加入)</label><br/>
+    <%= check_box_tag :private %></p>

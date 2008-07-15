@@ -1,0 +1,5 @@
+<% @me.goals.each do |g|%>
+  <% if g.choosed %>
+    <%= h(truncate(g.name, 4))%><%= state_image(g.done) %>
+  <% end %>
+<% end %>

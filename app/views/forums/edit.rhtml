@@ -1,0 +1,16 @@
+<h1>編輯</h1>
+
+<% form_for :forum, :url => {:action => 'update', :id => @forum } do |f|%>
+  <%= error_messages_for 'forum' %>
+
+  <p><label for="forum_subject">標題</label><br/>
+    <%= f.text_field :subject %></p>
+
+  <p><label for="forum_content">內容</label><br/>
+    <%= f.text_area :content %></p>
+  <%= submit_tag '編輯完成' %>
+<% end %>
+
+<%= link_to '取消', :action => 'show', :id => @forum %> |
+<%= link_to '列表', :action => 'index' %>
+

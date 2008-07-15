@@ -1,0 +1,702 @@
+.title a {
+  text-decoration:none;
+}
+
+.title a:hover {
+  text-decoration:none;
+}
+
+select {
+  border: 0pt none;
+}
+
+#day {
+  margin-left:700px;
+}
+
+td.diary {
+  width: 225px;
+}
+
+td.diary-long {
+  width: 300px;
+}
+
+td.goal{
+  width: 225px;
+}
+
+td.rsp {
+  width: 30px;
+}
+
+td.todo_time {
+  width: 160px;
+}
+td.comment-diary-time {
+  width: 1000px;
+  color :#A0AC89;
+}
+td.comment-diary {
+  width: 1000px;
+}
+td.comment-time {
+  width: 510px;
+}
+div.comment-response {
+  font-weight: bold;
+	font-size: 120%;
+}
+td.medium-font {
+  font-weight: bold;
+	font-size: 120%;
+}
+td.user-name {
+  width: 150px;
+}
+
+td.user-title {
+  width: 200px;
+}
+td.user-rank-profile {
+  width: 250px;
+}
+
+td.user-profile {
+  width: 1000px;
+}
+td.comment-diary-user {
+  /*width: 1000px;*/
+}
+
+#diary.showdiary {
+	border-left: none;
+	border-right: none;
+}
+
+tr.title a{
+  color:   #000000;
+  text-decoration: underline;
+}
+
+td.showdiary-time {
+  width: 1500px;
+}
+
+td.showdiary-content{
+  width: 1275px;
+}
+.current {
+  background: #68A9E3;
+	padding: 3px 6px 3px 14px;
+}
+
+.census {
+	padding: 3px 6px 3px 14px;
+}
+
+#sidetitle {
+  color :#D6BC89;
+}
+
+
+#remote_diary .tdinline div{
+  display: inline;
+}
+
+.pagination {
+  padding: 3px;
+  margin: 3px;
+}
+.pagination a {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  text-decoration: none;
+  color: #000099;
+}
+.pagination a:hover, .pagination a:active {
+  color: #000;
+}
+.pagination span.current {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  font-weight: bold;
+  background-color: #68A9E3;
+  color: #FFF;
+}
+.pagination span.disabled {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  color: #ddd;
+}
+
+#month-form {  
+  float: left;
+  display: block;
+}
+
+#choices {
+  float: right;
+}
+
+b.placeholder-time {
+  clear: both;
+}
+
+#placeholder {
+  clear: both;
+  width: 700px;
+  height: 300px;
+}
+
+#user-show {
+  /*float: left;*/
+}
+
+div.auth {
+  font-weight: bold;
+	font-size: 120%;
+}
+
+#profile {
+}
+.fieldWithoutErrors,
+.fieldWithErrors
+{
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+
+  /* !!HACK!! IE will not use this because it does not understand !important.  Border is not needed for firefox, so make it 0px!*/
+  border-width: 0px !important;    
+  /*for IE!*/
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+}
+
+.fieldWithErrors
+{
+  display: inline;
+  width: 30px;
+  background: pink;
+  background-color:pink;
+  outline-color: red;
+
+/*for IE!*/
+border-color: red;
+}
+
+/* Browser support may be limited here...*/
+.fieldWithErrors input,
+.fieldWithErrors select,
+.fieldWithErrors textarea
+{
+  background: pink;
+  background-color: pink;
+}
+
+.alert {
+  padding: 1px 5px 1px 5px;
+  background: #CC0000;
+  color : #FFFFFF;
+  font-weight: bold;
+}
+
+.alert a{
+  color : #FFFFFF;
+}
+
+.announce {
+  background-color:#FFF1A8
+  font-weight:bold;
+  display:block;
+}
+
+span.memo {
+  color : #666666;
+}
+
+.ebhead {
+  color : #FFF;
+}
+
+div.today_result {
+  float:left;
+  line-height:16px;
+  width:auto;
+}
+
+div.success_users {
+  border-right:1px solid #CBCACA;
+  float:left;
+  margin-bottom:10px;
+  margin-right:15px;
+  padding-right:15px;
+  width:120px;
+}
+
+div.fail_users {
+  border-right:1px solid #CBCACA;
+  padding-right:15px;
+  float:left;
+  margin-bottom:10px;
+  width:120px;
+}
+
+div.talk {
+  border-right:1px solid #CBCACA;
+  margin-right:15px;
+  float:left;
+  width:420px;
+}
+
+h2.result-title {
+  color:#663300 !important;
+  font-size:16px;
+  letter-spacing:2px;
+  margin:0px;
+  padding-top:0px;
+}
+
+div.result-comment-ceil {
+  float:left;
+  padding:10px;
+  border-top: 1px solid #EFEFEF;
+  width:400px;
+}
+.poo {
+  position:absolute;
+  padding-top:80px;  
+  padding-left:-10px;  
+}
+
+.orz {
+  position:absolute;
+  padding-top:20px;  
+  padding-left:80px;  
+}
+
+.bird-down {
+  position:relative;
+  padding-top:10px;  
+}
+
+.h-time {
+  color:#BBBBBB;
+}
+
+.faq {
+  font-weight: normal;
+  line-height: 26px;
+  font-size: 12px;
+}
+
+.clickme {
+  border:1px solid #777777;
+}
+.lazybird {
+  position:relative;
+  padding-top:0px;
+  padding-left:0px;
+}
+.clickme {
+ color:#F7D785;
+}
+
+div.set-feature {
+  background-color: #68A9E3;
+}
+td.comment-time {
+  width: 510px;
+}
+div.comment-response {
+  font-weight: bold;
+	font-size: 120%;
+}
+td.medium-font {
+  font-weight: bold;
+	font-size: 120%;
+}
+td.user-name {
+  width: 150px;
+}
+td.user-rank-profile {
+  width: 250px;
+}
+
+td.user-profile {
+  width: 1000px;
+}
+td.comment-diary-user {
+  /*width: 1000px;*/
+}
+
+#diary.showdiary {
+	border-left: none;
+	border-right: none;
+}
+
+tr.title {
+  background:   #d8dfe7;
+}
+
+tr.title a{
+  color:   #000000;
+  text-decoration: underline;
+}
+
+td.showdiary-time {
+  width: 1500px;
+}
+
+td.showdiary-content{
+  width: 1275px;
+}
+.current {
+  background: #68A9E3;
+	padding: 3px 6px 3px 14px;
+}
+
+.census {
+	padding: 3px 6px 3px 14px;
+}
+
+#sidetitle {
+  color :#D6BC89;
+}
+
+
+#remote_diary .tdinline div{
+  display: inline;
+}
+
+.pagination {
+  padding: 3px;
+  margin: 3px;
+}
+.pagination a {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  text-decoration: none;
+  color: #000099;
+}
+.pagination a:hover, .pagination a:active {
+  color: #000;
+}
+.pagination span.current {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  font-weight: bold;
+  background-color: #68A9E3;
+  color: #FFF;
+}
+.pagination span.disabled {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  color: #ddd;
+}
+
+#month-form {  
+  float: left;
+  display: block;
+}
+
+#choices {
+  float: right;
+}
+
+b.placeholder-time {
+  clear: both;
+}
+
+#placeholder {
+  clear: both;
+}
+
+#user-show {
+  /*float: left;*/
+}
+
+div.auth {
+  font-weight: bold;
+	font-size: 120%;
+}
+
+#profile {
+}
+.fieldWithoutErrors,
+.fieldWithErrors
+{
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+
+  /* !!HACK!! IE will not use this because it does not understand !important.  Border is not needed for firefox, so make it 0px!*/
+  border-width: 0px !important;    
+  /*for IE!*/
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+}
+
+.fieldWithErrors
+{
+  display: inline;
+  width: 30px;
+  background: pink;
+  background-color:pink;
+  outline-color: red;
+
+/*for IE!*/
+border-color: red;
+}
+
+/* Browser support may be limited here...*/
+.fieldWithErrors input,
+.fieldWithErrors select,
+.fieldWithErrors textarea
+{
+  background: pink;
+  background-color: pink;
+}
+
+.announce {
+  background: #FFF1A8;
+  font-weight: bold;
+}
+
+span.memo {
+  color : #666666;
+}
+
+div.today_result {
+  float:left;
+  line-height:16px;
+  width:auto;
+}
+
+h2.result-title {
+  color:#663300 !important;
+  font-size:16px;
+  letter-spacing:2px;
+  margin:0px;
+  padding-top:0px;
+}
+
+.poo {
+  position:absolute;
+  padding-top:80px;  
+  padding-left:-10px;  
+}
+
+.orz {
+  position:absolute;
+  padding-top:20px;  
+  padding-left:80px;  
+}
+
+.bird-down {
+  position:relative;
+  padding-top:10px;  
+}
+
+.h-time {
+  color:#BBBBBB;
+}
+
+.faq {
+  font-weight: normal;
+  line-height: 26px;
+  font-size: 12px;
+}
+
+.clickme {
+  border:1px solid #777777;
+}
+.lazybird {
+  position:relative;
+  padding-top:0px;
+  padding-left:0px;
+}
+.clickme {
+ color:#F7D785;
+}
+
+div.setting-bg{
+  background-color:#E1ECFE;
+}
+
+img{
+  border:0px;
+}
+
+td.forum_created_at{
+  width: 100px;
+}
+
+td.forum_subject{
+  width: 400px;
+}
+
+td.forum_author{
+  width: 100px;
+}
+
+td.forum-diary-time {
+  width: 500px;
+  color :#A0AC89;
+}
+
+td.forum-content{
+  width: 1000px;
+}
+
+.call_state{
+  float:left;
+}
+
+.call_data{
+  float:left;
+}
+
+.call_block {
+ border-bottom: 1px solid #dadada;
+ float:left;
+ width:760px;
+ padding: 10px 5px 10px 0px;
+}
+
+.clear {
+  clear:both;
+  line-height: 0px;
+} 
+
+tr.target_fail {
+  background: #FFEA70;
+}
+
+.announce_word {
+  float: left;
+  width: 560px;
+	line-height: 25px;
+  font-weight: bold;
+}
+
+.picture_border {
+  border:1px solid #CBCACA;
+}
+
+div.comment_title {
+  padding: 5px 0px 0px 0px;
+}
+div.comment_content {
+  border-bottom:1px solid #CBCACA;
+  padding: 10px 0px 10px 0px;
+}
+span.no_line_name a{
+  text-decoration: none;
+  color: #0033CC;
+}
+span.no_line_name a:hover {
+  text-decoration: underline;
+  color: #0033CC;
+}
+
+td.group_name{
+  width: 200px;
+}
+
+td.group_owner{
+  width: 100px;
+}
+
+td.group_condition{
+  width: 500px;
+}
+
+.group_feature span{
+  padding: 0px 5px 0px 5px;
+}
+
+.group_feature{
+  padding: 10px 10px 10px 10px;
+  background-color: #E1ECFE;
+  margin: 0px 0px 5px 0px;
+}
+
+div.group_feature a{
+	color: #1010C8;
+}
+
+div.group_setting {
+  background-color: #B5EDBC;
+  padding: 5px 5px 5px 10px;
+  margin: 0px 0px 5px 0px;
+  color: #000000;
+}
+div.group_setting a{
+	color: #1010C8;
+}
+
+.group_setting div{
+  padding: 1px 0px 1px 0px;
+}
+
+div.group_board{
+  padding: 5px 5px 5px 10px;
+}
+
+div.group_news{
+  padding: 5px 5px 5px 10px;
+  background-color: #FFEA70;
+  margin: 0px 0px 5px 0px;
+  color: #000000;
+}
+
+div.member_result{
+  float:left;
+  line-height:16px;
+  border-right:1px solid #CBCACA;
+  padding-right:15px;
+  margin-bottom:10px;
+  width:120px;
+  color: #000000;
+}
+
+div.member_result div {
+  padding: 5px 5px 5px 5px;
+}
+
+div.member_result span{
+  display: block;
+  border:1px solid #CBCACA;
+}
+
+
+td.member-profile {
+  width: 400px;
+}
+
+.paginate {
+  float:left;
+}
+
+.black {
+  color: #1010C8;
+}
+
+.attendance_rate {
+  float:left;
+  color:#000000;
+}
+
+.attendance_rate div{
+  padding: 3px 0px 3px 0px;
+}
+
+div.even{
+  background:   #d8dfe7;
+  margin: 10px 0px 10px 0px;
+  padding: 3px 0px 3px 0px;
+}

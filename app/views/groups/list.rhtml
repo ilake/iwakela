@@ -1,0 +1,18 @@
+<%= link_to_group('回到早起團', @group)%>
+<table>  
+  <thead>
+    <th>暱稱</th>
+    <th>頭銜</th>
+    <th>自介</th>
+    <th>開除</th>
+  </thead>
+  <% @members.each do |u|  %>
+    <tr class="<%= cycle('title','')%>">
+      <td class="user-name"><%= "<span class='alert'>[請假中]</span>" unless u.status.fight%><%= link_to_user(u, u.name, nil, true) %></td>    
+      <td class="user-title"><%= u.group_nickname %><%= link_to_set_title(@group, u)%></td>    
+      <td class="member-profile"><%= link_to_user(u, u.profile.others) %></td>    
+      <td><%= link_to_fire(@group, u) %></td>    
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @members %>

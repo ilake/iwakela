@@ -1,0 +1,61 @@
+<script type='text/javascript'>
+  function show_poo() {
+    $('img.poo').hide();
+    $('span.lazybird img').attr('disabled', false).removeClass('bird-down');
+  }
+
+  $(function(){
+    $('img.poo').hide();
+
+    $('span.lazybird img').click(function(){
+      $(this).addClass('bird-down');
+      $('img.poo').show();
+      $('span.lazybird img').attr('disabled', true);
+        setTimeout(show_poo, 1000);
+    });
+  });
+
+</script>
+
+<div class='today_result'>
+  <div class='fail_users'>
+    <span class='lazybird'>
+      <span class='clickme'>點我, 點我</span>
+      <%= image_tag('lazybird.gif')%>
+    </span>
+    <%= image_tag('poo.gif', :class => 'poo')%>
+    <h2 class='result-title'>懶鳥區</h2>
+    <% @lazy_users.each do |lu|%>
+      <div class='fail_one'><%= where_is_me(lu, lu.name) %></div>
+    <% end %>
+    <%= image_tag('orz.gif', :class => 'orz')%>
+  </div>
+
+  <div class='talk'>
+    <h2 class='result-title'>嘰嘰喳喳</h2>
+    <% form_tag :controller => 'chats', :action => 'create' do %>
+      <div>我說 :<%= text_field :chats, :content, :size => 30, :maxlength => 50 %>
+      <%= submit_tag '送出'%></div>
+    <% end %>
+    <div class='result-comment'>
+      <% @chat.each do |c|%>
+        <div class='result-comment-ceil'>
+          <div><%= link_to_user(c.user, c.user.name)  %>
+            <span class='h-time'><%= "#{distance_of_time_in_words_to_now(c.created_at)} ago"%></span>
+          </div>
+          <div><%= c.content %></div>
+        </div>
+      <% end %>
+    </div>
+    <%= will_paginate @chat %>
+  </div>
+
+  <div class='success_users'>
+    <h2 class='result-title'>早鳥區</h2>
+    <% @early_users.each do |eu|%>
+      <div class='success_one'><%= where_is_me(eu, eu.name) %></div>
+    <% end %>
+  </div>
+
+
+</div>

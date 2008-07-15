@@ -1,0 +1,2 @@
+<div><%= link_to '起床紀錄', :controller => 'member', :action => 'list', :id => @user.id %></div><br />
+<%= render :partial => 'shared/profiles', :locals => {:user => @user, :profile => @profile}%>

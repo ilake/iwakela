@@ -1,0 +1,5 @@
+<% form_tag :controller => "main", :action => "search"  do %>
+  <%= select('search_item', :search_type, [['暱稱', 0], ['日誌', 1]], :multiple => true)%>
+  <%= text_field_tag :query, params[:query], :size => 8 %>
+<%= submit_tag "查詢"%>
+<% end %>

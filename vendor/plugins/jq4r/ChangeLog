@@ -1,0 +1,14 @@
+[verion 0.1.1]
+
+	* lib/jq4r.rb: Fix ``jquery_visual_effect'' method's bug. (speed parameter
+    doesn't be quoted)
+
+	* lib/jq4r.rb: use alias_method to replace the method's prefix from jq_
+    to jquery_
+
+	* install.rb: the script of installing the necessary files for jq4r.
+
+	* javascripts/jq4r.js: combine the jquery-1.2.1.js and jquery.form.js 
+    into jq4r.js and patch the jQuery/Ajax's bug.
+
+

@@ -1,0 +1,17 @@
+<h1>發表心得</h1>
+
+<% form_tag :action => 'create', :group_id => params[:id] do %>
+  <%= error_messages_for 'forum' %>
+
+  <p><label for="forum_subject">標題</label><br/>
+    <%= text_field 'forum', 'subject' %></p>
+
+  <p><label for="forum_content">內容</label><br/>
+    <%= text_area 'forum', 'content' %></p>
+
+  <%= submit_tag "確定完成" %>
+  <%= link_to '取消', :action => 'index' %>
+<% end %>
+
+
+

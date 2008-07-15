@@ -1,0 +1,32 @@
+<span class='alert'>(最近3天)有上且(最少有七筆)紀錄而且(有設定目標時間)才會出現在這裡</span>
+<table>  
+  <thead>
+    <th>暱稱</th>
+    <th>自介</th>
+    <th><%= link_to '比接近目標', :action => 'list_user_rank', :sort => 'diff' %></th>
+    <th><%= link_to '比起床時間', :action => 'list_user_rank', :sort => 'average' %></th>
+    <th><%= link_to '比成功率', :action => 'list_user_rank', :sort => 'success_rate' %></th>
+  </thead>
+  <% @users.each do |u|  %>
+    <tr class="<%= cycle('title','')%>">
+      <td class="user-name"><%= link_to_user(u, u.name, nil, true) %></td>    
+      <td class="user-rank-profile"><%= link_to_user(u, truncate(u.profile.others, 20)) %></td>    
+      <td class="user-average"><%= u.status.diff %>分鐘</td>    
+      <td class="user-average"><%= extract_target_time(u.status.average) %></td>    
+      <td class="user-success-rate"><%= number_to_percentage(u.status.success_rate, :precision => 1)%></td>    
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @users %>
+<br />
+<script type="text/javascript"><!--
+  google_ad_client = "pub-0501077200190082";
+  /* 728x90, 已建立 2008/7/9 */
+  google_ad_slot = "3579364768";
+  google_ad_width = 728;
+  google_ad_height = 90;
+  //-->
+</script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>

@@ -1,0 +1,5 @@
+<% form_for :user, @me, :url => {:action => 'edit'} do |f|%>
+  帳號(信箱):<br />
+  <%= f.text_field :email %>
+  <%= submit_tag "變更"%>
+<% end %>

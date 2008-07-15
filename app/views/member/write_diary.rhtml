@@ -1,0 +1,9 @@
+<div class='setting-bg'>
+<% form_for :record, :url => { :action => 'update', :id => @record } do %>
+        <b>給今天的一句話</b><br />
+        <p><%= text_area 'record', 'content', :rows => '4', :cols => '60' %></p>
+        <%= submit_tag '完成' %>
+        <%= link_to_cancel %>
+<% end %>
+</div>
+<hr>

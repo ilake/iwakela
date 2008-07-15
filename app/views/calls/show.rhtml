@@ -1,0 +1,27 @@
+<div>徵求人: <%= @call.demander.name %></div>
+<div>同意人: <%= @call.accepter.name if @call.accepter %></div>
+<div>備註: <%= @call.title %></div>
+<br />
+<table>
+<% unless @call.comments.nil? %>
+  <% @call.comments.each do |c| %>
+    <tr class="comment-title">
+      <td class="comment-time"><%= link_to_user(c.user, c.user.name)%> 說:</td>
+        <td><%= extract_datetime_string(c.created_at) %></td>
+      </td>
+    </tr>
+    <tr>
+      <td class="comment-content">
+        <%= h(c.content) %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>
+</table>
+<br />
+<% form_tag :controller => 'comments', :action => 'create_comment', :id => @call.id, :model => "call" do %>
+  我說:
+  <br />
+  <%= text_area  'comments', 'content', :rows => '4', :cols => '60' %><br />
+  <%= submit_tag '送出'%>
+<% end %>

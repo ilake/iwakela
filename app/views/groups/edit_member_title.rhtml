@@ -1,0 +1,4 @@
+<% form_for :user, :url => {:action => 'edit_member_title', :id => @user} do |f|%>
+  <%= @user.name %>頭銜:<%= f.text_field :group_nickname %>
+  <%= submit_tag '送出' %>
+<% end %>

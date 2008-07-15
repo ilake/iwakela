@@ -1,0 +1,26 @@
+<% form_for :profile, :url => {:action => 'edit_profile'} do |f|%>
+  <div>自介:</div>
+  <%= f.text_area :others, :rows => '4', :cols => '40' %>
+  <div>性別:</div>
+  <%= f.text_field :sex %>
+  <div>興趣:</div>
+  <%= f.text_field :interest %>
+  <div>連絡方式:</div>
+  <%= f.text_field :connect %>
+  <div>相簿:</div>
+  <%= f.text_field :photo %>
+  <div>生日:</div>
+  <%= f.text_field :birth %>
+  <div>星座:</div>
+  <%= f.text_field :star %>
+  <div>血型:</div>
+  <%= f.text_field :blood %>
+  <div>住址:</div>
+  <%= f.text_field :address %>
+  <div>學校:</div>
+  <%= f.text_field :school%>
+  <div>職業:</div>
+  <%= f.text_field :job %>
+  <div><%= submit_tag "變更"%>
+    <%= link_to '取消', :controller => 'main', :action => 'index' %></div>
+<% end %>

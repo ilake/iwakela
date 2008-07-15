@@ -1,0 +1,20 @@
+<br />
+<div class="comment-response">回應</div>
+<br />
+<% unless item.comments.nil? %>
+  <% item.comments.each do |c| %>
+    <div class='comment_title'>
+      <span class='no_line_name'><%= link_to_user(c.user, c.user.name)%></span>
+      <span class='h-time'>(<%= extract_datetime_string(c.created_at) %>)</span>
+    </div>
+    <div class='comment_content'>
+      <%= h(c.content) %>
+    </div>
+  <% end %>
+<% end %>
+<br />
+<% form_tag :controller => 'comments', :action => 'create', :id => item.id, :model => item.class.to_s do%>
+  回應<br />
+  <%= text_area  'comments', 'content', :rows => '4', :cols => '60' %><br />
+  <%= submit_tag '送出'%>
+<% end %>

@@ -1,0 +1,116 @@
+#handle record table
+class MemberController < ApplicationController
+  before_filter :check_auth
+  before_filter :find_user ,:only => [:create, :show, :show_journal, :show_graph, :target_time_now, :wake_up]
+
+  def index
+    redirect_to :controller => 'main', :action => 'index'
+  end
+
+  def new
+    @record = Record.new
+  end
+
+  #create the records be forgot
+  def create 
+#    record = Record.new(params[:record])
+#    rec = record.todo('wake_up', @user)
+    record = Record.todo('wake_up', @user, params[:record])
+    unless record.nil?
+      @user.records << record
+      if @user.save
+        redirect_to :controller => 'member', :action => 'show'
+      else
+        render :controller => 'member', :action => 'new'
+      end
+    else
+      flash[:notice] = "不能設定現在之後的時間喔"
+      redirect_to :controller => 'member', :action => 'show'
+    end
+  end
+
+  #destroy the record
+  def destroy
+    Record.find(params[:id]).destroy
+    redirect_to :action => 'show'
+  end
+
+  def show
+    @records = @user.records.find_all_todo_time(month_selected, "DESC", params[:page], 7)
+  end
+
+  def show_journal
+    @records = @user.records.find_all_diaries(month_selected, params[:page])
+  end
+
+  def show_graph
+    month = month_selected
+    records = @user.records.find_all_todo_time(month)
+    target_records = @user.records.find_all_todo_time(month)
+    @time = Record.time_to_string(records, "todo_time")
+    @target_time = Record.time_to_string(target_records, "todo_target_time")
+  end
+
+  def target_time_now
+    if request.post?
+      @user.target_time_now = target_time( params[:date][:hour], params[:date][:minute] )
+
+      if @user.save
+        redirect_to :action => 'show'
+      end
+    end
+  end
+
+  def wake_up
+#    @record = Record.new
+#    record = @record.todo('wake_up',@user)
+    record = @user.records.create
+    if record.errors.empty?
+      flash[:notice] = "早安喔"
+      redirect_to :controller => 'member', :action => 'show'
+    else
+      flash[:notice] = "不能設定現在之後的時間喔"
+      redirect_to :controller => 'member', :action => 'show'
+    end
+
+  end
+
+  def write_diary
+    @record = Record.find(params[:id])
+    render :layout => false
+  end
+
+  #write diary to db
+  def update
+    @record = Record.find(params[:id])    
+    if @record.update_attributes(params[:record])
+      redirect_to :action => 'show', :page => params[:page]
+    end
+  end
+
+  private
+  def check_auth
+    unless session[:uid]
+      flash[:error] = 'You need to login first'
+      session[:original_uri] = request.request_uri
+      redirect_to :controller => 'main', :action => 'login'
+    end
+  end
+
+  def target_time(hour, minute)
+      now = Time.now
+      Time.local(now.year, now.month, now.day, hour, minute, 0)
+  end
+
+  def month_selected
+    params[:date].nil? ? Time.now.month : params[:date][:month].to_i 
+  end
+
+  def find_user
+    begin
+      @user = User.find(session[:uid])
+    rescue
+      session[:original_uri] = request.request_uri
+    end
+  end
+end

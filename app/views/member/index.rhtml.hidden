@@ -1,0 +1,13 @@
+<p>今天是<%= @today %> 星期<%= @weekday %></p>
+<table>
+<thead></thead>
+<thead></thead>
+<% @records.each_with_index do |record, i| %>
+  <tr class="<%= cycle('','title')%>">
+    <td width = 2%><%= order_index(i)%></td>
+    <td width = 12%><%= record.user.name%></td>
+    <td width = 18%><%= record.todo_time.strftime("%H:%M") %>起床囉</td>
+    <td width = 65%><%= truncate(record.diary, 20) %></td>
+  </tr> 
+<% end %>
+</table>

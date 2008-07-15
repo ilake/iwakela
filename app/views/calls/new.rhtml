@@ -1,0 +1,16 @@
+<h1>請叫我起床</h1>
+<% form_tag :action => 'create' do %>
+  <%= error_messages_for 'call' %>
+
+  <p><label for="call_title">附註</label><br/>
+    <%= text_field 'call', 'title' %></p>
+
+  <p><label for="call_time">希望幾點起床</label><br/>
+    <%= datetime_select :call, :time, :use_month_numbers => true, :end_year => Time.now.year %>
+
+  <%= submit_tag "確定完成" %>
+  <%= link_to '取消', :action => 'index' %>
+<% end %>
+
+
+

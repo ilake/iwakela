@@ -1,0 +1,8 @@
+<h1>我要開早起團</h1>
+<% form_for :group, :url => {:action => 'create'} do |f| %>
+  <%= error_messages_for 'group' %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "確定完成" %>
+  <%= link_to '取消', :action => 'index' %>
+<% end %>
+

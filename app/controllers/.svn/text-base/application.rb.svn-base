@@ -1,0 +1,21 @@
+# Filters added to this controller apply to all controllers in the application.
+# Likewise, all the methods added will be available for all controllers.
+
+class ApplicationController < ActionController::Base
+  # Pick a unique cookie name to distinguish our session data from others'
+  session :session_key => '_earlybirds_session_id'
+  before_filter :check_user
+    
+  def check_user
+    if uid = session[:uid]
+      @user = User.find_by_id(uid)
+    elsif @user = User.authenticate_by_cookie(cookies[:user_pass])
+      session[:uid] = @user.id
+      cookies[:user_pass] = @user.gen_cookie
+    else
+      # wrong cookie
+      cookies.delete(:user_pass)
+    end
+  end
+
+end

@@ -1,0 +1,6 @@
+production:
+  adapter: mysql
+  database: iwakela_earlybirds
+  username: iwakela_iwakela
+  password: plokmiju1@3$5^
+  host: localhost

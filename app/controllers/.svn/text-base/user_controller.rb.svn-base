@@ -1,0 +1,28 @@
+class UserController < ApplicationController
+  layout "member"
+
+  def list
+    @users = User.find_all_users(params[:page])
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @records = @user.records.find_all_diaries(month_selected, params[:page])
+  end
+
+  def edit
+    @user = User.find(session[:uid])
+    if request.post?
+      if @user.update_attributes(params[:user])
+        flash[:notice] = "變更完成"
+        redirect_to :controller => 'member', :action => 'show'
+      end
+    end
+  end
+
+  def search
+    @users = User.find_by_contents("*#{params[:query]}*", :page =>params[:page], :per_page => 20)
+    render :action => "list"
+  end
+
+end

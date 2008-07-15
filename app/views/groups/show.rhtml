@@ -1,0 +1,66 @@
+  <% if session[:uid]%>
+  <div class='group_feature'>
+    <%= link_to '早起團列表', :action => 'index' %> |
+    <span><%= link_to_join(@group) %></span>
+    <span><%= link_to_post(@group) %></span> 
+    <span><%= link_to_absence(@group) %></span> 
+    <span><%= link_to_invite(@group) %></span>
+    <span><%= link_to_quit(@group) %></span> 
+    <span><%= link_to_edit(@group) %></span> 
+    <span><%= link_to_destroy(@group) %></span>
+  </div>
+<% end %>
+<div class='group_setting'>
+  <div>團名: <%= @group.name %></div>
+  <div>團長: <%= link_to_user(@group.owner, @group.owner.name) %></div>
+  <div>團規: <%= @group.condition%></div>
+  <div>團員: <%= link_to_all_members(@members)%><%= link_to '>>更多', :action => 'list', :id => @group %></div>
+</div>
+  <div class='group_setting'>公佈欄: <%= h(@group.board)%></div>
+
+  <div class='group_news'>
+    最新文章: <% @forums.each do |f| %>
+      <%= link_to f.subject,:controller => 'forums', :action => 'show', :id => f.id %> 
+    <% end %>
+    <%= link_to '>>更多', :controller => 'forums', :action => 'group_forum_list', :id => @group %>
+  </div>
+<div class='member_result'>
+  <div>
+    <span>早起</span><%= render :partial => 'result_partial', :locals => {:members => @success_members}%>
+  </div>
+  <div>
+    <span>晚起</span><%= render :partial => 'result_partial', :locals => {:members => @fail_members}%>
+  </div>
+  <div>
+    <span>沒到</span><%= render :partial => 'result_partial', :locals => {:members => @absence_members}%>
+  </div>
+  <div>
+    <span>請假</span><%= render :partial => 'result_partial', :locals => {:members => @sick_members}%>
+  </div>
+</div>
+<div class='talk'>
+  <% form_tag :controller => 'chats', :action => 'create', :group_id => @group.id do %>
+    我說 :<%= text_field :chats, :content, :size => 30, :maxlength => 50 %>
+    <%= submit_tag '送出'%>
+  <% end %>
+  <div class='result-comment'>
+    <% @chat.each do |c|%>
+      <div class='result-comment-ceil'>
+        <div><%= link_to_member(c.user, c.user.name)  %>
+          <span class='h-time'><%= "#{distance_of_time_in_words_to_now(c.created_at)} ago"%></span>
+        </div>
+        <div><%= c.content %></div>
+      </div>
+    <% end %>
+  </div>
+  <%= will_paginate @chat %>
+</div>
+<div class='attendance_rate'>
+  <div>出席率(當天半夜結算)</div>
+  <% @absence_rank_members.each do |m|%>
+    <div>
+      <%= link_to_user(m, m.name)%>
+      (<%= number_to_percentage(m.status.attendance, :precision => 1) %>)
+    </div>
+  <% end %>
+</div>

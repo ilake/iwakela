@@ -1,0 +1,5 @@
+<% @me.goals.each do |g|%>
+  <% if g.choosed %>
+    <div><%= state_image(g.done) %><%= h(g.name) %>: <%= h(g.comment) %></div>
+  <% end %>
+<% end %>

@@ -1,0 +1,25 @@
+<%= link_to '回到列表', :action => 'index', :group => @forum.group %>
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <b><%= @forum.subject %></b>
+        <% if @forum.user == @me %>
+          <%= link_to '編輯', :action => 'edit', :id => @forum %> 
+        <% end %>
+      </td>
+      <td class="forum-diary-time">
+        <%= extract_datetime_string(@forum.created_at) %>
+        <%= link_to_user(@forum.user, @forum.user.name) %>
+      </td>
+    </tr>
+    <tr>
+      <td class="forum-content">
+        <%= (format_content(@forum.content)) %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+<%= render :partial => "shared/comment", :locals => {:item => @forum }%>

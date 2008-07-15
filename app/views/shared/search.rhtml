@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <th>暱稱</th>
+    <th>日誌</th>
+  </thead>
+  <% @records.each do |r|%>
+    <tr class="<%= cycle('title','')%>">
+      <td class="user-name"><%= link_to_user(r.user, r.user.name) %></td>
+      <td class="user-profile"><%= link_to_diary(r, r.content)%></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= will_paginate @records %>

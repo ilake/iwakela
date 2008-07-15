@@ -1,0 +1,9 @@
+<div class='setting-bg'>
+<% form_for :record, :url => { :action => 'update_time', :id => @record } do %>
+        <b>編輯起床時間</b><br />
+        <p><%= datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year %></p>
+        <%= submit_tag '完成' %>
+        <%= link_to_cancel %>
+<% end %>
+</div>
+<hr>

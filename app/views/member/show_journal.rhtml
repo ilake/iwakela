@@ -1,0 +1,22 @@
+<div id="remote_diary"></div>
+<% form_tag :action => 'show_journal' do |f|%>
+  <%= render :partial => 'shared/date_select' %>
+<% end %>
+
+<table>
+  <% @records.each do |record|%>
+    <%# unless record.content.size.zero? %>
+      <tr>
+        <td class="todo_time">
+          <%= exact_datetime_string(record.todo_time)%>
+        <td class="diary-long">
+          <%= link_to_diary(record, record.content) %>
+        </td>
+        <td class='goal'>
+          <%= record.com_goal %>
+        </td>
+      </tr>
+    <%# end %>
+<% end %>
+</table>
+<%= will_paginate @records %>

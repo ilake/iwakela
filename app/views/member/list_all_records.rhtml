@@ -1,0 +1,19 @@
+<table>
+<% @records.each_with_index do |record, i| %>
+  <tr class="<%= cycle('','title')%>">
+    <td width = 15%><%= link_to_user(record.user, record.user.name, nil, true) %></td>
+    <td width = 15%><%= record.todo_time.strftime("%m/%d %H:%M") %></td>
+    <td width = 35%><%= link_to h(truncate(record.content, 30)),
+                                :controller => 'member',
+                                :action => 'show',
+                                :id => record.id %></td>
+    <td width = 40%>
+    <% if record.goal %>
+      <%= link_to record.goal, :controller => 'member', :action => 'show', :id => record.id %>
+    <% end %>
+    </td>
+  </tr> 
+<% end %>
+</table>
+<%= will_paginate @records %>
+<br />

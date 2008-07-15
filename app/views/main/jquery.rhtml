@@ -1,0 +1,46 @@
+<head>
+  <style type="text/css">
+    div.jqdiv {
+      /*position: absolute;*/
+      position: relative;
+      background-color:#FF0000;
+      width: 140px;
+      padding: 30px;
+      margin: .5em 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+  <script type="text/javascript">
+    $(function(){
+        $('#bt').click(function(){
+          $('div.jqdiv').load('a.html');
+          alert('Loaded!');
+          });      
+
+        $('div.jqdiv').click(function(){
+          $('div.jqdiv').append("ccccc");
+          });      
+
+        $('div.jqdiv a').click(function(event){
+          $('div.jqdiv').append("dddd");
+          event.stopPropagation();
+          });
+        });
+</script>
+    </head>
+
+<div id="bt">btbt</div>
+<div class="jqdiv">
+</div>
+
+<table>
+  <% (1..5).each_with_index do |e,i|%>
+    <tr><td><%= i%></td></tr>
+  <% end %>
+  <% (1..5).each_with_index do |e,i|%>
+    <tr><th><%= i%></th></tr>
+  <% end %>
+</table>

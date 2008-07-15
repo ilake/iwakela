@@ -1,0 +1,13 @@
+<div class="auth">
+  <% if @me %>
+    <%= "<span class='alert'>[請假中]</span>" unless @me.status.fight%>
+    <%= link_to_user(@me, @me.name+"的起床日誌")%> | 
+    <%= link_to_my_group %> |
+    <%= link_to '登出', :controller => 'main', :action => 'logout' %> | 
+    <%= link_to '個人設定', :controller => 'user', :action => 'edit', :id => session[:uid] %>
+  <% else%>
+    <%= link_to '登入', :controller => 'main', :action => 'login' %> | 
+    <%= link_to '註冊', :controller => 'main', :action => 'register' %> | 
+    <%= link_to '忘記密碼', :controller => 'main', :action => 'forget_password' %>
+  <%end%>
+</div>

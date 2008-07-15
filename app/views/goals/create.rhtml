@@ -1,0 +1,80 @@
+<script type="text/javascript">
+  (function($){
+   $(document).ready(function(){
+
+     function goal_del() {
+       var id = {};
+       var tr;
+       var answer = confirm("妳確定要刪除嗎？")
+
+       tr = $(this).parent();
+       id['id'] = $(this).parent().attr('goal_id');
+
+       if (answer) {
+         $.ajax({
+            url:  '/goals/destroy', 
+            type: 'POST',
+            data: id,
+            success:function(html){
+               tr.remove();
+            }
+          });
+       }
+       return false;
+     }
+
+     $('#goal_submit').click(function(){
+       var goals = {};
+       goals['goals[name]'] = $('#goals_name').val();
+
+       $.ajax({
+          url:  '/goals/create', 
+          type: 'POST',
+          data: goals,
+          dataType:  'html',
+          success:function(html){
+          $('#new_goal_pos').after(html);
+            $('td.goal_del').bind('click', goal_del);
+          }
+        });
+
+       return false;
+       });
+
+      $('td.goal_del').bind('click', goal_del);
+      });
+    })(jQuery);
+</script>
+
+<div class='setting-bg'>
+  <div><b>我的每日目標</b></div>
+  <div>
+    <% jquery_form_remote_tag :update => 'after_delete', :url => {:controller => 'goals', :action => 'create'},
+      :position => "top" do |f|%>
+        目標名稱: <%= text_field :goals, :name %>
+        <%= submit_tag "設定完成", :id => "goal_submit" %>
+        <%= link_to_cancel %>
+      <% end %>
+      <br />
+      <hr>
+      <% form_tag :controller => 'goals', :action => 'update', :id => @record do %>
+        <table>
+          <tr id='new_goal_pos'>
+            <th>今天要做(不想做就別勾)</th>
+            <th>我有做到</th>
+            <th>目標名稱</th>
+            <th>備註</th>
+            <th>刪除</th>
+          </tr>
+          <% @me.goals.each do |g|%>
+            <%= render :partial => 'member/new_goal', :locals => {:g => g}%>
+          <% end %>
+        </table>
+        <%= submit_tag "設定完成" %>
+        <%= link_to_cancel %>
+      <% end %>
+    </div>
+  </div>
+  <hr>
+  <br />
+

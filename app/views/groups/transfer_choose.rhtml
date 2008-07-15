@@ -1,0 +1,10 @@
+<h1>請輸入妳想要轉交給誰</h1>
+<% form_tag :action => 'transfer', :id => params[:id] do %>
+  <%= error_messages_for 'group' %>
+
+  <p><label for="user_name">使用者名稱</label><br/>
+    <%= text_field 'user', 'name' %></p>
+
+  <%= submit_tag "確定完成" %>
+  <%= link_to '取消', :action => 'index' %>
+<% end %>

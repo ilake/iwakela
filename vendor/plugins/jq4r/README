@@ -1,0 +1,41 @@
+jq4r - jQuery helpers for Rails
+====
+
+The Rails framework installed the Prototype.js & Scriptaculous as its default
+JavaScript framework and defined many useful helper methods for easing the 
+design of JavaScript(especially, AJAX).
+
+jq4r is a Rails plugin, which installs the jQuery JavaScript framework and 
+provides useful helper methods, too. I wish this plugin also eases the design
+of the javascripts and make your RHTML clean.
+
+Just go to the jq4r project's page, and send me feedbacks if you have 
+interesting ideas or suggestions.
+
+==INSTALLATION==
+
+In your <RAILS_APP> directory, type this command:
+
+# script/plugin install http://jq4r.googlecode.com/svn/trunk/plugins/jq4r
+
+Done.
+
+==USAGE==
+
+You should add 
+
+<%= include_jq4r %>
+
+in your pages for using the jq4r's helpers. This code includes the necessary
+javascript files in order to help your browser know the jQuery codes.
+
+==LINKS==
+
+Ruby on Rails: http://www.rubyonrails.org/
+jQuery: http://jquery.com/
+jq4r project: http://jq4r.googlecode.com/
+jq4r's blog: http://jq4r.blogspot.com/
+
+==COPYRIGHT==
+Copyright (c) 2007 Lin-Chieh Shangkuan (ericsk@gmail.com), release under 
+the MIT license.

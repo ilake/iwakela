@@ -1,0 +1,74 @@
+<body>
+  <h1>起床時間圖</h1>
+  <br />
+  <div id="month-form">
+    <% form_tag :action => 'show_graph' do %>
+      <%= render :partial => 'shared/date_select' %>
+    <% end %>
+  </div>
+  <div id="choices">顯示: </div>
+  <b class="placeholder-time">時</b>
+  <div id="placeholder" style="width:700px;height:300px;"></div><b id="day">日</b>
+
+
+  <script id="source" language="javascript" type="text/javascript">
+    $(function () {
+        var time = <%= @time %>;
+        var target_time = <%= @target_time %>;
+
+        var time_set = {
+        "target": {
+            label: "目標時間",
+            data: target_time,
+            color: 3
+          },
+
+          "wake": {
+            label: "起床時間",
+            data: time,
+            color: 1
+          }
+
+          };
+
+            var choiceContainer = $("#choices");
+
+                $.each(time_set, function(key, value){
+                    choiceContainer.append('<input type="checkbox" name="' + key +
+                      '" checked="checked">' + value.label + '</input>');
+                    });
+
+            choiceContainer.find("input").click(plotAccordingToChoices);
+
+            function plotAccordingToChoices() {
+              var data = [];
+
+              choiceContainer.find("input:checked").each(function () {
+                  var key = $(this).attr("name");
+                  if (key && time_set[key])
+                  data.push(time_set[key]);
+                  });
+
+              if (data.length > 0)
+                $.plot($("#placeholder"), data, {
+                    yaxis: { tickSize: 1, min: 0 },
+                    xaxis: { tickSize: 1,
+                    min: 1,
+                    max: 31
+                },
+                    lines: { show: true },
+                    points: { show: true },
+                    legend: {
+                    show: true,
+                    position: "ne",
+                    backgroundColor: "#388A3"
+                    }
+                  });
+                }
+
+            plotAccordingToChoices();
+});
+</script>
+
+
+</body>
