@@ -7,10 +7,7 @@
     </tr>
     <tr>
       <td>你的暱稱:</td><td><%= f.text_field :name %>(例:早鳥)
-      </tr>
-    <tr>
-      <td>你的時區:</td><td><%= f.time_zone_select :time_zone, nil, :default => "Taipei" %>(在台灣不用改)
-      </tr>
+    </tr>
       <%# if @user.yahoo_userhash == nil %>
     <tr>
       <td>密碼:</td><td><%= f.password_field :password %></td>
