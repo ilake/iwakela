@@ -12,6 +12,7 @@
 <%= javascript_include_tag "flot/excanvas" %>
 <%= javascript_include_tag "flot/jquery" %>
 <%= javascript_include_tag "flot/jquery.flot.js" %>
+<%= javascript_include_tag "flot/jquery.corner.js" %>
 <title>早鳥網 一個紀錄幫助你早起的地方</title>
 <%= yield :page_spec %>
 </head>
@@ -27,20 +28,19 @@
 	
   <div class="main">
 
-
-		<div class="header">
-      
+    <div class="header">
       <div class="title">
         <h1 class="ebhead">
-          <% if controller.controller_name == 'member' and controller.action_name == 'list' %>
-            <%= link_to "#{@user.name}的早起紀錄",{:controller => 'main', :action => 'index'} ,:class => 'ebhead'%>
-          <% else %>
-            <%= link_to "早鳥網 I wake la",{:controller => 'main', :action => 'index'} ,:class => 'ebhead'%>
-          <% end %>
+  <% if controller.controller_name == 'member' and controller.action_name == 'list' %>
+    <%= link_to "#{@user.name}的早起紀錄",{:controller => 'main', :action => 'index'} ,:class => 'ebhead'%>
+  <% else %>
+    <%#= link_to "早鳥網 I wake la",{:controller => 'main', :action => 'index'} ,:class => 'ebhead'%>
+    早&nbsp;鳥&nbsp;&nbsp;<span style="font-size:50%">i wake la</span>
+  <% end %>
         </h1>
       </div>
-
-		</div>
+    </div>
+  <script> $('.header').corner(); </script>
 		
 		<div class="content">
 	    

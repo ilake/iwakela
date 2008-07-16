@@ -80,9 +80,8 @@ h1,h2,h3 {
 	padding: 8px;
 }
 
-
 .header {
-	background: url(/images/header.gif) repeat-x;
+	background: url(/images/header.jpg) repeat-x;
 }
 
 /* title */
@@ -92,7 +91,9 @@ h1,h2,h3 {
 	height: 100px;
 	line-height: 100px;
 	margin-bottom: 8px;
-	text-align: center;
+  margin-left: 20%;
+  padding-bottom: 10px;
+/*	text-align: center; */
 }
 
 /* navigation */
