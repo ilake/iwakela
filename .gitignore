@@ -5,4 +5,4 @@ public/cache/**/*
 doc/api
 doc/app
 config/database.yml
-db/*.sqilte3
+db/*.sqlite3
