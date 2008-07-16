@@ -2,8 +2,8 @@
 
 # Uncomment below to force Rails into production mode when
 # you don't control web/app server and can't set it the proper way
-# ENV['RAILS_ENV'] ||= 'production'
-# ENV['HOME'] = '/home/iwakela'
+ENV['RAILS_ENV'] ||= 'production'
+ENV['HOME'] = '/home/iwakela'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
@@ -32,11 +32,6 @@ Rails::Initializer.run do |config|
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
   # config.log_level = :debug
-  
-  # Make Time.zone default to the specified zone, and make Active Record store time values
-  # in the database in UTC, and return them converted to the specified local zone.
-  # Run "rake -D time" for a list of tasks for finding time zone names. Uncomment to use default local time.
-  config.time_zone = 'Taipei'
   
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
@@ -78,5 +73,4 @@ ActionMailer::Base.smtp_settings = {
   :password => "poiuytr4321"
 }
 
-# ENV['TZ'] = 'Asia/Taipei'
-#SCRIPT_LINES__ = {} if ENV['RAILS_ENV'] == 'development'
+ENV['TZ'] = 'Asia/Taipei'
