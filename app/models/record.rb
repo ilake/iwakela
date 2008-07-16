@@ -212,7 +212,7 @@ class Record < ActiveRecord::Base
   end
 
   def self.find_success_percent
-    records_success = self.count(:all, :conditions => ["success = true"])
+    records_success = self.count(:all, :conditions => ["success = ?", true])
     records_all = self.count 
     records_all = 1 if records_all.zero?
     100*(records_success / records_all.to_f)
@@ -240,13 +240,13 @@ class Record < ActiveRecord::Base
   def self.find_last_success
     self.find(:first,
               :order => 'todo_time DESC',
-              :conditions => "success = true")
+              :conditions => ["success = ?", true])
   end
 
   def self.find_last_fail
     self.find(:first,
               :order => 'todo_time DESC',
-              :conditions => "success = false")
+              :conditions => ["success = ?",false])
   end
 
   def self.find_continuous_num(start_time, end_time)

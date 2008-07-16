@@ -12,35 +12,37 @@
 <%= javascript_include_tag "flot/excanvas" %>
 <%= javascript_include_tag "flot/jquery" %>
 <%= javascript_include_tag "flot/jquery.flot.js" %>
+<%= javascript_include_tag "flot/jquery.corner.js" %>
 <title>早鳥網 一個紀錄幫助你早起的地方</title>
 <%= yield :page_spec %>
+
+<script type='text/javascript'>
+  $(function() {
+      $('.rounded').corner();
+  });
+</script>
 </head>
 
 <body>
+
+<div class="container">
 <div class="top_bar">
    <%= render :partial => "shared/auth"%>
 </div>
-
-<hr>
-
-<div class="container">
 	
   <div class="main">
 
-
-		<div class="header">
-      
+    <div class="header rounded">
       <div class="title">
         <h1 class="ebhead">
-          <% if controller.controller_name == 'member' and controller.action_name == 'list' %>
-            <%= link_to "#{@user.name}的早起紀錄",{:controller => 'main', :action => 'index'} ,:class => 'ebhead'%>
-          <% else %>
-            <%= link_to "早鳥網 I wake la",{:controller => 'main', :action => 'index'} ,:class => 'ebhead'%>
-          <% end %>
+        <% if @header %>
+          <%= @header %>
+        <% else %>
+          <a href='<%= home_url %>'> 早&nbsp;鳥&nbsp;&nbsp;<span style="font-size:50%">i wake la</span> </a>
+        <% end %>
         </h1>
       </div>
-
-		</div>
+    </div>
 		
 		<div class="content">
 	    
@@ -50,7 +52,7 @@
 			</div>
 
 		</div>
-    <div class="sidenav">
+    <div class="sidenav rounded">
       <% if session[:uid] %>
         <h1>統計</h1>
         <ul>
@@ -93,8 +95,6 @@
 
     </div>
 
-
-	
 		<div class="clearer"><span></span></div>
 
 	</div>
@@ -102,16 +102,18 @@
   <div class="footer">
    <%= render :partial => "shared/footer"%>
  </div>
- <!-- google analytic -->
-  <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-  </script>
-  <script type="text/javascript">
-    var pageTracker = _gat._getTracker("UA-4497093-1");
-    pageTracker._initData();
-    pageTracker._trackPageview();
-  </script>
+ <% if RAILS_ENV == "production" -%>
+   <!-- google analytic -->
+   <script type="text/javascript">
+     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+     document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+   </script>
+   <script type="text/javascript">
+     var pageTracker = _gat._getTracker("UA-4497093-1");
+     pageTracker._initData();
+     pageTracker._trackPageview();
+   </script>
+ <% end %>
 </div>
 </body>
 

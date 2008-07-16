@@ -92,3 +92,7 @@
   </tr>
 </table>
 <%= will_paginate @records %>
+
+<% @header = capture do %>
+    <%= link_to "#{@user.name}的早起紀錄",{:controller => 'main', :action => 'index'} ,:class => 'ebhead'%>
+<% end %>

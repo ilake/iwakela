@@ -217,7 +217,6 @@ class User < ActiveRecord::Base
   end
 
   def change_group(group, join=true)
-    debugger
     if join
       self.update_attribute(:group_id, group.id)
       self.status.update_attribute(:group_join_date, Time.now.at_beginning_of_day)

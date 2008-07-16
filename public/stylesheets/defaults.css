@@ -73,16 +73,20 @@ h1,h2,h3 {
 
 .top_bar {
 	text-align: right;
-    margin-bottom: 5px;
+  margin-right: 18px;
+  margin-bottom: 2px;
 }
 .top_bar a{
 	text-align: right;
 	padding: 8px;
 }
 
-
 .header {
-	background: url(/images/header.gif) repeat-x;
+	background: url(/images/header.jpg) repeat-x;
+}
+
+.header a{
+  color: #FFF;
 }
 
 /* title */
@@ -92,7 +96,9 @@ h1,h2,h3 {
 	height: 100px;
 	line-height: 100px;
 	margin-bottom: 8px;
-	text-align: center;
+  margin-left: 20%;
+  padding-bottom: 10px;
+/*	text-align: center; */
 }
 
 /* navigation */
@@ -118,7 +124,7 @@ h1,h2,h3 {
 /* main */
 .main {
 	clear: both;
-	padding: 8px 18px;
+	padding: 0px 18px 8px 18px;
 }
 
 /* main left */
