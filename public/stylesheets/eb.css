@@ -419,8 +419,12 @@ b.placeholder-time {
 }
 
 div.auth {
-  font-weight: bold;
-	font-size: 120%;
+  padding-top: 5px;
+	font-size: 90%;
+}
+
+div.auth a{
+  text-decoration: none;
 }
 
 #profile {
