@@ -50,6 +50,49 @@
 			</div>
 
 		</div>
+    <div class="sidenav">
+      <% if session[:uid] %>
+        <h1>統計</h1>
+        <ul>
+          <%= render :partial => "shared/census"%>
+        </ul>
+      <% end %>
+      <h1>紀錄</h1>
+      <ul>
+        <li>
+          <%= button_to '我起床了',:controller => 'member', :action => 'wake_up' %>
+          (紀錄現在時間)
+        </li>
+      </ul>
+
+      <h1>功能列表</h1>
+      <ul>
+        <% if session[:uid] %>
+          <%= link_tab([
+                       [ '首頁', 'main', 'index' ],
+                       [ '我的起床紀錄', 'member', 'list'],
+                       [ '早鳥團', 'groups', 'index' ],
+                       [ '早鳥嘰嘰喳喳', 'chats', 'list' ],
+                       [ '早鳥排行榜', 'user', 'list_user_rank' ],
+                       [ '早鳥的過去', 'member', 'list_all_records' ],
+                       [ '早鳥討論區', 'forums', 'index' ],
+                       [ '使用者列表', 'user', 'list' ]
+          ]) %>
+        <% else %>
+          <%= link_tab([
+                       [ '首頁', 'main', 'index' ],
+                       [ '早鳥團', 'groups', 'index' ],
+                       [ '早鳥嘰嘰喳喳', 'chats', 'list' ],
+                       [ '早鳥排行榜', 'user', 'list_user_rank' ],
+                       [ '早鳥的過去', 'member', 'list_all_records' ],
+                       [ '早鳥討論區', 'forums', 'index' ],
+                       [ '使用者列表', 'user', 'list' ]
+          ]) %>
+        <% end %>
+      </ul>
+
+    </div>
+
 
 	
 		<div class="clearer"><span></span></div>
