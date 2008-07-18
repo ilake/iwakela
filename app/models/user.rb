@@ -213,7 +213,7 @@ class User < ActiveRecord::Base
                   :per_page => 10,
                   :include => :status,
                   :order => order,
-                  :conditions => ["statuses.num > ? AND statuses.last_record_created_at > ? AND users.target_time_now is not NULL", 7, Time.now.ago(3.days)]
+                  :conditions => ["statuses.num > ? AND statuses.last_record_created_at > ?", 7, Time.now.ago(3.days)]
   end
 
   def change_group(group, join=true)
