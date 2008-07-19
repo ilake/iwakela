@@ -52,6 +52,7 @@
 			</div>
 
 		</div>
+
     <div class="sidenav rounded">
       <% if session[:uid] %>
         <h1>統計</h1>
@@ -59,13 +60,17 @@
           <%= render :partial => "shared/census"%>
         </ul>
       <% end %>
-      <h1>紀錄</h1>
-      <ul>
-        <li>
-          <%= button_to '我起床了',:controller => 'member', :action => 'wake_up' %>
-          (紀錄現在時間)
-        </li>
-      </ul>
+      <% if session[:uid] %>
+        <% unless  @me.check_record_exist? %>
+          <h1>起床囉！</h1>
+          <div style='text-align:center; border-bottom: 1px solid white; padding-bottom: 5px;'>
+            <%= link_to "#{image_tag('clock.gif')}<br /> 紀錄現在時間",
+              {:controller => 'member', :action => 'wake_up'},
+              {:style => 'text-decoration: none;'}
+          %>
+        </div>
+      <% end %>
+    <% end %>
 
       <h1>功能列表</h1>
       <ul>
