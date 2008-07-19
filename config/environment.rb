@@ -59,7 +59,7 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
   #config.action_mailer.delivery_method = :smtp
 end
-require "#{RAILS_ROOT}/app/errors.rb"
+require "errors"
 #require 'acts_as_ferret'
 require 'smtp_tls'
 ActionMailer::Base.delivery_method = :smtp 
