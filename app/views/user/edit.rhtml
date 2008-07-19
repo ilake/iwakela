@@ -3,7 +3,6 @@
     <li><%= link_to '更改圖像', :controller => 'mugshots', :action => 'new'%></li>
     <li><%= link_to "修改你的暱稱", :controller => "user", :action => 'edit_username', :id => @me.id %></li>
     <li><%= link_to "修改你的密碼", :controller => "user", :action => 'edit_password', :id => @me.id  %></li>
-    <li><%= link_to "修改你的時區", :controller => "user", :action => 'edit_time_zone', :id => @me.id  %></li>
     <li><%= link_to "修改帳號(信箱)", :controller => "user", :action => 'edit_email', :id => @me.id  %></li>
     <li><%= link_to "修改個人檔案", :controller => "user", :action => 'edit_profile', :id => @me.id  %></li>
   </ul>
