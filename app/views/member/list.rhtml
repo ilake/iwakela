@@ -11,7 +11,7 @@
 </div>
 <div id="remote"></div>
 <% unless is_owner?(@user)%>
-  <div class='group_feature'>
+  <div class='group_feature rounded'>
     <%= link_to "#{@user.name}的個人檔案", :controller => 'user', :action => 'show', :id => @user.id %>
     <%= @user.profile.others %>
   </div>
@@ -20,7 +20,7 @@
 <% end %>
 
 <% if is_owner?(@user)%>
-  <div class='group_feature'>
+  <div class='group_feature rounded'>
     <span>
       <%= jquery_link_to_remote "設定目標時間", :update => 'remote', :url => {:action => 'target_time_now'} %>
     </span>
@@ -94,5 +94,5 @@
 <%= will_paginate @records %>
 
 <% @header = capture do %>
-    <%= link_to "#{@user.name}的早起紀錄",{:controller => 'main', :action => 'index'} ,:class => 'ebhead'%>
+    <%= link_to "#{@user.name}的早起紀錄", home_url, :class => 'ebhead'%>
 <% end %>
