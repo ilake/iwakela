@@ -34,13 +34,14 @@
 
     <div class="header rounded">
       <div class="title">
-        <h1 class="ebhead">
-        <% if @header %>
-          <%= @header %>
-        <% else %>
-          <a href='<%= home_url %>'> 早&nbsp;鳥&nbsp;&nbsp;<span style="font-size:50%">i wake la</span> </a>
-        <% end %>
-        </h1>
+        <a href='<%= home_url %>'>
+          <h1 class="ebhead">
+            <% if @header %>
+              <%= @header %>
+            <% else %>
+            <% end %>
+          </h1>
+        </a>
       </div>
     </div>
 		
