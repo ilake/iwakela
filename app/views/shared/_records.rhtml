@@ -3,7 +3,7 @@
   <tr class="<%= cycle('','title')%>">
     <td width = 2%><%= page_index(records, i)%></td>
     <td width = 15%><%= link_to_user(record.user, record.user.name, nil, true) %></td>
-    <td width = 15%><%= record.todo_time.strftime("%H:%M") %>起床囉</td>
+    <td width = 15%><%= record.todo_time.strftime("%H:%M") %>起床</td>
     <td width = 35%><%= link_to h(truncate(record.content, 30)),
                                 :controller => 'member',
                                 :action => 'show',
