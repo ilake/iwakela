@@ -119,7 +119,7 @@ class MemberController < ApplicationController
         redirect_to :action => 'list'
       end
     else
-      flash[:notice] = "你沒輸入內容啦"
+      flash[:notice] = "不能設定現在之後的時間喔"
       redirect_to :back
     end
   end

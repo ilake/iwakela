@@ -28,6 +28,7 @@ class Record < ActiveRecord::Base
   after_destroy :set_census
 
   before_update :set_success
+  before_update :record_valid?
   #validates_length_of :content, :minimum => 1, :on => :update
   #after_create :set_average, :set_continuous_num, :set_successful_rate
   #acts_as_ferret :fields => [:content]
@@ -138,7 +139,7 @@ class Record < ActiveRecord::Base
   def self.todo(thing_name, params=nil)
     record = self.new(params)
 
-    if self.record_valid?(record)
+    if record.record_valid?
       if record.save
         record
       end
@@ -151,10 +152,11 @@ class Record < ActiveRecord::Base
     end
   end
 
-  def self.record_valid?(record)
-    time = record.todo_time
+  def record_valid?
+    time = self.todo_time
     if time > Time.now
-    elsif self.find(:all, :conditions => ['todo_time < ? and todo_time > ?', time.tomorrow.at_beginning_of_day, time.at_beginning_of_day]).blank?
+      false
+    elsif self.user.records.find(:all, :conditions => ['todo_time < ? and todo_time > ?', time.tomorrow.at_beginning_of_day, time.at_beginning_of_day]).blank?
       true 
     end
   end
@@ -219,7 +221,7 @@ class Record < ActiveRecord::Base
   end
 
   def self.find_all_wake_up_today(params, res='none', per_page=10)
-    cond = "records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}'"
+    cond = "records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"
     #cond << "and users.id > 10"
 
     unless res == 'none'

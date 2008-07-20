@@ -4,7 +4,7 @@ class MainController < ApplicationController
 
   def index
     @records = Record.find_all_wake_up_today(params[:page])
-    @yesterday_rec = Record.find_yesterday_records
+    #@yesterday_rec = Record.find_yesterday_records
     @num = User.count
   end
 
