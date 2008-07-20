@@ -85,7 +85,15 @@ h1,h2,h3 {
 	background: url(/images/header.jpg) repeat-x;
 }
 
+.header2 {
+	background: url(/images/header2.jpg) repeat-x;
+}
+
 .header a{
+  color: #FFF;
+}
+
+.header2 a{
   color: #FFF;
 }
 

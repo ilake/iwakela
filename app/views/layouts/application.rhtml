@@ -32,19 +32,26 @@
 	
   <div class="main">
 
-    <div class="header rounded">
-      <div class="title">
-        <a href='<%= home_url %>'>
-          <h1 class="ebhead">
-            <% if @header %>
+    <% if @header %>
+      <div class="header2 rounded">
+        <div class="title">
+          <a href='<%= home_url %>'>
+            <h1 class="ebhead">
               <%= @header %>
-            <% else %>
-            <% end %>
-          </h1>
-        </a>
+            </h1>
+          </a>
+        </div>
       </div>
-    </div>
-		
+    <% else %>
+      <div class="header rounded">
+        <div class="title">
+          <a href='<%= home_url %>'>
+            <h1 class="ebhead">
+            </h1>
+          </a>
+        </div>
+      </div>
+    <% end %>
 		<div class="content">
 	    
 			<div class="item">
