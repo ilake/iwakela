@@ -26,16 +26,16 @@
   </div>
 <div class='member_result'>
   <div>
-    <span>早起</span><%= render :partial => 'result_partial', :locals => {:members => @success_members}%>
+    <div class='ban'>早起</div><%= render :partial => 'result_partial', :locals => {:members => @success_members}%>
   </div>
   <div>
-    <span>晚起</span><%= render :partial => 'result_partial', :locals => {:members => @fail_members}%>
+    <div class='ban'>晚起</div><%= render :partial => 'result_partial', :locals => {:members => @fail_members}%>
   </div>
   <div>
-    <span>沒到</span><%= render :partial => 'result_partial', :locals => {:members => @absence_members}%>
+    <div class='ban'>沒到</div><%= render :partial => 'result_partial', :locals => {:members => @absence_members}%>
   </div>
   <div>
-    <span>請假</span><%= render :partial => 'result_partial', :locals => {:members => @sick_members}%>
+    <div class='ban'>請假</div><%= render :partial => 'result_partial', :locals => {:members => @sick_members}%>
   </div>
 </div>
 <div class='talk'>

@@ -673,8 +673,7 @@ div.member_result div {
   padding: 5px 5px 5px 5px;
 }
 
-div.member_result span{
-  display: block;
+div.ban{
   border:1px solid #CBCACA;
 }
 
@@ -706,7 +705,7 @@ div.even{
   padding: 3px 0px 3px 0px;
 }
 
-.user_photo img{
+#user_photo img{
   width:24px;
   height:24px;
 }
