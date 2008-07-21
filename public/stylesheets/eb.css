@@ -706,11 +706,7 @@ div.even{
   padding: 3px 0px 3px 0px;
 }
 
-.user_photo {
-	border: 1px solid #E5E5E5;
-}
-
 .user_photo img{
-  width:30px;
-  height:30px;
+  width:24px;
+  height:24px;
 }
