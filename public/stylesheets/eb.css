@@ -705,7 +705,7 @@ div.even{
   padding: 3px 0px 3px 0px;
 }
 
-span.user_photo_small img{
-  width:30px;
-  height:30px;
+span.user_photo_small img {
+  /*width:30px;
+  height:30px;*/
 }
