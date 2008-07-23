@@ -20,7 +20,7 @@
 
   <div class='group_news'>
     最新文章: <% @forums.each do |f| %>
-      <%= link_to f.subject,:controller => 'forums', :action => 'show', :id => f.id %> 
+      <%= link_to f.subject,:controller => 'forums', :action => 'show', :id => f.id %>&nbsp;&nbsp;
     <% end %>
     <%= link_to '>>更多', :controller => 'forums', :action => 'group_forum_list', :id => @group %> |
     <%= link_to '我要發文',:controller => 'forums', :action => 'new', :id => @group %>
