@@ -96,6 +96,14 @@ module AllHelper
     str << "#{link_to h(text), {:controller => 'member', :action => 'list', :id => u}, :class => cls}"     
   end
 
+  def link_to_user_image(u)
+    if u.mugshot
+      "#{link_to image_tag(u.mugshot.public_filename, :size =>'60x60'), {:controller => 'member', :action => 'list', :id => u}}"
+    else
+      "#{link_to image_tag("penguin.jpg", :size => '60x60'),{ :controller => 'member', :action => 'list', :id => u}}"
+    end
+  end
+
   def where_is_me(u, text)
     if @me
       if @me.id == u.id
