@@ -37,7 +37,7 @@ module AllHelper
       if time = @me.target_time
         "今日目標 #{extract_target_time(time)}"
       else
-        link_to "<font color='red'>你尚未目標起床時間</font>", :controller => 'member', :action => 'list'
+        link_to "<font color='red'>你尚未設定目標起床時間</font>", :controller => 'member', :action => 'list'
       end
     end
   end
@@ -82,8 +82,8 @@ module AllHelper
   end
 
   def show_messages
-    flh = flash[:notice] ? flash[:notice] : flash[:info]
-    message = flh ? "<span class='alert'>#{flh}</span>" : ""
+    flh =  flash[:notice] || flash[:info]
+    "<span class='alert'>#{flh}</span>"  if flh
   end
 
   def link_to_user(u, text, cls=nil, img=false)

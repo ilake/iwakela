@@ -197,10 +197,11 @@ border-color: red;
 }
 
 .alert {
-  padding: 1px 5px 1px 5px;
+  padding: 5px 5px 5px 15px;
   background: #CC0000;
-  color : #FFFFFF;
+  color: #FFFFFF;
   font-weight: bold;
+  width: 70%;
 }
 
 .alert a{
@@ -705,3 +706,20 @@ div.even{
   padding: 3px 0px 3px 0px;
 }
 
+.number_clock {
+  text-align: center;
+  width: 70%;
+  margin-left: 15%;
+  padding: 3px;
+  background-color: #b8d9f3;
+}
+
+.alarm_clock {
+ text-align:center; 
+ border-bottom: 1px solid white; 
+ padding-bottom: 5px;
+}
+
+.alarm_clock a{
+  text-decoration: none;
+}

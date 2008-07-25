@@ -6,7 +6,9 @@
 </div>
 
 <% content_for :page_spec do %>
+  <%= javascript_include_tag "excanvas", "jquery.flot.js", :cache => 'flot' %>
   <script id="source" language="javascript" type="text/javascript">
+
     $(function () {
         var time = <%= @time %>;
         var target_time = <%= @target_time %>;

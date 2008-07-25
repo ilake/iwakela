@@ -72,7 +72,7 @@ class MemberController < ApplicationController
   end
 
   def wake_up
-    if @me.check_record_exist?
+    if @me.today_record
       flash[:notice] = "沒有人一直在早起的啦"
       redirect_to :back
     else

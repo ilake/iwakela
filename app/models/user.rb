@@ -161,10 +161,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  def check_record_exist?
-    return false if self.records.count == 0
-    if self.records.find_last_day == Time.now.at_beginning_of_day
-      true
+  def today_record
+    record = self.records.last(:order => 'todo_time')
+    if record && record.todo_time.at_beginning_of_day == Time.now.at_beginning_of_day
+      record
+    else
+      nil
     end
   end
 
