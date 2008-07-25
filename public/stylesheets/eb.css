@@ -705,6 +705,37 @@ div.even{
   margin: 10px 0px 10px 0px;
   padding: 3px 0px 3px 0px;
 }
+.user_list {
+  float: left;
+  background-repeat: no-repeat;
+  background-position: left center;
+  margin: 2px;
+  padding-left: 20px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  width: 355px;
+  height: 120px;
+  border: 1px dashed #CCCCCC;
+} 
+.user_list .about {
+  display: block;
+  float: right;
+  width: 200px;
+  margin-top: 5px;
+}
+
+.user_list .pic { 
+  background-color: #FFFFFF;
+  padding: 2px;
+  display: block;
+} 
+
+.user_list .about h2 {
+  font-size: 110%;
+  font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 5px;
+} 
 
 .number_clock {
   text-align: center;

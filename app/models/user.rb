@@ -111,10 +111,10 @@ class User < ActiveRecord::Base
     end
   end 
 
-  def self.find_all_users(params)
+  def self.find_all_users(params, page_size=10)
     self.paginate :page => params,
-                  :per_page => 10,
-                  :include => :profile,
+                  :per_page => page_size,
+                  :include => 'profile',
                   :order => "users.id DESC"
   end
 

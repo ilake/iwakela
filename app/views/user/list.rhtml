@@ -1,13 +1,15 @@
-<table>  
-  <thead>
-    <th>暱稱</th>
-    <th>自介</th>
-  </thead>
-  <% @users.each do |u|  %>
-    <tr class="<%= cycle('title','')%>">
-      <td class="user-name"><%= link_to_user(u, u.name, nil, true) %></td>    
-      <td class="user-profile"><%= u.profile.others %></td>    
-    </tr>
+<div>
+  <% @users.each do |u| %>
+    <div class='user_list'>
+      <span class="about">
+        <h2><%= link_to_user(u, u.name) %></h2>
+        <%= truncate(u.profile.others, 85) %>
+      </span>
+      <span class="pic">
+        <%= link_to_user_image(u)%>
+      </span>
+    </div>
   <% end %>
-</table>
+</div>
+<div class='clear'></div>
 <%= will_paginate @users %>
