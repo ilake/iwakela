@@ -712,7 +712,7 @@ div.even{
   padding-left: 20px;
   padding-top: 2px;
   padding-bottom: 2px;
-  width: 225px;
+  width: 355px;
   border: 1px dashed #CCCCCC;
 } 
 .user_list .about {
@@ -727,8 +727,6 @@ div.even{
   padding: 2px;
   border: 1px solid #CCCCCC;
   display: block;
-  height: 60px;
-  width: 60px;
 } 
 
 .user_list .about h2 {
