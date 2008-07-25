@@ -713,6 +713,7 @@ div.even{
   padding-top: 2px;
   padding-bottom: 2px;
   width: 355px;
+  height: 120px;
   border: 1px dashed #CCCCCC;
 } 
 .user_list .about {
@@ -725,7 +726,6 @@ div.even{
 .user_list .pic { 
   background-color: #FFFFFF;
   padding: 2px;
-  border: 1px solid #CCCCCC;
   display: block;
 } 
 
