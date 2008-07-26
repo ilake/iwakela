@@ -705,37 +705,6 @@ div.even{
   margin: 10px 0px 10px 0px;
   padding: 3px 0px 3px 0px;
 }
-.user_list {
-  float: left;
-  background-repeat: no-repeat;
-  background-position: left center;
-  margin: 2px;
-  padding-left: 20px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  width: 355px;
-  height: 120px;
-  border: 1px dashed #CCCCCC;
-} 
-.user_list .about {
-  display: block;
-  float: right;
-  width: 200px;
-  margin-top: 5px;
-}
-
-.user_list .pic { 
-  background-color: #FFFFFF;
-  padding: 2px;
-  display: block;
-} 
-
-.user_list .about h2 {
-  font-size: 110%;
-  font-weight: bold;
-  padding-top: 5px;
-  padding-bottom: 5px;
-} 
 
 .number_clock {
   text-align: center;
@@ -753,4 +722,36 @@ div.even{
 
 .alarm_clock a{
   text-decoration: none;
+}
+
+.people {
+  border-color:-moz-use-text-color -moz-use-text-color #CCCCCC;
+  border-style:none none dotted;
+  float:left;
+  text-align:left;
+  padding :2px;
+  margin: 5px;
+  width:330px;
+  height :110px;
+}
+
+.thumbnail {
+  background:#FFFFFF none repeat scroll 0%;
+  border:1px solid #DDDDDD;
+  float:left;
+  height:100px;
+  width:100px;
+  overflow:hidden;
+  padding:2px;
+}
+.people .info {
+  margin-left:80px;
+  vertical-align:bottom;
+}
+.people .title {
+  clear:none;
+}
+
+.people p.description {
+  font-size:90%;
 }

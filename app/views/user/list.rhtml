@@ -1,15 +1,18 @@
-<div>
-  <% @users.each do |u| %>
-    <div class='user_list'>
-      <span class="about">
-        <h2><%= link_to_user(u, u.name) %></h2>
-        <%= truncate(u.profile.others, 85) %>
-      </span>
-      <span class="pic">
-        <%= link_to_user_image(u)%>
-      </span>
+<% @users.each do |u| %>
+  <div class='people'>
+    <div class="thumbnail">
+      <%= link_to_user_image(u, 'user')%>
     </div>
-  <% end %>
-</div>
+    <div class="pic">
+      <h3 class="title">
+        <%= link_to_user(u, u.name, 'user') %>
+      </h3>
+      <p class="description">
+        <%= truncate(u.profile.others, 50) %>
+      </p>
+      
+    </div>
+  </div>
+<% end %>
 <div class='clear'></div>
 <%= will_paginate @users %>

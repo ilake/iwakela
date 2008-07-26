@@ -96,11 +96,13 @@ module AllHelper
     str << "#{link_to h(text), {:controller => 'member', :action => 'list', :id => u}, :class => cls}"     
   end
 
-  def link_to_user_image(u)
+  def link_to_user_image(u, cls)
     if u.mugshot
-      "#{link_to image_tag(u.mugshot.public_filename), {:controller => 'member', :action => 'list', :id => u}}"
+      "#{link_to image_tag(u.mugshot.public_filename, :size => '100x100'),
+        {:controller => 'member', :action => 'list', :id => u}, :class => cls}"
     else
-      "#{link_to image_tag("penguin.jpg"),{ :controller => 'member', :action => 'list', :id => u}}"
+      "#{link_to image_tag("penguin.jpg", :size => '100x100'),
+        { :controller => 'member', :action => 'list', :id => u}, :class => cls}"
     end
   end
 
