@@ -124,6 +124,13 @@ class MemberController < ApplicationController
     end
   end
 
+  def widget
+     user = User.find(params[:id])
+     @content = render_to_string(:partial => 'census_widget', :locals => {:user => user}).to_json
+     render :layout => false
+     response.headers['Content-Type']='text/javascript'
+  end
+
   private
 
   def date_select

@@ -32,13 +32,11 @@ module AllHelper
     time.strftime("%H:%M") if time
   end
 
-  def exact_target_time
-    if session[:uid]
-      if time = @me.target_time
+  def exact_target_time(user)
+    if time = user.target_time
         "今日目標 #{extract_target_time(time)}"
-      else
-        link_to "<font color='red'>你尚未設定目標起床時間</font>", :controller => 'member', :action => 'list'
-      end
+    else
+      link_to "<font color='red'>你尚未設定目標起床時間</font>", :controller => 'member', :action => 'list'
     end
   end
 
@@ -46,7 +44,6 @@ module AllHelper
   def extract_datetime_string(datetime)
     datetime.strftime("%Y年%m月%d日  %H:%M") if datetime
   end
-
 
   def page_index(rec, i, asc=true)
      n = ((rec.current_page-1) * rec.per_page)+i
@@ -57,28 +54,20 @@ module AllHelper
      end
   end
 
-  def all_average
-    if session[:uid]
-      %[平均時間#{@me.status.average.strftime("%H:%M")}] if @me.status.average
-    end
+  def all_average(user)
+      %[平均時間#{user.status.average.strftime("%H:%M")}] if user.status.average
   end
 
-  def diff_value
-    if session[:uid]
-      "平均離目標#{@me.status.diff}分" if @me.status.diff and @me.target_time_now
-    end
+  def diff_value(user)
+      "平均離目標#{user.status.diff}分" if user.status.diff and user.target_time_now
   end
 
-  def success_census
-    if session[:uid]
-      "成功率為#{ number_to_percentage(@me.status.success_rate, :precision => 1) || 0}"
-    end
+  def success_census(user)
+      "成功率為#{ number_to_percentage(user.status.success_rate, :precision => 1) || 0}"
   end
 
-  def continuous_success_num
-    if session[:uid]
-     "連續早起 #{@me.status.continuous_num || 0}次"
-    end
+  def continuous_success_num(user)
+     "連續早起 #{user.status.continuous_num || 0}次"
   end
 
   def show_messages
