@@ -584,8 +584,18 @@ tr.target_fail {
 .announce_word {
   float: left;
   width: 560px;
-	line-height: 25px;
-  font-weight: bold;
+	line-height: 35px;
+  font-size:17px;
+}
+.announce_image {
+  float: left;
+  padding-right:40px;
+  padding-bottom:10px;
+  text-align: center;
+}
+
+.announce_image a{
+  font-weight:bold;
 }
 
 .picture_border {
