@@ -1,7 +1,59 @@
-<ul>
-  <li class = "census"><%= exact_target_time(user) %></li>
-  <li class = "census"><%= success_census(user) %></li>
-  <li class = "census"><%= continuous_success_num(user) %></li>
-  <li class = "census"><%= all_average(user) %></li>
-  <li class = "census"><%= diff_value(user) %></li>
-</li>
+<style>
+  .b1h, .b2h, .b3h, .b4h, .b2bh, .b3bh, .b4bh{font-size:1px; overflow:hidden; display:block;}
+  .b1h {height:1px; background:#68A9E3; margin:0 5px;}
+  .b2h, .b2bh {height:1px; background:#68A9E3; border-right:2px solid #68A9E3; border-left:2px solid #68A9E3; margin:0 3px;}
+  .b3h, .b3bh {height:1px; background:#68A9E3; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3; margin:0 2px;}
+  .b4h, .b4bh {height:2px; background:#68A9E3; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3; margin:0 1px;}
+  .b2bh, .b3bh, .b4bh {background: #FFFFFF;}
+  .headh {background: #68A9E3; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3;}
+  .headh h3 {margin: 0px 10px 0px 10px; padding-bottom: 3px; font-size:90%}
+  .contenth {background: #FFFFFF; border-right:1px solid #aaa; border-left:1px solid #aaa;}
+  .contenth div {margin-left: 12px; padding-top: 5px;}
+  div.power {margin-left: 22px; padding-top: 5px; font-size:80%; float:right;}
+
+  .ebwidget a{
+    text-decoration: none;
+    color: #000000;
+  }
+
+  .ebwidget {
+    width :215px;
+  }
+
+  .ebwidget img{
+    border:0px;
+  }
+
+  .ebwidget .bird img{
+    border:0px;
+    float:right;
+  }
+
+</style>
+
+<div class='ebwidget'>
+  <b class="b1h"></b>
+  <b class="b2h"></b>
+  <b class="b3h"></b>
+  <b class="b4h"></b>
+<a href="http://iwakela.com/member/list/<%= user.id %>" target="_blank">
+  <div class="headh">
+    <h3><%= user.name %> 成果</h3>
+  </div>
+  <div class="contenth">
+    <% if r = user.today_record%>
+      <div>今日起床 <%= extract_target_time(r.todo_time)%><%= image_tag(r.success ? '/images/thumbup.gif' : '/images/thumbdown.gif', :size => '19x19') %></div>
+    <% else %>
+      <div>今日起床 還沒做紀錄喔</div>
+    <% end %>
+    <div class='bird'><%= success_census(user) %><%= image_tag('/images/bird.gif', :path => true )%></div>
+    <div><%= continuous_success_num(user) %></div>
+    <div><%= all_average(user) %></div>
+  </div>
+    <div class='power'>powered by 早鳥網 iwakela</div>
+</a>
+<b class="b4bh"></b>
+<b class="b3bh"></b>
+<b class="b2bh"></b>
+<b class="b1h"></b>
+</div>
