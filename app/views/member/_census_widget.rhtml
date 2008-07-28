@@ -42,11 +42,11 @@
   </div>
   <div class="contenth">
     <% if r = user.today_record%>
-      <div>今日起床 <%= extract_target_time(r.todo_time)%><%= image_tag(r.success ? '/images/thumbup.gif' : '/images/thumbdown.gif', :size => '19x19') %></div>
+      <div>今日起床 <%= extract_target_time(r.todo_time)%><%= image_tag(r.success ? 'http://iwakela.com/images/thumbup.gif' : 'http://iwakela.com/images/thumbdown.gif', :size => '19x19') %></div>
     <% else %>
       <div>今日起床 還沒做紀錄喔</div>
     <% end %>
-    <div class='bird'><%= success_census(user) %><%= image_tag('/images/bird.gif', :path => true )%></div>
+    <div class='bird'><%= success_census(user) %><%= image_tag('http://iwakela.com/images/bird.gif', :path => true )%></div>
     <div><%= continuous_success_num(user) %></div>
     <div><%= all_average(user) %></div>
   </div>
