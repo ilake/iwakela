@@ -37,21 +37,27 @@ class GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
-    if params[:private]
-      if params[:fill]
-        params[:group][:state] = 3
+    g = params[:group]
+
+    if g[:pri] == "1"
+      if g[:fill] == "1"
+        g[:state] = 3
       else
-        params[:group][:state] = 1
+        g[:state] = 1
       end
     else
-      if params[:fill]
-        params[:group][:state] = 2
+      if g[:fill] == "1"
+        g[:state] = 2
       else
-        params[:group][:state] = 0
+        g[:state] = 0
       end
     end
 
-    if @group.update_attributes(params[:group])
+    g.delete(:fill)
+    g.delete(:pri)
+
+
+    if @group.update_attributes(g)
       flash[:notice] = '更新成功'
       redirect_to :action => 'show', :id => @group
     else

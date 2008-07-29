@@ -45,4 +45,21 @@ class Group < ActiveRecord::Base
   def get_in?(user)
     !(self.state == 2 || self.state == 3 || self.members.size >= self.user_num || user.group)
   end
+
+  def pri
+    if state == 1 || state == 3
+      1
+    else
+      0
+    end
+  end
+
+  def fill
+    if state == 2 || state == 3
+      1
+    else
+      0
+    end
+  end
+
 end
