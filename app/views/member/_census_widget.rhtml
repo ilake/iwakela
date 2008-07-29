@@ -5,11 +5,11 @@
   .b3h, .b3bh {height:1px; background:#68A9E3; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3; margin:0 2px;}
   .b4h, .b4bh {height:2px; background:#68A9E3; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3; margin:0 1px;}
   .b2bh, .b3bh, .b4bh {background: #FFFFFF;}
-  .headh {background: #68A9E3; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3;}
+  .headh {background: #68A9E3; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3;font-size:90%}
   .headh h3 {margin: 0px 10px 0px 10px; padding-bottom: 3px; font-size:90%}
   .contenth {background: #FFFFFF; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3;}
   .contenth div {margin-left: 12px; padding-top: 5px; font-size:80%;}
-  div.power {margin-left: 22px; padding-top: 5px; font-size:70%;float:left;}
+  div.power {margin-left: 5px; padding-top: 5px; font-size:70%;float:left;}
 
   .ebwidget a{
     text-decoration: none;
@@ -17,7 +17,7 @@
   }
 
   .ebwidget {
-    width :175px;
+    width :163px;
   }
 
   .ebwidget img{
@@ -46,14 +46,16 @@
     <% else %>
       <div style='font-size:100%'>今日起床 <span style='color:#F00'>還沒做紀錄</span></div>
     <% end %>
-    <div class='bird'><%= success_census(user) %><%= image_tag('http://iwakela.com/images/bird.gif', :path => true, :size =>'42x42' )%></div>
+    <div class='bird'><%= success_census(user) %></div>
     <div><%= continuous_success_num(user) %></div>
     <div><%= all_average(user) %></div>
   </div>
-    <div class='power'>powered by 早鳥網 iwakela</div>
 </a>
 <b class="b4bh"></b>
 <b class="b3bh"></b>
 <b class="b2bh"></b>
 <b class="b1h"></b>
+<a href="http://iwakela.com/member/list/<%= user.id %>" target="_blank">
+<div class='power'>powered by 早鳥網 iwakela</div>
+</a>
 </div>
