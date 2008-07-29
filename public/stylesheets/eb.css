@@ -197,7 +197,7 @@ border-color: red;
 }
 
 .alert {
-  padding: 5px 5px 5px 15px;
+  padding: 5px 5px 5px 5px;
   background: #CC0000;
   color: #FFFFFF;
   font-weight: bold;
