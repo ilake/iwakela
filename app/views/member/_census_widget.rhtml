@@ -8,8 +8,8 @@
   .headh {background: #68A9E3; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3;}
   .headh h3 {margin: 0px 10px 0px 10px; padding-bottom: 3px; font-size:90%}
   .contenth {background: #FFFFFF; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3;}
-  .contenth div {margin-left: 12px; padding-top: 5px;}
-  div.power {margin-left: 22px; padding-top: 5px; font-size:80%; float:right;}
+  .contenth div {margin-left: 12px; padding-top: 5px; font-size:80%;}
+  div.power {margin-left: 22px; padding-top: 5px; font-size:70%;float:left;}
 
   .ebwidget a{
     text-decoration: none;
@@ -17,7 +17,7 @@
   }
 
   .ebwidget {
-    width :190px;
+    width :175px;
   }
 
   .ebwidget img{
@@ -41,12 +41,12 @@
     <h3><%= user.name %></h3>
   </div>
   <div class="contenth">
-    <% if r = user.today_record%>
-      <div>今日起床 <%= extract_target_time(r.todo_time)%><%= image_tag(r.success ? 'http://iwakela.com/images/thumbup.gif' : 'http://iwakela.com/images/thumbdown.gif', :size => '19x19') %></div>
+    <% if r = user.today_record %>
+      <div style='font-size:100%'>今日起床 <%= extract_target_time(r.todo_time)%><%= image_tag(r.success ? 'http://iwakela.com/images/thumbup.gif' : 'http://iwakela.com/images/thumbdown.gif', :size => '20x20') %></div>
     <% else %>
-      <div>今日起床 還沒做紀錄喔</div>
+      <div style='font-size:100%'>今日起床 <span style='color:#F00'>還沒做紀錄</span></div>
     <% end %>
-    <div class='bird'><%= success_census(user) %><%= image_tag('http://iwakela.com/images/bird.gif', :path => true )%></div>
+    <div class='bird'><%= success_census(user) %><%= image_tag('http://iwakela.com/images/bird.gif', :path => true, :size =>'42x42' )%></div>
     <div><%= continuous_success_num(user) %></div>
     <div><%= all_average(user) %></div>
   </div>
