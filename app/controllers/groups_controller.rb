@@ -67,8 +67,12 @@ class GroupsController < ApplicationController
 
   def create
     unless @me.group
-      params[:group][:state] = params[:private] ? 1 : 0
-      params[:group][:owner_id] = @me.id
+      g = params[:group]
+      g[:state] = g[:pri]=='1' ? 1 : 0
+      g[:owner_id] = @me.id
+
+      g.delete(:fill)
+      g.delete(:pri)
 
       if @group = Group.create(params[:group])
         if @group.errors.empty? && @me.change_group(@group)
