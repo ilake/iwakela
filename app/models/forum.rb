@@ -13,6 +13,8 @@
 #
 
 class Forum < ActiveRecord::Base
+  validates_presence_of :subject, :content
+
   has_many :comments, :as => :record
   belongs_to :user
   belongs_to :group

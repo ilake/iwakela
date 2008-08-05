@@ -1,6 +1,6 @@
 <div class='setting-bg'>
-<b>補上您的起床時間</b>
-<% form_tag :action => 'create' do %>
+<b>補上您的睡覺時間</b>
+<% form_tag :action => 'create', :type => 'sleep' do %>
   <%= datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year %>
   <%= submit_tag "設定完成" %>
   <%= link_to_cancel %>

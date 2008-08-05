@@ -11,6 +11,7 @@
 
     $(function () {
         var time = <%= @time %>;
+        var sleep_time = <%= @sleep_time %>;
         var target_time = <%= @target_time %>;
 
         var time_set = {
@@ -24,6 +25,12 @@
             label: "起床時間",
             data: time,
             color: 1
+            },
+
+          "sleep": {
+            label: "睡覺時間",
+            data: sleep_time,
+            color: 2
           }
         };
 

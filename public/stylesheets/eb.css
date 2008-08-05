@@ -581,6 +581,10 @@ tr.target_fail {
   background: #FFEA70;
 }
 
+tr.sleep {
+  background: #dddddd;
+}
+
 .announce_word {
   float: left;
   width: 560px;

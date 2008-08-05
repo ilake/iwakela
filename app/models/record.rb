@@ -21,21 +21,29 @@ class Record < ActiveRecord::Base
 
   before_create :set_time
   before_create :set_todo_name
-  before_create :set_target_time
-  before_create :set_success
 
-  after_save    :set_census
-  after_destroy :set_census
+  before_create :set_target_time, :conditions => {:todo_name => 'wake_up'}
+  before_create :set_success, :conditions => {:todo_name => 'wake_up'}
 
-  before_update :set_success
-  before_update :record_valid?
+  after_save    :set_census, :conditions => {:todo_name => 'wake_up'}
+  after_destroy :set_census, :conditions => {:todo_name => 'wake_up'}
+  before_update :set_success, :conditions => {:todo_name => 'wake_up'}
+
+  before_update :record_valid?, :conditions => {:todo_name => 'wake_up'}
+
+  named_scope :success, :conditions => {:success => true}
+  named_scope :fail, :conditions => {:success => false}
+  named_scope :today_rec, :conditions => ["todo_time > ?", Time.now.midnight]
+  named_scope :week, :conditions => ["todo_time > ?", Time.now.beginning_of_week]
+  named_scope :wake, :conditions => {:todo_name => 'wake_up'}
+  named_scope :sleep, :conditions => {:todo_name => 'sleep'}
+
   #validates_length_of :content, :minimum => 1, :on => :update
   #after_create :set_average, :set_continuous_num, :set_successful_rate
   #acts_as_ferret :fields => [:content]
 
   protected
   def set_time
-    #self.todo_time ||= Time.zone.now
     self.todo_time ||= Time.now
   end
 
@@ -48,28 +56,28 @@ class Record < ActiveRecord::Base
   end
 
   def set_census
-    records = self.user.records
+    user = self.user
     status  = self.user.status
-    set_average(records, status)
-    set_successful_rate(records, status)
-    set_continuous_num(records, status)
-    set_today_state(records, status)
-    set_records_num(records, status)
-    set_last_record_time(records, status)
-    set_diff_time(records, status)
+    user.records.set_average(status)
+    user.records.set_successful_rate(status)
+    user.records.set_continuous_num(status)
+    user.records.set_today_state(status)
+    user.records.set_records_num(status)
+    user.records.set_last_record_time(status)
+    user.records.set_diff_time(status)
     true
   end
 
-  def set_last_record_time(records, status)
-    status.update_attribute(:last_record_created_at, records.find_last_day)
+  def self.set_last_record_time(status)
+    status.update_attribute(:last_record_created_at, self.find_last_day)
   end
 
-  def set_records_num(records, status)
-    status.update_attribute(:num, records.size)
+  def self.set_records_num(status)
+    status.update_attribute(:num, self.count)
   end
 
-  def set_today_state(records, status)
-    today_rec = records.find(:first, :order => 'todo_time DESC', :conditions => ['todo_time > ?', Time.now.at_beginning_of_day])
+  def self.set_today_state(status)
+    today_rec = self.wake.today_rec.find(:first, :order => 'todo_time DESC')
     if today_rec
       if today_rec.success
         status.update_attribute(:state, 1)
@@ -83,44 +91,44 @@ class Record < ActiveRecord::Base
     end
   end
   
-  def set_average(records, status)
-    average = records.count_average
+  def self.set_average(status)
+    average = self.count_average
     status.update_attribute(:average, average)
   end
 
-  def set_diff_time(records, status)
+  def self.set_diff_time(status)
     total = 0
-    records.find(:all, :conditions => "todo_target_time is not NULL").each do |r|
+    self.wake.find(:all, :conditions => "todo_target_time is not NULL").each do |r|
       t = r.todo_target_time - r.todo_time
       if t < 0
         t *= -1
       end
       total += t
     end
-    counts = records.count(:all, :conditions => "todo_target_time is not NULL")
+    counts = self.wake.count(:all, :conditions => "todo_target_time is not NULL")
     counts = 1 if counts.zero?
     diff = total/counts
     diff /= 60
     status.update_attribute(:diff, diff)
   end
 
-  def set_successful_rate(records, status)
-    records_success_percent = records.find_success_percent
+  def self.set_successful_rate(status)
+    records_success_percent = self.find_success_percent
     status.update_attribute(:success_rate, records_success_percent)
   end
 
-  def set_continuous_num(records, status)
-    last_success = records.find_last_success
-    last_fail = records.find_last_fail
+  def self.set_continuous_num(status)
+    last_success = self.find_last_success
+    last_fail = self.find_last_fail
 
     if last_fail.nil?
-      num = records.count
+      num = self.wake.count
     elsif last_success.nil? 
       num = 0
     elsif last_fail.todo_time > last_success.todo_time
       num = 0 
     else
-      num = records.find_continuous_num(last_fail, last_success)
+      num = self.find_continuous_num(last_fail, last_success)
     end
 
     status.update_attribute(:continuous_num, num)
@@ -136,7 +144,8 @@ class Record < ActiveRecord::Base
     true # why this
   end
   
-  def self.todo(thing_name, params=nil)
+  def self.todo(name, params=nil)
+    params[:todo_name] = name
     record = self.new(params)
 
     if record.record_valid?
@@ -156,13 +165,13 @@ class Record < ActiveRecord::Base
     time = self.todo_time
     if time > Time.now
       false
-    elsif self.user.records.find(:all, :conditions => ['todo_time < ? and todo_time > ?', time.tomorrow.at_beginning_of_day, time.at_beginning_of_day]).blank?
+    elsif self.user.records.wake.find(:all, :conditions => ['todo_time < ? and todo_time > ?', time.tomorrow.at_beginning_of_day, time.at_beginning_of_day]).blank?
       true 
     end
   end
 
   def lastest_target_time
-    find(:first, :order =>'id DESC').todo_target_time
+    first(:order =>'id DESC').todo_target_time
   end
 
   #make array to string
@@ -183,39 +192,35 @@ class Record < ActiveRecord::Base
     "[#{time}]"
   end
 
-  def self.find_all_todo_time(month = Time.now.month, year = Time.now.year, option ="", params = nil, page = nil)
+  def self.find_all_todo_time(month = Time.now.month, year = Time.now.year, option ="", type=nil)
+    #debugger
     month_selected = Time.local(year, month)
     month_next = month_selected.next_month
 
-    per_page = page.nil? ? 31 : page
-    self.paginate :page => params,
-                  :per_page => per_page,
-                  :order => "todo_time #{option}", 
-                  :conditions => ["todo_time >= ? and todo_time <= ?", month_selected, month_next],
-                  :include => :comments
+    params = {
+      :order => "todo_time #{option}", 
+      :conditions => ["todo_time >= ? and todo_time <= ?", month_selected, month_next],
+    }
+
+    if type.blank?
+      self.all(params.merge!(:include => :comments))
+    elsif type == 'sleep'
+      self.sleep.find(:all, params)
+    else
+      self.wake.find(:all, params)
+    end
   end
 
   def self.find_all_records(params)
-    self.paginate :page => params,
+    self.wake.paginate :page => params,
                   :per_page => 10,
                   :order => "id DESC", 
                   :conditions => "content is not NULL"
   end
 
-  def self.find_all_diaries(month = Time.now.month, year = Time.now.year, params = nil, per_page=7)
-    month_selected = Time.local(year, month)
-    month_next = month_selected.next_month
-
-    self.paginate(:page => params,
-                  :per_page => 31,
-                  :order => "todo_time DESC",
-                  :conditions => ["todo_time >= ? and todo_time <= ?", month_selected, month_next]
-                 )
-  end
-
   def self.find_success_percent
-    records_success = self.count(:all, :conditions => ["success = ?", true])
-    records_all = self.count 
+    records_success = self.wake.success.count
+    records_all = self.wake.count 
     records_all = 1 if records_all.zero?
     100*(records_success / records_all.to_f)
   end
@@ -228,31 +233,27 @@ class Record < ActiveRecord::Base
       cond << "and records.success = #{res}" 
     end
 
-    self.paginate :page => params,
+    self.wake.paginate :page => params,
                   :per_page => per_page,
     #              :include => [:user, {:user => :mugshot}],
                   :conditions => cond
   end
 
   def self.find_yesterday_records
-    self.find(:all, :conditions => ["content is not NULL and todo_time > ?", Time.now.midnight.yesterday],
+    self.wake.find(:all, :conditions => ["content is not NULL and todo_time > ?", Time.now.midnight.yesterday],
                     :limit => 5)
   end
 
   def self.find_last_success
-    self.find(:first,
-              :order => 'todo_time DESC',
-              :conditions => ["success = ?", true])
+    self.wake.success.find(:first, :order => 'todo_time DESC')
   end
 
   def self.find_last_fail
-    self.find(:first,
-              :order => 'todo_time DESC',
-              :conditions => ["success = ?",false])
+    self.wake.fail.find(:first, :order => 'todo_time DESC')
   end
 
   def self.find_continuous_num(start_time, end_time)
-    self.count(:all, :conditions => ["todo_time > ? and todo_time < ?", start_time.todo_time, end_time.todo_time])+1
+    self.wake.count(:conditions => ["todo_time > ? and todo_time < ?", start_time.todo_time, end_time.todo_time])+1
   end
 
   def self.weekly_report
@@ -270,16 +271,16 @@ class Record < ActiveRecord::Base
   end
 
   def self.find_week_record
-    record = self.find(:all, :conditions => ["todo_time > ?", Time.now.beginning_of_week])
+    record = self.wake.find(:all, :conditions => ["todo_time > ?", Time.now.beginning_of_week])
     average = self.count_average(false)
     return record, average
   end
 
   def self.count_average(total=true)
     if total 
-      times = self.find(:all).map(&:todo_time)
+      times = self.wake.map(&:todo_time)
     else
-      times = self.find(:all, :conditions => ["todo_time > ?", Time.now.beginning_of_week]).map(&:todo_time)
+      times = self.wake.find(:all, :conditions => ["todo_time > ?", Time.now.beginning_of_week]).map(&:todo_time)
     end
 
     if times.blank?

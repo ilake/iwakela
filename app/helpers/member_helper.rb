@@ -28,8 +28,10 @@ module MemberHelper
               </tr>"
   end
 
-  def record_flag(state)
-    if state == 1
+  def record_flag(record)
+    if record.todo_name == 'sleep'
+      image_tag('sleep.png', :title => '睡覺時間')
+    elsif record.state == 1
       image_tag('flag_yellow.png', :title => '補上或修改的紀錄')
     else
       image_tag('flag_green.png', :title => '不是補上或修改的紀錄')

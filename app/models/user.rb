@@ -162,7 +162,7 @@ class User < ActiveRecord::Base
   end
 
   def today_record
-    record = self.records.last(:order => 'todo_time')
+    record = self.records.wake.last(:order => 'todo_time')
     if record && record.todo_time.at_beginning_of_day == Time.now.at_beginning_of_day
       record
     else

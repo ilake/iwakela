@@ -92,12 +92,18 @@
             <%= image_tag(r.success ? 'thumbup.gif' : 'thumbdown.gif') %> <br />
             <%= number_clock       r %>
           </div>
+          <h1>睡覺囉！</h1>
+          <div class='alarm_clock'>
+            <%= link_to "#{image_tag('sleep_time.png')}<br /> 紀錄現在時間",
+              {:controller => 'member', :action => 'sleep'} %>
+          </div>
         <% else %>
           <h1>起床囉！</h1>
           <div class='alarm_clock'>
             <%= link_to "#{image_tag('clock.gif')}<br /> 紀錄現在時間",
               {:controller => 'member', :action => 'wake_up'} %>
           </div>
+
         <% end %>
       <% end %>
 
@@ -110,7 +116,6 @@
                        [ '早鳥團', 'groups', 'index' ],
                        [ '早鳥嘰嘰喳喳', 'chats', 'list' ],
                        [ '早鳥排行榜', 'user', 'list_user_rank' ],
-                       [ '早鳥的過去', 'member', 'list_all_records' ],
                        [ '早鳥討論區', 'forums', 'index' ],
                        [ '使用者列表', 'user', 'list' ]
           ]) %>
@@ -120,7 +125,6 @@
                        [ '早鳥團', 'groups', 'index' ],
                        [ '早鳥嘰嘰喳喳', 'chats', 'list' ],
                        [ '早鳥排行榜', 'user', 'list_user_rank' ],
-                       [ '早鳥的過去', 'member', 'list_all_records' ],
                        [ '早鳥討論區', 'forums', 'index' ],
                        [ '使用者列表', 'user', 'list' ]
           ]) %>

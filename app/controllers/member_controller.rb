@@ -15,10 +15,17 @@ class MemberController < ApplicationController
     render :layout => false
   end
 
+  def new_sleep
+    @record = Record.new
+    render :layout => false
+  end
+
   #create the records be forgot
   def create 
     params[:record][:state] = 1
-    if @me.records.todo('wake_up', params[:record])
+    if params[:type] == 'sleep' && @me.records.todo('sleep', params[:record])
+      flash[:info] = "設定完成"
+    elsif @me.records.todo('wake_up', params[:record])
       flash[:info] = "設定完成"
     else
       flash[:notice] = "設定失敗, 已有紀錄, 或者設定了未來的時間喔= ="
@@ -47,10 +54,12 @@ class MemberController < ApplicationController
   end
 
   def list
-    @records = @user.records.find_all_todo_time(@month, @year, "DESC", params[:page], 31)
+    @records = @user.records.find_all_todo_time(@month, @year, "DESC")
+    records = @user.records.find_all_todo_time(@month, @year, "", 'wake')
+    sleep_records = @user.records.find_all_todo_time(@month, @year, "", 'sleep')
 
-    records = @user.records.find_all_todo_time(@month, @year)
     @time = Record.time_to_string(records, "todo_time")
+    @sleep_time = Record.time_to_string(sleep_records, "todo_time")
     @target_time = Record.time_to_string(records, "todo_target_time")
   end
 
@@ -60,7 +69,7 @@ class MemberController < ApplicationController
 
   def target_time_now
     if request.post?
-      @me.target_time_now = target_time( params[:date][:hour], params[:date][:minute] )
+      @me.target_time_now = target_time(params[:date][:hour], params[:date][:minute])
 
       if @me.save
         flash[:info] = "設定完成"
@@ -76,9 +85,8 @@ class MemberController < ApplicationController
       flash[:notice] = "沒有人一直在早起的啦"
       redirect_to :back
     else
-      record = @me.records.create    
+      record = @me.records.create
       if record.errors.empty?
-        #@me.set_census
         flash[:info] = "早安喔, 可以寫一下給今日的話, 鼓勵一下自己喔"
       else
         flash[:notice] = "不能設定現在之後的時間喔"
@@ -88,6 +96,17 @@ class MemberController < ApplicationController
     end 
   end
 
+  def sleep
+    record = @me.records.create(:todo_name => 'sleep')
+    if record.errors.empty?
+      flash[:info] = "晚安喔"
+    else
+      flash[:notice] = "不能設定現在之後的時間喔"
+    end
+
+    redirect_to :controller => 'member', :action => 'list' 
+  end
+
   def edit_time
     @record = @me.records.find(params[:id])
     render :layout => false
@@ -95,7 +114,6 @@ class MemberController < ApplicationController
 
   def write_diary
     @record = @me.records.find(params[:id])
-    #@time = Time.now
     render :layout => false
   end
 
