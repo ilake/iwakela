@@ -148,7 +148,13 @@ class Record < ActiveRecord::Base
     params[:todo_name] = name
     record = self.new(params)
 
-    if record.record_valid?
+    if name == 'wake_up'
+      if record.record_valid?
+        if record.save
+          record
+        end
+      end
+    else
       if record.save
         record
       end
