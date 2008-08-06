@@ -28,8 +28,9 @@
     <% @lazy_users.each do |lu|%>
       <div class='fail_one'><%= where_is_me(lu, lu.name) %></div>
     <% end %>
-    <% if @totoal_success >= 20 %>
-      <b>只有後20名失敗的才會在這, 明天請早</b>
+    <br />
+    <% if @totoal_fail >= 20 %>
+      <b>只有後20名失敗的才會在這</b>
     <% end %>
     <%= image_tag('orz.gif', :class => 'orz')%>
   </div>
@@ -61,7 +62,7 @@
 
     <br />
     <% if @totoal_success >= 20 %>
-      <b>只有前20名成功的才會在這, 明天請早</b>
+      <b>只有前20名成功的才會在這</b>
     <% end %>
   </div>
 
