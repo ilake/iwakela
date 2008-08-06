@@ -33,7 +33,8 @@ class Record < ActiveRecord::Base
 
   named_scope :success, :conditions => {:success => true}
   named_scope :fail, :conditions => {:success => false}
-  named_scope :today_rec, :conditions => ["todo_time > ?", Time.now.midnight]
+  named_scope :today,
+              :conditions => ["todo_time > ? AND todo_time < ?", Time.now.midnight, Time.now.tomorrow.midnight]
   named_scope :week, :conditions => ["todo_time > ?", Time.now.beginning_of_week]
   named_scope :wake, :conditions => {:todo_name => 'wake_up'}
   named_scope :sleep, :conditions => {:todo_name => 'sleep'}
@@ -77,7 +78,7 @@ class Record < ActiveRecord::Base
   end
 
   def self.set_today_state(status)
-    today_rec = self.wake.today_rec.find(:first, :order => 'todo_time DESC')
+    today_rec = self.wake.today.find(:first, :order => 'todo_time DESC')
     if today_rec
       if today_rec.success
         status.update_attribute(:state, 1)
@@ -316,4 +317,5 @@ class Record < ActiveRecord::Base
   def all_records_id
     user.records.map(&:id)
   end
+
 end

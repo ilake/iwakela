@@ -9,8 +9,10 @@ class ChatsController < ApplicationController
   end
 
   def list
-    @lazy_users = User.find_fight_user_result(true, 2)
-    @early_users= User.find_fight_user_result(true, 1)
+    @lazy_users = User.today_earliest('fail')
+    @early_users = User.today_earliest('success')
+    @totoal_success = Record.wake.today.success.count
+    @totoal_fail = Record.wake.today.fail.count
     @chat = Chat.find_some_chats(params[:page], 20)
   end
 end

@@ -24,9 +24,12 @@
       <%= image_tag('lazybird.gif')%>
     </span>
     <%= image_tag('poo.gif', :class => 'poo')%>
-    <h2 class='result-title'>懶鳥區</h2>
+    <h2 class='result-title'>懶鳥區<%=@totoal_fail%>人</h2>
     <% @lazy_users.each do |lu|%>
       <div class='fail_one'><%= where_is_me(lu, lu.name) %></div>
+    <% end %>
+    <% if @totoal_success == 20 %>
+      <b>只有後20名失敗的才會在這, 明天請早</b>
     <% end %>
     <%= image_tag('orz.gif', :class => 'orz')%>
   </div>
@@ -51,9 +54,14 @@
   </div>
 
   <div class='success_users'>
-    <h2 class='result-title'>早鳥區</h2>
+    <h2 class='result-title'>早鳥區<%=@totoal_success%>人</h2>
     <% @early_users.each do |eu|%>
       <div class='success_one'><%= where_is_me(eu, eu.name) %></div>
+    <% end %>
+
+    <br />
+    <% if @totoal_success == 20 %>
+      <b>只有前20名成功的才會在這, 明天請早</b>
     <% end %>
   </div>
 

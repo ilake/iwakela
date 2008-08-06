@@ -233,6 +233,14 @@ class User < ActiveRecord::Base
     self.create_status
   end
 
+  def self.today_earliest(result='success')
+    if result == 'success'
+      Record.wake.today.success.find(:all, :limit => 20).map{|r|r.user}
+    else
+      Record.wake.today.fail.find(:all, :limit => 20, :order => 'id DESC').map{|r|r.user}
+    end
+  end
+
   private 
   def self.random_str
     [Array.new(6){rand(256).chr}.join].pack("m").chomp
