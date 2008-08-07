@@ -51,6 +51,7 @@
     <% else %>
       <% form_tag :controller => 'chats', :action => 'create', :group_id => @group.id do %>
         我說 :<%= text_field :chats, :content, :size => 30, :maxlength => 50 %>
+        <%= submit_tag '送出'%>
       <% end %>
     <%end %>
   <% end %>
