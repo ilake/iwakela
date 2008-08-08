@@ -195,13 +195,8 @@ class User < ActiveRecord::Base
 
   #daily 
   def self.reset_all_state
-    self.find(:all).each do |u|
-      if u.status.fight
-        u.status.update_attribute(:state, 0)
-      else
-        u.status.update_attribute(:state, 3)
-      end
-    end
+    Status.update_all("status = 0", "fight = true")
+    Status.update_all("status = 3", "fight = true")
   end
 
   def self.find_user_rank(page, sort)
