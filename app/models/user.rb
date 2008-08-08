@@ -195,8 +195,8 @@ class User < ActiveRecord::Base
 
   #daily 
   def self.reset_all_state
-    Status.update_all("status = 0", "fight = true")
-    Status.update_all("status = 3", "fight = true")
+    Status.update_all("state = 0", "fight = true")
+    Status.update_all("state = 3", "fight = true")
   end
 
   def self.find_user_rank(page, sort)
