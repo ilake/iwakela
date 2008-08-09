@@ -88,7 +88,7 @@
           %>
           <% end %>
         </td>
-        <td class='goal'><%=record.com_goal%></td>
+        <td class='goal'><%=link_to record.com_goal, member_url(:action => :show, :id => record) unless record.com_goal.blank?%></td>
         <% if is_owner?(@user)%>
         <td><%=jquery_link_to_remote image_tag("todo.png",
                                                :border => "0",

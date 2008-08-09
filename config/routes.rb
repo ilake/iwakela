@@ -28,6 +28,7 @@ ActionController::Routing::Routes.draw do |map|
   # map.root :controller => "welcome"
 
   map.home '', :controller => 'main', :action => 'index'
+  map.member 'member/:action', :controller => 'member'
 
 
   map.connect "main/reset_password/:reset_code",
