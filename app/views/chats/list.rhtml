@@ -29,9 +29,10 @@
       <div class='fail_one'><%= where_is_me(lu, lu.name) %></div>
     <% end %>
     <br />
-    <% if @totoal_fail >= 20 %>
+    <% if @totoal_fail >= 1 %>
       <b>只有後20名失敗的才會在這</b>
-    <% end %>
+    <% end -%>
+    <div class='clear'></div>
     <%= image_tag('orz.gif', :class => 'orz')%>
   </div>
 
