@@ -41,7 +41,10 @@
     </span>
     <span>
       <%= jquery_link_to_remote "補上睡覺時間", :update => 'remote', :url => {:action => 'new_sleep'} %>
-    </span>
+    </span> 
+    | 
+    <span><%=jquery_link_to_remote "設定今日目標", :update => 'remote', :url => {:controller => 'goals', :action => 'create', :id => @last_record}
+    %></span>
   </div>
 <% end %>
 <table>  
@@ -91,8 +94,7 @@
         <td class='goal'><%=link_to record.com_goal, member_url(:action => :show, :id => record) unless record.com_goal.blank?%></td>
         <% if is_owner?(@user)%>
         <td><%=jquery_link_to_remote image_tag("todo.png",
-                                               :border => "0",
-                                               :mouseover => image_path("todo_over.png")),
+                                               :border => "0"),
                                                :update => 'remote',
                                                :url => {:controller => 'goals', :action => 'create', :id => record.id}
         %></td>

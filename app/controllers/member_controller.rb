@@ -61,6 +61,8 @@ class MemberController < ApplicationController
     @time = Record.time_to_string(records, "todo_time")
     @sleep_time = Record.time_to_string(sleep_records, "todo_time")
     @target_time = Record.time_to_string(records, "todo_target_time")
+
+    @last_record = @user.records.last(:order => "todo_time")
   end
 
   def list_all_records
