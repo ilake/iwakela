@@ -16,6 +16,8 @@ class Comment < ActiveRecord::Base
   belongs_to :record, :polymorphic => true
   belongs_to :user
 
+  named_scope :valid, :conditions => "comments.user_id is not NULL"
+
   after_save :add_forum_comment_count
 
   def add_forum_comment_count

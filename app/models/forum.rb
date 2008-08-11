@@ -22,19 +22,25 @@ class Forum < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
 
+  after_create :default_comment
+
+  def default_comment
+    comments.create(:user_id => nil, :content => 'cant be seen')
+  end
+
   def self.find_all_forum(params, group=nil)
     if group
       self.paginate :page => params,
-                    :per_page => 10,
-                    :include => :comments,
-                    :order => 'comments.created_at DESC',
-                    :conditions => ["group_id = ?", group]
+                          :per_page => 10,
+                          :include => :comments,
+                          :order => 'comments.created_at DESC',
+                          :conditions => ["forums.group_id = ?", group]
     else
       self.paginate :page => params,
-                    :per_page => 10,
-                    :include => :comments,
-                    :order => 'comments.created_at DESC',
-                    :conditions => 'group_id is NULL'
+                          :per_page => 10,
+                          :include => :comments,
+                          :order => 'comments.created_at DESC',
+                          :conditions => 'forums.group_id is NULL'
     end
   end
 end

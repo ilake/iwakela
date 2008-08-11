@@ -2,7 +2,7 @@
 <div class="comment-response">回應</div>
 <br />
 <% unless item.comments.nil? %>
-  <% item.comments.each do |c| %>
+  <% item.comments.valid.each do |c| %>
     <div class='comment_title'>
       <span class='no_line_name'><%= link_to_user(c.user, c.user.name)%></span>
       <span class='h-time'>(<%= extract_datetime_string(c.created_at) %>)</span>
