@@ -26,13 +26,13 @@ class Forum < ActiveRecord::Base
     if group
       self.paginate :page => params,
                     :per_page => 10,
-                    :include => :comments,
+                    :include => :last_comment,
                     :order => 'comments.created_at DESC',
                     :conditions => ["group_id = ?", group]
     else
       self.paginate :page => params,
                     :per_page => 10,
-                    :include => :comments,
+                    :include => :last_comment,
                     :order => 'comments.created_at DESC',
                     :conditions => 'group_id is NULL'
     end
