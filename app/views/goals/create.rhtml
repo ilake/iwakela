@@ -47,12 +47,12 @@
 </script>
 
 <div class='setting-bg'>
-  <div><b>我的每日目標</b></div>
+  <div><b style='color:#FF0000'>我的每日目標</b></div>
   <div>
     <% jquery_form_remote_tag :update => 'after_delete', :url => {:controller => 'goals', :action => 'create'},
       :position => "top" do |f|%>
         目標名稱: <%= text_field :goals, :name %>
-        <%= submit_tag "設定完成", :id => "goal_submit" %>
+        <%= submit_tag "新增", :id => "goal_submit" %>
         <%= link_to_cancel %>
       <% end %>
       <br />
@@ -60,7 +60,7 @@
       <% form_tag :controller => 'goals', :action => 'update', :id => @record do %>
         <table>
           <tr id='new_goal_pos'>
-            <th>今天要做(不想做就別勾)</th>
+            <th>今天要做(不做就別勾)</th>
             <th>我有做到</th>
             <th>目標名稱</th>
             <th>備註</th>
