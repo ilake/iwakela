@@ -554,6 +554,7 @@ td.forum-diary-time {
 }
 
 td.forum-content{
+  line-height: 30px;
   width: 1000px;
 }
 
@@ -608,6 +609,7 @@ div.comment_title {
 div.comment_content {
   border-bottom:1px solid #CBCACA;
   padding: 10px 0px 10px 0px;
+  line-height : 22px;
 }
 span.no_line_name a{
   text-decoration: none;
