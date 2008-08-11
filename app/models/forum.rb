@@ -16,6 +16,9 @@ class Forum < ActiveRecord::Base
   validates_presence_of :subject, :content
 
   has_many :comments, :as => :record
+  has_one :last_comment, :as => :record,
+                         :class_name => 'Comment',
+                         :order => 'comments.created_at DESC'
   belongs_to :user
   belongs_to :group
 
@@ -23,12 +26,14 @@ class Forum < ActiveRecord::Base
     if group
       self.paginate :page => params,
                     :per_page => 10,
-                    :order => 'id DESC',
+                    :include => :comments,
+                    :order => 'comments.created_at DESC',
                     :conditions => ["group_id = ?", group]
     else
       self.paginate :page => params,
                     :per_page => 10,
-                    :order => 'id DESC',
+                    :include => :comments,
+                    :order => 'comments.created_at DESC',
                     :conditions => 'group_id is NULL'
     end
   end
