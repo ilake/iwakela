@@ -57,6 +57,7 @@
       <% end %>
       <br />
       <hr>
+      您改的是<span style='color:#0000EE'><%= @record.todo_time.strftime("%m月%d日")%></span>的紀錄
       <% form_tag :controller => 'goals', :action => 'update', :id => @record do %>
         <table>
           <tr id='new_goal_pos'>
