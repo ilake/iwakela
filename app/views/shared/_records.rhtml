@@ -1,3 +1,4 @@
+<% unless records.size.zero? %>
 <table>
 <% records.each_with_index do |record, i| %>
   <tr class="<%= cycle('','title')%>">
@@ -16,3 +17,7 @@
   </tr> 
 <% end %>
 </table>
+<% else %>
+  <h1>現在沒有人, 因為我們都已經睡了</h1>
+  <img src="/images/linux.png" alt="早點睡阿"/>
+<% end %>
