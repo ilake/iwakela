@@ -136,7 +136,8 @@ td.showdiary-content{
 }
 
 #choices {
-  float: right;
+  /*float: right;*/
+  padding-left:300px;
 }
 
 b.placeholder-time {
@@ -145,7 +146,7 @@ b.placeholder-time {
 
 #placeholder {
   clear: both;
-  width: 700px;
+  width: 600px;
   height: 300px;
 }
 
@@ -403,10 +404,6 @@ td.showdiary-content{
   display: block;
 }
 
-#choices {
-  float: right;
-}
-
 b.placeholder-time {
   clear: both;
 }
@@ -530,6 +527,7 @@ h2.result-title {
 
 div.setting-bg{
   background-color:#E1ECFE;
+  padding:5px;
 }
 
 img{

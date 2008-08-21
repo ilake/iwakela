@@ -62,12 +62,23 @@ module AllHelper
       "平均離目標#{user.status.diff}分" if user.status.diff and user.target_time_now
   end
 
+  def exact_score(user)
+      "分數#{user.status.score}分" if user.status.score
+  end
+
   def success_census(user)
       "成功率為#{ number_to_percentage(user.status.success_rate, :precision => 1) || 0}"
   end
 
   def continuous_success_num(user)
-     "連續早起 #{user.status.continuous_num || 0}次"
+    num = user.status.continuous_num
+    if !num 
+     "連續早起0次"
+    elsif num < 0
+     "<span class='alert'>連續晚起 #{num.abs || 0}次</span>"
+    else
+     "連續早起 #{num.abs || 0}次"
+    end
   end
 
   def show_messages
@@ -108,7 +119,7 @@ module AllHelper
   end
 
   def link_to_diary(r, text, size=32)
-    link_to h(truncate(text, size)), :controller => 'member', :action => 'show', :id => r
+    link_to format_content(truncate(text, size)), :controller => 'member', :action => 'show', :id => r
   end
 
   def month_selected
@@ -133,6 +144,7 @@ module AllHelper
   end
 
   def ck_box(item, opt, checked)
+    checked = checked == 1 ? true : false
     check_box_tag("item[#{item.id.to_s}][#{opt}]", 1, checked )
   end
 

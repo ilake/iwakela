@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20
+# Schema version: 20080819065738
 #
 # Table name: users
 #
@@ -16,6 +16,7 @@
 #  yahoo_userhash            :string(255)     
 #  group_id                  :integer(11)     
 #  group_nickname            :string(255)     
+#  time_zone                 :string(255)     default("Taipei")
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

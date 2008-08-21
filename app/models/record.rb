@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20
+# Schema version: 20080819065738
 #
 # Table name: records
 #
@@ -12,6 +12,7 @@
 #  success          :boolean(1)      default(TRUE)
 #  goal             :text            
 #  com_goal         :text            
+#  state            :integer(11)     
 #
 
 class Record < ActiveRecord::Base
@@ -61,7 +62,8 @@ class Record < ActiveRecord::Base
 
   def set_census
     user = self.user
-    status  = self.user.status
+    status  = user.status
+    scores = user.scores
     user.records.set_average(status)
     user.records.set_successful_rate(status)
     user.records.set_continuous_num(status)
@@ -69,7 +71,33 @@ class Record < ActiveRecord::Base
     user.records.set_records_num(status)
     user.records.set_last_record_time(status)
     user.records.set_diff_time(status)
+    user.records.set_score(status, scores)
     true
+  end
+
+  #只算最近21筆紀錄, 來算分數
+  def self.set_score(status, scores)
+    total = self.wake.count
+    total = total > 21 ? 21 : total
+
+    a = self.wake.find(:all, :order => "id DESC", :limit => 21).map(&:success)
+    a.delete(false)
+    wake_count = a.size
+    sleep_count = total - wake_count
+
+#    wake_score = wake_count * scores.find_by_name('wake').value
+#    sleep_score = sleep_count * scores.find_by_name('sleep').value
+    wake_score = wake_count * 1
+    sleep_score = sleep_count * 2
+
+    cont_count = status.continuous_num
+    cont_count = cont_count > 21 ? 21 : cont_count
+
+    #在加上連續天數x2
+    wake_score = wake_score + cont_count*2
+
+    total_score = wake_score - sleep_score 
+    status.update_attribute(:score, total_score)
   end
 
   def self.set_last_record_time(status)
@@ -102,14 +130,14 @@ class Record < ActiveRecord::Base
 
   def self.set_diff_time(status)
     total = 0
-    self.wake.find(:all, :conditions => "todo_target_time is not NULL").each do |r|
+    self.wake.find(:all, :conditions => "todo_target_time is not NULL", :limit => 21).each do |r|
       t = r.todo_target_time - r.todo_time
       if t < 0
         t *= -1
       end
       total += t
     end
-    counts = self.wake.count(:all, :conditions => "todo_target_time is not NULL")
+    counts = self.wake.count(:all, :conditions => "todo_target_time is not NULL", :limit => 21)
     counts = 1 if counts.zero?
     diff = total/counts
     diff /= 60
@@ -128,9 +156,9 @@ class Record < ActiveRecord::Base
     if last_fail.nil?
       num = self.wake.count
     elsif last_success.nil? 
-      num = 0
+      num = self.sleep.count*-1
     elsif last_fail.todo_time > last_success.todo_time
-      num = 0 
+      num = self.find_continuous_num(last_success, last_fail)*-1
     else
       num = self.find_continuous_num(last_fail, last_success)
     end
@@ -139,6 +167,23 @@ class Record < ActiveRecord::Base
   end
 
   public
+
+  def self.count_score
+    total = self.count
+    total = total > 21 ? 21 : total
+
+    a = self.find(:all, :order => "id DESC", :limit => 21)
+    a.delete(false)
+    wake_count = a.size
+    sleep_count = total - wake_count
+
+    wake_score = wake_count * user.scores.find_by_name('wake').value
+    sleep_score = sleep_count * user.scores.find_by_name('sleep').value
+
+    total_score = wake_score - sleep_score 
+    user.status.update_attribute(:score, total_score)
+  end
+
   def set_success
     unless self.todo_target_time.blank?
       self.success = self.todo_time > self.todo_target_time ? false : true

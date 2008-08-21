@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20
+# Schema version: 20080819065738
 #
 # Table name: records
 #
@@ -12,6 +12,7 @@
 #  success          :boolean(1)      default(TRUE)
 #  goal             :text            
 #  com_goal         :text            
+#  state            :integer(11)     
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

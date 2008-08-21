@@ -1,6 +1,51 @@
 <script type="text/javascript">
   (function($){
-   $(document).ready(function(){
+
+   function ajax_create(act, pos, goals) {
+     $.ajax({
+        url:  '/goals/'+act, 
+        type: 'POST',
+        data: goals,
+        dataType:  'html',
+        success:function(html){
+          $(pos).after(html);
+          $('td.goal_del').unbind('click', goal_del).bind('click', goal_del);
+          $('td.goal_up_tmp').unbind('click', goal_up ).bind('click', goal_up);
+          $('td.goal_down_tmp').unbind('click', goal_down).bind('click', goal_down);
+        }
+      });
+   }
+
+   function goal_create(act, pos, choosed){
+     var goals = {};
+
+     goals['goals[name]'] = $('#goals_name').val();
+     goals['goals[choosed]'] = choosed
+
+     ajax_create(act, pos, goals)
+     return false;
+     }
+
+     function goal_tmp_create(act, pos, choosed, text){
+       var goals = {};
+
+       goals['goals[name]'] = text;
+       goals['goals[choosed]'] = choosed
+
+       ajax_create(act, pos, goals)
+       return false;
+     }
+
+     function ajax_del(id, tr) {
+       $.ajax({
+          url:  '/goals/destroy', 
+          type: 'POST',
+          data: id,
+          success:function(html){
+             tr.remove();
+          }
+        });
+     }
 
      function goal_del() {
        var id = {};
@@ -8,73 +53,103 @@
        var answer = confirm("妳確定要刪除嗎？")
 
        tr = $(this).parent();
-       id['id'] = $(this).parent().attr('goal_id');
+       id['id'] = tr.attr('goal_id');
 
        if (answer) {
-         $.ajax({
-            url:  '/goals/destroy', 
-            type: 'POST',
-            data: id,
-            success:function(html){
-               tr.remove();
-            }
-          });
+         ajax_del(id, tr)
        }
        return false;
      }
 
-     $('#goal_submit').click(function(){
-       var goals = {};
-       goals['goals[name]'] = $('#goals_name').val();
+     function goal_tmp_del(del_id) {
+       var id = {};
 
-       $.ajax({
-          url:  '/goals/create', 
-          type: 'POST',
-          data: goals,
-          dataType:  'html',
-          success:function(html){
-          $('#new_goal_pos').after(html);
-            $('td.goal_del').bind('click', goal_del);
-          }
-        });
+       id['id'] = del_id;
 
+       tr = $('[goal_id='+del_id+']');
+       ajax_del(id, tr)
        return false;
-       });
+     }
 
-      $('td.goal_del').bind('click', goal_del);
-      });
-    })(jQuery);
+     function goal_up() {
+       var text = $(this).parent().find(".goal_name").html()
+       var g_id = $(this).parent().attr('goal_id');
+
+       goal_tmp_create('create', '#temp_goal_pos', '-1', text);
+       goal_tmp_del(g_id);
+     }
+
+     function goal_down() {
+       var text = $(this).parent().find(".goal_tmp_name").html()
+       var g_id = $(this).parent().attr('goal_id');
+
+       goal_tmp_create('create', '#new_goal_pos', '1', text);
+       goal_tmp_del(g_id);
+     }
+
+   $(document).ready(function(){
+       $('#goal_submit').bind('click', function() {
+         goal_create('create', '#new_goal_pos', '1');
+         });
+
+       $('#goal_temp').bind('click', function() {
+         goal_create('create', '#temp_goal_pos', '-1');
+         });
+
+       $('td.goal_up_tmp').bind('click', goal_up );
+       $('td.goal_down_tmp').bind('click', goal_down );
+
+       $('td.goal_del').bind('click', goal_del);
+    });
+  })(jQuery);
 </script>
 
 <div class='setting-bg'>
   <div><b style='color:#FF0000'>我的每日目標</b></div>
-  <div>
-    <% jquery_form_remote_tag :update => 'after_delete', :url => {:controller => 'goals', :action => 'create'},
-      :position => "top" do |f|%>
-        目標名稱: <%= text_field :goals, :name %>
-        <%= submit_tag "新增", :id => "goal_submit" %>
-        <%= link_to_cancel %>
-      <% end %>
       <br />
       <hr>
-      您改的是<span style='color:#0000EE'><%= @record.todo_time.strftime("%m月%d日")%> 星期<%= week_day(@record.todo_time.wday)%></span>的紀錄
-      <% form_tag :controller => 'goals', :action => 'update', :id => @record do %>
+      <br />
+    <div>
+      <b>目標名稱:</b> <%= text_field :goals, :name %>
+      <%= submit_tag "新增", :id => "goal_submit" %>
+      <%= submit_tag "暫存", :id => "goal_temp" %>
+      <%= link_to_cancel %>
+    </div>
+      <br />
+      <div style='background-color:#EFEFEF;padding-top:5px;'>
+        <b>目標暫存區</b>
         <table>
-          <tr id='new_goal_pos'>
-            <th>今天要做(不做就別勾)</th>
-            <th>我有做到</th>
+          <tr id='temp_goal_pos'>
             <th>目標名稱</th>
-            <th>備註</th>
             <th>刪除</th>
+            <th>下移</th>
           </tr>
-          <% @me.goals.each do |g|%>
-            <%= render :partial => 'member/new_goal', :locals => {:g => g}%>
+          <% @me.goals.temp.find(:all, :order => "id DESC").each do |g|%>
+            <%= render :partial => 'member/temp_goal', :locals => {:g => g}%>
           <% end %>
         </table>
-        <%= submit_tag "設定完成" %>
-        <%= link_to_cancel %>
-      <% end %>
-    </div>
+      </div>
+      <div style='EFEFEF;padding-top:5px;'>
+        <br />
+        您改的是<span style='color:#0000EE'><%= @record.todo_time.strftime("%m月%d日")%> 星期<%= week_day(@record.todo_time.wday)%></span>的紀錄
+        <% form_tag :controller => 'goals', :action => 'update', :id => @record do %>
+          <table>
+            <tr id='new_goal_pos'>
+              <th>今天要做(不做就別勾)</th>
+              <th>我有做到</th>
+              <th>目標名稱</th>
+              <th>備註</th>
+              <th>刪除</th>
+              <th>上移暫存</th>
+            </tr>
+            <% @me.goals.active.find(:all, :order => "id DESC").each do |g|%>
+              <%= render :partial => 'member/new_goal', :locals => {:g => g}%>
+            <% end %>
+          </table>
+          <%= submit_tag "設定完成" %>
+          <%= link_to_cancel %>
+        <% end %>
+      </div>
   </div>
   <hr>
   <br />

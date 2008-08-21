@@ -1,6 +1,5 @@
 class CallsController < ApplicationController
   helper :all
-  layout 'member'
 
   def index
     @calls = Call.find(:all, :order => 'id DESC')

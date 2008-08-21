@@ -1,5 +1,5 @@
-<% @me.goals.each do |g|%>
-  <% if g.choosed %>
+<% @me.goals.active.find(:all, :order => "id DESC").each do |g|%>
+  <% if g.choosed == 1%>
     <div><%= state_image(g.done) %><%= h(g.name) %>: <%= h(g.comment) %></div>
   <% end %>
 <% end %>

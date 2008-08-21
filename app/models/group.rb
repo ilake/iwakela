@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20
+# Schema version: 20080819065738
 #
 # Table name: groups
 #
@@ -12,10 +12,6 @@
 #  created_at :datetime        
 #  owner_id   :integer(11)     
 #
-#state 0 public unfill
-#state 1 private unfill
-#state 2 public fill
-#state 3 private fill
 
 class Group < ActiveRecord::Base
   has_many :members, :foreign_key => "group_id", :class_name => "User", :dependent => :nullify

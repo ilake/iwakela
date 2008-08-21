@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20
+# Schema version: 20080819065738
 #
 # Table name: statuses
 #
@@ -13,7 +13,8 @@
 #  num                    :integer(11)     
 #  last_record_created_at :datetime        
 #  group_join_date        :datetime        
-#  attendance             :float           
+#  attendance             :float           default(0.0)
+#  diff                   :integer(11)     
 #
 
 #state 

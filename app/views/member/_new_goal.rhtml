@@ -1,8 +1,9 @@
 <tr goal_id=<%=g.id%>>
   <td><%= ck_box(g, 'choosed', g.choosed) %></td>
   <td><%= ck_box(g, 'done', g.done )%></td>
-  <td><%= h(g.name) %></td>
+  <td class="goal_name"><%= h(g.name) %></td>
   <td><%= text_fields(g, g.comment)%></td>
   <td class="goal_del"><%= image_tag("delete.png", :border => "0")%></td>
+  <td class="goal_up_tmp"><%= image_tag("folder_with_file.png", :border => "0", :size => "18x18")%></td>
 </tr>
 
