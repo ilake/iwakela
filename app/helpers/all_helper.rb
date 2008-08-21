@@ -144,7 +144,7 @@ module AllHelper
   end
 
   def ck_box(item, opt, checked)
-    checked = checked == 1 ? true : false
+    checked = (checked == 1 || checked == true) ? true : false
     check_box_tag("item[#{item.id.to_s}][#{opt}]", 1, checked )
   end
 
