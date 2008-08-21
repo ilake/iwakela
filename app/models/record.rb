@@ -71,34 +71,34 @@ class Record < ActiveRecord::Base
     user.records.set_records_num(status)
     user.records.set_last_record_time(status)
     user.records.set_diff_time(status)
-    #user.records.set_score(status, scores)
+    user.records.set_score(status, scores)
     true
   end
 
   #只算最近21筆紀錄, 來算分數
-#  def self.set_score(status, scores)
-#    total = self.wake.count
-#    total = total > 21 ? 21 : total
-#
-#    a = self.wake.find(:all, :order => "id DESC", :limit => 21).map(&:success)
-#    a.delete(false)
-#    wake_count = a.size
-#    sleep_count = total - wake_count
-#
-##    wake_score = wake_count * scores.find_by_name('wake').value
-##    sleep_score = sleep_count * scores.find_by_name('sleep').value
-#    wake_score = wake_count * 1
-#    sleep_score = sleep_count * 2
-#
-#    cont_count = status.continuous_num
-#    cont_count = cont_count > 21 ? 21 : cont_count
-#
-#    #在加上連續天數x2
-#    wake_score = wake_score + cont_count*2
-#
-#    total_score = wake_score - sleep_score 
-#    status.update_attribute(:score, total_score)
-#  end
+  def self.set_score(status, scores)
+    total = self.wake.count
+    total = total > 21 ? 21 : total
+
+    a = self.wake.find(:all, :order => "id DESC", :limit => 21).map(&:success)
+    a.delete(false)
+    wake_count = a.size
+    sleep_count = total - wake_count
+
+#    wake_score = wake_count * scores.find_by_name('wake').value
+#    sleep_score = sleep_count * scores.find_by_name('sleep').value
+    wake_score = wake_count * 1
+    sleep_score = sleep_count * 2
+
+    cont_count = status.continuous_num
+    cont_count = cont_count > 21 ? 21 : cont_count
+
+    #在加上連續天數x2
+    wake_score = wake_score + cont_count*2
+
+    total_score = wake_score - sleep_score 
+    status.update_attribute(:score, total_score)
+  end
 
   def self.set_last_record_time(status)
     status.update_attribute(:last_record_created_at, self.find_last_day)
