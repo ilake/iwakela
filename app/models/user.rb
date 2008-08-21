@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   #SELECT comments.* FROM comments INNER JOIN forums ON comments.record_id = forums.id AND comments.record_type = 'Forum' WHERE ((forums.user_id = 2))
   #example : u.forums.find(:all).map {|a| a.comments}  ===  u.forum_comments
   has_many :forum_comments, :through => :forums, :source => :comments  
-  has_many :record_comments, :through => :records, :source => :comments, :order => "created_at DESC", :limit => 7
+  has_many :record_comments, :through => :records, :source => :comments, :order => "created_at DESC", :limit => 6
 
   has_many :demands, :foreign_key => 'demander_id', :class_name => 'Call'
   has_many :accepts, :foreign_key => 'accepter_id', :class_name => 'Call'

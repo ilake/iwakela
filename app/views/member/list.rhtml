@@ -12,7 +12,12 @@
   <% if @user.record_comments.count > 0 %>
   <b>最新回應</b>
     <% @user.record_comments.find(:all).each do |c| %>
-      <div style='padding:2px 0px 3px 0px;'><%= link_to_user(c.user, c.user.name, nil, false) %> <%= link_to truncate(c.content, 20), member_url(:action => 'show', :id => c.record)%></div>
+      <div style='padding:6px 0px 6px 0px;'>
+        <div><span class='no_line_name'><%= link_to_user(c.user, c.user.name) %></span> : </div>
+        <span class='no_line_name'>
+          <%= link_to truncate(c.content, 13), member_url(:action => 'show', :id => c.record)%>
+        </span>
+      </div>
     <% end %>
   <% end %>
 </div>
