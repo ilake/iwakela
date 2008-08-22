@@ -25,12 +25,16 @@
           var t = new Date();
           now = t.getTime();
           window.location = '/member/wake_up?time='+now
+
+          return false;
           });
 
         $('.sleep_button').click(function(){
           var t = new Date();
           now = t.getTime();
           window.location = '/member/sleep?time='+now
+
+          return false;
           });
     });
   </script>

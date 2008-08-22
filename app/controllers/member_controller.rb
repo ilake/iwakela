@@ -23,7 +23,6 @@ class MemberController < ApplicationController
   #create the records be forgot
   def create 
     params[:record][:state] = 1
-    params[:record][:todo_time] = Time.at(params[:time].to_f/1000).to_s(:db)
 
     if params[:type] == 'sleep' && @me.records.todo('sleep', params[:record])
       flash[:info] = "設定完成"
@@ -91,7 +90,7 @@ class MemberController < ApplicationController
       flash[:notice] = "沒有人一直在早起的啦"
       redirect_to :back
     else
-      record = @me.records.create
+      record = @me.records.create(:todo_time => Time.at(params[:time].to_f/1000).to_s(:db))
       if record.errors.empty?
         flash[:info] = "早安喔, 可以寫一下給今日的話, 鼓勵一下自己喔"
       else
@@ -103,10 +102,7 @@ class MemberController < ApplicationController
   end
 
   def sleep
-    params[:record][:todo_time] = Time.at(params[:time].to_f/1000).to_s(:db)
-    params[:record][:todo_name] = 'sleep'
-
-    record = @me.records.create(params[:record])
+    record = @me.records.create(:todo_name => 'sleep', :todo_time => Time.at(params[:time].to_f/1000).to_s(:db))
     if record.errors.empty?
       flash[:info] = "晚安喔"
     else
