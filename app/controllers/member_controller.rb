@@ -103,6 +103,9 @@ class MemberController < ApplicationController
   end
 
   def sleep
+    params[:record][:todo_time] = Time.at(params[:time].to_f/1000).to_s(:db)
+    params[:record][:todo_name] = 'sleep'
+
     record = @me.records.create(:todo_name => 'sleep')
     if record.errors.empty?
       flash[:info] = "晚安喔"
