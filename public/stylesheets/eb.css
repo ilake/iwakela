@@ -140,13 +140,9 @@ td.showdiary-content{
   padding-left:300px;
 }
 
-b.placeholder-time {
-  clear: both;
-}
-
 #placeholder {
-  clear :both;
-  width: 700px;
+  float :left;
+  width: 650px;
   height: 300px;
 }
 
@@ -405,10 +401,6 @@ td.showdiary-content{
 }
 
 b.placeholder-time {
-  clear: both;
-}
-
-#placeholder {
   clear: both;
 }
 
