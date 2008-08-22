@@ -145,6 +145,7 @@ b.placeholder-time {
 }
 
 #placeholder {
+  clear :both;
   width: 700px;
   height: 300px;
 }
