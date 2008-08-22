@@ -333,7 +333,7 @@ class Record < ActiveRecord::Base
 
   def self.count_average(total=true)
     if total 
-      times = self.wake.map(&:todo_time)
+      times = self.wake.find(:all, :limit => 21).map(&:todo_time)
     else
       times = self.wake.find(:all, :conditions => ["todo_time > ?", Time.now.beginning_of_week]).map(&:todo_time)
     end
