@@ -20,6 +20,12 @@
     $(function() {
         $('.rounded').corner();
         $("img").pngfix();
+
+        $('.alarm_clock').click(function(){
+          var t = new Date();
+          now = t.getTime();
+          window.location = '/member/wake_up?time='+now
+          });
     });
   </script>
 

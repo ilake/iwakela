@@ -23,6 +23,8 @@ class MemberController < ApplicationController
   #create the records be forgot
   def create 
     params[:record][:state] = 1
+    params[:record][:todo_time] = Time.at(params[:time].to_f/1000).to_s(:db)
+
     if params[:type] == 'sleep' && @me.records.todo('sleep', params[:record])
       flash[:info] = "設定完成"
     elsif @me.records.todo('wake_up', params[:record])
