@@ -1,6 +1,6 @@
 class FixTheWakeTimeBug < ActiveRecord::Migration
   def self.up
-    User.find(:all, :conditions => {:id => 1..73}).each do |u|
+    User.find(:all, :conditions => {:id => 1..72}).each do |u|
       u.records.each do |r|
         if r.todo_time < Time.parse("20080603")
           if r.todo_target_time
@@ -12,7 +12,7 @@ class FixTheWakeTimeBug < ActiveRecord::Migration
       end
     end
 
-    User.find(:all, :conditions => {:id => 75..78}).each do |u|
+    User.find(:all, :conditions => {:id => 74..78}).each do |u|
       u.records.each do |r|
         if r.todo_time < Time.parse("20080603")
           if r.todo_target_time
@@ -24,7 +24,7 @@ class FixTheWakeTimeBug < ActiveRecord::Migration
       end
     end
 
-    User.find(:all, :conditions => {:id => 74}).each do |u|
+    User.find(:all, :conditions => {:id => 73}).each do |u|
       u.records.each do |r|
         if r.todo_time < Time.parse("20080603")
           if r.todo_target_time
@@ -61,7 +61,7 @@ class FixTheWakeTimeBug < ActiveRecord::Migration
   end
 
   def self.down
-    User.find(:all, :conditions => {:id => 1..73}).each do |u|
+    User.find(:all, :conditions => {:id => 1..72}).each do |u|
       u.records.each do |r|
         if r.todo_time < Time.parse("20080603")
           if r.todo_target_time
@@ -73,7 +73,7 @@ class FixTheWakeTimeBug < ActiveRecord::Migration
       end
     end
 
-    User.find(:all, :conditions => {:id => 75..78}).each do |u|
+    User.find(:all, :conditions => {:id => 74..78}).each do |u|
       u.records.each do |r|
         if r.todo_time < Time.parse("20080603")
           if r.todo_target_time
@@ -85,7 +85,7 @@ class FixTheWakeTimeBug < ActiveRecord::Migration
       end
     end
 
-    User.find(:all, :conditions => {:id => 74}).each do |u|
+    User.find(:all, :conditions => {:id => 73}).each do |u|
       u.records.each do |r|
         if r.todo_time < Time.parse("20080603")
           if r.todo_target_time
