@@ -730,6 +730,12 @@ div.even{
  padding-bottom: 5px;
 }
 
+.sleep_button {
+ text-align:center; 
+ border-bottom: 1px solid white; 
+ padding-bottom: 5px;
+}
+
 .alarm_clock a{
   text-decoration: none;
 }

@@ -26,6 +26,12 @@
           now = t.getTime();
           window.location = '/member/wake_up?time='+now
           });
+
+        $('.sleep_button').click(function(){
+          var t = new Date();
+          now = t.getTime();
+          window.location = '/member/sleep?time='+now
+          });
     });
   </script>
 
@@ -106,7 +112,7 @@
           </div>
         <% end %>
           <h1>睡覺囉！</h1>
-          <div class='alarm_clock'>
+          <div class='sleep_button'>
             <%= link_to "#{image_tag('sleep_time.png')}<br /> 紀錄現在時間",
               {:controller => 'member', :action => 'sleep'} %>
           </div>
