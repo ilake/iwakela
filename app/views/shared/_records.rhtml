@@ -1,3 +1,16 @@
+<style type="text/css">
+      div.dialog {
+        width: 25em;
+        height:300px;
+        padding: 0 4em;
+        margin: 4em auto 0 auto;
+        border-right-color: #999;
+        border-bottom-color: #999;
+        background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif;
+      }
+
+</style>
+
 <% unless records.size.zero? %>
 <table>
 <% records.each_with_index do |record, i| %>
@@ -18,6 +31,9 @@
 <% end %>
 </table>
 <% else %>
-  <h1>現在沒有人, 因為我們都已經睡了</h1>
-  <img src="/images/linux.png" alt="早點睡阿"/>
+  <div class='dialog'>
+    <h1>現在沒有人, 因為我們都已經睡了</h1>
+    <br />
+    <img src="/images/linux.png" alt="早點睡阿"/>
+  </div>
 <% end %>
