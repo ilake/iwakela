@@ -40,5 +40,16 @@ class FixTheWakeTimeBug < ActiveRecord::Migration
   end
 
   def self.down
+    User.find(:all, :conditions => {:id => 2}).each do |u|
+      u.records.each do |r|
+        if r.todo_time < Time.parse("20080603")
+          if r.todo_target_time
+            r.update_attributes(:todo_time => r.todo_time.ago(8.hours), :todo_target_time => r.todo_target_time.ago(8.hours))
+          else
+            r.update_attribute(:todo_time, r.todo_time.ago(8.hours))
+          end
+        end
+      end
+    end
   end
 end
