@@ -9,7 +9,7 @@
 <div>
   <%= render :partial => 'show_graph' %>
 </div>
-<div style='float:left;padding-top:25px;padding-left:10px;width:145px;'>
+<div style='float:left;padding-top:10px;padding-left:10px;width:145px;'>
   <% if @user.record_comments.count > 0 %>
   <b>最新回應</b>
     <% @user.record_comments.find(:all).each do |c| %>
