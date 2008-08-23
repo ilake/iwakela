@@ -44,14 +44,12 @@ class MemberController < ApplicationController
   def show
     @record = Record.find(params[:id])
     @user = @record.user
-    index = @record.all_records_id.index(params[:id].to_i)
+    #index = @record.all_records_id.index(params[:id].to_i)
 
     #第一筆大(小)於現在的時間
     #把條件存在session裡, 前一筆跟後一筆也是
-    @next_record = @record.user.records.find(:first, :conditions => ["todo_time > ?", @record.todo_time])
-    unless index.zero?
-      @previous_record = @record.user.records.find(:first, :conditions => ["todo_time < ?", @record.todo_time])
-    end
+    @next_record = @user.records.find(:first, :conditions => ["todo_time > ?", @record.todo_time])
+    @previous_record = @user.records.find(:first, :conditions => ["todo_time < ?", @record.todo_time])
 
     Record.increment_counter(:readed, @record.id)
   end

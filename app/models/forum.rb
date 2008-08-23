@@ -13,6 +13,7 @@
 #
 
 class Forum < ActiveRecord::Base
+  named_scope :no_group, :conditions => {:group_id => nil}
   validates_presence_of :subject, :content
 
   has_many :comments, :as => :record

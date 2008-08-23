@@ -1,3 +1,5 @@
+<%= link_to '上一篇' ,:action => 'show', :id => @previous_forum.id if @previous_forum %>
+<%= link_to '下一篇' ,:action => 'show', :id => @next_forum.id if @next_forum %>
 <%= link_to '回到列表', :action => 'index', :group => @forum.group %>
 <table>
   <tbody>

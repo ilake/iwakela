@@ -37,6 +37,13 @@ class ForumsController < ApplicationController
 
   def show
     @forum = Forum.find(params[:id])
+    if group = @forum.group 
+      @next_forum = group.forums.find(:first, :conditions => ["created_at > ?", @forum.created_at])
+      @previous_forum = group.forums.find(:first, :conditions => ["created_at < ?", @forum.created_at])
+    else
+      @next_forum = Forum.no_group.find(:first, :conditions => ["created_at > ?", @forum.created_at])
+      @previous_forum = Forum.no_group.find(:first, :conditions => ["created_at < ?", @forum.created_at])
+    end
   end
 
   def edit
