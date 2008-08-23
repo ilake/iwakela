@@ -132,7 +132,6 @@ td.showdiary-content{
 
 #month-form {  
   float: left;
-  display: block;
 }
 
 #choices {
@@ -142,7 +141,7 @@ td.showdiary-content{
 
 #placeholder {
   float :left;
-  width: 650px;
+  width: 600px;
   height: 300px;
 }
 
