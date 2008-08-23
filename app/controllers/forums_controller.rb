@@ -37,13 +37,13 @@ class ForumsController < ApplicationController
 
   def show
     @forum = Forum.find(params[:id])
-    if group = @forum.group 
-      @next_forum = group.forums.find(:first, :conditions => ["created_at > ?", @forum.created_at])
-      @previous_forum = group.forums.find(:first, :conditions => ["created_at < ?", @forum.created_at])
-    else
-      @next_forum = Forum.no_group.find(:first, :conditions => ["created_at > ?", @forum.created_at])
-      @previous_forum = Forum.no_group.find(:first, :conditions => ["created_at < ?", @forum.created_at])
-    end
+#    if group = @forum.group 
+#      @next_forum = group.forums.find(:first, :include => :comments, :conditions => ["comments.created_at > ?", @forum.last_comment.created_at], :order => 'comments.created_at DESC')
+#      @previous_forum = group.forums.find(:first, :include => :comments, :conditions => ["comments.created_at < ?", @forum.last_comment.created_at], :order => 'comments.created_at DESC')
+#    else
+#      @next_forum = Forum.no_group.find(:first, :include => :comments, :conditions => ["comments.created_at > ?", @forum.last_comment.created_at], :order => 'comments.created_at DESC')
+#      @previous_forum = Forum.no_group.find(:first, :include => :comments, :conditions => ["comments.created_at < ?", @forum.last_comment.created_at], :order => 'comments.created_at DESC')
+#    end
   end
 
   def edit
