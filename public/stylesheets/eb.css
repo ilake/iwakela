@@ -786,6 +786,10 @@ div.even{
   padding:5px;
 }
 
+.new_friend_list {
+  width:350px;
+}
+
 .last_rsp {
   float:left;
   padding-top:10px;
