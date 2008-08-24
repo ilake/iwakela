@@ -46,6 +46,11 @@ class User < ActiveRecord::Base
   has_one :mugshot
 
   belongs_to :group
+  has_and_belongs_to_many :friends,
+            :class_name => "User",
+            :join_table => "friends",
+            :association_foreign_key => "friend_id",
+            :foreign_key => "user_id"
 
   after_create :create_default_user_setting
 

@@ -1,39 +1,19 @@
 <script type="text/javascript">
   (function($){
 
-   function ajax_create(act, pos, goals) {
-     $.ajax({
-        url:  '/goals/'+act, 
-        type: 'POST',
-        data: goals,
-        dataType:  'html',
-        success:function(html){
-          $(pos).after(html);
-          $('td.goal_del').unbind('click', goal_del).bind('click', goal_del);
-          $('td.goal_up_tmp').unbind('click', goal_up ).bind('click', goal_up);
-          $('td.goal_down_tmp').unbind('click', goal_down).bind('click', goal_down);
-        }
-      });
-   }
-
-   function goal_create(act, pos, choosed){
-     var goals = {};
-
-     goals['goals[name]'] = $('#goals_name').val();
-     goals['goals[choosed]'] = choosed
-
-     ajax_create(act, pos, goals)
-     return false;
-     }
-
-     function goal_tmp_create(act, pos, choosed, text){
-       var goals = {};
-
-       goals['goals[name]'] = text;
-       goals['goals[choosed]'] = choosed
-
-       ajax_create(act, pos, goals)
-       return false;
+     function ajax_create(act, pos, goals) {
+       $.ajax({
+          url:  '/goals/'+act, 
+          type: 'POST',
+          data: goals,
+          dataType:  'html',
+          success:function(html){
+            $(pos).after(html);
+            $('td.goal_del').unbind('click', goal_del).bind('click', goal_del);
+            $('td.goal_up_tmp').unbind('click', goal_up ).bind('click', goal_up);
+            $('td.goal_down_tmp').unbind('click', goal_down).bind('click', goal_down);
+          }
+        });
      }
 
      function ajax_del(id, tr) {
@@ -45,6 +25,28 @@
              tr.remove();
           }
         });
+     }
+
+
+     function goal_create(act, pos, choosed){
+       var goals = {};
+
+       goals['goals[name]'] = $('#goals_name').val();
+       goals['goals[choosed]'] = choosed
+
+       ajax_create(act, pos, goals)
+       return false;
+     }
+
+     function goal_tmp_create(act, pos, choosed, text, comment){
+       var goals = {};
+
+       goals['goals[name]'] = text;
+       goals['goals[choosed]'] = choosed;
+       goals['goals[comment]'] = comment;
+
+       ajax_create(act, pos, goals)
+       return false;
      }
 
      function goal_del() {
@@ -74,16 +76,20 @@
      function goal_up() {
        var text = $(this).parent().find(".goal_name").html()
        var g_id = $(this).parent().attr('goal_id');
+       var comment = $(this).parent().find(".goal_comment input").val();
 
-       goal_tmp_create('create', '#temp_goal_pos', '-1', text);
+       alert(comment);
+
+       goal_tmp_create('create', '#temp_goal_pos', '-1', text, comment);
        goal_tmp_del(g_id);
      }
 
      function goal_down() {
        var text = $(this).parent().find(".goal_tmp_name").html()
        var g_id = $(this).parent().attr('goal_id');
+       var comment = $(this).parent().find(".goal_tmp_comment input").val();
 
-       goal_tmp_create('create', '#new_goal_pos', '1', text);
+       goal_tmp_create('create', '#new_goal_pos', '1', text, comment);
        goal_tmp_del(g_id);
      }
 
@@ -117,10 +123,12 @@
     </div>
       <br />
       <div style='background-color:#EFEFEF;padding-top:5px;'>
+      <% form_tag :controller => 'goals', :action => 'update_tmp_goal' do %>
         <b>目標暫存區</b>
         <table>
           <tr id='temp_goal_pos'>
             <th>目標名稱</th>
+            <th>備註</th>
             <th>刪除</th>
             <th>下移</th>
           </tr>
@@ -128,6 +136,9 @@
             <%= render :partial => 'member/temp_goal', :locals => {:g => g}%>
           <% end %>
         </table>
+          <%= submit_tag "設定完成" %>
+          <%= link_to_cancel %>
+        <% end %>
       </div>
       <div style='EFEFEF;padding-top:5px;'>
         <br />

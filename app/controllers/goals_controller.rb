@@ -34,6 +34,18 @@ class GoalsController < ApplicationController
     redirect_to :controller => 'member', :action => 'list'
   end
 
+  def update_tmp_goal
+    goals = @me.goals.temp
+    if params[:item]
+      params[:item].each do |id, attr|
+          goals.find(id.to_i).update_attributes(:choosed => -1,
+                                                :done => false,
+                                                :comment => attr[:comment])
+      end
+    end
+    redirect_to :controller => 'member', :action => 'list'
+  end
+
   def destroy
     @me.goals.find(params[:id]).destroy
     render :nothing => true

@@ -1,0 +1,16 @@
+<%= link_to '回到你的日誌', :action => 'list' %>
+<div>
+<h1>請輸入妳想要新增的好友名稱</h1>
+<% form_tag :action => 'add_friend' do %>
+  <p><label for="user_name"></label><br/>
+    <%= text_field_tag 'name' %></p>
+  <%= submit_tag "確定完成" %>
+<% end %>
+</div>
+
+<div>
+<h1>你的好友列表</h1>
+<% @me.friends.each do |u|%>
+  <%= link_to_user(u, u.name) %><%=link_to_delete('friend', u.id)%>
+<% end %>
+</div>

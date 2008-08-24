@@ -1,0 +1,34 @@
+<div class='clear'></div>
+<br />
+<div class='my_friend'>
+  <%= link_to '回到你的日誌', member_url(:action => 'list') %>
+  <div class='add_friend_block'>
+    <h1>請輸入妳想要新增的好友名稱</h1>
+    <% form_tag :action => 'add_friend' do %>
+      <p><label for="user_name"></label><br/>
+        <%= text_field_tag 'name' %></p>
+      <%= submit_tag "新增" %>
+    <% end %>
+  </div>
+
+  <div>
+    <h1>你的好友列表</h1>
+    <% @me.friends.each do |u|%>
+      <div class='friend_list'><%= link_to_user(u, u.name) %> <%= link_to_delete('friend', u.id)%></div>
+    <% end %>
+  </div>
+</div>
+<h1>新進朋友</h1>
+<% @users.each do |u| %>
+  <div class='new_people'>
+    <div class="thumbnail">
+      <%= link_to_user_image(u, 'user')%>
+    </div>
+    <div class="pic">
+      <h3 class="title">
+        <%= link_to_user(u, u.name, 'user') %>
+      </h3>
+    </div>
+  </div>
+<% end %>
+<div class='clear'></div>

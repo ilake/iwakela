@@ -64,6 +64,8 @@ class MemberController < ApplicationController
     @target_time = Record.time_to_string(records, "todo_target_time")
 
     @last_record = @user.records.last(:order => "todo_time")
+
+    @friend_list = @user.friends.map{|u| [u.name, u.id]}
   end
 
   def list_all_records
@@ -151,6 +153,7 @@ class MemberController < ApplicationController
      render :layout => false
      response.headers['Content-Type']='text/javascript'
   end
+
 
   private
 

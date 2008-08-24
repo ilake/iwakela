@@ -193,11 +193,11 @@ border-color: red;
 }
 
 .alert {
-  padding: 5px 5px 5px 5px;
+  padding: 2px 5px 2px 5px;
   background: #CC0000;
   color: #FFFFFF;
   font-weight: bold;
-  width: 70%;
+  width:70%;
 }
 
 .alert a{
@@ -742,6 +742,15 @@ div.even{
   height :110px;
 }
 
+.new_people {
+  float:left;
+  text-align:left;
+  padding :2px;
+  margin: 5px;
+  width:130px;
+  height :110px;
+}
+
 .thumbnail {
   background:#FFFFFF none repeat scroll 0%;
   border:1px solid #DDDDDD;
@@ -761,4 +770,25 @@ div.even{
 
 .people p.description {
   font-size:90%;
+}
+
+.my_friend {
+  width :400px;
+  float :left;
+}
+
+.add_friend_block {
+  border-bottom : 1px solid #EFEFEF;
+  padding-bottom: 10px;
+}
+
+.friend_list {
+  padding:5px;
+}
+
+.last_rsp {
+  float:left;
+  padding-top:10px;
+  padding-left:10px;
+  width:170px;
 }
