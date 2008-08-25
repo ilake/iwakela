@@ -152,6 +152,10 @@ module AllHelper
     text_field_tag "item["+item.id.to_s+"][comment]", comment
   end
 
+  def rank_fields(item, rank)
+    text_field_tag "item["+item.id.to_s+"][rank]", rank, :size => 3
+  end
+
   def state_image(done, img1='plus.gif', img2='minus.gif')
     image = done ? image_tag(img1) : image_tag(img2)
   end

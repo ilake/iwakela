@@ -77,9 +77,6 @@
        var text = $(this).parent().find(".goal_name").html()
        var g_id = $(this).parent().attr('goal_id');
        var comment = $(this).parent().find(".goal_comment input").val();
-
-       alert(comment);
-
        goal_tmp_create('create', '#temp_goal_pos', '-1', text, comment);
        goal_tmp_del(g_id);
      }
@@ -131,8 +128,9 @@
             <th>備註</th>
             <th>刪除</th>
             <th>下移</th>
+            <th>順序</th>
           </tr>
-          <% @me.goals.temp.find(:all, :order => "id DESC").each do |g|%>
+          <% @me.goals.temp.find(:all, :order => "rank").each do |g|%>
             <%= render :partial => 'member/temp_goal', :locals => {:g => g}%>
           <% end %>
         </table>
@@ -146,14 +144,15 @@
         <% form_tag :controller => 'goals', :action => 'update', :id => @record do %>
           <table>
             <tr id='new_goal_pos'>
-              <th>今天要做(不做就別勾)</th>
+              <th>今天我要做</th>
               <th>我有做到</th>
               <th>目標名稱</th>
               <th>備註</th>
               <th>刪除</th>
-              <th>上移暫存</th>
+              <th>暫存</th>
+              <th>順序</th>
             </tr>
-            <% @me.goals.active.find(:all, :order => "id DESC").each do |g|%>
+            <% @me.goals.active.find(:all, :order => "rank").each do |g|%>
               <%= render :partial => 'member/new_goal', :locals => {:g => g}%>
             <% end %>
           </table>

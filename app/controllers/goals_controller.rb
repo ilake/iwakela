@@ -23,7 +23,8 @@ class GoalsController < ApplicationController
       params[:item].each do |id, attr|
           goals.find(id.to_i).update_attributes(:choosed => attr[:choosed].to_i,
                                                 :done => !attr[:done].to_i.zero?,
-                                                :comment => attr[:comment])
+                                                :comment => attr[:comment],
+                                                :rank => attr[:rank])
       end
     end
 
@@ -40,7 +41,8 @@ class GoalsController < ApplicationController
       params[:item].each do |id, attr|
           goals.find(id.to_i).update_attributes(:choosed => -1,
                                                 :done => false,
-                                                :comment => attr[:comment])
+                                                :comment => attr[:comment],
+                                                :rank => attr[:rank])
       end
     end
     redirect_to :controller => 'member', :action => 'list'
