@@ -328,12 +328,23 @@ class Record < ActiveRecord::Base
     u= User.find_by_email('lake.ilakela@gmail.com')
     600.times do |i|
       if i%30 == 0 and i != 0
-        sleep(600)
+        sleep(1800)
       end
       email = EbMail.create_weekly_report(u)
       EbMail.deliver(email)
     end
 #    email.set_content_type("text/html")
+  end
+
+  def self.test_sleep
+    600.times do |i|
+      if i%60 == 0 and i != 0
+        puts a.inspect
+        a.clear
+        sleep(60)
+      end
+      a << i
+    end
   end
 
   def self.find_week_record
