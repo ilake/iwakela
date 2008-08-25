@@ -331,7 +331,7 @@ class Record < ActiveRecord::Base
     600.times do 
       if num == 60
         num = 0
-        sleep(60)
+        sleep(300)
       end
       num = num + 1
       email = EbMail.create_weekly_report(u)
