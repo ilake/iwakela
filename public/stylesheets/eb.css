@@ -788,6 +788,7 @@ div.even{
 
 .new_friend_list {
   width:350px;
+  float:left;
 }
 
 .last_rsp {
