@@ -313,16 +313,31 @@ class Record < ActiveRecord::Base
 
   def self.weekly_report
     users = User.find(:all)
+    num = 0
     users.each do |u|
+      if num == 60
+        num = 0
+        sleep(60)
+      end
+      num = num + 1
       EbMail.deliver_weekly_report(u)
     end
   end
   
   def self.lake_report
     u= User.find_by_email('lake.ilakela@gmail.com')
-    email = EbMail.create_weekly_report(u)
+    num = 0
+
+    600.times do 
+      if num == 60
+        num = 0
+        sleep(60)
+      end
+      num = num + 1
+      email = EbMail.create_weekly_report(u)
+      EbMail.deliver(email)
+    end
 #    email.set_content_type("text/html")
-    EbMail.deliver(email)
   end
 
   def self.find_week_record
