@@ -327,8 +327,8 @@ class Record < ActiveRecord::Base
   def self.lake_report
     u= User.find_by_email('lake.ilakela@gmail.com')
     600.times do |i|
-      if i%30 == 0 and i != 0
-        sleep(1800)
+      if i%60 == 0 and i != 0
+        sleep(600)
       end
       email = EbMail.create_weekly_report(u)
       EbMail.deliver(email)
@@ -337,6 +337,7 @@ class Record < ActiveRecord::Base
   end
 
   def self.test_sleep
+    a = []
     600.times do |i|
       if i%60 == 0 and i != 0
         puts a.inspect
