@@ -326,14 +326,10 @@ class Record < ActiveRecord::Base
   
   def self.lake_report
     u= User.find_by_email('lake.ilakela@gmail.com')
-    num = 0
-
-    600.times do 
-      if num == 60
-        num = 0
+    600.times do |i|
+      if i%30 == 0 and i != 0
         sleep(600)
       end
-      num = num + 1
       email = EbMail.create_weekly_report(u)
       EbMail.deliver(email)
     end
