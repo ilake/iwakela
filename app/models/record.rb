@@ -315,8 +315,8 @@ class Record < ActiveRecord::Base
     users = User.find(:all)
     num = 0
     users.each_with_index do |u, i|
-      if i%60 == 0 and i != 0
-        Kernel.sleep(60)
+      if i%50 == 0 and i != 0
+        Kernel.sleep(300)
       end
       EbMail.deliver_weekly_report(u)
     end
@@ -325,8 +325,8 @@ class Record < ActiveRecord::Base
   def self.lake_report
     u= User.find_by_email('lake.ilakela@gmail.com')
     600.times do |i|
-      if i%60 == 0 and i != 0
-        Kernel.sleep(60)
+      if i%50 == 0 and i != 0
+        Kernel.sleep(300)
       end
       email = EbMail.create_weekly_report(u)
       EbMail.deliver(email)
