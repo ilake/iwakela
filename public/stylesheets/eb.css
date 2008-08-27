@@ -797,3 +797,8 @@ div.even{
   padding-left:10px;
   width:170px;
 }
+
+.user_status_score img{
+  width :64px;
+  height :64px;
+}

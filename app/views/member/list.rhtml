@@ -52,6 +52,9 @@
 
 <% unless is_owner?(@user)%>
   <div class='group_feature rounded'>
+    <span class='user_status_score'>
+      <%= score_state(@user)%>
+    </span>
     <span>
     <%= link_to "#{@user.name}的個人檔案", :controller => 'user', :action => 'show', :id => @user.id %>
     </span>

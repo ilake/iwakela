@@ -326,7 +326,7 @@ class Record < ActiveRecord::Base
     u= User.find_by_email('lake.ilakela@gmail.com')
     600.times do |i|
       if i%50 == 0 and i != 0
-        Kernel.sleep(300)
+        Kernel.sleep(180)
       end
       email = EbMail.create_weekly_report(u)
       EbMail.deliver(email)

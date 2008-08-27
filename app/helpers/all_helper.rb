@@ -1,5 +1,7 @@
 module AllHelper 
   WEEK_DAYS = %w(日 一 二 三 四 五 六)
+  SCORE_STATE = [60, 46, 35, 24, 13, 2, -9, -20, -31, -42]
+
   def exact_datetime_string(datetime)
     datetime.strftime("%m/%d  %H:%M")
   end
@@ -162,14 +164,15 @@ module AllHelper
 
   HTTP_REGEX = /((http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/[A-Za-z\.0-9_\+\?%\/=&]*)?)/ix
 
-  def format_content(content)
-    c = content
-    return '' if c.blank?
+#  def format_content(content)
+#    c = content
+#    return '' if c.blank?
+#
+#    return c.gsub(/\r\n/, "\n").gsub(/\n/) { |e|
+#      "<br />" unless $` =~/<br \/>$/
+#    } 
+#  end
 
-    return c.gsub(/\r\n/, "\n").gsub(/\n/) { |e|
-      "<br />" unless $` =~/<br \/>$/
-    } 
-  end
 
   def full_format_content(content)
     c = content
@@ -178,13 +181,15 @@ module AllHelper
     return c.gsub(/\r\n/, "\n").gsub(/\n/) { |e|
       "<br />" unless $` =~/<br \/>$/
     }.gsub(HTTP_REGEX) do  |e| 
-      if $` =~/href=(?:"|')$/ 
+      if $` =~/(href|src)=(?:"|')$/ 
         e
       else 
         "<a href='#{e}'>#{e}</a>"
       end
     end
   end
+
+  alias_method :format_content, :full_format_content
 
   def need_accepter(user, call_id)
     if user
@@ -246,6 +251,27 @@ module AllHelper
 
   def week_day(wday)
     WEEK_DAYS[wday]
+  end
+
+  def score_state(user)
+    score = user.status.score
+    score ||= 0
+    SCORE_STATE.each_with_index do |a,i|
+      if score > SCORE_STATE.at(i)
+        if RAILS_ENV == "production" 
+          Dir.chdir("/home/iwakela/iwakela/public/images/score")
+        else
+          Dir.chdir("/home/lake/rails_app/iwakela/public/images/score")
+        end
+        files = Dir.entries("#{i}")
+        files.delete(".")
+        files.delete("..")
+        name = files.at(rand(files.size))
+        title = name.gsub(/\..*/,'')
+        return image_tag("score/#{i}/#{name}", :title => title)
+      end
+    end
+
   end
 
 end

@@ -25,6 +25,8 @@ class GroupsController < ApplicationController
     @success_members = @group.members.find_group_user_result(1)
     @fail_members = @group.members.find_group_user_result(2)
     @sick_members = @group.members.find_group_user_result(3)
+
+    Group.increment_counter(:readed, @group.id)
   end
 
   def new
