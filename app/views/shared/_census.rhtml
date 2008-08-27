@@ -3,5 +3,6 @@
 <li class = "census"><%= continuous_success_num(@me) %></li>
 <li class = "census"><%= all_average(@me) %></li>
 <li class = "census"><%= diff_value(@me) %></li>
-<li class = "census"><%= link_to score_state(@me), :controller => 'main', :action => 'history', :anchor => 'score'%></li>
-
+<div class= "my_score_status">
+  <%= score_state(@me) %>
+</div>
