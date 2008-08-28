@@ -1,6 +1,6 @@
 module AllHelper 
   WEEK_DAYS = %w(日 一 二 三 四 五 六)
-  SCORE_STATE = [60, 46, 35, 24, 13, 2, -9, -20, -31, -42]
+  SCORE_STATE = [60, 46, 35, 24, 13, 2, -9, -20, -31, -90]
 
   def exact_datetime_string(datetime)
     datetime.strftime("%m/%d  %H:%M")
@@ -258,12 +258,7 @@ module AllHelper
     score ||= 0
     SCORE_STATE.each_with_index do |a,i|
       if score > SCORE_STATE.at(i)
-        if RAILS_ENV == "production" 
-          Dir.chdir("/home/iwakela/iwakela/public/images/score")
-        else
-          Dir.chdir("/home/lake/rails_app/iwakela/public/images/score")
-        end
-        files = Dir.entries("#{i}")
+        files = Dir.entries("public/images/score/#{i}")
         files.delete(".")
         files.delete("..")
         name = files.at(rand(files.size))

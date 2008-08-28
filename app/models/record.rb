@@ -90,6 +90,8 @@ class Record < ActiveRecord::Base
     wake_score = wake_count * 1
     sleep_score = sleep_count * 2
 
+#21+42
+#42+42
     cont_count = status.continuous_num
     cont_count = cont_count > 21 ? 21 : cont_count
 
