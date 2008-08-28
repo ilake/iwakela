@@ -798,14 +798,19 @@ div.even{
   width:170px;
 }
 
-.user_status_score img{
-  width :64px;
-  height :64px;
-}
-
 .my_score_status {
   border-bottom:1px solid white;
   padding-bottom:5px;
   text:center;
   text-align:center;
 }
+
+.ui-tabs-hide { display: none; }
+
+.attendance_rate li {
+  border: 1px solid #FAFAFA;
+  border-top: none;
+  list-style: none;
+  margin: 0;
+}
+
