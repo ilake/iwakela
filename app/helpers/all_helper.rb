@@ -38,7 +38,7 @@ module AllHelper
     if time = user.target_time
         "今日目標 #{extract_target_time(time)}"
     else
-      link_to "<font color='red'>你尚未設定目標起床時間</font>", :controller => 'member', :action => 'list'
+      link_to "<font color='red'>尚未設定目標起床時間</font>", :controller => 'member', :action => 'list'
     end
   end
 
@@ -253,22 +253,20 @@ module AllHelper
     WEEK_DAYS[wday]
   end
 
-  def score_state(user)
+  def score_state(user, size='128')
     score = user.status.score
     score ||= 0
     SCORE_STATE.each_with_index do |a,i|
       if score > SCORE_STATE.at(i)
-        if RAILS_ENV == "production"
-          Dir.chdir("/home/iwakela/iwakela/public/images/score")
-        else
-          Dir.chdir("/home/lake/rails_app/iwakela/public/images/score")
-        end
-        files = Dir.entries("#{i}")
+        files = Dir.entries("#{RAILS_ROOT}/public/images/score/#{i}")
+
         files.delete(".")
         files.delete("..")
+
         name = files.at(rand(files.size))
-        title = name.gsub(/\..*/,'')
-        return image_tag("score/#{i}/#{name}", :title => title)
+        title = name.gsub(/_.*/,'')
+        type = name.gsub(/.*\./,'')
+        return image_tag("score/#{i}/#{title}_#{size}.#{type}", :title => "#{score}分")
       end
     end
 

@@ -21,6 +21,8 @@ class GroupsController < ApplicationController
 
     @absence_rank_members = @group.members.find(:all, :include => 'status', :order => 'statuses.attendance DESC')
 
+    @score_rank_members = @group.members.find(:all, :include => 'status', :order => 'statuses.score DESC')
+
     @absence_members = @group.members.find_group_user_result(0)
     @success_members = @group.members.find_group_user_result(1)
     @fail_members = @group.members.find_group_user_result(2)

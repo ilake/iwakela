@@ -1,3 +1,10 @@
+<link rel="stylesheet" href="http://dev.jquery.com/view/tags/ui/latest/themes/flora/flora.all.css" type="text/css" media="screen" title="Flora (Default)">
+<script>
+  $(document).ready(function() {
+    $(".attendance_rate > ul").tabs();
+  });
+</script>
+
   <% if session[:uid]%>
   <div class='group_feature rounded'>
     <%= link_to '早起團列表', :action => 'index' %> |
@@ -68,11 +75,26 @@
   <%= will_paginate @chat %>
 </div>
 <div class='attendance_rate'>
-  <div>出席率(當天半夜結算)</div>
-  <% @absence_rank_members.each do |m|%>
-    <div>
-      <%= link_to_user(m, m.name)%>
-      (<%= number_to_percentage(m.status.attendance, :precision => 1) %>)
-    </div>
-  <% end %>
+  <ul>
+    <li><a href="#group_score_rank"><span>積分</span></a></li>
+    <li><a href="#group_absence_rank"><span>出席率(半夜結算)</span></a></li>
+  </ul>
+
+  <div id="group_score_rank">
+    <% @score_rank_members.each do |m|%>
+      <div>
+        <%= score_state(m, '32')%><%= link_to_user(m, m.name)%>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="group_absence_rank">
+    <% @absence_rank_members.each do |m|%>
+      <div>
+        <%= link_to_user(m, m.name)%>
+        (<%= number_to_percentage(m.status.attendance, :precision => 1) %>)
+      </div>
+    <% end %>
+  </div>
+
 </div>

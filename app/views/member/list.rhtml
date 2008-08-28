@@ -52,8 +52,8 @@
 
 <% unless is_owner?(@user)%>
   <div class='group_feature rounded'>
-    <span class='user_status_score'>
-      <%= score_state(@user)%>
+    <span>
+      <%= score_state(@user, '64')%>
     </span>
     <span>
     <%= link_to "#{@user.name}的個人檔案", :controller => 'user', :action => 'show', :id => @user.id %>
@@ -61,6 +61,11 @@
     <span>
       <%= select("user", "id", @friend_list, {:include_blank => "#{@user.name}的好友"}) %>
     </span>
+    <span><%= success_census(@user) %></span>
+    <span><%= continuous_success_num(@user) %></span>
+    <span><%= all_average(@user) %></span>
+    <br />
+    <br />
     <span>
     <%= truncate(@user.profile.others, 40) %>
     </span>
