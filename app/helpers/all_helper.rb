@@ -258,7 +258,12 @@ module AllHelper
     score ||= 0
     SCORE_STATE.each_with_index do |a,i|
       if score > SCORE_STATE.at(i)
-        files = Dir.entries("public/images/score/#{i}")
+        if RAILS_ENV == "production"
+          Dir.chdir("/home/iwakela/iwakela/public/images/score")
+        else
+          Dir.chdir("/home/lake/rails_app/iwakela/public/images/score")
+        end
+        files = Dir.entries("#{i}")
         files.delete(".")
         files.delete("..")
         name = files.at(rand(files.size))
