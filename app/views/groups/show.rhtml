@@ -83,7 +83,7 @@
   <div id="group_score_rank">
     <% @score_rank_members.each do |m|%>
       <div>
-        <%= score_state(m, '32')%><%= link_to_user(m, m.name)%>
+        <%= "#{m.status.score ||= 0}  "%><%= link_to_user(m, m.name)%>
       </div>
     <% end %>
   </div>
