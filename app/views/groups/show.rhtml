@@ -73,7 +73,7 @@
 
   <div id="group_score_rank">
     <% @score_rank_members.each do |m|%>
-      <div style='margin:0px;0px;0px;10px;'>
+      <div>
        <%= score_state(m, '32')%><%= link_to_user(m, m.name)%>
       </div>
     <% end %>
@@ -81,7 +81,7 @@
 
   <div id="group_absence_rank">
     <% @absence_rank_members.each do |m|%>
-      <div style='margin:0px;0px;0px;10px;'>
+      <div>
         <%= link_to_user(m, m.name)%>
         (<%= number_to_percentage(m.status.attendance, :precision => 1) %>)
       </div>
