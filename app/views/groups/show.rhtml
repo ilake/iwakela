@@ -48,19 +48,10 @@
 </div>
 <div class='talk'>
   <% if @me %>
-    <% if (@group.state == 1 || @group.state == 3) %>
-      <% if @me.group == @group %>
-        <% form_tag :controller => 'chats', :action => 'create', :group_id => @group.id do %>
-          我說 :<%= text_field :chats, :content, :size => 30, :maxlength => 50 %>
-          <%= submit_tag '送出'%>
-        <% end %>
-      <% end %>
-    <% else %>
-      <% form_tag :controller => 'chats', :action => 'create', :group_id => @group.id do %>
-        我說 :<%= text_field :chats, :content, :size => 30, :maxlength => 50 %>
-        <%= submit_tag '送出'%>
-      <% end %>
-    <%end %>
+    <% form_tag :controller => 'chats', :action => 'create', :group_id => @group.id do %>
+      我說 :<%= text_field :chats, :content, :size => 30, :maxlength => 50 %>
+      <%= submit_tag '送出'%>
+    <% end %>
   <% end %>
   <div class='result-comment'>
     <% @chat.each do |c|%>
