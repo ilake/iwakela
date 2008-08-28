@@ -255,7 +255,7 @@ module AllHelper
 
   def score_state(user, size='128')
     score = user.status.score
-    score ||= 0
+    score ||= -84
     SCORE_STATE.each_with_index do |a,i|
       if score > SCORE_STATE.at(i)
         files = Dir.entries("#{RAILS_ROOT}/public/images/score/#{i}")
