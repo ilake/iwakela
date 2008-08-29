@@ -36,6 +36,8 @@ ActionController::Routing::Routes.draw do |map|
                 :conditions => { :method => :get },
                 :controller => "main",
                 :action => "reset_password"
+
+  map.main 'main/:action/:id', :controller => 'main'
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.

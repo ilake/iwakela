@@ -577,9 +577,16 @@ tr.sleep {
 
 .announce_word {
   float: left;
-  width: 560px;
+  width: 430px;
 	line-height: 35px;
   font-size:17px;
+}
+
+.announce_last{
+  border-left: 1px solid #EFEFEF;
+  float: left;
+  width: 180px;
+  padding-left:5px;
 }
 .announce_image {
   float: left;
@@ -812,4 +819,9 @@ div.even{
   border-top: none;
   list-style: none;
   margin: 0;
+}
+
+.announce_last .title {
+  color :#FF0A00;
+  padding-bottom:5px;
 }
