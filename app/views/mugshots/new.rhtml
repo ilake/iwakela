@@ -1,6 +1,6 @@
 <%= error_messages_for :mugshot %>
 
-<% form_for(:mugshot, :url => {:action => 'create'}, :html => { :multipart => true }) do |f| -%>
+<% form_for(:mugshot, :url => {:action => 'create', :id => params[:id]}, :html => { :multipart => true} ) do |f| -%>
   <p>
     <label for="mugshot">上傳圖片:</label>
     <%= f.file_field :uploaded_data %>

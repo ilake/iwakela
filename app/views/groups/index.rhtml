@@ -1,10 +1,35 @@
+<% content_for :page_spec do %>
+  <%= stylesheet_link_tag "flora_tabs.css" %>
+  <script>
+    $(document).ready(function() {
+      $(".group_index > ul").tabs();
+    });
+  </script>
+<% end %>
+
 <%= link_to '我要開團', :action => 'new' %>
 <br />
 <br />
-<hr>
-<h1>早鳥公開團(可自由加入)</h1>
-<%= render :partial => 'group_index_partial', :locals => {:groups => @public_groups}%>
-<hr>
-<br />
-<h1>早鳥私人團(只能由團長邀請)</h2>
-<%= render :partial => 'group_index_partial', :locals => {:groups => @private_groups}%>
+  <div class='group_index'>
+  <ul>
+    <li><a href="#group_index_public"><span>早鳥公開團(可自由加入)</span></a></li>
+    <li><a href="#group_index_private"><span>早鳥私人團(只能由團長邀請)</span></a></li>
+  </ul>
+  <div id='group_index_public', style="border:none">
+    <%= render :partial => 'group_index_partial',
+      :locals => {:groups => @latest_public_groups, :type => 'public', :sort => 'id'}%>
+      <div class='clear'></div>
+      <br />
+    <%= render :partial => 'group_index_partial',
+      :locals => {:groups => @hottest_public_groups, :type => 'public', :sort => 'readed'}%>
+  </div>
+
+  <div id='group_index_private', style="border:none">
+    <%= render :partial => 'group_index_partial',
+      :locals => {:groups => @latest_private_groups, :type => 'private', :sort => 'id' }%>
+      <div class='clear'></div>
+      <br />
+    <%= render :partial => 'group_index_partial',
+      :locals => {:groups => @hottest_private_groups, :type => 'private', :sort => 'readed' }%>
+  </div>
+</div>

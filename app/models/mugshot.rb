@@ -24,4 +24,5 @@ class Mugshot < ActiveRecord::Base
   validates_as_attachment
 
   belongs_to :user
+  belongs_to :group
 end

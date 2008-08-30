@@ -1,10 +1,19 @@
+<%= link_to '回到團裡', :action => 'show', :id => @group %>
 <h1>編輯</h1>
+<div>團隊頭像</div>
+<div>
+  <%= big_mugshot(@group) %>
+</div>
+<div
+  <%= link_to '更改團隊圖像', :controller => 'mugshots', :action => 'new', :id => @group %>
+</div>
+<br />
 <% form_for :group, :url => {:action => 'update', :id => @group} do |f|%>
   <%= error_messages_for 'group' %>
   <%= render :partial => 'form' %>
   <p><label for="group_user_num">停止徵人</label><br/>
     <%= check_box 'group', 'fill' %></p>
   <%= submit_tag "確定完成" %>
-  <%= link_to '取消', :action => 'index' %>
+  <%= link_to '取消', :action => 'show', :id => @group %>
 <% end %>
 

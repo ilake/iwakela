@@ -94,4 +94,20 @@ module GroupsHelper
       false
     end
   end
+
+  def group_type_title(type, sort)
+    title = []
+    if type == 'public' && sort == 'id'
+      title << "最新早起團"
+    elsif type == 'public' && sort == 'readed'
+      title << "活躍早起團"
+    elsif type == 'private' && sort == 'id'
+      title << "最新私人團"
+    elsif type == 'private' && sort == 'readed'
+      title << "活躍私人團"
+    end
+
+    title << link_to("  <<更多", :action => 'list_all_groups', :type => type, :sort => sort)
+    title.join("")
+  end
 end

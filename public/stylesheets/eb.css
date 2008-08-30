@@ -648,6 +648,8 @@ div.group_setting {
   margin: 0px 0px 5px 0px;
   color: #000000;
   line-height: 19px;
+  width:770px;
+  float:left;
 }
 div.group_setting a{
 	color: #1010C8;
@@ -824,4 +826,10 @@ div.even{
 .announce_last .title {
   color :#FF0A00;
   padding-bottom:5px;
+}
+
+.group_setting .group_image {
+  width:100px;
+  float:left;
+  padding-right:10px;
 }

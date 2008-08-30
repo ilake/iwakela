@@ -234,9 +234,9 @@ module AllHelper
     end
   end
 
-  def big_mugshot(user)
-    if user.mugshot
-      image_tag(user.mugshot.public_filename)
+  def big_mugshot(item, title=nil)
+    if item.mugshot
+      image_tag(item.mugshot.public_filename, :title => title ||= item.name)
     else 
       image_tag("penguin.jpg")
     end

@@ -20,6 +20,11 @@ class Group < ActiveRecord::Base
   has_many :chats, :dependent => :delete_all
   has_many :forums, :dependent => :delete_all
 
+  has_one :mugshot
+
+  named_scope :public, :conditions =>"state = 0 or state = 2"
+  named_scope :private, :conditions =>"state = 1 or state = 3"
+
   validates_length_of :name, :within => 1..10
   validates_length_of :condition, :within => 1..300
   validates_numericality_of :user_num, :only_integer => true
@@ -58,4 +63,10 @@ class Group < ActiveRecord::Base
     end
   end
 
+  def self.find_group_rank(page, type='public', sort='id')
+    order = "groups.#{sort} DESC"
+    self.send(type.to_sym).paginate :page => page,
+                                    :per_page => 10,
+                                    :order => order
+  end
 end

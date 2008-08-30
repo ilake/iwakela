@@ -1,16 +1,18 @@
-<table>
-  <thead>
-    <th></th>
-    <th>團名</th>
-    <th>團長</th>
-    <th>希望團員的條件</th>
-  </thead>
-  <% groups.each do |g|%>
-    <tr>
-      <td><%= "<span class='alert'>滿</span>" if g.state == 2 || g.state == 3 %></td>
-      <td class='group_name'><%= link_to_group(g.name, g.id) %></td>
-      <td class='group_owner'><%= link_to_user(g.owner, g.owner.name) %></td>
-      <td class='group_condition'><%= truncate(h(g.condition), 55) %></td>
-    </tr>
-  <% end %>
-</table>
+<div style='margin-bottom:20px;'>
+  <h1 style='color:#FF0A00'>
+    <%= group_type_title(type, sort) %>
+  </h1>
+    <% groups.each do |g|%>
+      <div style='font-size:11px;width:150px;float:left;'>
+        <div>
+          <%= big_mugshot(g, truncate(h(g.condition), 30)) %>
+        </div>
+        <div class="pic">
+          <h3 class="title">
+            <%= "<span class='alert'>滿</span>" if g.state == 2 || g.state == 3 %>
+            <%= link_to_group(g.name, g.id) %>
+          </h3>
+        </div>
+      </div>
+    <% end %>
+</div>

@@ -3,8 +3,24 @@ class GroupsController < ApplicationController
   before_filter :check_auth, :except =>[:index, :show]
 
   def index 
-    @public_groups = Group.find(:all, :conditions =>"state = 0 or state = 2", :order => 'id DESC')
-    @private_groups = Group.find(:all, :conditions =>"state = 1 or state = 3", :order => 'id DESC')
+    @latest_public_groups = Group.public.find(:all,
+                                               :order => 'id DESC',
+                                               :limit => 10)
+    @hottest_public_groups = Group.public.find(:all,
+                                                :order => 'readed DESC',
+                                                :limit => 10)
+
+    @latest_private_groups = Group.private.find(:all,
+                                                :order => 'id DESC',
+                                                :limit => 10)
+
+    @hottest_private_groups = Group.private.find(:all,
+                                                 :order => 'readed DESC',
+                                                 :limit => 10)
+  end
+
+  def list_all_groups
+    @groups = Group.find_group_rank(params[:page], params[:type], params[:sort])
   end
 
   def list
