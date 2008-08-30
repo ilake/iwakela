@@ -238,7 +238,7 @@ module AllHelper
     if item.mugshot
       image_tag(item.mugshot.public_filename, :title => title ||= item.name)
     else 
-      image_tag("penguin.jpg")
+      image_tag("penguin.jpg", :title => title )
     end
   end
 
