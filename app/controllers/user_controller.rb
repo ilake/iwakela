@@ -1,5 +1,6 @@
 class UserController < ApplicationController
   helper :all
+  before_filter :check_auth, :only =>[:edit]
 
   #before_filter :check_owner, :only => [:edit, :edit_profile, :edit_password, :edit_username]
 

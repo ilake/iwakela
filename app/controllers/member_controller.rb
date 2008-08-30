@@ -161,6 +161,14 @@ class MemberController < ApplicationController
      render :action => 'widget', :layout => false
   end
 
+  def sparkline_widget
+     user = User.find(params[:id])
+
+     @content = render_to_string(:partial => 'sparkline_widget', :locals => {:user => user}).to_json
+     response.headers['Content-Type']='text/javascript'
+     render :action => 'widget', :layout => false
+  end
+
   private
 
   def date_select

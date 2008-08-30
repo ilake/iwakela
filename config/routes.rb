@@ -30,6 +30,7 @@ ActionController::Routing::Routes.draw do |map|
   map.home '', :controller => 'main', :action => 'index'
   map.member 'member/:action/:id', :controller => 'member'
   map.friend 'friend/:action/:id', :controller => 'friend'
+  map.user 'user/:action/:id', :controller => 'user'
 
 
   map.connect "main/reset_password/:reset_code",

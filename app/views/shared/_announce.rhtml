@@ -13,7 +13,12 @@
 <div class='announce_last'>
   <div class='title'>公 告 區  <%= link_to '(功能介紹)', :controller => 'main', :action => 'history'%></div>
   <div>
-    <%= image_tag("icon_new.gif")%> 新增<%= link_to '積分狀態', main_url(:action => "history", :anchor => 'score')%> 
+    <div style='padding-bottom:5px;'>
+      <%= image_tag("icon_new.gif")%> 新增<%= link_to 'blog貼紙', user_url(:action => "edit", :id => @me )%> 
+    </div>
+    <div>
+      新增<%= link_to '積分狀態', main_url(:action => "history", :anchor => 'score')%> 
+    </div>
   </div>
 </div>
 

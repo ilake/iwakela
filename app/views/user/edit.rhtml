@@ -1,5 +1,5 @@
 <div>
-  <div style='border-right:1px solid #EFEFEF; padding-right:20px;float:left;'>
+  <div>
     <ul>
       <li><%= link_to '更改圖像', :controller => 'mugshots', :action => 'new'%></li>
       <li><%= link_to "修改你的暱稱", :controller => "user", :action => 'edit_username', :id => @me.id %></li>
@@ -8,13 +8,24 @@
       <li><%= link_to "修改個人檔案", :controller => "user", :action => 'edit_profile', :id => @me.id  %></li>
     </ul>
   </div>
-  <!--div style='padding:0px 10px 0px 10px;float:left;' >
-    <h3>部落格貼紙</h3><br />
-    <textarea cols='34' rows='3'><script src="http://iwakela.com/member/widget?id=<%#= @me.id%>"></script></textarea>
+      <h3>部落格貼紙</h3><br />
+  <div style='padding:0px 10px 0px 10px;float:left;'>
+    <div style='border-right:1px solid #EFEFEF; padding:0px 10px 0px 0px;float:left;' >
+      <%= image_tag('ebwidget1.png')%>
+    </div>
+    <div style='float:left;'>
+      <textarea cols='50' rows='6'><script src="http://iwakela.com/member/widget?id=<%= @me.id%>"></script></textarea>
+    </div>
   </div>
-  <div style='border-right:1px solid #EFEFEF; padding:0px 10px 0px 0px;float:left;' >
-    <%#= image_tag('ebwidget.png')%>
-  </div-->
+
+  <div style='padding:0px 10px 0px 10px;float:left;'>
+    <div style='border-right:1px solid #EFEFEF; padding:0px 10px 0px 0px;float:left;' >
+      <%= image_tag('ebwidget2.png')%>
+    </div>
+    <div style='float:left;'>
+      <textarea cols='52' rows='6'><script src="http://iwakela.com/member/pie_widget?id=<%= @me.id%>"></script></textarea>
+    </div>
+  </div>
 </div>
 
 <div class='clear'></div>
