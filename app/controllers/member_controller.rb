@@ -154,6 +154,12 @@ class MemberController < ApplicationController
      response.headers['Content-Type']='text/javascript'
   end
 
+  def pie_widget
+     user = User.find(params[:id])
+     @content = render_to_string(:partial => 'pie_widget', :locals => {:user => user}).to_json
+     response.headers['Content-Type']='text/javascript'
+     render :action => 'widget', :layout => false
+  end
 
   private
 
