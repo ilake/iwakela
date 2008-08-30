@@ -1,7 +1,7 @@
 #handle record table
 class MemberController < ApplicationController
   layout "application"
-  before_filter :check_auth, :except =>[:show_today_results, :list, :list_all_records, :widget, :show]
+  before_filter :check_auth, :except =>[:show_today_results, :list, :list_all_records, :widget, :show, :pie_widget]
   before_filter :date_select, :only => [:list]
   before_filter :find_user, :except => [:show]
   helper :all
