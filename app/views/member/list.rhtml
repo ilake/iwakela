@@ -64,11 +64,18 @@
     <span><%= success_census(@user) %></span>
     <span><%= continuous_success_num(@user) %></span>
     <span><%= all_average(@user) %></span>
-    <br />
-    <br />
-    <span>
-    <%= truncate(@user.profile.others, 40) %>
-    </span>
+    <% if @user.group %>
+      <br />
+      <br />
+      <span><%= "參加了#{link_to_group(@user.group.name, @user.group.id)}" %></span>
+    <% end %>
+    <% unless @user.profile.others.blank? %>
+      <br />
+      <br />
+      <span>
+        <%= truncate(@user.profile.others, 50) %>
+      </span>
+    <% end %>
   </div>
 <br />
 <hr>
