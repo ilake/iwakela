@@ -1,3 +1,3 @@
 <a href="http://iwakela.com/member/list/<%= user.id %>" target="_blank">
-  <img src="http://chart.apis.google.com/chart?chs=250x100&chd=t:60,40&cht=p3&chl=Hello|World" />
+  <img src="http://chart.apis.google.com/chart?chs=120x80&chd=t:<%= user.status.success_rate %>,<%= 100 - user.status.success_rate%>&cht=p3&chl=成功|失敗" />
 </a>
