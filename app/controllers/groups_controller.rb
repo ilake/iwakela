@@ -5,18 +5,18 @@ class GroupsController < ApplicationController
   def index 
     @latest_public_groups = Group.public.find(:all,
                                                :order => 'id DESC',
-                                               :limit => 10)
+                                               :limit => 4)
     @hottest_public_groups = Group.public.find(:all,
                                                 :order => 'readed DESC',
-                                                :limit => 10)
+                                                :limit => 4)
 
     @latest_private_groups = Group.private.find(:all,
                                                 :order => 'id DESC',
-                                                :limit => 10)
+                                                :limit => 4)
 
     @hottest_private_groups = Group.private.find(:all,
                                                  :order => 'readed DESC',
-                                                 :limit => 10)
+                                                 :limit => 4)
   end
 
   def list_all_groups

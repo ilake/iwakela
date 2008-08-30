@@ -3,9 +3,9 @@
     <%= group_type_title(type, sort) %>
   </h1>
     <% groups.each_with_index do |g, i|%>
-      <div style='font-size:11px;width:150px;float:left;'>
+      <div style='font-size:11px;width:180px;float:left;padding-bottom:20px;'>
         <div>
-          <%= big_mugshot(g, truncate(h(g.condition), 30)) %>
+          <%= big_mugshot(g, truncate(h(g.condition), 60)) %>
         </div>
         <div class="pic">
           <h3 class="title">
