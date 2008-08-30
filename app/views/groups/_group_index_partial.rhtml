@@ -2,7 +2,7 @@
   <h1 style='color:#FF0A00'>
     <%= group_type_title(type, sort) %>
   </h1>
-    <% groups.each do |g|%>
+    <% groups.each_with_index do |g, i|%>
       <div style='font-size:11px;width:150px;float:left;'>
         <div>
           <%= big_mugshot(g, truncate(h(g.condition), 30)) %>
@@ -14,5 +14,8 @@
           </h3>
         </div>
       </div>
+      <% if i == 4 %>
+        <div class='clear'></div>
+      <% end %>
     <% end %>
 </div>
