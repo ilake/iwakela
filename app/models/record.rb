@@ -158,7 +158,7 @@ class Record < ActiveRecord::Base
     if last_fail.nil?
       num = self.wake.count
     elsif last_success.nil? 
-      num = self.sleep.count*-1
+      num = self.wake.count*-1
     elsif last_fail.todo_time > last_success.todo_time
       num = self.find_continuous_num(last_success, last_fail)*-1
     else
