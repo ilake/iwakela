@@ -47,7 +47,6 @@ class Record < ActiveRecord::Base
   #after_create :set_average, :set_continuous_num, :set_successful_rate
   #acts_as_ferret :fields => [:content]
 
-  protected
   def set_time
     self.todo_time ||= Time.now
   end
