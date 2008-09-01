@@ -181,6 +181,7 @@ class MemberController < ApplicationController
       @user = User.find(params[:id])
     rescue
       @user ||= @me
+      redirect_to :controler => 'main', :action => 'index' unless @user
     end
   end
 end
