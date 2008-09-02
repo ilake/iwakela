@@ -89,7 +89,7 @@ class Record < ActiveRecord::Base
   private
   def self.count_total_score(array, cont_count)
     total = array.size
-    cont_count ||= 0
+    cont_count ||= -1000
 
     array.delete(false)
     success_count = array.size
