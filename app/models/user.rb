@@ -245,6 +245,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def count_score(cond=nil)
+    a = self.records.wake.find(:all, :order => "id DESC", :conditions => cond).map(&:success)
+    cont_count = status.continuous_num
+
+    total_score = Record.count_total_score(a, cont_count)
+  end
+
   private 
   def self.random_str
     [Array.new(6){rand(256).chr}.join].pack("m").chomp

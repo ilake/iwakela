@@ -14,6 +14,11 @@
 #
 
 class Group < ActiveRecord::Base
+  HUMANIZED_ATTRIBUTES = {
+    :name => "團名",
+    :condition => "條件",
+    :user_num => "團員數"
+  }
   has_many :members, :foreign_key => "group_id", :class_name => "User", :dependent => :nullify
   belongs_to :owner,  :foreign_key => "owner_id", :class_name => "User"
 
@@ -29,6 +34,10 @@ class Group < ActiveRecord::Base
   validates_length_of :condition, :within => 1..300
   validates_numericality_of :user_num, :only_integer => true
   validates_inclusion_of :user_num, :in => 1..30
+
+  def self.human_attribute_name(attr)
+    HUMANIZED_ATTRIBUTES[attr.to_sym] || super
+  end
 
   def self.count_all_group_user_attendance
     now = Time.now

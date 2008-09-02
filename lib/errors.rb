@@ -2,7 +2,7 @@ module ActiveRecord
   class Errors
     begin
       @@default_error_messages.update( {
-        :inclusion => "中文1",
+        :inclusion => "超過範圍",
         :exclusion => "中文2",
         :invalid => "中文3",
         :confirmation => "請再確認一次密碼",

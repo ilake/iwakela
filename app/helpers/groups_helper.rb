@@ -42,6 +42,12 @@ module GroupsHelper
     end
   end
 
+  def link_to_rank(group)
+    if @me.own_group == group || @me.group == group
+      link_to '排行榜', :action => 'rank_list', :id => group.id
+    end
+  end
+
   def link_to_destroy(group)
     if @me.own_group == group
       link_to '[解散早起團]', {:action => 'destroy', :id => group.id},
@@ -49,7 +55,6 @@ module GroupsHelper
     end
   end
 
-  
   def link_to_post(group)
     if @me.own_group == group || @me.group == group
       link_to '我要發文',:controller => 'forums', :action => 'new', :id => group.id 

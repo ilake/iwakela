@@ -100,11 +100,11 @@ class GroupsController < ApplicationController
           redirect_to :action => "show", :id => @group.id
         else
           flash[:notice] = "開團失敗, 請重新在設定一次"
-          redirect_to :action => "new"
+          render :action => 'new'
         end
       else
         flash[:notice] = "開團失敗, 請重新在設定一次"
-        redirect_to :action => "new"
+        render :action => 'new'
       end
     else
       flash[:notice] = "一個人限開一團"
@@ -197,4 +197,37 @@ class GroupsController < ApplicationController
       redirect_to :action => 'list', :id => @me.own_group
     end
   end
+
+  def rank_list
+    if request.post?
+      date_from = Time.local(params[:from][:year], params[:from][:month], params[:from][:day])
+      date_until = Time.local(params[:until][:year], params[:until][:month], params[:until][:day])
+      date_until = 1.day.since(date_until)
+
+      cond = date_range_cond(date_from, date_until)
+
+      group = Group.find(params[:id])
+
+      @rank = []
+      group.members.each do |m|
+        @rank << [m, m.count_score(cond)]
+      end
+
+      @rank.sort!{|x, y| y[1] <=> x[1] }
+    end
+  end
+
+  private
+
+  def date_range_cond(date_from, date_until)
+    if date_from <=  date_until 
+      from = date_from
+      utl = date_until
+    else
+      from = date_until
+      utl = date_from
+    end
+    return "todo_time <= '#{utl.to_s(:db)}' and todo_time >= '#{from.to_s(:db)}'"
+  end
+
 end

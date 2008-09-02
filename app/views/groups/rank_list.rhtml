@@ -1,0 +1,16 @@
+<h1>積分排行</h1>
+<% form_tag :action => 'rank_list', :id => params[:id] do%>
+  從
+  <%= select_date Time.now.ago(1.month), :prefix => "from", :use_month_numbers => true %>
+  到
+  <%= select_date Time.now, :prefix => "until", :use_month_numbers => true %>
+  的積分
+  <%= submit_tag '計算' %>
+<% end %>
+<% if @rank %>
+  <% @rank.each do |k, v|%>
+    <div>
+      <%= link_to_user(k, k.name) %>  <%= v %>分
+    </div>
+  <% end %>
+<% end %>

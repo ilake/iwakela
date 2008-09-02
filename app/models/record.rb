@@ -79,27 +79,28 @@ class Record < ActiveRecord::Base
     total = self.wake.count
     total = total > 21 ? 21 : total
 
-    a = self.wake.find(:all, :order => "id DESC", :limit => 21).map(&:success)
-    a.delete(false)
-    wake_count = a.size
-    sleep_count = total - wake_count
-
-#    wake_score = wake_count * scores.find_by_name('wake').value
-#    sleep_score = sleep_count * scores.find_by_name('sleep').value
-    wake_score = wake_count * 1
-    sleep_score = sleep_count * 2
-
-#21+42
-#42+42
+    a = self.wake.find(:all, :order => "id DESC", :limit => total).map(&:success)
     cont_count = status.continuous_num
-    cont_count = cont_count > 21 ? 21 : cont_count
-
-    #在加上連續天數x2
-    wake_score = wake_score + cont_count*2
-
-    total_score = wake_score - sleep_score 
+    
+    total_score = Record.count_total_score(a, cont_count)
     status.update_attribute(:score, total_score)
   end
+
+  private
+  def self.count_total_score(array, cont_count)
+    total = array.size
+
+    array.delete(false)
+    success_count = array.size
+    fail_count = total - success_count
+    cont_count = cont_count > total ? total : cont_count
+
+    success_score = success_count + cont_count*2
+    fail_score = fail_count * 2
+
+    total_score = success_score - fail_score
+  end
+  public
 
   def self.set_last_record_time(status)
     status.update_attribute(:last_record_created_at, self.find_last_day)
@@ -169,21 +170,21 @@ class Record < ActiveRecord::Base
 
   public
 
-  def self.count_score
-    total = self.count
-    total = total > 21 ? 21 : total
-
-    a = self.find(:all, :order => "id DESC", :limit => 21)
-    a.delete(false)
-    wake_count = a.size
-    sleep_count = total - wake_count
-
-    wake_score = wake_count * user.scores.find_by_name('wake').value
-    sleep_score = sleep_count * user.scores.find_by_name('sleep').value
-
-    total_score = wake_score - sleep_score 
-    user.status.update_attribute(:score, total_score)
-  end
+#  def self.count_score
+#    total = self.count
+#    total = total > 21 ? 21 : total
+#
+#    a = self.find(:all, :order => "id DESC", :limit => 21)
+#    a.delete(false)
+#    wake_count = a.size
+#    sleep_count = total - wake_count
+#
+#    wake_score = wake_count * user.scores.find_by_name('wake').value
+#    sleep_score = sleep_count * user.scores.find_by_name('sleep').value
+#
+#    total_score = wake_score - sleep_score 
+#    user.status.update_attribute(:score, total_score)
+#  end
 
   def set_success
     unless self.todo_target_time.blank?
