@@ -9,7 +9,7 @@
 <% end %>
 <% if @rank %>
   <% @rank.each do |k, v|%>
-    <div>
+    <div style='padding:3px;'>
       <%= link_to_user(k, k.name) %>  <%= v %>分
     </div>
   <% end %>
