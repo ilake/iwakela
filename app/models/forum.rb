@@ -38,7 +38,7 @@ class Forum < ActiveRecord::Base
                           :conditions => ["forums.group_id = ?", group]
     else
       self.paginate :page => params,
-                          :per_page => 10,
+                          :per_page => 20,
                           :include => :comments,
                           :order => 'comments.created_at DESC',
                           :conditions => 'forums.group_id is NULL'
