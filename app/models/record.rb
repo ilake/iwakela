@@ -96,7 +96,9 @@ class Record < ActiveRecord::Base
     fail_count = total - success_count
     cont_count = cont_count > total ? total : cont_count
 
-    success_score = success_count + cont_count*2
+#42, -63
+#  -10 0 10 20 30 40  
+    success_score = success_count + cont_count
     fail_score = fail_count * 2
 
     total_score = success_score - fail_score
