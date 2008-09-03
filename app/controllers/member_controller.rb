@@ -161,6 +161,39 @@ class MemberController < ApplicationController
      render :action => 'widget', :layout => false
   end
 
+  def pie_widget_test1
+     user = User.find(params[:id])
+     @content = render_to_string(:partial => 'pie_widget', :locals => {:user => user}).to_json
+     #response.headers['Content-Type']='text/javascript'
+     render :action => 'widget', :layout => false, :content_type => 'text/javascript'
+  end
+
+  def pie_widget_test2
+     user = User.find(params[:id])
+     @content = render_to_string(:partial => 'pie_widget', :locals => {:user => user}).to_json
+     #response.headers['Content-Type']='text/javascript'
+     render :action => 'widget', :layout => false
+  end
+
+  def pie_widget_test3
+     user = User.find(params[:id])
+     @content = render_to_string(:partial => 'pie_widget', :locals => {:user => user})
+     render :action => 'widget', :layout => false
+  end
+
+  def pie_widget_test4
+     user = User.find(params[:id])
+     @content = render_to_string(:partial => 'pie_widget', :locals => {:user => user})
+     render :action => 'widget', :layout => false, :content_type => 'text/javascript'
+  end
+
+  def pie_widget_test5
+     user = User.find(params[:id])
+     @content = render_to_string(:partial => 'pie_widget', :locals => {:user => user})
+     response.headers['Content-Type']='text/javascript'
+     render :action => 'widget', :layout => false
+  end
+
   def sparkline_widget
      user = User.find(params[:id])
 
