@@ -8,7 +8,7 @@
       <span class='h-time'>(<%= extract_datetime_string(c.created_at) %>)</span>
     </div>
     <div class='comment_content'>
-      <%= h(c.content) %>
+      <%= (format_content(c.content)) %>
     </div>
   <% end %>
 <% end %>
