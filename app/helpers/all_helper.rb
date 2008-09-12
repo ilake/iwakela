@@ -122,7 +122,11 @@ module AllHelper
   end
 
   def link_to_diary(r, text, size=32)
-    link_to format_content(truncate(text, size)), :controller => 'member', :action => 'show', :id => r
+    if size
+      link_to format_content(truncate(text, size)), :controller => 'member', :action => 'show', :id => r
+    else
+      link_to format_content(text), :controller => 'member', :action => 'show', :id => r
+    end
   end
 
   def month_selected

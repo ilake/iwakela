@@ -136,7 +136,7 @@
         </td>
         </td>
         <td class='diary'>
-          <%=link_to_diary(record, record.content) %>
+          <%=link_to_diary(record, record.content, nil) %>
           <% if is_owner?(@user)%>
             <%=jquery_link_to_remote image_tag("pencil.png",
                                                :border => "0"),
