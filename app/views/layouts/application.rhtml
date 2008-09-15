@@ -17,21 +17,35 @@
   <%= yield :page_spec %>
 
   <script type='text/javascript'>
+        function time_now() {
+          var t = new Date();
+          var year = t.getYear();
+          year+=1900;
+
+          var month = t.getMonth();
+          month+=1;
+
+          var day = t.getDate();
+          var hours = t.getHours();
+          var minutes = t.getMinutes();
+          var seconds = t.getSeconds();
+
+          var now = year+"-"+ month+"-"+ day+"-"+ hours+":"+ minutes+":"+ seconds
+          return now;
+        }
     $(function() {
         $('.rounded').corner();
         $("img").pngfix();
 
         $('.alarm_clock').click(function(){
-          var t = new Date();
-          now = t.getTime();
+          now = time_now();
           window.location = '/member/wake_up?time='+now
 
           return false;
           });
 
         $('.sleep_button').click(function(){
-          var t = new Date();
-          now = t.getTime();
+          now = time_now();
           window.location = '/member/sleep?time='+now
 
           return false;

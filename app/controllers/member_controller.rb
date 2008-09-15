@@ -90,7 +90,8 @@ class MemberController < ApplicationController
       flash[:notice] = "沒有人一直在早起的啦"
       redirect_to :back
     else
-      record = @me.records.create(:todo_time => Time.at(params[:time].to_f/1000).to_s(:db))
+      record = @me.records.create(:todo_time => Time.parse(params[:time]))
+      #record = @me.records.create(:todo_time => Time.at(params[:time].to_f/1000).to_s(:db))
       if record.errors.empty?
         flash[:info] = "早安喔, 可以寫一下給今日的話, 鼓勵一下自己喔"
       else
@@ -102,7 +103,7 @@ class MemberController < ApplicationController
   end
 
   def sleep
-    record = @me.records.create(:todo_name => 'sleep', :todo_time => Time.at(params[:time].to_f/1000).to_s(:db))
+    record = @me.records.create(:todo_name => 'sleep', :todo_time => Time.parse(params[:time]))
     if record.errors.empty?
       flash[:info] = "晚安喔"
     else
@@ -214,7 +215,7 @@ class MemberController < ApplicationController
       @user = User.find(params[:id])
     rescue
       @user ||= @me
-      redirect_to :controler => 'main', :action => 'index' unless @user
+      redirect_to :controler => 'main', :action => 'index' and return false unless @user
     end
   end
 end
