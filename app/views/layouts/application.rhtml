@@ -20,7 +20,9 @@
         function time_now() {
           var t = new Date();
           var year = t.getYear();
-          year+=1900;
+          if (year < 1900) {
+            year+=1900;
+          }
 
           var month = t.getMonth();
           month+=1;
@@ -33,20 +35,30 @@
           var now = year+"-"+ month+"-"+ day+"-"+ hours+":"+ minutes+":"+ seconds
           return now;
         }
+
     $(function() {
         $('.rounded').corner();
         $("img").pngfix();
 
+        var flag = true;
+
         $('.alarm_clock').click(function(){
           var now = time_now();
-          window.location = '/member/wake_up?time='+now
+          if (flag) {
+            flag = false;
+            window.location = '/member/wake_up?time='+now;
+          }
 
           return false;
           });
 
         $('.sleep_button').click(function(){
           var now = time_now();
-          window.location = '/member/sleep?time='+now
+
+          if (flag) {
+            flag = false;
+            window.location = '/member/sleep?time='+now
+          }
 
           return false;
           });
