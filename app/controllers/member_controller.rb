@@ -92,7 +92,8 @@ class MemberController < ApplicationController
     else
       begin 
         record = @me.records.create(:todo_time => Time.parse(params[:time]))
-      rescue
+      rescue Error => e
+        logger.debug "DEBUG!! #{e}"
         record = @me.records.create
       end
 
@@ -109,7 +110,8 @@ class MemberController < ApplicationController
   def sleep
       begin 
         record = @me.records.create(:todo_name => 'sleep', :todo_time => Time.parse(params[:time]))
-      rescue
+      rescue Error => e
+        logger.debug "DEBUG!! #{e}"
         record = @me.records.create(:todo_name => 'sleep')
       end
     if record.errors.empty?
