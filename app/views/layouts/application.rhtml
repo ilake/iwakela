@@ -38,14 +38,14 @@
         $("img").pngfix();
 
         $('.alarm_clock').click(function(){
-          now = time_now();
+          var now = time_now();
           window.location = '/member/wake_up?time='+now
 
           return false;
           });
 
         $('.sleep_button').click(function(){
-          now = time_now();
+          var now = time_now();
           window.location = '/member/sleep?time='+now
 
           return false;
