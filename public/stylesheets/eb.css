@@ -786,6 +786,7 @@ div.even{
   float :left;
 }
 
+
 .add_friend_block {
   border-bottom : 1px solid #EFEFEF;
   padding-bottom: 10px;
@@ -832,4 +833,26 @@ div.even{
   width:100px;
   float:left;
   padding-right:10px;
+}
+
+.my_diary{
+  width :440px;
+  float :left;
+}
+
+.update_info{
+  width:330px;
+  float:left;
+}
+
+#nice_words{
+  float:left;
+  background-color: #B5EDBC;
+  margin-bottom:10px;
+  padding: 10px;
+  line-height:20px;
+}
+
+.content_padding{
+  padding:5px;
 }

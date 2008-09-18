@@ -121,11 +121,11 @@ module AllHelper
     end
   end
 
-  def link_to_diary(r, text, size=32)
+  def link_to_diary(r, text, size=32, cls=nil)
     if size
-      link_to format_content(truncate(text, size)), :controller => 'member', :action => 'show', :id => r
+      link_to format_content(truncate(text, size)), {:controller => 'member', :action => 'show', :id => r}, cls
     else
-      link_to format_content(text), :controller => 'member', :action => 'show', :id => r
+      link_to format_content(text), {:controller => 'member', :action => 'show', :id => r}, cls
     end
   end
 
@@ -205,8 +205,8 @@ module AllHelper
     end
   end
 
-  def link_to_cancel(col = "member")
-    link_to '取消',:controller => col, :action => 'list'
+  def link_to_cancel(col = "member", text = '取消')
+    link_to text, :controller => col, :action => 'list'
   end
 
   def week_day(day)

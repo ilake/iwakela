@@ -1,0 +1,4 @@
+<% form_for :great_word, :url => {:action => 'update', :id => @great_word} do |f|%>
+  <%= f.text_area 'content', :rows => '6', :cols => '60'  %></p>
+  <%= submit_tag "確定完成" %>
+<% end %>

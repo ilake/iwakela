@@ -8,13 +8,16 @@ class FriendController < ApplicationController
         if !(@me.friends.include?(user)) && user.id != @me.id && @me.friends << user 
           flash[:notice] = '加入完成'
         else
-          flash.now[:notice] = "他已經是你的好友了"
+          flash[:notice] = "他已經是你的好友了"
         end
       else
         flash.now[:notice] = '沒有這個使用者喔'
       end
+
+      redirect_to :back
     end
     @users = User.find(:all, :order => "created_at DESC",:limit => 10)
+
   end
 
   def destroy

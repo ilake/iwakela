@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :forums
   has_many :comments
   has_many :scores
+  has_many :great_words
 
   #我發表過forum的comments
   #Its sql :

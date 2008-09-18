@@ -117,4 +117,13 @@ class MainController < ApplicationController
       render :template => 'shared/search'
     end
   end
+
+  def test
+#    u = User.all
+#    send_data u
+#    send_file '/home/lake/rails_app/iwakela/public/images/rails.png'
+    redirect_to :controller => 'main' and return
+    debugger
+    us = User.all
+  end
 end

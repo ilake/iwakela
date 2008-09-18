@@ -54,6 +54,7 @@
   <div class='group_feature rounded'>
     <span>
       <%= score_state(@user, '64')%>
+      <%= link_to '加入好友', friend_url(:action => 'add_friend', :name => @user.name), :method => :post %>
     </span>
     <span>
     <%= link_to "#{@user.name}的個人檔案", :controller => 'user', :action => 'show', :id => @user.id %>
@@ -75,6 +76,7 @@
       <span>
         <%= truncate(@user.profile.others, 50) %>
       </span>
+
     <% end %>
   </div>
 <br />
@@ -138,11 +140,7 @@
         <td class='diary'>
           <%=link_to_diary(record, record.content, nil) %>
           <% if is_owner?(@user)%>
-            <%=jquery_link_to_remote image_tag("pencil.png",
-                                               :border => "0"),
-                                               :update => 'remote',
-                                               :url => {:action => 'write_diary', :id => record.id}
-          %>
+            <%= link_to image_tag("pencil.png", :border => "0"), {:action => 'write_diary', :id => record.id} %>
           <% end %>
         </td>
         <td class='goal'><%=link_to record.com_goal, member_url(:action => :show, :id => record) unless record.com_goal.blank?%></td>

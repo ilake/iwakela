@@ -4,6 +4,9 @@ class MemberController < ApplicationController
   before_filter :check_auth, :except =>[:show_today_results, :list, :list_all_records, :widget, :show, :pie_widget]
   before_filter :date_select, :only => [:list]
   before_filter :find_user, :except => [:show]
+
+  before_filter :rand_word, :only => [:wake_up, :sleep, :write_diary]
+  before_filter :latest_diary, :only => [:wake_up, :sleep, :write_diary]
   helper :all
 
   def index
@@ -91,36 +94,37 @@ class MemberController < ApplicationController
       redirect_to :back
     else
       begin 
-        record = @me.records.create(:todo_time => Time.parse(params[:time]))
+        @record = @me.records.create(:todo_time => Time.parse(params[:time]))
       rescue Error => e
         logger.debug "DEBUG!! #{e}"
-        record = @me.records.create
+        @record = @me.records.create
       end
 
-      if record.errors.empty?
+      if @record.errors.empty?
         flash[:info] = "早安喔, 可以寫一下給今日的話, 鼓勵一下自己喔"
       else
         flash[:notice] = "不能設定現在之後的時間喔"
       end
 
-      redirect_to :controller => 'member', :action => 'list' 
+      render :action => 'update'
     end 
   end
 
   def sleep
-      begin 
-        record = @me.records.create(:todo_name => 'sleep', :todo_time => Time.parse(params[:time]))
-      rescue Error => e
-        logger.debug "DEBUG!! #{e}"
-        record = @me.records.create(:todo_name => 'sleep')
-      end
-    if record.errors.empty?
+    begin 
+      @record = @me.records.create(:todo_name => 'sleep', :todo_time => Time.parse(params[:time]))
+    rescue Error => e
+      logger.debug "DEBUG!! #{e}"
+      @record = @me.records.create(:todo_name => 'sleep')
+    end
+
+    if @record.errors.empty?
       flash[:info] = "晚安喔"
     else
       flash[:notice] = "不能設定現在之後的時間喔"
     end
 
-    redirect_to :controller => 'member', :action => 'list' 
+    render :action => 'update'
   end
 
   def edit_time
@@ -130,7 +134,7 @@ class MemberController < ApplicationController
 
   def write_diary
     @record = @me.records.find(params[:id])
-    render :layout => false
+    render :action => 'update'
   end
 
   def update
@@ -156,6 +160,11 @@ class MemberController < ApplicationController
       flash[:notice] = "不能設定現在之後的時間喔"
       redirect_to :back
     end
+  end
+
+  def update_words
+    word = GreatWord.find('random')
+    render :partial => 'word', :locals => {:word => word}
   end
 
   def widget
@@ -227,5 +236,13 @@ class MemberController < ApplicationController
       @user ||= @me
       redirect_to :controler => 'main', :action => 'index' and return false unless @user
     end
+  end
+
+  def latest_diary
+    @latest_diary = Record.have_content.find(:all, :limit => 5, :order => 'id DESC')
+  end
+
+  def rand_word
+    @word = GreatWord.find('random')
   end
 end

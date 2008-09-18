@@ -1,0 +1,11 @@
+<h1>新增名言佳句</h1>
+<% form_for @great_word, :url => {:action => 'create'} do |f| %>
+  <%= error_messages_for 'great_word' %>
+  <%= f.text_area 'content', :rows => '6', :cols => '60'  %></p>
+  <%= submit_tag "確定完成" %>
+  <%= link_to '取消', :action => 'index' %>
+<% end %>
+
+<% @words.each do |w| %>
+  <div><%= w.content %></div>
+<% end %>

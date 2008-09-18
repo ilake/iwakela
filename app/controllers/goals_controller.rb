@@ -52,4 +52,5 @@ class GoalsController < ApplicationController
     @me.goals.find(params[:id]).destroy
     render :nothing => true
   end
+
 end

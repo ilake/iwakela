@@ -52,6 +52,10 @@ class Group < ActiveRecord::Base
     end
   end
 
+  def self.group_readed_reset
+    Group.update_all(:readed => 0)
+  end
+
   def get_in?(user)
     !(self.state == 2 || self.state == 3 || self.members.size >= self.user_num || user.group)
   end

@@ -1,0 +1,49 @@
+<div class='clear'></div>
+<br />
+<div class='my_diary'>
+  <h1 style='display:inline;'>今日日誌</h1>
+    <%= exact_datetime_string(@record.todo_time)%>(星期<%= week_day(@record.todo_time.wday)%>)
+  <br />
+  <br />
+  <div>
+    <% form_for @record, :url => member_url(:action => 'update', :id => @record ) do |f| %>
+      <p><%= f.text_area 'content', :rows => '8', :cols => '36' %></p>
+      <%= submit_tag '完成' %>
+      <%= link_to_cancel('member', '懶得寫') %>
+<% end %>
+</div>
+</div>
+
+<div class='update_info'>
+  <div>
+    <h1>最新日誌</h1>
+    <% @latest_diary.each do |diary|%>
+      <div class='content_padding'><%= link_to_diary(diary, diary.content, 24, {:popup => true}) %></div>
+    <% end %>
+  </div>
+</div>
+<div class='clear'></div>
+<br />
+<br />
+<div style='margin-bottom:10px;'>
+  <h1 style='display:inline;'>格言佳句</h1>
+  <%= jquery_link_to_remote ">>還要看",:update => 'nice_words', :url => {:action => 'update_words'}%>
+</div>
+<div id='nice_words' class='rounded'>
+  <%= render :partial => 'word', :locals => {:word => @word} %>
+</div>
+
+<div class='clear'></div>
+<div align="center">
+  <script type="text/javascript"><!--
+    google_ad_client = "pub-0501077200190082";
+    /* 728x90, 已建立 2008/9/17 */
+    google_ad_slot = "4960828006";
+    google_ad_width = 728;
+    google_ad_height = 90;
+    //-->
+  </script>
+  <script type="text/javascript"
+    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+  </script>
+</div>

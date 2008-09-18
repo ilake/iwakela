@@ -31,6 +31,7 @@ class Record < ActiveRecord::Base
   before_update :set_success, :conditions => {:todo_name => 'wake_up'}
 
   before_update :record_valid?, :conditions => {:todo_name => 'wake_up'}
+  before_update :content_null?
 
   named_scope :success, :conditions => {:success => true}
   named_scope :fail, :conditions => {:success => false}
@@ -42,6 +43,8 @@ class Record < ActiveRecord::Base
   named_scope :week, :conditions => ["todo_time > ?", Time.now.beginning_of_week]
   named_scope :wake, :conditions => {:todo_name => 'wake_up'}
   named_scope :sleep, :conditions => {:todo_name => 'sleep'}
+
+  named_scope :have_content, :conditions => "content is not NULL"
 
   #validates_length_of :content, :minimum => 1, :on => :update
   #after_create :set_average, :set_continuous_num, :set_successful_rate
@@ -228,6 +231,10 @@ class Record < ActiveRecord::Base
     elsif self.user.records.wake.find(:all, :conditions => ['todo_time < ? and todo_time > ?', time.tomorrow.at_beginning_of_day, time.at_beginning_of_day]).blank?
       true 
     end
+  end
+
+  def content_null?
+    self.content = nil if self.content.size == 0
   end
 
   def lastest_target_time
