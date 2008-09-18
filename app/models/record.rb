@@ -234,7 +234,7 @@ class Record < ActiveRecord::Base
   end
 
   def content_null?
-    self.content = nil if self.content.size == 0
+    self.content = nil if self.content.blank?
   end
 
   def lastest_target_time
