@@ -1,7 +1,7 @@
 module AllHelper 
   WEEK_DAYS = %w(日 一 二 三 四 五 六)
   #SCORE_STATE = [60, 46, 35, 24, 13,  2, -9, -20, -31, -90]
-  SCORE_STATE = [38, 28, 16, 2, -10,-22,-34, -44, -52, -64]
+  SCORE_STATE = [38, 32, 20, 6, -6,-18,-30, -40, -48, -10000]
 
   def exact_datetime_string(datetime)
     datetime.strftime("%m/%d  %H:%M")
