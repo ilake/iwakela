@@ -97,7 +97,11 @@ class Record < ActiveRecord::Base
     array.delete(false)
     success_count = array.size
     fail_count = total - success_count
-    cont_count = cont_count > total ? total : cont_count
+    if cont_count >= 0 
+      cont_count = cont_count > total ? total : cont_count
+    else
+      cont_count = cont_count.abs > total ? total*-1 : cont_count
+    end
 
 #42, -63
 #  -10 0 10 20 30 40  
