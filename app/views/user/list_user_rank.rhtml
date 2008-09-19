@@ -6,14 +6,16 @@
     <th><%= link_to '比接近目標', :action => 'list_user_rank', :sort => 'diff' %></th>
     <th><%= link_to '比起床時間', :action => 'list_user_rank', :sort => 'average' %></th>
     <th><%= link_to '比成功率', :action => 'list_user_rank', :sort => 'success_rate' %></th>
+    <th><%= link_to '比連續天數', :action => 'list_user_rank', :sort => 'continuous_num' %></th>
   </thead>
   <% @users.each do |u|  %>
     <tr class="<%= cycle('title','')%>">
       <td class="user-name"><%= link_to_user(u, u.name, nil, true) %></td>    
       <td class="user-rank-profile"><%= link_to_user(u, truncate(u.profile.others, 20)) %></td>    
-      <td class="user-average"><%= u.status.diff %>分鐘</td>    
-      <td class="user-average"><%= extract_target_time(u.status.average) %></td>    
-      <td class="user-success-rate"><%= number_to_percentage(u.status.success_rate, :precision => 1)%></td>    
+      <td><%= u.status.diff %>分鐘</td>    
+      <td><%= extract_target_time(u.status.average) %></td>    
+      <td><%= number_to_percentage(u.status.success_rate, :precision => 1)%></td>    
+      <td><%= continuous_success_num(u) %></td>    
     </tr>
   <% end %>
 </table>
