@@ -59,7 +59,7 @@ td.user-title {
   width: 200px;
 }
 td.user-rank-profile {
-  width: 250px;
+  width: 150px;
 }
 
 td.user-profile {
@@ -315,16 +315,7 @@ td.medium-font {
   font-weight: bold;
 	font-size: 120%;
 }
-td.user-name {
-  width: 150px;
-}
-td.user-rank-profile {
-  width: 250px;
-}
 
-td.user-profile {
-  width: 1000px;
-}
 td.comment-diary-user {
   /*width: 1000px;*/
 }
