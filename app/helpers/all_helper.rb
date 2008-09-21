@@ -73,9 +73,9 @@ module AllHelper
       num = user.status.continuous_num
       if !num 
       elsif num < 0
-        st = image_tag('arrow_down.png')
+        st = image_tag('http://iwakela.com/images/arrow_down.png', :alt => '退步', :title => '退步' )
       else
-        st = image_tag('arrow_up.png')
+        st = image_tag('http://iwakela.com/images/arrow_up.png', :alt => '進步', :title => '進步' )
       end
 
       "成功率#{ number_to_percentage(user.status.success_rate, :precision => 1) || 0}#{st}"
