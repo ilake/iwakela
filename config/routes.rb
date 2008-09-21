@@ -31,6 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   map.member 'member/:action/:id', :controller => 'member'
   map.friend 'friend/:action/:id', :controller => 'friend'
   map.user 'user/:action/:id', :controller => 'user'
+  map.word 'word/:action/:id', :controller => 'great_word'
 
 
   map.connect "main/reset_password/:reset_code",

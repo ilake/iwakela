@@ -3,9 +3,13 @@
   <%= error_messages_for 'great_word' %>
   <%= f.text_area 'content', :rows => '6', :cols => '60'  %></p>
   <%= submit_tag "確定完成" %>
-  <%= link_to '取消', :action => 'index' %>
+  <%= link_to '取消', member_path(:action => 'list')%>
 <% end %>
-
-<% @words.each do |w| %>
-  <div><%= w.content %></div>
+<h1>我貢獻過的</h1>
+<% @words.each do |word| %>
+  <div>
+    <%= word.content %>
+    <%= link_to '修改', word_path(:action => 'edit', :id => word) %> | 
+    <%= link_to '刪除', word_path(:action => 'destroy', :id => word) %>
+  </div>
 <% end %>

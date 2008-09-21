@@ -5,8 +5,8 @@ class MemberController < ApplicationController
   before_filter :date_select, :only => [:list]
   before_filter :find_user, :except => [:show]
 
-  before_filter :rand_word, :only => [:wake_up, :sleep, :write_diary]
-  before_filter :latest_diary, :only => [:wake_up, :sleep, :write_diary]
+  before_filter :rand_word, :only => [:wake_up, :sleep, :create, :write_diary]
+  before_filter :latest_diary, :only => [:wake_up, :sleep, :create, :write_diary]
   helper :all
 
   def index
@@ -27,15 +27,15 @@ class MemberController < ApplicationController
   def create 
     params[:record][:state] = 1
 
-    if params[:type] == 'sleep' && @me.records.todo('sleep', params[:record])
+    if params[:type] == 'sleep' && @record = @me.records.todo('sleep', params[:record])
       flash[:info] = "設定完成"
-    elsif @me.records.todo('wake_up', params[:record])
+    elsif @record =  @me.records.todo('wake_up', params[:record])
       flash[:info] = "設定完成"
     else
       flash[:notice] = "設定失敗, 已有紀錄, 或者設定了未來的時間喔= ="
     end
 
-    redirect_to :controller => 'member', :action => 'list'
+    render :action => 'update'
   end
 
   #destroy the record

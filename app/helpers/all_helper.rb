@@ -70,7 +70,15 @@ module AllHelper
   end
 
   def success_census(user)
-      "成功率為#{ number_to_percentage(user.status.success_rate, :precision => 1) || 0}"
+      num = user.status.continuous_num
+      if !num 
+      elsif num < 0
+        st = image_tag('arrow_down.png')
+      else
+        st = image_tag('arrow_up.png')
+      end
+
+      "成功率#{ number_to_percentage(user.status.success_rate, :precision => 1) || 0}#{st}"
   end
 
   def continuous_success_num(user)

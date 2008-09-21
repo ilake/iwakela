@@ -48,6 +48,12 @@ module GroupsHelper
     end
   end
 
+  def link_to_group_user(group)
+    if @me.own_group == group
+      link_to '團員設定', :action => 'list', :id => group.id
+    end
+  end
+
   def link_to_destroy(group)
     if @me.own_group == group
       link_to '[解散早起團]', {:action => 'destroy', :id => group.id},
