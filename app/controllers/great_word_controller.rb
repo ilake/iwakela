@@ -7,8 +7,16 @@ class GreatWordController < ApplicationController
   end
 
   def create
-    @me.great_words.create(params[:great_word])
-    redirect_to :action => 'new'
+    @words = @me.great_words.find(:all)
+
+    if @great_word = @me.great_words.create(params[:great_word])
+      if @great_word.errors.empty?
+        flash[:notice] = '新增成功'
+        redirect_to :action => 'new' and return
+      end
+    end 
+
+    render :action => 'new'
   end
 
   def list
