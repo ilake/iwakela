@@ -92,7 +92,8 @@ module GroupsHelper
 
   def link_to_member(user, text)
     if user.group_nickname
-      "<span class='black'>#{user.group_nickname}</span>#{link_to_user(user, user.name)} "
+      text ||= user.name
+      "<span class='black'>#{user.group_nickname}</span>#{link_to_user(user, text)} "
     else
       "#{link_to_user(user, text)} "
     end
