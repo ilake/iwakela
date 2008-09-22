@@ -78,7 +78,7 @@ module AllHelper
         st = image_tag('http://iwakela.com/images/arrow_up.png', :alt => '進步', :title => '進步' )
       end
 
-      "成功率#{ number_to_percentage(user.status.success_rate, :precision => 1) || 0}#{st}"
+      "成功率#{ number_to_percentage(user.status.success_rate, :precision => 1) || 0} #{st}"
   end
 
   def continuous_success_num(user)
