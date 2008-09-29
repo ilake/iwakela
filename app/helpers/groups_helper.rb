@@ -50,7 +50,7 @@ module GroupsHelper
 
   def link_to_group_user(group)
     if @me.own_group == group
-      link_to "#{image_tag("icon_new.gif")}團員設定", :action => 'list', :id => group.id
+      link_to "團員設定", :action => 'list', :id => group.id
     end
   end
 
