@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080819065738
+# Schema version: 20080916232411
 #
 # Table name: targets
 #
@@ -12,4 +12,7 @@
 
 class Target < ActiveRecord::Base
   belongs_to :user
+
+  named_scope :wake, :conditions => {:todo_type => 0}
+  named_scope :sleep, :conditions => {:todo_type => 1}
 end

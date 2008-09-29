@@ -1,10 +1,11 @@
 # == Schema Information
 # Schema version: 20080916232411
 #
-# Table name: friends
+# Table name: great_words
 #
-#  user_id   :integer(11)     not null
-#  friend_id :integer(11)     not null
+#  id      :integer(11)     not null, primary key
+#  content :text            
+#  user_id :integer(11)     
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

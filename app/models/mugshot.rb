@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080819065738
+# Schema version: 20080916232411
 #
 # Table name: mugshots
 #
@@ -13,6 +13,7 @@
 #  size         :integer(11)     
 #  width        :integer(11)     
 #  height       :integer(11)     
+#  group_id     :integer(11)     
 #
 
 class Mugshot < ActiveRecord::Base

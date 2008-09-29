@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080819065738
+# Schema version: 20080916232411
 #
 # Table name: users
 #
@@ -71,10 +71,19 @@ class User < ActiveRecord::Base
   end
 
   def target_time(time=Time.now)
-    if target = self.targets.find_by_week(time.wday)
+    if target = self.targets.wake.find_by_week(time.wday)
       target_time = target.todo_target_time
       Time.local(time.year.to_i, time.month.to_i, time.day.to_i, target_time.hour, target_time.min, 0)
     elsif target_time = self.target_time_now
+      Time.local(time.year.to_i, time.month.to_i, time.day.to_i, target_time.hour, target_time.min, 0)
+    end
+  end
+
+  def target_sleep_time(time=Time.now)
+    if target = self.targets.sleep.find_by_week(time.wday)
+      target_time = target.todo_target_time
+      Time.local(time.year.to_i, time.month.to_i, time.day.to_i, target_time.hour, target_time.min, 0)
+    elsif target_time = self.sleep_target_time
       Time.local(time.year.to_i, time.month.to_i, time.day.to_i, target_time.hour, target_time.min, 0)
     end
   end

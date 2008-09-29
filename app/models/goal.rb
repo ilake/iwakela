@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080819065738
+# Schema version: 20080916232411
 #
 # Table name: goals
 #
@@ -9,6 +9,7 @@
 #  done    :boolean(1)      
 #  name    :string(255)     
 #  comment :text            
+#  rank    :integer(11)     default(0)
 #
 
 class Goal < ActiveRecord::Base

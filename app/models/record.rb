@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080819065738
+# Schema version: 20080916232411
 #
 # Table name: records
 #
@@ -13,6 +13,7 @@
 #  goal             :text            
 #  com_goal         :text            
 #  state            :integer(11)     
+#  readed           :integer(11)     default(0)
 #
 
 class Record < ActiveRecord::Base
@@ -23,12 +24,13 @@ class Record < ActiveRecord::Base
   before_create :set_time
   before_create :set_todo_name
 
-  before_create :set_target_time, :conditions => {:todo_name => 'wake_up'}
-  before_create :set_success, :conditions => {:todo_name => 'wake_up'}
+  before_create :set_target_time
+
+  before_create :set_success
 
   after_save    :set_census, :conditions => {:todo_name => 'wake_up'}
   after_destroy :set_census, :conditions => {:todo_name => 'wake_up'}
-  before_update :set_success, :conditions => {:todo_name => 'wake_up'}
+  before_update :set_success
 
   before_update :record_valid?, :conditions => {:todo_name => 'wake_up'}
   before_update :content_null?
@@ -59,7 +61,11 @@ class Record < ActiveRecord::Base
   end
 
   def set_target_time
-    self.todo_target_time ||= self.user.target_time(todo_time)
+    if todo_name == 'wake_up'
+      self.todo_target_time ||= self.user.target_time(todo_time)
+    elsif todo_name == 'sleep'
+      self.todo_target_time ||= self.user.target_sleep_time(todo_time)
+    end
   end
 
   def set_census

@@ -13,19 +13,26 @@
         var time = <%= @time %>;
         var sleep_time = <%= @sleep_time %>;
         var target_time = <%= @target_time %>;
+        var sleep_target_time = <%= @sleep_target_time %>;
 
         var time_set = {
-        "target": {
-            label: "目標時間",
-            data: target_time,
-            color: 3
-          },
+          "target": {
+              label: "目標時間",
+              data: target_time,
+              color: 3
+            },
 
           "wake": {
             label: "起床時間",
             data: time,
             color: 1
             },
+
+          "sleep_target": {
+            label: "目標睡覺時間",
+            data: sleep_target_time,
+            color: 0
+          },
 
           "sleep": {
             label: "睡覺時間",

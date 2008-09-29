@@ -65,6 +65,7 @@ class MemberController < ApplicationController
     @time = Record.time_to_string(records, "todo_time")
     @sleep_time = Record.time_to_string(sleep_records, "todo_time")
     @target_time = Record.time_to_string(records, "todo_target_time")
+    @sleep_target_time = Record.time_to_string(sleep_records, "todo_target_time")
 
     @last_record = @user.records.last(:order => "todo_time")
 
@@ -84,6 +85,21 @@ class MemberController < ApplicationController
         redirect_to :action => 'list'
       end
     else
+      @targets = @me.targets.wake.find(:all, :order => 'week')
+      render :layout => false
+    end
+  end
+
+  def sleep_target_time
+    if request.post?
+      @me.sleep_target_time = target_time(params[:date][:hour], params[:date][:minute])
+
+      if @me.save
+        flash[:info] = "設定完成"
+        redirect_to :action => 'list'
+      end
+    else
+      @targets = @me.targets.sleep.find(:all, :order => 'week')
       render :layout => false
     end
   end

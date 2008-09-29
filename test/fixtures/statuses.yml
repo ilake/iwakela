@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080819065738
+# Schema version: 20080916232411
 #
 # Table name: statuses
 #
@@ -15,6 +15,7 @@
 #  group_join_date        :datetime        
 #  attendance             :float           default(0.0)
 #  diff                   :integer(11)     
+#  score                  :integer(11)     
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

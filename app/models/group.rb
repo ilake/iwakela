@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080819065738
+# Schema version: 20080916232411
 #
 # Table name: groups
 #
@@ -11,6 +11,7 @@
 #  state      :integer(11)     default(0)
 #  created_at :datetime        
 #  owner_id   :integer(11)     
+#  readed     :integer(11)     default(0)
 #
 
 class Group < ActiveRecord::Base
