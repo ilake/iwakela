@@ -1,5 +1,7 @@
 class GoalsController < ApplicationController
   helper :all
+  before_filter :check_auth
+
   def create
     if request.post?
       new_goal = @me.goals.create(params[:goals])
