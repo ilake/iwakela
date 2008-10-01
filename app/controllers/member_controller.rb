@@ -33,6 +33,7 @@ class MemberController < ApplicationController
       flash[:info] = "設定完成"
     else
       flash[:notice] = "設定失敗, 已有紀錄, 或者設定了未來的時間喔= ="
+      redirect_to :action => 'list' and return
     end
 
     render :action => 'update'
