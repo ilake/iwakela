@@ -25,18 +25,22 @@ class MemberController < ApplicationController
 
   #create the records be forgot
   def create 
-    params[:record][:state] = 1
+    if params[:record]
+      params[:record][:state] = 1 
 
-    if params[:type] == 'sleep' && @record = @me.records.todo('sleep', params[:record])
-      flash[:info] = "設定完成"
-    elsif @record =  @me.records.todo('wake_up', params[:record])
-      flash[:info] = "設定完成"
+      if params[:type] == 'sleep' && @record = @me.records.todo('sleep', params[:record])
+        flash[:info] = "設定完成"
+      elsif @record =  @me.records.todo('wake_up', params[:record])
+        flash[:info] = "設定完成"
+      else
+        flash[:notice] = "設定失敗, 已有紀錄, 或者設定了未來的時間喔= ="
+        redirect_to :action => 'list' and return
+      end
+
+      render :action => 'update'
     else
-      flash[:notice] = "設定失敗, 已有紀錄, 或者設定了未來的時間喔= ="
-      redirect_to :action => 'list' and return
+      redirect_to :action => 'list'
     end
-
-    render :action => 'update'
   end
 
   #destroy the record
