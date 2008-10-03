@@ -848,3 +848,8 @@ div.even{
 .content_padding{
   padding:5px;
 }
+
+#group_score_rank img{
+  width   :32px;
+  height  :32px;
+}
