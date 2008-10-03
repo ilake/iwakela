@@ -146,7 +146,7 @@ class GroupsController < ApplicationController
       @user = @me.own_group.members.find(params[:id])
       @user.change_group(nil, nil)
     end
-    redirect_to :action => "show", :id => @me.own_group
+    redirect_to :action => "list", :id => @me.own_group
   end
 
   def quit 
