@@ -1,6 +1,29 @@
+<% content_for :page_spec do %>
+<script type='text/javascript'>
+  (function($){
+     var round_num;
+     var i;
+
+     function round_steps() {
+       if ( i < round_num) {
+         $('.round:eq('+i+')').removeClass('hidden');
+         i++;
+         var dummy = setTimeout(round_steps, 1000);
+       }
+     }
+
+       $(document).ready(function(){
+         round_num = $('.round').length;
+         i = 0;
+         round_steps();
+       });
+     })(jQuery);
+   </script>
+ <% end %>
 
 <%= link_to '首頁', :action => 'index' %>
 <%= link_to '幫他加招式', :action => 'create_fight_methods', :id => @game %>
+<div class='try'>TRY</div>
 <hr >
 Name PK
 <br />
@@ -28,12 +51,17 @@ Name PK
 <%end %>
 <br />
 <br />
-<% if @attack_round %>
-  <% @attack_round.each do |round| %>
-    <%= "[#{round.fighter1}] 對 [#{round.fighter2}] 使出 #{round.atk_method}, 傷害#{round.atk_val} |#{round.hp1} VS #{round.hp2}"%> 
-      <br />
+<div class='fight_rounds'>
+  <% if @attack_round %>
+    <% @attack_round.each do |round| %>
+      <div class='round hidden'>
+        <%= "[#{round.fighter1}] 對 [#{round.fighter2}] 使出 #{round.atk_method}, 傷害#{round.atk_val} | <span style='color:#EE0000'>#{round.hp1} VS #{round.hp2}</span>"%> 
+      </div>
       <% if round.hp1 <= 0 || round.hp2 <= 0 %>
-        <%= "#{round.fighter2} 被擊敗了"%>
+        <div class='round hidden'>
+          <%= "#{round.fighter2} 被擊敗了"%>
+        </div>
       <% end %>
     <% end %>
   <% end %>
+</div>
