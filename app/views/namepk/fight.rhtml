@@ -1,0 +1,39 @@
+
+<%= link_to '首頁', :action => 'index' %>
+<%= link_to '幫他加招式', :action => 'create_fight_methods', :id => @game %>
+<hr >
+Name PK
+<br />
+遊戲名稱: <%= @game.name %>
+<h1>請輸入對戰的名稱</h1>
+<% form_for :game, :url => {:action => 'fight', :id => @game} do |f| %>
+  <%= f.text_field :name1 %> VS
+  <%= f.text_field :name2 %>
+  <%= submit_tag 'submit'%>
+<% end %>
+<%if @fighter1 %>
+  <%= name1 = @fighter1.name %>
+  <%= @fighter1.hp[:value] %>
+  <% @fighter1.attrs.each do |a|%>
+    <%= "<span style='color:#00EE00;'>#{a[:name]}</span>: <span style='color:#0000EE;'>#{a[:value]}</span>"%>,
+  <% end %>
+<%end %>
+<br />
+<%if @fighter2 %>
+  <%= name2 = @fighter2.name %>
+  <%= @fighter2.hp[:value] %>
+  <% @fighter2.attrs.each do |a|%>
+    <%= "<span style='color:#00EE00;'>#{a[:name]}</span>: <span style='color:#0000EE;'>#{a[:value]}</span>"%>,
+  <% end %>
+<%end %>
+<br />
+<br />
+<% if @attack_round %>
+  <% @attack_round.each do |round| %>
+    <%= "[#{round.fighter1}] 對 [#{round.fighter2}] 使出 #{round.atk_method}, 傷害#{round.atk_val} |#{round.hp1} VS #{round.hp2}"%> 
+      <br />
+      <% if round.hp1 <= 0 || round.hp2 <= 0 %>
+        <%= "#{round.fighter2} 被擊敗了"%>
+      <% end %>
+    <% end %>
+  <% end %>

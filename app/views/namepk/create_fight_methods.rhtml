@@ -1,0 +1,15 @@
+<%= @game.name %>
+<%= link_to '進階版', :action => 'adv_game_setting', :id => @game %>
+<h3>產生你的招式名稱<h3>
+<% form_for :fight_method, :url => {:action => 'create_fight_methods', :id => @game} do |f|%>
+  <%= f.text_field :name %>
+  <%= submit_tag 'create' %>
+<% end %>
+
+<%= link_to '完成', :action => 'fight', :id => @game if @methods_size > 0%>
+
+<ul>
+  <% @methods.each do |m|%>
+    <li><%= m.name %></li>
+  <% end %>
+</li>

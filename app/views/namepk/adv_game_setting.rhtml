@@ -1,0 +1,30 @@
+<%= @game.name %>
+<%= link_to '完成', :action => 'fight', :id => @game if @methods_size > 0%>
+
+<h4>屬性<h4>
+<% form_for :attr, :url => {:action => 'adv_game_setting', :id => @game} do |f|%>
+  <%= f.text_field :name %>
+  <%= submit_tag 'create' %>
+<% end %>
+<ul>
+  <% @attrs.each do |attr|%>
+    <li><%= attr.name %></li>
+  <% end %>
+</ul>
+<br />
+<hr>
+<h4>招式<h4>
+    <% form_for :fight_method, :url => {:action => 'adv_game_setting', :id => @game} do |f|%>
+      <label>招式名稱<label>
+  <%= f.text_field :name %>
+      <label>傷害<label>
+  <%= f.text_field :value %>
+  <%= submit_tag 'create' %>
+<% end %>
+
+
+<ul>
+  <% @methods.each do |m|%>
+    <li><%= m.name %> : <%= m.value %></li>
+  <% end %>
+</ul>

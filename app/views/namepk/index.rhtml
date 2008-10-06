@@ -1,0 +1,6 @@
+<%= link_to '我也要做', :action => 'new' %>
+<ul>
+  <% @games.each do |g|%>
+    <li><%= link_to g.name, :action => 'fight', :id => g.id %></li>
+  <% end %>
+</li>
