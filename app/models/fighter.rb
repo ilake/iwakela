@@ -1,9 +1,9 @@
 class Fighter
-  #PRIME_VALUE = [541, 547, 557, 563, 569, 571, 577, 587, 593, 599]
-  PRIME_VALUE = [353, 359, 367, 373, 379, 383, 389, 397, 401, 409]
-  #PRIME_VALUE = [443, 449, 457, 461, 463, 467, 479, 487, 491, 499]
+  #PRIME_VALUE = [541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601]
+  PRIME_VALUE = [353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 443]
+  #PRIME_VALUE = [443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 541]
 
-  FIGHT_ATTRIBUTES = ['力量', '敏捷', '智力', '精神', '命中', '致命', '強度']
+  FIGHT_ATTRIBUTES = ['力量', '敏捷', '智力', '精神', '命中']
 
   attr_accessor :name, :hp, :attrs
 
@@ -24,7 +24,7 @@ class Fighter
     attr_names.concat(FIGHT_ATTRIBUTES).uniq
     attr_names.unshift('hp')
     # 最少 6個屬性, 一個血, 一個其他
-    attr_size = count < 6 ? 5 : count
+    attr_size = count < 5 ? 6 : count+1
 
     #{:name => '力量', :value => '40'}
     #第一個屬性 最少大於150 (當作血用)

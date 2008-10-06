@@ -15,10 +15,6 @@ class Game < ActiveRecord::Base
     self.salt = Game.random_str
   end
 
-  def create_fighter(user_name)
-    Fighter.new(user_name, salt)
-  end
-
   def fighter_round(fighter1, fighter2)
     attack_desc = []
 
