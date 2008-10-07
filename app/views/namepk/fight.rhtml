@@ -23,7 +23,6 @@
 
 <%= link_to '首頁', :action => 'index' %>
 <%= link_to '幫他加招式', :action => 'create_fight_methods', :id => @game %>
-<div class='try'>TRY</div>
 <hr >
 Name PK
 <br />
@@ -34,6 +33,11 @@ Name PK
   <%= f.text_field :name2 %>
   <%= submit_tag 'submit'%>
 <% end %>
+
+
+  <%= pk_charts(@fighter1, @game) if @fighter1 %>
+  <%= pk_charts(@fighter2, @game) if @fighter2 %>
+<br />
 <%if @fighter1 %>
   <%= name1 = @fighter1.name %>
   <%= @fighter1.hp[:value] %>
@@ -41,6 +45,7 @@ Name PK
     <%= "<span style='color:#00EE00;'>#{a[:name]}</span>: <span style='color:#0000EE;'>#{a[:value]}</span>"%>,
   <% end %>
 <%end %>
+
 <br />
 <%if @fighter2 %>
   <%= name2 = @fighter2.name %>
