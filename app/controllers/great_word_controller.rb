@@ -1,5 +1,6 @@
 class GreatWordController < ApplicationController
   helper :all
+  before_filter :check_auth
 
   def new
     @great_word = GreatWord.new
