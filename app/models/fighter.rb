@@ -32,7 +32,7 @@ class Fighter
       val = (attr_base%p_value)
       if i == 0
         val = val < 150 ? val+150 : val
-        val = val * (attr_size/6)
+        val = val * (attr_size/5)
       else
         val = val%100
       end
