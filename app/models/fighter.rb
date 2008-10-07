@@ -8,10 +8,10 @@ class Fighter
   attr_accessor :name, :hp, :attrs
 
   def initialize(name, game)
-    attr_value = create_attr_value(name, game)
-    @name = name
-    @hp = attr_value.shift
-    @attrs = attr_value
+    @attr_value ||= create_attr_value(name, game)
+    @name ||= name
+    @hp ||= @attr_value.shift
+    @attrs ||= @attr_value
   end
 
   private
@@ -31,7 +31,7 @@ class Fighter
     PRIME_VALUE.slice(0..attr_size).each_with_index do |p_value, i|
       val = (attr_base%p_value)
       if i == 0
-        val = val < 100 ? val+100 : val
+        val = val < 150 ? val+150 : val
         val = val * (attr_size/6)
       else
         val = val%100
