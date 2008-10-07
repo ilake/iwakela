@@ -24,7 +24,7 @@ class Fighter
     attr_names.concat(FIGHT_ATTRIBUTES).uniq
     attr_names.unshift('hp')
     # 最少 6個屬性, 一個血, 一個其他
-    attr_size = count < 5 ? 6 : count+1
+    attr_size = count < 5 ? 5 : count
 
     #{:name => '力量', :value => '40'}
     #第一個屬性 最少大於150 (當作血用)
