@@ -43,14 +43,16 @@ class NamepkController < ApplicationController
   end
 
   def fight
-    if @game = Game.find(params[:id])
-      if request.post?
-        @fighter1 = Fighter.new(params[:game][:name1], @game)
-        @fighter2 = Fighter.new(params[:game][:name2], @game)
+    @game = Game.find(params[:id])
+  end
 
-        @attack_round = @game.fighter_round(@fighter1, @fighter2)
-      end
-    end
+  def do_fight
+    @game = Game.find(params[:id])
+    @fighter1 = Fighter.new(params[:game][:name1], @game)
+    @fighter2 = Fighter.new(params[:game][:name2], @game)
+
+    @attack_round = @game.fighter_round(@fighter1, @fighter2)
+    render :action => :fight
   end
 
 end

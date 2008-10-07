@@ -18,13 +18,13 @@ module NamepkHelper
 
     names_str =  data_names.map {|k|
       v = args[k]
-      "#{k}"
+      "#{CGI::escape k}"
     }.join('|')
 
     data_values.push(data_values[0])
     data_str  = data_values.join(',')
     outer_str = ([100] * data_values.size).join(',')
-    title = "#{game_name}: #{fighter_name}"
+    title = "#{CGI::escape game_name}: #{CGI::escape fighter_name}"
 
     str =<<-API
     <img src='http://chart.apis.google.com/chart?chs=250x250&cht=r&chd=t:#{data_str}|#{outer_str}&chl=#{names_str}&chm=B,FF000070,0,2,10&chtt=#{title}'></img>
