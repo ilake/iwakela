@@ -30,5 +30,9 @@ module NamepkHelper
     <img src='http://chart.apis.google.com/chart?chs=250x250&cht=r&chd=t:#{data_str}|#{outer_str}&chl=#{names_str}&chm=B,FF000070,0,2,10&chtt=#{title}'></img>
     API
   end
+
+  def round_desc(round)
+    "[#{round.fighter1}] 對 [<span class='beated'>#{round.fighter2}</span>] 使出 #{round.atk_method}, 傷害#{round.atk_val} | <span class='round_hp1'>#{round.hp1}</span> VS <span class='round_hp2'>#{round.hp2}</span>| <span class='round_hp1_percent'>#{round.hp1_percent}</span> VS <span class='round_hp2_percent'>#{round.hp2_percent}</span>"
+  end
 end
 

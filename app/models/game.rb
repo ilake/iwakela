@@ -34,6 +34,11 @@ class Game < ActiveRecord::Base
     around = 0
     around_size = fighter1.attrs.size
 
+    total_hp1 = hp1
+    total_hp2 = hp2
+
+    hp1_percent = 100
+    hp2_percent = 100
     while (hp1 > 0 && hp2 > 0)
       index = around%around_size
       ['fighter_1', 'fighter_2'].each do |user|
@@ -43,16 +48,22 @@ class Game < ActiveRecord::Base
           #打出的傷害
           #fighter 1 打 fighter 2
           atk = attack_val(average_hit_1, attr1[index], atk_method.value)
-          hp2 = hp2 - atk 
+          hp2 = hp2 - atk
+          hp2 = 0 if hp2 < 0
 
-          attack_desc << Round.new(name1, name2, atk_method.name, atk, hp1, hp2)
+          hp2_percent = ((hp2/total_hp2.to_f)*100).to_i
+
+          attack_desc << Round.new(name1, name2, atk_method.name, atk, hp1, hp2, hp1_percent, hp2_percent)
 
           break if hp2 < 0
         elsif user == 'fighter_2'
           #fighter 2 打 fighter 1
           atk = attack_val(average_hit_2, attr2[index], atk_method.value)
           hp1 = hp1 - atk 
-          attack_desc << Round.new(name2, name1, atk_method.name, atk, hp1, hp2)
+          hp1 = 0 if hp1 < 0
+
+          hp1_percent = ((hp1/total_hp1.to_f)*100).to_i
+          attack_desc << Round.new(name2, name1, atk_method.name, atk, hp1, hp2, hp1_percent, hp2_percent)
 
           break if hp1 < 0
         end

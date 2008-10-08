@@ -3,20 +3,59 @@
   (function($){
      var round_num;
      var i;
+     var name1;
+     var name2;
 
-     function round_steps() {
+     function bar_1_init() {
+       var path = '<%= image_path('progress/progressbar.gif')%>';
+
+       $("#user_hp1_bar").progressBar(100, { boxImage: path, barImage:  '<%= image_path('progress/progressbg_red.gif')%>'} );
+     }
+
+     function bar_2_init() {
+       var path = '<%= image_path('progress/progressbar.gif')%>';
+
+       $("#user_hp2_bar").progressBar(100, { boxImage: path, barImage: '<%= image_path('progress/progressbg_pink.gif')%>'} );
+     }
+
+     function round_steps(
+       ) {
        if ( i < round_num) {
-         $('.round:eq('+i+')').removeClass('hidden');
-         i++;
-         var dummy = setTimeout(round_steps, 1000);
+       $('.round:eq('+i+')').removeClass('hidden');
+           var name;
+           var percent;
+           var hp;
+
+           name = $('.round:eq('+i+')').find('.beated').html()
+           if (name == name1) {
+             percent = $('.round:eq('+i+')').find('.round_hp1_percent').html();
+             hp = $('.round:eq('+i+')').find('.round_hp1').html();
+             $('#user_hp1_bar').progressBar(percent);
+             $('#user_hp1_num').html(hp);
+           }
+           else if (name == name2) {
+             percent = $('.round:eq('+i+')').find('.round_hp2_percent').html();
+             hp = $('.round:eq('+i+')').find('.round_hp2').html();
+
+             bar_2_init();
+             $('#user_hp2_bar').progressBar(percent);
+             $('#user_hp2_num').html(hp);
+           }
+           i++;
+           var dummy = setTimeout(round_steps, 1000);
        }
      }
 
        $(document).ready(function(){
+         name1 = '<%= @fighter1.name %>';
+         name2 = '<%= @fighter2.name %>';
+
          round_num = $('.round').length;
          i = 0;
          round_steps();
 
+         bar_1_init();
+         bar_2_init();
 
          $('#names').submit(function() {
            var str = $(this).serialize();
@@ -30,51 +69,57 @@
    </script>
  <% end %>
 
-<%= link_to '首頁', :action => 'index' %>
-<%= link_to '幫他加招式', :action => 'create_fight_methods', :id => @game %>
-<hr >
-Name PK
-<br />
-遊戲名稱: <%= @game.name %>
-<h1>請輸入對戰的名稱</h1>
-<% form_for :game, :url => {:action => 'fight', :id => @game}, :html => {:id =>'names'} do |f| %>
-  <%= f.text_field :name1 %> VS
-  <%= f.text_field :name2 %>
-  <%= submit_tag 'submit'%>
-<% end %>
-
-  <%= pk_charts(@fighter1, @game) if @fighter1 %>
-  <%= pk_charts(@fighter2, @game) if @fighter2 %>
-<br />
-<%if @fighter1 %>
-  <%= name1 = @fighter1.name %>
-  <%= @fighter1.hp[:value] %>
-  <% @fighter1.attrs.each do |a|%>
-    <%= "<span style='color:#00EE00;'>#{a[:name]}</span>: <span style='color:#0000EE;'>#{a[:value]}</span>"%>,
+  <%= link_to '首頁', :action => 'index' %>
+  <%= link_to '幫他加招式', :action => 'create_fight_methods', :id => @game %>
+  <hr >
+  Name PK
+  <br />
+  遊戲名稱: <%= @game.name %>
+  <h1>請輸入對戰的名稱</h1>
+  <% form_for :game, :url => {:action => 'fight', :id => @game}, :html => {:id =>'names'} do |f| %>
+    <%= f.text_field :name1 %> VS
+    <%= f.text_field :name2 %>
+    <%= submit_tag 'submit'%>
   <% end %>
-<%end %>
 
-<br />
-<%if @fighter2 %>
-  <%= name2 = @fighter2.name %>
-  <%= @fighter2.hp[:value] %>
-  <% @fighter2.attrs.each do |a|%>
-    <%= "<span style='color:#00EE00;'>#{a[:name]}</span>: <span style='color:#0000EE;'>#{a[:value]}</span>"%>,
-  <% end %>
-<%end %>
-<br />
-<br />
-<div class='fight_rounds'>
-  <% if @attack_round %>
-    <% @attack_round.each do |round| %>
-      <div class='round hidden'>
-        <%= "[#{round.fighter1}] 對 [#{round.fighter2}] 使出 #{round.atk_method}, 傷害#{round.atk_val} | <span style='color:#EE0000'>#{round.hp1} VS #{round.hp2}</span>"%> 
-      </div>
-      <% if round.hp1 <= 0 || round.hp2 <= 0 %>
+    <%= pk_charts(@fighter1, @game) if @fighter1 %>
+    <%= pk_charts(@fighter2, @game) if @fighter2 %>
+  <br />
+  <span id="user_hp1_bar"></span>
+  <span id='user_hp1_num'><%= @fighter1.hp[:value] %></span>
+  <span id="user_hp2_bar"></span>
+  <span id='user_hp2_num'><%= @fighter2.hp[:value] %></span>
+  <br />
+  <br />
+  <%if @fighter1 %>
+    <%= name1 = @fighter1.name %>
+    <%= @fighter1.hp[:value] %>
+    <% @fighter1.attrs.each do |a|%>
+      <%= "<span style='color:#00EE00;'>#{a[:name]}</span>: <span style='color:#0000EE;'>#{a[:value]}</span>"%>,
+    <% end %>
+  <%end %>
+
+  <br />
+  <%if @fighter2 %>
+    <%= name2 = @fighter2.name %>
+    <%= @fighter2.hp[:value] %>
+    <% @fighter2.attrs.each do |a|%>
+      <%= "<span style='color:#00EE00;'>#{a[:name]}</span>: <span style='color:#0000EE;'>#{a[:value]}</span>"%>,
+    <% end %>
+  <%end %>
+  <br />
+  <br />
+  <div class='fight_rounds'>
+    <% if @attack_round %>
+      <% @attack_round.each do |round| %>
         <div class='round hidden'>
-          <%= "#{round.fighter2} 被擊敗了"%>
+          <%= round_desc(round)%>
         </div>
+        <% if round.hp1 <= 0 || round.hp2 <= 0 %>
+          <div class='round hidden'>
+            <%= "#{round.fighter2} 被擊敗了"%>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
