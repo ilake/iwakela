@@ -21,10 +21,11 @@
      function round_steps(
        ) {
        if ( i < round_num) {
-       $('.round:eq('+i+')').removeClass('hidden');
            var name;
            var percent;
            var hp;
+
+           $('.round:eq('+i+')').removeClass('hidden');
 
            name = $('.round:eq('+i+')').find('.beated').html()
            if (name == name1) {
@@ -37,7 +38,6 @@
              percent = $('.round:eq('+i+')').find('.round_hp2_percent').html();
              hp = $('.round:eq('+i+')').find('.round_hp2').html();
 
-             bar_2_init();
              $('#user_hp2_bar').progressBar(percent);
              $('#user_hp2_num').html(hp);
            }
@@ -50,12 +50,12 @@
          name1 = '<%= @fighter1.name if @fighter1 %>';
          name2 = '<%= @fighter2.name if @fighter2 %>';
 
+         bar_1_init();
+         bar_2_init();
+
          round_num = $('.round').length;
          i = 0;
          round_steps();
-
-         bar_1_init();
-         bar_2_init();
 
          $('#names').submit(function() {
            var str = $(this).serialize();
