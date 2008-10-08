@@ -32,7 +32,7 @@ module NamepkHelper
   end
 
   def round_desc(round)
-    "[#{round.fighter1}] 對 [<span class='beated'>#{round.fighter2}</span>] 使出 #{round.atk_method}, 傷害#{round.atk_val} | <span class='round_hp1'>#{round.hp1}</span> VS <span class='round_hp2'>#{round.hp2}</span>| <span class='round_hp1_percent'>#{round.hp1_percent}%</span> VS <span class='round_hp2_percent'>#{round.hp2_percent}%</span>"
+    "[#{round.fighter1}] 對 [<span class='beated'>#{round.fighter2}</span>] 使出 #{round.atk_method}, 傷害#{round.atk_val} | <span class='round_hp1'>#{round.hp1}</span> VS <span class='round_hp2'>#{round.hp2}</span>| <span class='round_hp1_percent'>#{round.hp1_percent}</span> VS <span class='round_hp2_percent'>#{round.hp2_percent}</span>"
   end
 end
 
