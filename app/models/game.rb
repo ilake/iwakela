@@ -15,8 +15,16 @@ class Game < ActiveRecord::Base
     self.salt = Game.random_str
   end
 
-  def fighter_round(fighter1, fighter2)
+  def fighter_round(user1, user2)
     attack_desc = []
+
+    if rand(10)%2 == 0
+      fighter1 = user1
+      fighter2 = user2
+    else
+      fighter2 = user1
+      fighter1 = user2
+    end
 
     attr1 = fighter1.attrs.map{|h| h[:value]}
     attr2 = fighter2.attrs.map{|h| h[:value]}
