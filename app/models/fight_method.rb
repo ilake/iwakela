@@ -5,7 +5,7 @@ class FightMethod < ActiveRecord::Base
   before_create :set_default_val
 
   def set_default_val
-    self.value = self.value.zero? ? rand(50) : value
+    self.value = self.value.zero? ? rand(500) : value
   end
 
   def self.find_or_create(params)
