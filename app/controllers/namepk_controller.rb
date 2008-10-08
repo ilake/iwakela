@@ -51,6 +51,8 @@ class NamepkController < ApplicationController
     @fighter1 = Fighter.new(params[:game][:name1], @game)
     @fighter2 = Fighter.new(params[:game][:name2], @game)
 
+    @game.attributes = params[:game]
+
     @attack_round = @game.fighter_round(@fighter1, @fighter2)
     render :action => :fight
   end

@@ -1,7 +1,7 @@
 class FightMethod < ActiveRecord::Base
   belongs_to :game
 
-  validates_numericality_of :value, :less_than_or_equal_to => 100
+  validates_numericality_of :value, :less_than_or_equal_to => 200
   before_create :set_default_val
 
   def set_default_val
