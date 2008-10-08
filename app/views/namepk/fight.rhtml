@@ -79,7 +79,7 @@
   <% form_for :game, :url => {:action => 'fight', :id => @game}, :html => {:id =>'names'} do |f| %>
     <%= f.text_field :name1 %> VS
     <%= f.text_field :name2 %>
-    <%= submit_tag 'submit'%>
+    <%= submit_tag '對戰'%>
   <% end %>
 
     <%= pk_charts(@fighter1, @game) if @fighter1 %>
