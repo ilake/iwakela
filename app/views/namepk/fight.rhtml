@@ -94,7 +94,7 @@
   <br />
   <%if @fighter1 %>
     <%= name1 = @fighter1.name %>
-    <%= @fighter1.hp[:value] %>
+    <span style='color:#EE0000'>血量 :<%= @fighter1.hp[:value] %></span>, 
     <% @fighter1.attrs.each do |a|%>
       <%= "<span style='color:#00EE00;'>#{a[:name]}</span>: <span style='color:#0000EE;'>#{a[:value]}</span>"%>,
     <% end %>
@@ -103,7 +103,7 @@
   <br />
   <%if @fighter2 %>
     <%= name2 = @fighter2.name %>
-    <%= @fighter2.hp[:value] %>
+    <span style='color:#EE0000'>血量 :<%= @fighter2.hp[:value] %></span>, 
     <% @fighter2.attrs.each do |a|%>
       <%= "<span style='color:#00EE00;'>#{a[:name]}</span>: <span style='color:#0000EE;'>#{a[:value]}</span>"%>,
     <% end %>
