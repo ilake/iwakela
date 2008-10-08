@@ -55,7 +55,7 @@ class Game < ActiveRecord::Base
 
           attack_desc << Round.new(name1, name2, atk_method.name, atk, hp1, hp2, hp1_percent, hp2_percent)
 
-          break if hp2 < 0
+          break if hp2 <= 0
         elsif user == 'fighter_2'
           #fighter 2 打 fighter 1
           atk = attack_val(average_hit_2, attr2[index], atk_method.value)
@@ -65,7 +65,7 @@ class Game < ActiveRecord::Base
           hp1_percent = ((hp1/total_hp1.to_f)*100).to_i
           attack_desc << Round.new(name2, name1, atk_method.name, atk, hp1, hp2, hp1_percent, hp2_percent)
 
-          break if hp1 < 0
+          break if hp1 <= 0
         end
 
       end
