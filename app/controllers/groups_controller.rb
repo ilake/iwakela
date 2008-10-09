@@ -161,6 +161,7 @@ class GroupsController < ApplicationController
 
   def transfer
     if @user = @me.own_group.members.find_by_name(params[:user][:name])
+      @group = @me.group
       @group.owner = @user
       @group.save
 
