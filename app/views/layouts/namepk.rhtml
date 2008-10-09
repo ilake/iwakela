@@ -1,8 +1,76 @@
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-  <%= stylesheet_link_tag 'namepk' %>
-  <%= javascript_include_tag "jquery", "jquery.corner.js", "jquerypngfix.js","jquery-ui-tab-1.6b.min.js", "jquery.progressbar.min", :cache => 'main3' %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
 
+	zenlike1.0 by nodethirtythree design
+	http://www.nodethirtythree.com
+
+-->
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>zenlike1.0 by nodethirtythree</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+  <%= stylesheet_link_tag "zenlike", "paginator" %>
+  <%= stylesheet_link_tag "namepk" %>
+  <%= javascript_include_tag "jquery", "jquery.corner.js", "jquery.progressbar.min.js", :cache => 'main' %>
   <%= yield :page_spec %>
 </head>
-<%= yield %>
+<body>
+
+<div id="upbg"></div>
+
+<div id="outer">
+
+
+	<div id="header">
+		<div id="headercontent">
+			<h1>Name PK</h1>
+			<h2>Let's Fight</h2>
+		</div>
+	</div>
+	
+	<div id="menu">
+    <!-- HINT: Set the class of any menu link below to "active" to make it appear active -->
+    <% act_name = controller.action_name %>
+		<ul>
+      <li><%= link_to '首頁', {:action => 'index'}, :class => here?(act_name, 'index') %></li>
+		</ul>
+	</div>
+	<div id="menubottom"></div>
+
+		<!-- Normal content: Stuff that's not going to be put in the left or right column. -->
+		<div id="normalcontent">
+      <div class="contentarea">
+        <script type="text/javascript"><!--
+          google_ad_client = "pub-0501077200190082";
+          /* 728x90, 已建立 2008/10/8 */
+          google_ad_slot = "5115898976";
+          google_ad_width = 728;
+          google_ad_height = 90;
+          //-->
+        </script>
+        <script type="text/javascript"
+          src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+        </script>
+			</div>
+		</div>
+
+    <div class='clear'></div>
+    <br />
+  <div id="content">
+    <%= yield %>
+  </div>
+  <div id="siderbar">
+    <%= render :partial => 'siderbar' %>
+  </div>
+
+	<div id="footer">
+			<div class="left">&copy; 2006 Your Website Name. All rights reserved.</div>
+			<div class="right">Design by <a href="http://www.nodethirtythree.com/">NodeThirtyThree Design</a></div>
+	</div>
+	
+</div>
+
+</body>
+</html>

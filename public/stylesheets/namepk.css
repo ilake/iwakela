@@ -5,3 +5,17 @@
 .round {
   padding: 5px;
 }
+
+.clear {
+  clear: both;
+}
+
+.post
+{
+  padding:5px;
+}
+
+.post .desc
+{
+  color: #777777;
+}

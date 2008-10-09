@@ -1,4 +1,5 @@
 <% form_for :game, :url => {:action => 'create'} do |f|%>
   <%= f.text_field :name %>
+  <%= f.text_area :desc %>
   <%= submit_tag 'create' %>
 <% end %>

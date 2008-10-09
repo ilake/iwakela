@@ -1,7 +1,7 @@
 class NamepkController < ApplicationController
 
   def index
-    @games = Game.all(:order => 'id DESC')
+    @games = Game.find_hottest(params[:page])
   end
 
   def new
@@ -52,6 +52,9 @@ class NamepkController < ApplicationController
     @fighter2 = Fighter.new(params[:game][:name2], @game)
 
     @game.attributes = params[:game]
+
+    Game.increment_counter(:num, @game.id)
+    Game.increment_counter(:today_num, @game.id)
 
     @attack_round = @game.fighter_round(@fighter1, @fighter2)
     render :action => :fight

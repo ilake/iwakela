@@ -18,8 +18,7 @@
        $("#user_hp2_bar").progressBar(100, { boxImage: path, barImage: '<%= image_path('progress/progressbg_pink.gif')%>'} );
      }
 
-     function round_steps(
-       ) {
+     function round_steps() {
        if ( i < round_num) {
            var name;
            var percent;
@@ -28,21 +27,19 @@
            $('.round:eq('+i+')').removeClass('hidden');
 
            name = $('.round:eq('+i+')').find('.beated').html()
+           percent = $('.round:eq('+i+')').find('.round_hp2_percent').html();
+           hp = $('.round:eq('+i+')').find('.round_hp2').html();
+
            if (name == name1) {
-             percent = $('.round:eq('+i+')').find('.round_hp1_percent').html();
-             hp = $('.round:eq('+i+')').find('.round_hp1').html();
              $('#user_hp1_bar').progressBar(percent);
              $('#user_hp1_num').html(hp);
            }
            else if (name == name2) {
-             percent = $('.round:eq('+i+')').find('.round_hp2_percent').html();
-             hp = $('.round:eq('+i+')').find('.round_hp2').html();
-
              $('#user_hp2_bar').progressBar(percent);
              $('#user_hp2_num').html(hp);
            }
            i++;
-           var dummy = setTimeout(round_steps, 1000);
+           var dummy = setTimeout(round_steps, 1500);
        }
      }
 
@@ -59,7 +56,7 @@
 
          $('#names').submit(function() {
            var str = $(this).serialize();
-           str =  '<%= url_for :action => "do_fight" , :id => @game.id %>?' + str;
+           str =  '<%= url_for :action => "do_fight" , :id => @game.id %>?' + str ;
 
            window.location = str;
            return false;
@@ -69,13 +66,13 @@
    </script>
  <% end %>
 
-  <%= link_to '首頁', :action => 'index' %>
   <%= link_to '幫他加招式', :action => 'create_fight_methods', :id => @game %>
   <hr >
   Name PK
   <br />
   遊戲名稱: <%= @game.name %>
   <h1>請輸入對戰的名稱</h1>
+  <a name='fight_here'></a>
   <% form_for :game, :url => {:action => 'fight', :id => @game}, :html => {:id =>'names'} do |f| %>
     <%= f.text_field :name1 %> VS
     <%= f.text_field :name2 %>
@@ -86,10 +83,10 @@
     <%= pk_charts(@fighter2, @game) if @fighter2 %>
   <br />
   <span id="user_hp1_bar"></span>
-  <span id='user_hp1_num'><%= @fighter1.hp[:value] if @fighter1 %></span>
+  <span id='user_hp1_num' style='color:#EE0000;'><%= @fighter1.hp[:value] if @fighter1 %></span>
    VS 
   <span id="user_hp2_bar"></span>
-  <span id='user_hp2_num'><%= @fighter2.hp[:value] if @fighter1 %></span>
+  <span id='user_hp2_num' style='color:#EE0000;'><%= @fighter2.hp[:value] if @fighter1 %></span>
   <br />
   <br />
   <%if @fighter1 %>

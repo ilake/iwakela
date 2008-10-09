@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
 
-  validates_presence_of :name
+  validates_presence_of :name, :desc
   validates_uniqueness_of :name, :case_sensitive => false
   validates_length_of :name, :within => 1..10
 
@@ -18,7 +18,7 @@ class Game < ActiveRecord::Base
   def fighter_round(user1, user2)
     attack_desc = []
 
-    if rand(10)%2 == 0
+    if rand(2) == 0
       fighter1 = user1
       fighter2 = user2
     else
@@ -71,7 +71,7 @@ class Game < ActiveRecord::Base
           hp1 = 0 if hp1 < 0
 
           hp1_percent = ((hp1/total_hp1.to_f)*100).to_i
-          attack_desc << Round.new(name2, name1, atk_method.name, atk, hp1, hp2, hp1_percent, hp2_percent)
+          attack_desc << Round.new(name2, name1, atk_method.name, atk, hp2, hp1, hp2_percent, hp1_percent)
 
           break if hp1 <= 0
         end
@@ -97,6 +97,12 @@ class Game < ActiveRecord::Base
     attr_val = rand(attr_val)
     atk_method_val = rand(atk_method_val)
     attack_val = (average + attr_val + atk_method_val).to_i
+  end
+
+  def self.find_hottest(page, per_page=20)
+    self.paginate :page => page,
+                  :per_page => per_page,
+                  :order => 'games.num DESC'
   end
 
 end

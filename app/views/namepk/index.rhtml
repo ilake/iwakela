@@ -1,6 +1,19 @@
-<%= link_to '我也要做', :action => 'new' %>
-<ul>
-  <% @games.each do |g|%>
-    <li><%= link_to g.name, :action => 'fight', :id => g.id %></li>
-  <% end %>
-</li>
+		<!-- Primary content: Stuff that goes in the primary content column (by default, the left column) -->
+		<div id="primarycontainer">
+			<div id="primarycontent">
+				<!-- Primary content area start -->
+        <% @games.each do |g|%>
+          <div class="post">
+            <h4 style='float:left;'><%= link_to g.name, :action => 'fight', :id => g.id %></h4>
+            <span class='desc'>啦啦啦啦啊<%= g.desc %></span>
+            <div class='clear'></div>
+          </div>
+        <% end %>
+		
+				<!-- Primary content area end -->
+        <%= will_paginate @games %>
+			</div>
+		</div>
+
+
+

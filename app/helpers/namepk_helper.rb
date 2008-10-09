@@ -32,7 +32,13 @@ module NamepkHelper
   end
 
   def round_desc(round)
-    "[#{round.fighter1}] 對 [<span class='beated'>#{round.fighter2}</span>] 使出 #{round.atk_method}, 傷害#{round.atk_val} | <span class='round_hp1'>#{round.hp1}</span> VS <span class='round_hp2'>#{round.hp2}</span>| <span class='round_hp1_percent'>#{round.hp1_percent}</span> VS <span class='round_hp2_percent'>#{round.hp2_percent}</span>"
+    "[#{round.fighter1}] 對 [<span class='beated'>#{round.fighter2}</span>] 使出 <span style='color:#555555;'>#{round.atk_method}</span>, 傷害#{round.atk_val} <span class='round_hp1 hidden'>#{round.hp1}</span><span class='round_hp2 hidden'>#{round.hp2}</span><span class='round_hp1_percent hidden'>#{round.hp1_percent}</span><span class='round_hp2_percent hidden'>#{round.hp2_percent}</span>"
+  end
+
+  def here?(key1, key2)
+    if key1 === key2
+      'active'
+    end
   end
 end
 
