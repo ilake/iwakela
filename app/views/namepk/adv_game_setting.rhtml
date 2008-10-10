@@ -8,7 +8,7 @@
   <h4>屬性</h4>
   <% form_for :attr, :url => {:action => 'adv_game_setting', :id => @game} do |f|%>
     <%= error_messages_for 'attr' %>
-    <%= f.text_field :name, :title => '輸入角色屬性名稱:啥都可', :class => 'populate'  %>
+    <%= f.text_field :name, :title => '輸入角色屬性名稱, 例如:狗屎運', :class => 'populate'  %>
     <%= submit_tag '新增' %>
   <% end %>
   <ul class='list'>
@@ -22,7 +22,7 @@
   <% form_for :fight_method, :url => {:action => 'adv_game_setting', :id => @game} do |f|%>
     <%= error_messages_for 'fight_method' %>
     <label>招式名稱</label>
-    <%= f.text_field :name, :size => '20', :title => '輸入招式名稱, 例如:狗屎運', :class => 'populate' %>
+    <%= f.text_field :name, :size => '20', :title => '輸入招式名稱, 例如:打屁股', :class => 'populate' %>
     <label>傷害(上限200)</label>
     <%= f.text_field :value, :size => '10' %>
     <%= submit_tag '新增' %>

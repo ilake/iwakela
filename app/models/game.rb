@@ -1,5 +1,5 @@
 class Game < ActiveRecord::Base
-
+  DEFAULT_METHODS = ["阿魯巴", "降龍十巴掌", "鐵頭功"]
   HUMANIZED_ATTRIBUTES = {
     :name => "名稱",
     :desc => "描述"
@@ -60,6 +60,7 @@ class Game < ActiveRecord::Base
       index = around%around_size
       ['fighter_1', 'fighter_2'].each do |user|
         atk_method = fight_methods.rand
+        atk_method ||= fight_methods.find_or_create(:name => DEFAULT_METHODS.rand())
 
         if user == 'fighter_1'
           #打出的傷害
