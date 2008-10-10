@@ -41,6 +41,10 @@ a:hover
 text-decoration: none;
 }
 
+h1, h2,  p {
+  margin:10px 15px;
+  padding:0pt;
+}
 
 h3 span
 {
@@ -70,11 +74,13 @@ padding-right: 28px;
 
 .contentarea
 {
-padding-top: 1.3em;
+border:1px solid #EFEFEF;
+padding-left:2px;
 }
 
 img
 {
+  border:0px;
 }
 
 img.left
@@ -151,13 +157,16 @@ background-image: url('/images/namepk/icon-more.gif');
 
 .box
 {
-position: relative;
-background: #FDFCF6 url('/images/namepk/boxbg.gif') repeat-x;
 left: -1.5em;
 top: -1.5em;
-padding: 1.5em;
-border-bottom: solid 1px #E1D2BD;
+padding: 2px 0px 5px 2px;
+border: solid 3px #FE2100;
 margin-bottom: 1.0em;
+}
+
+.box a{
+	text-decoration: none;
+  color: #444444;
 }
 
 ul.linklist
@@ -201,7 +210,7 @@ margin: 0 auto;
 position: relative;
 width: 100%;
 height: 9.0em;
-background: #2B2B2B url('/images/namepk/topbg.gif') repeat-x;
+background-color: #4B4B4B;
 margin-bottom: 2px;
 }
 
@@ -273,7 +282,7 @@ margin-bottom: 2px;
 #menu
 {
 position: relative;
-background: #7F8400 url('/images/namepk/menubg.gif') repeat-x top left;
+background-color:#68A9E3; 
 height: 3.5em;
 padding: 0em 1.0em 0em 1.0em;
 margin-bottom: 2px;
@@ -293,7 +302,9 @@ display: inline;
 
 #menu ul li a
 {
-padding: 0.5em 1.0em 0.9em 1.0em;
+font-size:16px;
+font-width:normal;
+padding: 0.8em 1.5em 0.8em 1.5em;
 color: #fff;
 text-decoration: none;
 }
@@ -305,7 +316,7 @@ text-decoration: underline;
 
 #menu ul li a.active
 {
-background: #7F8400 url('/images/namepk/menuactive.gif') repeat-x top left;
+  background-color: #685EFF;
 }
 
 #menubottom
@@ -326,41 +337,59 @@ float:left;
 {
 float: left;
 margin-right: -18.0em;
-width: 100%;
+width: 90%;
+background-color: #EEEEEE;
+padding:10px;
+border:#DDDDDD;
 }
 
 #primarycontent
 {
 margin: 1.5em 22.0em 0em 0em;
+padding: 5px;
 }
 
 #secondarycontent
 {
-margin-top: 1.5em;
 float: right;
 width: 200px;
 }
 
 #footer
 {
-position: relative;
-height: 2.0em;
-clear: both;
-padding-top: 5.0em;
-background: #fff url('/images/namepk/border2.gif') repeat-x 0em 2.5em;
-font-size: 0.8em;
+  border:1px solid #EEEEEE;
+  text-align:center;
+  clear: both;
+  margin-top: 6.0em;
+  padding-top: 3.0em;
+  background: #fff url('/images/namepk/border2.gif') repeat-x 0em 2em;
 }
 
-#footer .left
+#footer a
 {
-position: absolute;
-left: 2.0em;
-bottom: 1.2em;
+  font-size:16px;
+  padding-left:5px;
 }
 
-#footer .right
-{
-position: absolute;
-right: 2.0em;
-bottom: 1.2em;
+textarea {
+  border:1px solid #B2C0C8;
+  color:#777777;
+  display:block;
+  font-family:Verdana,sans-serif;
+  font-size:1em;
+  font-size-adjust:none;
+  font-stretch:normal;
+  font-style:normal;
+  font-variant:normal;
+  font-weight:normal;
+  height:100px;
+  line-height:normal;
+  margin:10px 15px;
+  padding:3px;
+  width:400px;
+}
+
+.light_back form input {
+  border:1px solid #B2C0C8;
+  margin:10px 15px;
 }

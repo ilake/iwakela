@@ -1,30 +1,37 @@
-<%= @game.name %>
-<%= link_to '完成', :action => 'fight', :id => @game if @methods_size > 0%>
+<div id="primarycontainer" class='rounded'>
+  <h1 class='game_name'><%= @game.name %></h1>
+  <div class='adv_info'>
+    <%= link_to '完成, 回到遊戲', :action => 'fight', :id => @game if @methods_size > 0%>
+  </div>
+  <div class='clear'></div>
 
-<h4>屬性<h4>
-<% form_for :attr, :url => {:action => 'adv_game_setting', :id => @game} do |f|%>
-  <%= f.text_field :name %>
-  <%= submit_tag 'create' %>
-<% end %>
-<ul>
-  <% @attrs.each do |attr|%>
-    <li><%= attr.name %></li>
+  <h4>屬性</h4>
+  <% form_for :attr, :url => {:action => 'adv_game_setting', :id => @game} do |f|%>
+    <%= error_messages_for 'attr' %>
+    <%= f.text_field :name, :title => '輸入角色屬性名稱:啥都可', :class => 'populate'  %>
+    <%= submit_tag '新增' %>
   <% end %>
-</ul>
-<br />
-<hr>
-<h4>招式<h4>
-    <% form_for :fight_method, :url => {:action => 'adv_game_setting', :id => @game} do |f|%>
-      <label>招式名稱<label>
-  <%= f.text_field :name %>
-      <label>傷害<label>
-  <%= f.text_field :value %>
-  <%= submit_tag 'create' %>
-<% end %>
-
-
-<ul>
-  <% @methods.each do |m|%>
-    <li><%= m.name %> : <%= m.value %></li>
+  <ul class='list'>
+    <% @attrs.each do |attr|%>
+      <li><%= attr.name %></li>
+    <% end %>
+  </ul>
+  <br />
+  <hr>
+  <h4>招式</h4>
+  <% form_for :fight_method, :url => {:action => 'adv_game_setting', :id => @game} do |f|%>
+    <%= error_messages_for 'fight_method' %>
+    <label>招式名稱</label>
+    <%= f.text_field :name, :size => '20', :title => '輸入招式名稱, 例如:狗屎運', :class => 'populate' %>
+    <label>傷害(上限200)</label>
+    <%= f.text_field :value, :size => '10' %>
+    <%= submit_tag '新增' %>
   <% end %>
-</ul>
+
+
+  <ul class='list'>
+    <% @methods.each do |m|%>
+      <li><%= m.name %>  :  <%= m.value %>傷害</li>
+    <% end %>
+  </ul>
+</div>

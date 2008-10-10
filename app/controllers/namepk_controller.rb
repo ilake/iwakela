@@ -1,4 +1,5 @@
 class NamepkController < ApplicationController
+  before_filter :siderbar
 
   def index
     @games = Game.find_hottest(params[:page])
@@ -10,8 +11,11 @@ class NamepkController < ApplicationController
 
   def create
     if @game = Game.create(params[:game])
-      redirect_to :action => 'create_fight_methods', :id => @game
+      if @game.errors.empty?
+        redirect_to :action => 'create_fight_methods', :id => @game.id and return
+      end
     end
+    render :action => 'new'
   end
 
   def create_fight_methods
@@ -58,6 +62,10 @@ class NamepkController < ApplicationController
 
     @attack_round = @game.fighter_round(@fighter1, @fighter2)
     render :action => :fight
+  end
+
+  def siderbar
+    @new_games = Game.all(:order => 'id DESC', :limit => 5)
   end
 
 end

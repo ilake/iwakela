@@ -1,5 +1,10 @@
 class Game < ActiveRecord::Base
 
+  HUMANIZED_ATTRIBUTES = {
+    :name => "名稱",
+    :desc => "描述"
+  }
+
   validates_presence_of :name, :desc
   validates_uniqueness_of :name, :case_sensitive => false
   validates_length_of :name, :within => 1..10
@@ -10,6 +15,10 @@ class Game < ActiveRecord::Base
   before_create :set_salt
 
   attr_accessor :name1, :name2
+
+  def self.human_attribute_name(attr)
+    HUMANIZED_ATTRIBUTES[attr.to_sym] || super
+  end
 
   def set_salt
     self.salt = Game.random_str

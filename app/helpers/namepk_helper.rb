@@ -27,12 +27,8 @@ module NamepkHelper
     title = "#{CGI::escape game_name}: #{CGI::escape fighter_name}"
 
     str =<<-API
-    <img src='http://chart.apis.google.com/chart?chs=250x250&cht=r&chd=t:#{data_str}|#{outer_str}&chl=#{names_str}&chm=B,FF000070,0,2,10&chtt=#{title}'></img>
+    <img src='http://chart.apis.google.com/chart?chs=250x250&cht=r&chd=t:#{data_str}|#{outer_str}&chl=#{names_str}&chm=B,FE890070,0,1,10&chtt=#{title}'></img>
     API
-  end
-
-  def round_desc(round)
-    "[#{round.fighter1}] 對 [<span class='beated'>#{round.fighter2}</span>] 使出 <span style='color:#555555;'>#{round.atk_method}</span>, 傷害#{round.atk_val} <span class='round_hp1 hidden'>#{round.hp1}</span><span class='round_hp2 hidden'>#{round.hp2}</span><span class='round_hp1_percent hidden'>#{round.hp1_percent}</span><span class='round_hp2_percent hidden'>#{round.hp2_percent}</span>"
   end
 
   def here?(key1, key2)

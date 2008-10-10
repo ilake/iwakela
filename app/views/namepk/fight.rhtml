@@ -61,61 +61,95 @@
            window.location = str;
            return false;
          });
+
+         $('.fight_again').click(function(){
+           window.location.reload();
+           return false;
+         });
        });
      })(jQuery);
    </script>
  <% end %>
+ <div>
+   <h1 class='game_name'><%= @game.name %></h1>
+   <div class='adv_info'>
+     <%= link_to "#{image_tag('namepk/fist.jpeg')}幫它加招式", :action => 'create_fight_methods', :id => @game %>
+   </div>
+ </div>
 
-  <%= link_to '幫他加招式', :action => 'create_fight_methods', :id => @game %>
-  <hr >
-  Name PK
   <br />
-  遊戲名稱: <%= @game.name %>
-  <h1>請輸入對戰的名稱</h1>
-  <a name='fight_here'></a>
-  <% form_for :game, :url => {:action => 'fight', :id => @game}, :html => {:id =>'names'} do |f| %>
-    <%= f.text_field :name1 %> VS
-    <%= f.text_field :name2 %>
-    <%= submit_tag '對戰'%>
+ <div class='game_input_form'>
+   <a name='fight_here'></a>
+   <% form_for :game, :url => {:action => 'fight', :id => @game}, :html => {:id =>'names'} do |f| %>
+     <%= f.text_field :name1, :size => 28, :title => '請輸入對戰的名稱', :class => 'populate' %> VS
+     <%= f.text_field :name2, :size => 28, :title => '請輸入對戰的名稱', :class => 'populate' %>
+     <%= submit_tag '對戰'%>
+   <% end %>
+ </div>
+
+  <div>
+    <div class='radar_chart'><%= pk_charts(@fighter1, @game) if @fighter1 %></div>
+    <div class='radar_chart'><%= pk_charts(@fighter2, @game) if @fighter2 %></div>
+  </div>
+  <div class='clear'></div>
+  <br />
+  <% if @fighter1 && @fighter2 %>
+    <table>
+      <th>  </th>
+      <th>血量</th>
+      <% @fighter1.attrs.each do |a|%>
+        <th><%= a[:name] %></th>
+      <% end %>
+
+      <tbody>
+        <tr>
+          <td><%= name1 = @fighter1.name %></td>
+          <td><%= @fighter1.hp[:value] %></td>
+          <% @fighter1.attrs.each do |a|%>
+            <td><%= a[:value] %></td>
+          <% end %>
+        </tr>
+
+        <tr>
+          <td><%= name2 = @fighter2.name %></td>
+          <td><%= @fighter2.hp[:value] %></td>
+          <% @fighter2.attrs.each do |a|%>
+            <td><%= a[:value] %></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
   <% end %>
+  <br />
 
-    <%= pk_charts(@fighter1, @game) if @fighter1 %>
-    <%= pk_charts(@fighter2, @game) if @fighter2 %>
-  <br />
-  <span id="user_hp1_bar"></span>
-  <span id='user_hp1_num' style='color:#EE0000;'><%= @fighter1.hp[:value] if @fighter1 %></span>
-   VS 
-  <span id="user_hp2_bar"></span>
-  <span id='user_hp2_num' style='color:#EE0000;'><%= @fighter2.hp[:value] if @fighter1 %></span>
-  <br />
-  <br />
-  <%if @fighter1 %>
-    <%= name1 = @fighter1.name %>
-    <span style='color:#EE0000'>血量 :<%= @fighter1.hp[:value] %></span>, 
-    <% @fighter1.attrs.each do |a|%>
-      <%= "<span style='color:#00EE00;'>#{a[:name]}</span>: <span style='color:#0000EE;'>#{a[:value]}</span>"%>,
-    <% end %>
-  <%end %>
-
-  <br />
-  <%if @fighter2 %>
-    <%= name2 = @fighter2.name %>
-    <span style='color:#EE0000'>血量 :<%= @fighter2.hp[:value] %></span>, 
-    <% @fighter2.attrs.each do |a|%>
-      <%= "<span style='color:#00EE00;'>#{a[:name]}</span>: <span style='color:#0000EE;'>#{a[:value]}</span>"%>,
-    <% end %>
-  <%end %>
-  <br />
+  <div class='fight_bar'>
+    <span id='user_hp1_bar'></span>
+    <span id='user_hp1_num' class='user_blood'><%= @fighter1.hp[:value] if @fighter1 %></span>
+  </div>
+  <div class='fight_vs'>VS</div>
+  <div class='fight_bar'>
+    <span id='user_hp2_num'  class='user_blood'><%= @fighter2.hp[:value] if @fighter1 %></span>
+    <span id="user_hp2_bar"></span>
+  </div>
+  <div class='clear'></div>
   <br />
   <div class='fight_rounds'>
     <% if @attack_round %>
-      <% @attack_round.each do |round| %>
+      <% @attack_round.each_with_index do |round, i| %>
         <div class='round hidden'>
-          <%= round_desc(round)%>
+          <%= round.fighter1 %> 對 <span class='beated'><%= round.fighter2 %></span>
+          使出 <span class=<%= i%2 == 0 ? 'atk_method_1' : 'atk_method_2'%>><%= round.atk_method %></span>, 
+          傷害 <span class='atk_hurt'><%= round.atk_val %></span>
+          <span class='round_hp1 hidden'><%= round.hp1 %></span>
+          <span class='round_hp2 hidden'><%= round.hp2 %></span>
+          <span class='round_hp1_percent hidden'><%= round.hp1_percent %></span>
+          <span class='round_hp2_percent hidden'><%= round.hp2_percent %></span>
         </div>
+
         <% if round.hp1 <= 0 || round.hp2 <= 0 %>
           <div class='round hidden'>
-            <%= "#{round.fighter2} 被擊敗了"%>
+            <span class='alert_red'><%= "#{round.fighter2} 被擊敗了"%></span>
+            <input type='submit' name='commit' class='fight_again' value='再打一次'/>
           </div>
         <% end %>
       <% end %>

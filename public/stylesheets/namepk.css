@@ -10,12 +10,111 @@
   clear: both;
 }
 
-.post
-{
+.adv_info {
+  padding-top:7px;
+}
+
+.adv_info a{
+  font-size:18px;
+  text-decoration: none;
+}
+
+.user_blood {
+  color:#EE0000;
+  font-weight: normal;
+}
+
+.fight_bar {
+  width: 200px;
+  float:left;
+}
+
+.fight_vs {
+  width: 50px;
+  float:left;
+}
+
+.user_attrs {
+  color:#00EE00;
+}
+
+.user_val {
+  color:#0000EE;
+}
+
+.alert_red {
+  color:#C62B26;
+}
+
+.radar_chart {
+  float:left;
+  width:280px;
+}
+
+input {
+  border:1px solid #B2C0C8;
+  color:#777777;
+  font-family:Verdana,sans-serif;
+  font-size:1em;
+  font-size-adjust:none;
+  font-stretch:normal;
+  font-style:normal;
+  font-variant:normal;
+  font-weight:normal;
+  line-height:normal;
   padding:5px;
 }
 
-.post .desc
+.game_name {
+  float:left;
+}
+
+.list {
+  margin:5px 15px;
+  padding:5pt 25px 5px 5px;
+}
+.list li{
+  padding:3pt 5px 3px 5px;
+}
+
+.list .desc
 {
-  color: #777777;
+  padding-left: 15px;
+  color: #666666;
+}
+
+.atk_method_1 {
+  color: #FE8900;
+}
+
+.atk_method_2 {
+  color: #FE2100;
+}
+
+.atk_hurt {
+  color: #000000;
+}
+
+/* Browser support may be limited here...*/
+.fieldWithErrors input,
+.fieldWithErrors select,
+.fieldWithErrors textarea
+{
+  background: pink;
+  background-color: pink;
+}
+
+.errorExplanation h2,
+.errorExplanation li
+{
+  color:#C62B26;
+  padding:5px 5px 5px 10px;
+  margin-bottom:20px;
+}
+
+.light_back {
+  background-color:#F4F8FD;
+  border:1px solid #D4E0EA;
+  padding:10px;
+  width:500px;
 }

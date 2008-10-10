@@ -3,15 +3,42 @@
 			<!-- Secondary content area start -->
 			
 			<!-- HINT: Set any div's class to "box" to encapsulate it in (you guessed it) a box -->
-			<div class="box">
-				<h4><%= link_to '我也想做', :action => 'new' %></h4>
-			</div>
-		
+			
+      <h4>
+        <%= link_to "<div class='box'>#{image_tag('namepk/palm.jpeg')}我也要做</div>", :action => 'new' %>
+      </h4>
+      
+      <div>
+        <style type="text/css">
+          @import url(http://www.google.com/cse/api/branding.css);
+        </style>
+        <div class="cse-branding-bottom" style="background-color:#FFFFFF;color:#000000">
+          <div class="cse-branding-form">
+            <form action="http://www.google.com.tw/cse" id="cse-search-box" target="_blank">
+              <div>
+                <input type="hidden" name="cx" value="partner-pub-0501077200190082:v2aq2v-q3tr" />
+                <input type="hidden" name="ie" value="big5" />
+                <input type="text" name="q" size="15" style='margin:0px 0px 0px 0px;' />
+                <input type="submit" name="sa" value="&#x641c;&#x5c0b;" style='margin:0px 0px 0px 0px;'/>
+              </div>
+            </form>
+          </div>
+          <div class="cse-branding-logo">
+            <img src="http://www.google.com/images/poweredby_transparent/poweredby_FFFFFF.gif" alt="Google" />
+          </div>
+          <div class="cse-branding-text">
+            &#33258;&#35330;&#25628;&#23563;
+          </div>
+        </div>
+      </div>
+		  <br />
 			<div>
-				<h4>Nullam Dolore</h4>
+				<h2>新進對戰</h2>
 				<div class="contentarea">
-					<ul class="linklist">
-						<li><a href="#">Volutpat at varius sed</a></li>						<li><a href="#">Sollicitudin et arcu</a></li>						<li><a href="#">Vivamus viverra nullam</a></li>						<li><a href="#">Turpis vestibulum</a></li>						<li><a href="#">Sed etiam lorem ipsum</a></li>						<li><a href="#">Sit amet dolore nulla</a></li>						<li><a href="#">Facilisi sed tortor</a></li>						<li><a href="#">Aenean felis quisque</a></li>						<li><a href="#">Eros cras lobortis vel</a></li>						<li><a href="#">Purus in eget odio sapien</a></li>						<li><a href="#">Adipiscing blandit</a></li>
+          <ul class="list">
+            <% @new_games.each do |game| %>
+              <li><%= link_to game.name, namepk_url(:action => 'fight', :id => game.id) %></li>
+            <% end %>
 					</ul>
 				</div>
 			</div>

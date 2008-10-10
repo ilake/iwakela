@@ -11,24 +11,29 @@
 <title>Name PK</title>
 <meta name="keywords" content="name,pk,名字,對戰" />
 <meta name="description" content="名字對戰, 製作自己的對戰機" />
-  <%= stylesheet_link_tag "zenlike", "paginator" %>
+  <%= stylesheet_link_tag "zenlike", "paginator", "itunes" %>
   <%= stylesheet_link_tag "namepk" %>
-  <%= javascript_include_tag "jquery", "jquery.corner.js", "jquery.progressbar.min.js" %>
+  <%= javascript_include_tag "jquery", "jquery.corner.js", "jquery.progressbar.min.js", "autopopulate" %>
   <%= yield :page_spec %>
+  <script type='text/javascript'>
+    $(function() {
+        $('.up_rounded').corner("top");
+        $('.rounded').corner();
+    });
+  </script>
 </head>
 <body>
 
 <div id="upbg"></div>
 
 <div id="outer">
-
-
-	<div id="header">
+	<div id="header" class='up_rounded'>
 		<div id="headercontent">
-			<h1>Name PK</h1>
+			<h1>名字對戰</h1>
 			<h2>Let's Fight</h2>
 		</div>
-	</div>
+  </div>
+  <div class='clear'></div>
 	
 	<div id="menu">
     <!-- HINT: Set the class of any menu link below to "active" to make it appear active -->
@@ -41,7 +46,6 @@
 
 		<!-- Normal content: Stuff that's not going to be put in the left or right column. -->
 		<div id="normalcontent">
-      <div class="contentarea">
         <script type="text/javascript"><!--
           google_ad_client = "pub-0501077200190082";
           /* 728x90, 已建立 2008/10/8 */
@@ -53,7 +57,6 @@
         <script type="text/javascript"
           src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
         </script>
-			</div>
 		</div>
 
     <div class='clear'></div>
@@ -66,8 +69,8 @@
   </div>
 
 	<div id="footer">
-			<div class="left">&copy; 2006 Your Website Name. All rights reserved.</div>
-			<div class="right">Design by <a href="http://www.nodethirtythree.com/">NodeThirtyThree Design</a></div>
+			<%= link_to "關於NamePK", :controller => 'about', :action => 'about'%>
+			<%= mail_to "iwakela@gmail.com", "聯絡我" %>
 	</div>
 	
 </div>
