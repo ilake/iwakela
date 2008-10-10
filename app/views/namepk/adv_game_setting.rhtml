@@ -1,11 +1,11 @@
 <div id="primarycontainer" class='rounded'>
   <h1 class='game_name'><%= @game.name %></h1>
   <div class='adv_info'>
-    <%= link_to '完成, 回到遊戲', :action => 'fight', :id => @game if @methods_size > 0%>
+    <%= link_to '完成, 開始玩', :action => 'fight', :id => @game if @methods_size > 0%>
   </div>
   <div class='clear'></div>
 
-  <h4>屬性</h4>
+  <h4>角色屬性</h4>
   <% form_for :attr, :url => {:action => 'adv_game_setting', :id => @game} do |f|%>
     <%= error_messages_for 'attr' %>
     <%= f.text_field :name, :title => '輸入角色屬性名稱, 例如:狗屎運', :class => 'populate'  %>

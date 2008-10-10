@@ -118,3 +118,8 @@ input {
   padding:10px;
   width:500px;
 }
+
+#headercontent a {
+  text-decoration:none;
+  color:#FFFFFF;
+}

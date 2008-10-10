@@ -1,7 +1,7 @@
 <div id="primarycontainer" class='rounded'>
   <h1 class='game_name'><%= @game.name %></h1>
   <div class='adv_info'>
-    <%= link_to '完成, 回到遊戲', :action => 'fight', :id => @game if @methods_size > 0%>
+    <%= link_to '完成, 開始玩', :action => 'fight', :id => @game if @methods_size > 0%>
   </div>
   <div class='clear'></div>
   <% form_for :fight_method, :url => {:action => 'create_fight_methods', :id => @game} do |f|%>
