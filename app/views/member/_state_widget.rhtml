@@ -1,0 +1,52 @@
+<style>
+  .ebwidget .b1h, .b2h, .b3h, .b4h, .b2bh, .b3bh, .b4bh{font-size:1px; overflow:hidden; display:block;}
+  .ebwidget .b1h {height:1px; background:#68A9E3; margin:0 5px;}
+  .ebwidget .b2h, .b2bh {height:1px; background:#68A9E3; border-right:2px solid #68A9E3; border-left:2px solid #68A9E3; margin:0 3px;}
+  .ebwidget .b3h, .b3bh {height:1px; background:#68A9E3; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3; margin:0 2px;}
+  .ebwidget .b4h, .b4bh {height:2px; background:#68A9E3; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3; margin:0 1px;}
+  .ebwidget .b2bh, .b3bh, .b4bh {background: #FFFFFF;}
+  .ebwidget .headh {background: #68A9E3; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3;font-size:90%}
+  .ebwidget .headh h3 {margin: 0px 10px 0px 10px; padding-bottom: 3px; font-size:13px; color:#000000; }
+  .ebwidget .contenth {background: #FFFFFF; border-right:1px solid #68A9E3; border-left:1px solid #68A9E3;}
+  .ebwidget .contenth div {margin-left: 12px; padding-top: 5px; font-size:12px; color:#000000;}
+  .ebwidget .power {margin-left: 5px; padding-top: 5px; font-size:10px;}
+
+  .ebwidget a{
+    text-decoration: none;
+    color: #000000;
+  }
+
+  .ebwidget {
+    width :163px;
+    color: #000000;
+    font-family: null;
+    text-align:left;
+  }
+
+  .ebwidget img{
+    border:0px;
+  }
+
+</style>
+
+<div class='ebwidget'>
+  <b class="b1h"></b>
+  <b class="b2h"></b>
+  <b class="b3h"></b>
+  <b class="b4h"></b>
+<a href="http://iwakela.com/member/list/<%= user.id %>" target="_blank">
+  <div class="headh">
+    <h3><%= user.name %></h3>
+  </div>
+  <div class="contenth">
+    <%= score_state(user, '64') %>
+  </div>
+</a>
+<b class="b4bh"></b>
+<b class="b3bh"></b>
+<b class="b2bh"></b>
+<b class="b1h"></b>
+<a href="http://iwakela.com/member/list/<%= user.id %>" target="_blank">
+<div class='power'>powered by 早鳥網 iwakela</div>
+</a>
+</div>

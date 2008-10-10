@@ -1,7 +1,7 @@
 #handle record table
 class MemberController < ApplicationController
   layout "application"
-  before_filter :check_auth, :except =>[:show_today_results, :list, :list_all_records, :widget, :show, :pie_widget]
+  before_filter :check_auth, :except =>[:show_today_results, :list, :list_all_records, :widget, :show, :pie_widget, :state_widget]
   before_filter :date_select, :only => [:list]
   before_filter :find_user, :except => [:show]
 
@@ -200,6 +200,13 @@ class MemberController < ApplicationController
      @content = render_to_string(:partial => 'pie_widget', :locals => {:user => user}).to_json
      response.headers['Content-Type']='text/javascript'
      render :action => 'widget', :layout => false
+  end
+
+  def state_widget
+    user = User.find(params[:id])
+    @content = render_to_string(:partial => 'state_widget', :locals => {:user => user}).to_json
+    response.headers['Content-Type']='text/javascript'
+    render :action => 'widget', :layout => false
   end
 
   def pie_widget_test1
