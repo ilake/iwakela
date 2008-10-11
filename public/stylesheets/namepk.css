@@ -123,3 +123,29 @@ input {
   text-decoration:none;
   color:#FFFFFF;
 }
+
+.top_info {
+}
+
+.top_info {
+  background-color:#FFFFFF;
+  font-size:14px;
+  height:25px;
+  padding:5px 5px 0px 8px;
+  margin-bottom:20px;
+  font-weight: bold;
+}
+
+.embed {
+  background-color:#E1ECFE;
+  border: 1px solid #E1ECAE;
+  width :440px;
+  height: 50px;
+  padding:10px;
+}
+
+.chart_embed {
+  float: left;
+  width :220px;
+  font-weight: bold;
+}

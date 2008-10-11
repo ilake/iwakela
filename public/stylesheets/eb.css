@@ -149,11 +149,6 @@ td.showdiary-content{
   /*float: left;*/
 }
 
-div.auth {
-  font-weight: bold;
-	font-size: 120%;
-}
-
 #profile {
 }
 .fieldWithoutErrors,
@@ -375,6 +370,7 @@ b.placeholder-time {
 div.auth {
   padding-top: 5px;
 	font-size: 90%;
+  font-weight: bold;
 }
 
 div.auth a{
@@ -826,4 +822,16 @@ div.even{
 #group_score_rank img{
   width   :32px;
   height  :32px;
+}
+
+.top_info {
+	text-align: left;
+  font-size:14px;
+  width:260px;
+  float:left;
+  font-weight:bold;
+}
+
+.alert_red {
+  color:#C62B26;
 }

@@ -1,6 +1,6 @@
 class Fighter
   #PRIME_VALUE = [541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601]
-  PRIME_VALUE = [353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 443]
+  PRIME_VALUE = [353, 359, 367, 373, 379, 389, 397, 401, 409, 443]
   #PRIME_VALUE = [443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 541]
 
   FIGHT_ATTRIBUTES = ['力量', '敏捷', '智力', '精神', '命中']
@@ -32,7 +32,7 @@ class Fighter
       val = (attr_base%p_value)
       if i == 0
         val = val < 150 ? val+150 : val
-        val = val * (attr_size/5)
+        #val = val * (attr_size/5)
       else
         val = val%100
       end

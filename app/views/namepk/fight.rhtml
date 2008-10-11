@@ -88,8 +88,12 @@
  </div>
 
   <div>
-    <div class='radar_chart'><%= pk_charts(@fighter1, @game) if @fighter1 %></div>
-    <div class='radar_chart'><%= pk_charts(@fighter2, @game) if @fighter2 %></div>
+    <div class='radar_chart'>
+      <%= chart1 = pk_charts(@fighter1, @game) if @fighter1 %>
+    </div>
+    <div class='radar_chart'>
+      <%= chart2 = pk_charts(@fighter2, @game) if @fighter2 %>
+    </div>
   </div>
   <div class='clear'></div>
   <br />
@@ -150,8 +154,24 @@
           <div class='round hidden'>
             <span class='alert_red'><%= "#{round.fighter2} 被擊敗了"%></span>
             <input type='submit' name='commit' class='fight_again' value='再打一次'/>
+
+            <br />
+            <div class='embed'>
+              <div class='chart_embed'>
+                <span>把<%= name1 %>的狀態圖貼到你的網誌</span>
+                <br />
+                <%= text_field_tag 'chart', h(chart1), :onclick => "this.select()" if chart1 %>
+              </div>
+              <div class='chart_embed'>
+                <span>把<%= name2 %>的狀態圖貼到你的網誌</span>
+                <br />
+                <%= text_field_tag 'chart', h(chart2), :onclick => "this.select()" if chart2 %>
+              </div>
+            </div>
+            <div class='clear'></div>
           </div>
         <% end %>
       <% end %>
     <% end %>
   </div>
+

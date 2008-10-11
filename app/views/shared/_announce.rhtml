@@ -14,14 +14,14 @@
   <div class='title'>公 告 區  <%= link_to '(功能介紹)', :controller => 'main', :action => 'history'%></div>
   <div>
     <div style='padding-bottom:5px;'>
-      <%= image_tag("icon_new.gif")%> <span class='alert'>新增睡覺目標設定</span>
-    </div>
-    <div style='padding-bottom:5px;'>
-     <span class='alert'>新增名言佳句</span>
+      <%= image_tag("icon_new.gif")%> <span class='alert'><%= link_to '新增跟早鳥沒關係的NamePK', namepk_url %></span>
     </div>
 
     <div style='padding-bottom:5px;'>
-      <span>解決各時區問題</span>
+      <span>新增睡覺目標設定</span>
+    </div>
+    <div style='padding-bottom:5px;'>
+     <span>新增名言佳句</span>
     </div>
 
     <div>

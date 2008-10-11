@@ -19,11 +19,7 @@
   <script type='text/javascript'>
         function time_now() {
           var t = new Date();
-          var year = t.getYear();
-          if (year < 1900) {
-            year+=1900;
-          }
-
+          var year = t.getFullYear();
           var month = t.getMonth();
           month+=1;
 
@@ -77,6 +73,10 @@
 
 <div class="container">
   <div class="top_bar">
+    <div class='top_info'>
+      <span class='alert_red'>早鳥網</span> | 
+      <%= image_tag("icon_new.gif")%><%= link_to '名字對戰製造機', namepk_url %>
+    </div>
     <div class="auth">
       <% if @me %>
         <%= "<span class='alert'>[請假中]</span>" unless @me.status.fight%>

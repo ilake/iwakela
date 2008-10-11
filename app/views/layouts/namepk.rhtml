@@ -10,7 +10,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>Name PK</title>
 <meta name="keywords" content="name,pk,名字,對戰" />
-<meta name="description" content="名字對戰, 製作自己的對戰機" />
+<meta name="description" content="名字對戰, 製作自己的名字對戰機" />
   <%= stylesheet_link_tag "zenlike", "paginator", "itunes" %>
   <%= stylesheet_link_tag "namepk" %>
   <%= javascript_include_tag "jquery", "jquery.corner.js", "jquery.progressbar.min.js", "autopopulate" %>
@@ -24,13 +24,18 @@
 </head>
 <body>
 
-<div id="upbg"></div>
+  <div class="top_bar">
+    <div class="top_info">
+      <span class='alert_red'>名字對戰製造機</span> | 
+      <%= link_to '早鳥網', home_url %>
+    </div>
+  </div>
+
 
 <div id="outer">
 	<div id="header" class='up_rounded'>
 		<div id="headercontent">
-      <h1><%= link_to '名字對戰', :action => 'index' %></h1>
-			<h2>Let's Fight</h2>
+      <h1><%= link_to '名字對戰製造機', :action => 'index' %></h1>
 		</div>
   </div>
   <div class='clear'></div>

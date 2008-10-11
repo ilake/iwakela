@@ -14,7 +14,6 @@ margin: 0em;
 body
 {
 background: #CACED1;
-padding: 35px 0px 35px 0px;
 }
 
 body,input
@@ -207,11 +206,11 @@ margin: 0 auto;
 
 #header
 {
-position: relative;
-width: 100%;
-height: 9.0em;
-background-color: #4B4B4B;
-margin-bottom: 2px;
+  position: relative;
+  width: 100%;
+  height: 9.0em;
+  background: url(/images/header2.jpg) repeat-x;
+  margin-bottom: 2px;
 }
 
 #headercontent
@@ -282,7 +281,7 @@ margin-bottom: 2px;
 #menu
 {
 position: relative;
-background-color:#68A9E3; 
+background-color:#8CC9FF; 
 height: 3.5em;
 padding: 0em 1.0em 0em 1.0em;
 margin-bottom: 2px;
@@ -316,7 +315,7 @@ text-decoration: underline;
 
 #menu ul li a.active
 {
-  background-color: #685EFF;
+  background-color:#68A9E3; 
 }
 
 #menubottom
@@ -329,7 +328,7 @@ margin-bottom: 1.5em;
 #content
 {
 padding: 0em 2.0em 0em 2.0em;
-width:70%;
+width:68%;
 float:left;
 }
 
