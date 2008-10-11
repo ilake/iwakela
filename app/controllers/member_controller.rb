@@ -112,7 +112,7 @@ class MemberController < ApplicationController
   def wake_up
     if @me.today_record
       flash[:notice] = "沒有人一直在早起的啦"
-      redirect_to :back
+      redirect_to :action => 'list', :id => @me.id
     else
       begin 
         @record = @me.records.create(:todo_time => Time.parse(params[:time]))
