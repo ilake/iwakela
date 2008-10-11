@@ -62,6 +62,7 @@ end
 require "errors"
 #require 'acts_as_ferret'
 require 'smtp_tls'
+ActionController::Base.asset_host = "iwakela.com"
 ActionMailer::Base.delivery_method = :smtp 
 #ActionMailer::Base.server_settings = {
 ActionMailer::Base.smtp_settings = {
@@ -74,3 +75,8 @@ ActionMailer::Base.smtp_settings = {
 }
 
 ENV['TZ'] = 'Asia/Taipei'
+
+def log_to(stream)
+  ActiveRecord::Base.logger = Logger.new(stream)
+  ActiveRecord::Base.clear_active_connections!
+end

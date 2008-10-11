@@ -161,12 +161,14 @@
               <div class='chart_embed'>
                 <span>把<%= name1 %>的狀態圖貼到你的網誌</span>
                 <br />
-                <%= text_field_tag 'chart', h(chart1), :onclick => "this.select()" if chart1 %>
+                <% link1 = link_to h(chart1), namepk_url(:action => 'fight', :id => @game ), :include_path => false %>
+                <%= text_field_tag 'chart', link1, :onclick => "this.select()" if chart1 %>
               </div>
               <div class='chart_embed'>
                 <span>把<%= name2 %>的狀態圖貼到你的網誌</span>
                 <br />
-                <%= text_field_tag 'chart', h(chart2), :onclick => "this.select()" if chart2 %>
+                <% link2 = link_to h(chart2), namepk_url(:action => 'fight', :id => @game ), :include_path => false %>
+                <%= text_field_tag 'chart', link2, :onclick => "this.select()" if chart2 %>
               </div>
             </div>
             <div class='clear'></div>
