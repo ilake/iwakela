@@ -52,16 +52,20 @@ class NamepkController < ApplicationController
 
   def do_fight
     @game = Game.find(params[:id])
-    @fighter1 = Fighter.new(params[:game][:name1], @game)
-    @fighter2 = Fighter.new(params[:game][:name2], @game)
+    if params[:game]
+      @fighter1 = Fighter.new(params[:game][:name1], @game)
+      @fighter2 = Fighter.new(params[:game][:name2], @game)
 
-    @game.attributes = params[:game]
+      @game.attributes = params[:game]
 
-    Game.increment_counter(:num, @game.id)
-    Game.increment_counter(:today_num, @game.id)
+      Game.increment_counter(:num, @game.id)
+      Game.increment_counter(:today_num, @game.id)
 
-    @attack_round = @game.fighter_round(@fighter1, @fighter2)
-    render :action => :fight
+      @attack_round = @game.fighter_round(@fighter1, @fighter2)
+      render :action => :fight
+    else
+      redirect_to :action => 'fight', :id => @game.id
+    end
   end
 
   def siderbar
