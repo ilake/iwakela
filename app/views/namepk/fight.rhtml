@@ -23,12 +23,14 @@
            var name;
            var percent;
            var hp;
+           var current_round;
 
-           $('.round:eq('+i+')').removeClass('hidden');
+           current_round = $('.round:eq('+i+')');
 
-           name = $('.round:eq('+i+')').find('.beated').html()
-           percent = $('.round:eq('+i+')').find('.round_hp2_percent').html();
-           hp = $('.round:eq('+i+')').find('.round_hp2').html();
+           current_round.removeClass('hidden');
+           name = current_round.find('.beated').html()
+           percent = current_round.find('.round_hp2_percent').html();
+           hp = current_round.find('.round_hp2').html();
 
            if (name == name1) {
              $('#user_hp1_bar').progressBar(percent);
@@ -38,6 +40,8 @@
              $('#user_hp2_bar').progressBar(percent);
              $('#user_hp2_num').html(hp);
            }
+           current_round.find('.round_info').remove();
+
            i++;
            var dummy = setTimeout(round_steps, 1600);
        }
@@ -144,10 +148,12 @@
           <%= round.fighter1 %> 對 <span class='beated'><%= round.fighter2 %></span>
           使出 <span class=<%= i%2 == 0 ? 'atk_method_1' : 'atk_method_2'%>><%= round.atk_method %></span>, 
           傷害 <span class='atk_hurt'><%= round.atk_val %></span>
-          <span class='round_hp1 hidden'><%= round.hp1 %></span>
-          <span class='round_hp2 hidden'><%= round.hp2 %></span>
-          <span class='round_hp1_percent hidden'><%= round.hp1_percent %></span>
-          <span class='round_hp2_percent hidden'><%= round.hp2_percent %></span>
+          <div class='round_info'>
+            <span class='round_hp1 hidden' style='display:none'><%= round.hp1 %></span>
+            <span class='round_hp2 hidden' style='display:none'><%= round.hp2 %></span>
+            <span class='round_hp1_percent hidden' style='display:none'><%= round.hp1_percent %></span>
+            <span class='round_hp2_percent hidden' style='display:none'><%= round.hp2_percent %></span>
+          </div>
         </div>
 
         <% if round.hp1 <= 0 || round.hp2 <= 0 %>
