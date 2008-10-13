@@ -27,11 +27,11 @@ class Fighter
     attr_size = count < 5 ? 5 : count
 
     #{:name => '力量', :value => '40'}
-    #第一個屬性 最少大於150 (當作血用)
+    #第一個屬性 最少大於200 (當作血用)
     PRIME_VALUE.slice(0..attr_size).each_with_index do |p_value, i|
       val = (attr_base%p_value)
       if i == 0
-        val = val < 150 ? val+150 : val
+        val = val < 200 ? val+200 : val
         #val = val * (attr_size/5)
       else
         val = val%100
