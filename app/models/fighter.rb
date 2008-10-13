@@ -18,7 +18,6 @@ class Fighter
   def create_attr_value(user_name, game)
     attr_value = []
 
-    user_name ||= 'lala'
     attr_base = Fighter.encode(user_name, game.salt).unpack("CCCCCCC").join('').to_i
     count = game.attrs.count
     attr_names = game.attrs.all.map(&:name)
@@ -47,6 +46,7 @@ class Fighter
   end
 
   def self.encode(name, salt)
+    name ||= 'user_name'
     Digest::MD5.hexdigest(name + salt)
   end
 
