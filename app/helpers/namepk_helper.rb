@@ -21,6 +21,9 @@ module NamepkHelper
       "#{CGI::escape k}"
     }.join('|')
 
+    game_name ||= 'namepk'
+    fighter_name ||= 'fighter'
+
     data_values.push(data_values[0])
     data_str  = data_values.join(',')
     outer_str = ([100] * data_values.size).join(',')
