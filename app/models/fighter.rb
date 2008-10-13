@@ -31,7 +31,7 @@ class Fighter
     PRIME_VALUE.slice(0..attr_size).each_with_index do |p_value, i|
       val = (attr_base%p_value)
       if i == 0
-        val = val < 200 ? val+200 : val
+        val = val < 250 ? val+250 : val
         #val = val * (attr_size/5)
       else
         val = val%100
