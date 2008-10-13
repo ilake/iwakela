@@ -7,7 +7,7 @@
         <% @games.each do |g|%>
           <li>
             <%= link_to h(g.name), namepk_url(:action => 'fight', :id => g.id) %>
-            <span class='desc'><%= h(g.desc) %></span>
+            <span class='desc'><%= h(g.desc) %>(<%= g.num %>場戰役)</span>
           </li>
             <div class='clear'></div>
         <% end %>
