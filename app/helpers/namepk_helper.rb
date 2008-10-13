@@ -36,5 +36,10 @@ module NamepkHelper
       'active'
     end
   end
+
+  def show_messages
+    flh =  flash[:notice] || flash[:info]
+    "<span class='alert'>#{flh}</span>"  if flh
+  end
 end
 
