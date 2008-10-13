@@ -216,6 +216,7 @@ class User < ActiveRecord::Base
   def self.reset_all_state
     Status.update_all("state = 0", "fight = true")
     Status.update_all("state = 3", "fight = false")
+    Game.update_all("today_num = 0")
   end
 
   def self.find_user_rank(page, sort)
