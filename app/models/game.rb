@@ -56,11 +56,12 @@ class Game < ActiveRecord::Base
 
     hp1_percent = 100
     hp2_percent = 100
+    fight_methods.find_or_create(:name => DEFAULT_METHODS.rand()) if fight_methods.count == 0
+
     while (hp1 > 0 && hp2 > 0)
       index = around%around_size
       ['fighter_1', 'fighter_2'].each do |user|
         atk_method = fight_methods.rand
-        atk_method ||= fight_methods.find_or_create(:name => DEFAULT_METHODS.rand())
 
         if user == 'fighter_1'
           #打出的傷害
