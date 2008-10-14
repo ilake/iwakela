@@ -149,3 +149,12 @@ input {
   width :220px;
   font-weight: bold;
 }
+
+div.result-comment-ceil {
+  padding:10px;
+  border-top: 1px solid #EFEFEF;
+}
+
+.h-time {
+  color:#BBBBBB;
+}

@@ -72,4 +72,14 @@ class NamepkController < ApplicationController
     @new_games = Game.all(:order => 'id DESC', :limit => 5)
   end
 
+  def talks
+    @game = Game.find(params[:id])
+    @talk = Talk.new
+    if params[:talk]
+      @talk = @game.talks.create(params[:talk])
+    end
+
+    @talks = @game.talks.paginator(params[:page])
+  end
+
 end

@@ -11,6 +11,7 @@ class Game < ActiveRecord::Base
 
   has_many :attrs  #角色屬性
   has_many :fight_methods  #可能使用的招式
+  has_many :talks
 
   before_create :set_salt
 

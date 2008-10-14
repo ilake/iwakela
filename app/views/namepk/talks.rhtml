@@ -1,0 +1,23 @@
+  <div class='talk'>
+    <h2 class='result-title'><%= @game.name %>討論串 | 回到<%= link_to @game.name, namepk_url(:action => 'fight', :id => @game.id) %></h2>
+    
+    <% form_for :talk, :url => namepk_url(:action => 'talks') do |f| %>
+      <%= f.text_field :name, :size => 30, :maxlength => 50, :title => '暱稱', :class => 'populate'  %>
+      <%= f.text_field :content, :size => 30, :maxlength => 50, :title => '內容', :class => 'populate' %>
+      <%= submit_tag '送出'%>
+    <% end %>
+    <div class='result-comment'>
+      <% @talks.each do |c|%>
+        <div class='result-comment-ceil' style="padding:10px;border-top:1px solid #EFEFEF;">
+          <div>
+            <span style='color:#0066FF'><%= h(c.name)  %></span>
+            <span class='h-time' style='color:#BBBBBB;'>
+              <%= "#{distance_of_time_in_words_to_now(c.created_at)} ago"%>
+            </span>
+          </div>
+          <div><%= h(c.content) %></div>
+        </div>
+      <% end %>
+    </div>
+    <%= will_paginate @talks %>
+  </div>
