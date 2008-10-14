@@ -1,5 +1,5 @@
   <div class='talk'>
-    <h2 class='result-title'><%= @game.name %>討論串 | 回到<%= link_to @game.name, namepk_url(:action => 'fight', :id => @game.id) %></h2>
+    <h2 class='result-title'><%= @game.name %>Talk | 回到<%= link_to @game.name, namepk_url(:action => 'fight', :id => @game.id) %></h2>
     
     <% form_for :talk, :url => namepk_url(:action => 'talks') do |f| %>
       <%= f.text_field :name, :size => 30, :maxlength => 50, :title => '暱稱', :class => 'populate'  %>
