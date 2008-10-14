@@ -13,7 +13,7 @@
   <% end %>
   <ul class='list'>
     <% @attrs.each do |attr|%>
-      <li><%= attr.name %></li>
+      <li><%= attr.name %> <%= link_to '[修改]', namepk_url(:action => 'update_attr', :id => attr.id, :game => @game.id ) %></li>
     <% end %>
   </ul>
   <br />
@@ -31,7 +31,7 @@
 
   <ul class='list'>
     <% @methods.each do |m|%>
-      <li><%= m.name %>  :  <%= m.value %>傷害</li>
+      <li><%= m.name %>  :  <%= m.value %>傷害  <%= link_to '[修改]', namepk_url(:action => 'update_method', :id => m.id, :game => @game.id ) %></li>
     <% end %>
   </ul>
 </div>

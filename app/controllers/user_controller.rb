@@ -58,7 +58,6 @@ class UserController < ApplicationController
 
   private
   def check_owner
-    debugger
     unless params[:id].to_i == @me.id
       flash[:notice] = "請更改自己的檔案"
       redirect_to :controller => 'main', :action => 'index'

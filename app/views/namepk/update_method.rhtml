@@ -1,0 +1,7 @@
+<% form_for :method, :url => namepk_url(:action => 'update_method', :id => @method.id, :game => params[:game]) do |f| %>
+  <%= error_messages_for :method %>
+  <%= f.text_field :name %>
+  <%= f.text_field :value %>
+  <%= submit_tag %>
+  <%= link_to '取消', namepk_url(:action => 'adv_game_setting', :id => params[:game])%>
+<% end %>

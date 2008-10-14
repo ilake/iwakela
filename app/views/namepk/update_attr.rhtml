@@ -1,0 +1,6 @@
+<% form_for :attr, :url => namepk_url(:action => 'update_attr', :id => @attr.id, :game => params[:game]) do |f| %>
+  <%= error_messages_for :attr %>
+  <%= f.text_field :name %>
+  <%= submit_tag %>
+  <%= link_to '取消', namepk_url(:action => 'adv_game_setting', :id => params[:game])%>
+<% end %>

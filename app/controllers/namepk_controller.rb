@@ -82,4 +82,31 @@ class NamepkController < ApplicationController
     @talks = @game.talks.paginator(params[:page])
   end
 
+  def update_method 
+    if @method = FightMethod.find(params[:id])
+      if request.post?
+        if @method.update_attributes(params[:method])
+          flash[:notice] = '更新成功'
+          redirect_to :action => 'adv_game_setting', :id => params[:game] and return
+        end
+      end
+      render :action => 'update_method', :game => params[:game]
+    else
+      redirect_to :back
+    end
+  end
+
+  def update_attr
+    if @attr = Attr.find(params[:id])
+      if request.post?
+        if @attr.update_attributes(params[:attr])
+          flash[:notice] = '更新成功'
+          redirect_to :action => 'adv_game_setting', :id => params[:game] and return
+        end
+      end
+      render :action => 'update_attr', :game => params[:game]
+    else
+      redirect_to :back
+    end
+  end
 end
