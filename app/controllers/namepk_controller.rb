@@ -1,5 +1,6 @@
 class NamepkController < ApplicationController
   before_filter :siderbar
+  before_filter :check_ip 
 
   def index
     @games = Game.find_hottest(params[:page])
@@ -116,5 +117,12 @@ class NamepkController < ApplicationController
     end
     redirect_to :back
   end
+
+  private
+  def check_ip  
+    if request.remote_ip  == "59.115.204.192"  
+      render :text => '阿鬼 別在玩啦！'  and return
+    end  
+  end 
 
 end
