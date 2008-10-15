@@ -120,7 +120,7 @@ class NamepkController < ApplicationController
 
   private
   def check_ip  
-    if request.env['HTTP_X_REAL_IP'] == "59.115.204.192"  
+    if request.remote_ip == "59.115.204.192"  
       render :text => '阿鬼 別在玩啦！'  and return
     end  
   end 
