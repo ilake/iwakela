@@ -109,4 +109,5 @@ class NamepkController < ApplicationController
       redirect_to :back
     end
   end
+
 end

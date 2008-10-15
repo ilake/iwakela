@@ -106,7 +106,7 @@ class Game < ActiveRecord::Base
   end
 
   def attack_val(average, attr_val, atk_method_val)
-    attr_val = rand(attr_val)
+    #attr_val = rand(attr_val)
     atk_method_val = rand(atk_method_val)
     attack_val = (average + attr_val + atk_method_val).to_i
   end
