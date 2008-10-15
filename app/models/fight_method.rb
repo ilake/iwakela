@@ -3,7 +3,7 @@ class FightMethod < ActiveRecord::Base
 
   validates_presence_of :name, :value
   validates_numericality_of :value, :less_than_or_equal_to => 200
-  validates_numericality_of :value, :greater_than_or_equal_to => 1
+  validates_numericality_of :value, :greater_than_or_equal_to => 0
   before_create :set_default_val
 
   def set_default_val
