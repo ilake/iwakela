@@ -110,4 +110,11 @@ class NamepkController < ApplicationController
     end
   end
 
+  def destroy
+    if method = FightMethod.find(params[:id])
+      method.destroy
+    end
+    redirect_to :back
+  end
+
 end
