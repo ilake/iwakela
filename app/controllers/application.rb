@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   require "sanitize"
 
   before_filter :check_user
+  before_filter :jumpback
   #before_filter :set_time_zone
 
   def set_time_zone
@@ -49,4 +50,27 @@ class ApplicationController < ActionController::Base
       redirect_to :controller => 'main', :action => 'login'
     end
   end
+
+  def jumpback
+    session[:jumpback] = session[:jumpcurrent]
+    session[:jumpcurrent] = request.request_uri
+  end  
+
+  #  force the request connect from outside
+#  def local_request? 
+#    false 
+#  end
+
+  def rescue_action_in_public(exception)
+    case exception
+    when ActionController::RedirectBackError
+      jumpto = session[:jumpback] || {:controller => "main"}
+      redirect_to jumpto
+    when ActionController::RoutingError
+      redirect_to home_url
+    else
+      super
+    end
+  end
+
 end

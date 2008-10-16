@@ -8,3 +8,8 @@ config/database.yml
 db/*.sqlite3
 public/mugshots
 **/tags
+db/schema.rb
+public/dispatch.rb
+public/h.rb
+tags
+
