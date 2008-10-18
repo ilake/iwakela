@@ -3,7 +3,7 @@ class NamepkController < ApplicationController
   before_filter :check_ip 
 
   def index
-    @games = Game.find_hottest(params[:page])
+    @games = Game.find_hottest(params[:page], 20, 'games.today_num')
   end
 
   def list
