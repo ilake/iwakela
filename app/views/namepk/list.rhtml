@@ -1,0 +1,19 @@
+		<!-- Primary content: Stuff that goes in the primary content column (by default, the left column) -->
+		<div id="primarycontainer" class='rounded'>
+			<div id="primarycontent">
+				<h1>熱門對戰</h1>
+        <!-- Primary content area start -->
+        <ul class='list'>
+        <% @games.each do |g|%>
+          <li>
+            <%= link_to h(g.name), namepk_url(:action => 'fight', :id => g.id) %>
+            <span class='desc'><%= h(g.desc) %>(<%= g.num %>場戰役)</span>
+          </li>
+            <div class='clear'></div>
+        <% end %>
+        </ul>
+		
+				<!-- Primary content area end -->
+        <%= will_paginate @games %>
+			</div>
+		</div>

@@ -111,10 +111,10 @@ class Game < ActiveRecord::Base
     attack_val = (average + attr_val + atk_method_val).to_i
   end
 
-  def self.find_hottest(page, per_page=20)
+  def self.find_hottest(page, per_page=20, cond='games.num')
     self.paginate :page => page,
                   :per_page => per_page,
-                  :order => 'games.num DESC'
+                  :order => "#{cond} DESC"
   end
 
 end

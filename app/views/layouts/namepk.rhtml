@@ -11,7 +11,7 @@
 <title>名字對戰製造機</title>
 <meta name="keywords" content="name,pk,名字,對戰" />
 <meta name="description" content="名字對戰, 製作自己的名字對戰機" />
-  <%= stylesheet_link_tag "zenlike", "paginator", "itunes","namepk"  %>
+  <%= stylesheet_link_tag "zenlike", "paginator", "itunes","namepk" %>
   <%= javascript_include_tag "jquery", "jquery.corner.js", "jquery.progressbar.min.js", "autopopulate" %>
   <%= yield :page_spec %>
   <script type='text/javascript'>
@@ -44,6 +44,7 @@
     <% act_name = controller.action_name %>
 		<ul>
       <li><%= link_to '首頁', {:action => 'index'}, :class => here?(act_name, 'index') %></li>
+      <li><%= link_to '熱門列表', {:action => 'list'}, :class => here?(act_name, 'list') %></li>
 		</ul>
 	</div>
 	<div id="menubottom"></div>

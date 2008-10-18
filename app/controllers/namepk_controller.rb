@@ -6,6 +6,10 @@ class NamepkController < ApplicationController
     @games = Game.find_hottest(params[:page])
   end
 
+  def list
+    @games = Game.find_hottest(params[:page])
+  end
+
   def new
     @game = Game.new
   end
