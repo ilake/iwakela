@@ -37,7 +37,7 @@
       <li>
         <%= m.name %>  :  <%= m.value %>傷害  
         <%= link_to '[修改]', namepk_url(:action => 'update_method', :id => m.id, :game => @game.id ) %>
-        <%= link_to '[刪除]', namepk_url(:action => 'destroy', :id => m.id)%>
+        <%#= link_to '[刪除]', namepk_url(:action => 'destroy', :id => m.id)%>
       </li>
     <% end %>
   </ul>
