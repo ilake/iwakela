@@ -1,4 +1,5 @@
 class MainController < ApplicationController
+  require "sparklines"
   layout "application"
   helper :all
 
@@ -118,11 +119,6 @@ class MainController < ApplicationController
   end
 
   def test
-#    u = User.all
-#    send_data u
-#    send_file '/home/lake/rails_app/iwakela/public/images/rails.png'
-    redirect_to :controller => 'main' and return
-    debugger
-    us = User.all
+    render :layout => false
   end
 end

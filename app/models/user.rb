@@ -31,12 +31,26 @@ class User < ActiveRecord::Base
   has_many :scores
   has_many :great_words
 
+  composed_of :user_data, :mapping =>%w(name name)
+
   #我發表過forum的comments
   #Its sql :
   #SELECT comments.* FROM comments INNER JOIN forums ON comments.record_id = forums.id AND comments.record_type = 'Forum' WHERE ((forums.user_id = 2))
   #example : u.forums.find(:all).map {|a| a.comments}  ===  u.forum_comments
   has_many :forum_comments, :through => :forums, :source => :comments  
   has_many :record_comments, :through => :records, :source => :comments, :order => "created_at DESC", :limit => 6
+
+  #forum 裡有我的 comments的 forum, 找出 forum array
+  has_many :forums_has_comments,
+           :through => :comments,
+           :source  => :record,
+           :source_type => 'Forum'
+
+  #我在forum 裡所有的comments, 找出 comments array
+  has_many :comments_in_forums,
+           :foreign_key => :user_id,
+           :class_name => 'Comment',
+           :conditions => {:record_type => 'Forum'}
 
   has_many :demands, :foreign_key => 'demander_id', :class_name => 'Call'
   has_many :accepts, :foreign_key => 'accepter_id', :class_name => 'Call'
@@ -62,7 +76,11 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of   :email, :case_sensitive => false
 
-  #acts_as_ferret :fields => [:name]
+  field = Profile.content_columns.inject([]) do |result, column|
+    result << column.name
+  end.push(:to => :profile)
+
+  delegate *field
 
   attr_reader :password
 

@@ -52,7 +52,6 @@ class MemberController < ApplicationController
   def show
     @record = Record.find(params[:id])
     @user = @record.user
-    #index = @record.all_records_id.index(params[:id].to_i)
 
     #第一筆大(小)於現在的時間
     #把條件存在session裡, 前一筆跟後一筆也是

@@ -11,4 +11,6 @@
 
 class Score < ActiveRecord::Base
   belongs_to :user
+  named_scope :wake, :conditions => {:name => 'wake'}
+  named_scope :sleep, :conditions => {:name => 'sleep'}
 end

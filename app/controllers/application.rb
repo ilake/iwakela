@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   # Pick a unique cookie name to distinguish our session data from others'
   include HoptoadNotifier::Catcher
-  #require 'ruby-debug'
+  require 'ruby-debug'
   session :session_key => '_earlybirds_session_id'
   require "sanitize"
 
