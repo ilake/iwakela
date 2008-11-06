@@ -175,7 +175,7 @@ module AllHelper
     image = done ? image_tag(img1) : image_tag(img2)
   end
 
-  HTTP_REGEX = /((http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/[A-Za-z\.0-9_\+\?%\/=&]*)?)/ix
+  HTTP_REGEX = /((http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/[A-Za-z\.0-9_\+\?%\/=&\-]*)?)/ix
 
 #  def format_content(content)
 #    c = content
