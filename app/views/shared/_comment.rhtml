@@ -15,6 +15,6 @@
 <br />
 <% form_tag :controller => 'comments', :action => 'create', :id => item.id, :model => item.class.to_s do%>
   回應<br />
-  <%= text_area  'comments', 'content', :rows => '4', :cols => '60' %><br />
+  <%= text_area  'comments', 'content', :rows => '12', :cols => '72' %><br />
   <%= submit_tag '送出'%>
 <% end %>
