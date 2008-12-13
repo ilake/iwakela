@@ -266,11 +266,11 @@ class User < ActiveRecord::Base
     self.create_status
   end
 
-  def self.today_earliest(result='success')
+  def self.today_earliest(result='success', num = 20)
     if result == 'success'
-      Record.wake.today.success.find(:all, :limit => 20).map{|r|r.user}
+      Record.wake.today.success.find(:all, :limit => num, :order => 'todo_time').map{|r|r.user}
     else
-      Record.wake.today.fail.find(:all, :limit => 20, :order => 'id DESC').map{|r|r.user}
+      Record.wake.today.fail.find(:all, :limit => num, :order => 'id DESC').map{|r|r.user}
     end
   end
 

@@ -1,48 +1,63 @@
-<% content_for :page_spec do %>
-  <%= stylesheet_link_tag "flora_tabs.css" %>
-  <script>
-    $(document).ready(function() {
-      $(".group_index > ul").tabs();
-    });
-  </script>
-<% end %>
+<div class='record_content'> 
+  <span class='bold-link'><%= link_to '我要開團', :action => 'new' %></span>
+  <% @hottest_groups.each do |g| %>
+    <div id="post" class="group_item post">
+      <div id="title" class="title">
+        <%= group_status(g)%>
+        <%= link_to_group(g.name, g.id) %>
+      </div>
+      <div class="group_photo">
+        <%= big_mugshot(g, h(g.name)) %>
+      </div>
+      <div id="content" class="content">
 
-<%= link_to '我要開團', :action => 'new' %>
-<br />
-<br />
-  <div class='group_index'>
-  <ul>
-    <li><a href="#group_index_public"><span>早鳥公開團(可自由加入)</span></a></li>
-    <li><a href="#group_index_private"><span>早鳥私人團(只能由團長邀請)</span></a></li>
-  </ul>
-  <div id='group_index_public', style="border:none">
-    <%= render :partial => 'group_index_partial',
-      :locals => {:groups => @latest_public_groups, :type => 'public', :sort => 'id'}%>
-      <div class='clear'></div>
-      <br />
-    <%= render :partial => 'group_index_partial',
-      :locals => {:groups => @hottest_public_groups, :type => 'public', :sort => 'readed'}%>
-  </div>
-
-  <div id='group_index_private', style="border:none">
-    <%= render :partial => 'group_index_partial',
-      :locals => {:groups => @latest_private_groups, :type => 'private', :sort => 'id' }%>
-      <div class='clear'></div>
-      <br />
-    <%= render :partial => 'group_index_partial',
-      :locals => {:groups => @hottest_private_groups, :type => 'private', :sort => 'readed' }%>
+        <div id="others" class="others">
+          由 <%= link_to_user(g.owner, g.owner.name) %> 
+          <span class="time">於<%= extract_date_string(g.created_at)%></span>開創
+          <span class="listinfo">徵求<%= g.user_num %>名會員，目前共有<%= g.members_count %>名</span>   
+        </div>
+        <div id="description" class="description">
+          <%= h(truncate(g.condition, :length => 200)) %>
+        </div>
+      </div>
+      <div class="endOfItem"><!--IE--></div>      
+    </div>
+  <% end %>
+  <div class='clear'></div>
+  <%= will_paginate @hottest_groups %>
+  <br />
+  <br />
+  <div>
+    <script type="text/javascript"><!--
+      google_ad_client = "pub-0501077200190082";
+      /* 728x90, 已建立 2008/8/30 */
+      google_ad_slot = "6537955217";
+      google_ad_width = 728;
+      google_ad_height = 90;
+      //-->
+    </script>
+    <script type="text/javascript"
+      src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
   </div>
 </div>
-<div>
-<script type="text/javascript"><!--
-  google_ad_client = "pub-0501077200190082";
-  /* 728x90, 已建立 2008/8/30 */
-  google_ad_slot = "6537955217";
-  google_ad_width = 728;
-  google_ad_height = 90;
-  //-->
-</script>
-<script type="text/javascript"
-  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
+
+<% content_for :sider do %>
+  <div class="group_sidenav">
+    <div id="overview-selector" class="selector">
+      <span >最新的團</span>
+      <%= link_to("<<更多", :action => 'list_all_groups', :sort => 'id') %>
+    </div>
+    <div class="smallList">
+      <% @latest_groups.each do |g| %>
+        <div class="smallItem">
+          <span class="count">
+            <%= link_to_group( small_mugshot(g), g.id) %>
+            <span class="group_side_title">
+              <%= link_to_group(h(truncate(g.name, :length => 9)), g.id) %>
+            </span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>

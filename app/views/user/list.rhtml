@@ -1,3 +1,6 @@
+<p>
+  <%= today_show %>
+</p>
 <% @users.each do |u| %>
   <div class='people'>
     <div class="thumbnail">
@@ -8,7 +11,7 @@
         <%= link_to_user(u, u.name, 'user') %>
       </h3>
       <p class="description">
-        <%= truncate(u.profile.others, 50) %>
+        <%= truncate(u.others, 50)%>
       </p>
       
     </div>

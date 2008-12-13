@@ -53,8 +53,8 @@ class Group < ActiveRecord::Base
     end
   end
 
-  def self.group_readed_reset
-    Group.update_all(:readed => 0)
+  def self.group_chats_num_reset
+    Group.update_all(:chats_num=> 0)
   end
 
   def get_in?(user)
@@ -63,17 +63,17 @@ class Group < ActiveRecord::Base
 
   def pri
     if state == 1 || state == 3
-      1
+      @pri ||= 1
     else
-      0
+      @pri ||= 0
     end
   end
 
   def fill
-    if state == 2 || state == 3
-      1
+    if state == 2 || state == 3 || members.count == user_num
+      @fill ||= 1
     else
-      0
+      @fill ||= 0
     end
   end
 
@@ -81,6 +81,23 @@ class Group < ActiveRecord::Base
     order = "groups.#{sort} DESC"
     self.send(type.to_sym).paginate :page => page,
                                     :per_page => 10,
+                                    :include => :mugshot,
                                     :order => order
+  end
+
+  def self.find_all_group(page, sort='id', per_page=5)
+    order = "groups.#{sort} DESC"
+
+    self.paginate :page => page,
+                  :per_page => per_page,
+                  :include =>  [:mugshot, :owner],
+                  :order => order
+  end
+
+  def self.count_7_days_chats_num
+    all.each do |group|
+      group.chats_num = group.chats.count(:all, :conditions => {:created_at => Time.now.ago(7.days)..Time.now})
+      group.save!
+    end
   end
 end

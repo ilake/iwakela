@@ -6,6 +6,7 @@ class UserController < ApplicationController
 
   def list
     @users = User.find_all_users(params[:page])
+    @num = User.count
   end
 
   def list_user_rank 

@@ -10,12 +10,15 @@
       }
 
 </style>
-
-<% unless records.size.zero? %>
+<div class='eb_header'>大家的起床時間</div>
+  <%= render :partial => 'index_graph' %>
+  <div class='clear'></div>
+  <br />
+<% if records %>
 <table>
 <% records.each_with_index do |record, i| %>
   <tr class="<%= cycle('','title')%>">
-    <td width = 2%><%= page_index(records, i)%></td>
+    <td width = 2% class='td_index'><%= page_index(records, i)%></td>
     <td width = 15%><%= link_to_user(record.user, record.user.name, nil, true) %></td>
     <td width = 15%><%= record.todo_time.strftime("%H:%M") %>起床</td>
     <td width = 35%><%= link_to h(truncate(record.content, 30)),

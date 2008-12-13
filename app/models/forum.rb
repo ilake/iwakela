@@ -31,17 +31,17 @@ class Forum < ActiveRecord::Base
 
   def self.find_all_forum(params, group=nil)
     if group
-      self.paginate :page => params,
-                          :per_page => 10,
-                          :include => :comments,
-                          :order => 'comments.created_at DESC',
-                          :conditions => ["forums.group_id = ?", group]
+      options = { 
+        :per_page => 10,
+        :conditions => ["forums.group_id = ?", group]
+      }
     else
-      self.paginate :page => params,
-                          :per_page => 30,
-                          :include => :comments,
-                          :order => 'comments.created_at DESC',
-                          :conditions => 'forums.group_id is NULL'
+      options = {
+        :per_page => 20,
+        :conditions => 'forums.group_id is NULL'
+      }
     end
+
+    self.paginate options.merge!(:page => params, :order => "last_comment_time DESC")
   end
 end

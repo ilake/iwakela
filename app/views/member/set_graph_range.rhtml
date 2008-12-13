@@ -1,0 +1,56 @@
+<script type="text/javascript">
+  (function($){
+   $(document).ready(function(){
+
+     $("#startDate").datepicker({ 
+       dateFormat: $.datepicker.ISO_8601,
+       numberOfMonths: 1,
+       onSelect: function(date) { 
+         $("#startDateInput").val(date);
+       } 
+     });
+
+     $("#endDate").datepicker({ 
+       dateFormat: $.datepicker.ISO_8601,
+       numberOfMonths: 1,
+       onSelect: function(date) { 
+         $("#endDateInput").val(date);
+       } 
+     });
+
+     $('.setting-bg .close').click(function(){
+       $(this).parent().hide();
+       });
+
+     });
+   })(jQuery);
+ </script>
+
+ <% form_remote_tag :url => {:action => 'set_graph_range'}, :html => {:id => 'graph_range'} do %>
+   <div class='setting-bg rounded' style='margin-top:15px;width:500px'>
+     <span style='float:right;' class='close'>關閉</span>
+     <b>日期範圍</b>
+     <table>
+       <tr>
+         <td>
+           <%= text_field_tag :startDateInput, Time.now.strftime("%Y-%m-%d") %>
+         </td>
+         <td>to </td>
+         <td>
+           <%= text_field_tag :endDateInput, Time.now.strftime("%Y-%m-%d") %>
+         </td>
+       </tr>
+       <tr>
+         <td><div id="startDate"></div> </td>
+         <td>~</td>
+         <td><div id="endDate"></div> </td>
+         <td><div class='clear'></div></td>
+       </tr>
+       <tr>
+         <%= submit_tag "送出" %>
+       </tr>
+       </table >
+     </div>
+     <% end %>
+
+   <!--input type='button'id='ajax_submit' value='AjAx Submit' /-->

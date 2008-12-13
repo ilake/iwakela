@@ -27,7 +27,7 @@
 <br />
 <div style='margin-bottom:10px;'>
   <h1 style='display:inline;'>格言佳句</h1>
-  <%= jquery_link_to_remote ">>還要看",:update => 'nice_words', :url => {:action => 'update_words'}%>
+  <%= link_to_remote ">>還要看",:update => 'nice_words', :url => {:action => 'update_words'}%>
     |  
   <%= link_to "我也要貢獻", word_path(:action => 'new'), {:popup => true} %>
 </div>

@@ -1,0 +1,61 @@
+<% if census_exist %>
+  <div id="overview-selector" class="selector">
+    <span class="hide_side_census"><a href='#'><%= @census_status == 'show' ? '+' : '－'  %></a></span>
+    <span>早起成果</span>
+  </div>
+  <ul class='side_census <%= @census_status %>'>
+    <%= render :partial => "shared/census"%>
+  </ul>
+<% end %>
+
+<% if wake_exist %>
+  <% if  r = @user.today_record %>
+    <div id="overview-selector" class="selector"> 
+      <span class='hide_side_number_clock'><a href='#'><%= @number_clock_status == 'show' ? '+' : '－'  %></a></span>
+      <span>今天起床時間</span>
+    </div>
+    <div class='number_clock <%= @number_clock_status%>'>
+      <%= image_tag(r.success ? 'thumbup.gif' : 'thumbdown.gif') %> <br />
+      <%= number_clock       r %>
+    </div>
+  <% elsif @user.id == @me.id %>
+    <div id="overview-selector" class="selector"> 
+      <span class='hide_side_alarm_clock'><a href='#'><%= @alarm_clock_status == 'show' ? '+' : '－'  %></a></span>
+      <span>起床囉！</span>
+    </div>
+    <div class='alarm_clock <%= @alarm_clock_status%>'> <%= "#{image_tag('clock.gif')}<br /> 紀錄現在時間" %> </div>
+  <% end %>
+<% end %>
+
+<% if sleep_exist && @user.id == @me.id %>
+  <div id="overview-selector" class="selector">
+    <span class='hide_side_sleep_button'><a href='#'><%= @sleep_button_status == 'show' ? '+' : '－'  %></a></span>
+    <span>睡覺囉！</span>
+  </div>
+  <div class='sleep_button <%= @sleep_button_status%>'>
+    <%= "#{image_tag('sleep_time.png')}<br /> 紀錄現在時間" %>
+  </div>
+<% end %>
+
+<% if rsp_exist %>
+    <div id="overview-selector" class="selector">
+      <span class='hide_side_last_rsp'>
+        <a href='#'>
+          <%= @last_rsp_status == 'show' ? '+' : '－'  %>
+        </a>
+      </span>
+      <span>最新回應</span>
+    </div>
+    <div class='last_rsp <%= @last_rsp_status%>'>
+      <% if @user.record_comments.count > 0 %>
+        <% @user.record_comments.find(:all).each do |c| %>
+          <div style='padding:6px 0px 6px 0px;'>
+            <div><span class='no_line_name'><%= link_to_user(c.user, c.user.name) %></span> : </div>
+            <span class='no_line_name'>
+              <%= link_to truncate(c.content, 10), member_url(:action => 'show', :id => c.record)%>
+            </span>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>

@@ -21,12 +21,14 @@ class Chat < ActiveRecord::Base
       self.paginate :page => params,
                     :per_page => per_page,
                     :order => 'created_at DESC',
-                    :conditions => ["created_at > ? AND group_id = ?", Time.now.ago(7.days), group]
+                    :limit => '100',
+                    :conditions => ["group_id = ?", group]
     else
       self.paginate :page => params,
                     :per_page => per_page,
                     :order => 'created_at DESC',
-                    :conditions => ["created_at > ? AND group_id is NULL", Time.now.ago(7.days)]
+                    :limit => '100',
+                    :conditions => "group_id is NULL"
     end
   end
 end

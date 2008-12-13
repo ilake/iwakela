@@ -7,6 +7,16 @@ module AllHelper
     datetime.strftime("%m/%d  %H:%M")
   end
 
+  def extract_date_string(datetime)
+    datetime.strftime("%Y年%m月%d日") if datetime
+  end
+
+  #今天是X年X月X日 ...
+  def extract_datetime_string(datetime)
+    datetime.strftime("%Y年%m月%d日  %H:%M") if datetime
+  end
+
+
   def select_week
     "<select id='week', name='week'>
       #{options_for_select(TargetsController::WEEK_OPTIONS)}
@@ -37,15 +47,10 @@ module AllHelper
 
   def exact_target_time(user)
     if time = user.target_time
-        "今日目標 #{extract_target_time(time)}"
+        "今日目標: #{extract_target_time(time)}"
     else
       link_to "<font color='red'>尚未設定目標起床時間</font>", :controller => 'member', :action => 'list'
     end
-  end
-
-  #今天是X年X月X日 ...
-  def extract_datetime_string(datetime)
-    datetime.strftime("%Y年%m月%d日  %H:%M") if datetime
   end
 
   def page_index(rec, i, asc=true)
@@ -109,10 +114,10 @@ module AllHelper
 
   def link_to_user_image(u, cls)
     if u.mugshot
-      "#{link_to image_tag(u.mugshot.public_filename, :size => '100x100'),
+      "#{link_to image_tag(u.mugshot.public_filename, :size => '100x100', :alt => u.name, :title => u.name ),
         {:controller => 'member', :action => 'list', :id => u}, :class => cls}"
     else
-      "#{link_to image_tag("penguin.jpg", :size => '100x100'),
+      "#{link_to image_tag("penguin.jpg", :size => '100x100', :alt => u.name, :title => u.name ),
         { :controller => 'member', :action => 'list', :id => u}, :class => cls}"
     end
   end
@@ -227,7 +232,7 @@ module AllHelper
 
   def is_owner?(user)
     if @me
-      is_owner = @me.id == user.id ? true : false
+      is_owner ||= @me.id == user.id ? true : false
     else
       false
     end
@@ -248,18 +253,19 @@ module AllHelper
   end
 
   def big_mugshot(item, title=nil)
-    if item.mugshot
-      image_tag(item.mugshot.public_filename, :title => title ||= item.name)
+    if @big_mugshot = item.mugshot
+      image_tag(@big_mugshot.public_filename, :title => title ||= item.name)
     else 
       image_tag("penguin.jpg", :title => title )
     end
   end
 
-  def today_show
-    now = Time.now
-    wday = week_day(now.wday)
-    today = now.to_date
-    "今天是#{today} 星期#{wday} 目前共有鳥友#{@num}名"
+  def small_mugshot(item, title=nil)
+    if @small_mugshot = item.mugshot
+      image_tag(@small_mugshot.public_filename(:small), :title => title ||= item.name)
+    else 
+      image_tag("penguin_small.jpg", :title => title )
+    end
   end
 
   def week_day(wday)

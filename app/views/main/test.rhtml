@@ -1,3 +1,11 @@
+  <%= stylesheet_link_tag "defaults", "itunes", "paginator", "flora.datepicker.css", :cache => 'add_datepicker' %>
+  <%= stylesheet_link_tag "flora_tabs.css" %>
+  <%= stylesheet_link_tag "eb" %>
+  <%= javascript_include_tag "jquery",
+                             "jquery-ui-personalized-1.5.3.min",
+                              :cache => 'add_jrails' %>
+
+
 <%= sparkline_tag [1,2,3,4,5,6] %>
 <%= sparkline_tag [1,2,3,4,5,6],
   :type => 'discrete',
@@ -5,3 +13,16 @@
   :upper => 80,
   :above_color => 'green',
   :below_color => 'blue' %>
+
+  <script>
+    $(document).ready(function() {
+      $(".group_index > ul").tabs();
+    });
+  </script>
+
+<div class='group_index'>
+  <ul>
+    <li><a href="#group_index_public"><span>早鳥公開團(可自由加入)</span></a></li>
+    <li><a href="#group_index_private"><span>早鳥私人團(只能由團長邀請)</span></a></li>
+  </ul>
+</div>

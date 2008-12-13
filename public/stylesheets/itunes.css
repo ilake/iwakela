@@ -58,7 +58,8 @@ tr {
 }
 
 tr,th,td {
-	padding: .75em;
+	padding: 0.55em;
+	/*padding: 2px;*/
 }
 td {
 /*	border-left: 1px solid #dadada;*/

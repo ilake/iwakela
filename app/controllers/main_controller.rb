@@ -1,11 +1,15 @@
 class MainController < ApplicationController
-  require "sparklines"
+  #require "sparklines"
   layout "application"
   helper :all
 
+  before_filter :user_default_sideber_option, :only => [:index]
+
   def index
     @records = Record.find_all_wake_up_today(params[:page])
-    @num = User.count
+    records = @records.size > 10 ? @records : Record.wake.find(:all, :order => 'todo_time DESC', :limit => 10) 
+
+    @time = record_to_string(records)
   end
 
   def register
@@ -120,5 +124,10 @@ class MainController < ApplicationController
 
   def test
     render :layout => false
+  end
+
+  def record_to_string(records)
+    time = Record.time_to_string(records, "todo_time")
+    return time
   end
 end

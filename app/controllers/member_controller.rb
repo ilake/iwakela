@@ -7,6 +7,8 @@ class MemberController < ApplicationController
 
   before_filter :rand_word, :only => [:wake_up, :sleep, :create, :write_diary]
   before_filter :latest_diary, :only => [:wake_up, :sleep, :create, :write_diary]
+
+  before_filter :user_default_sideber_option, :only => [:list]
   helper :all
 
   def index
@@ -62,22 +64,17 @@ class MemberController < ApplicationController
   end
 
   def list
-    @records = @user.records.find_all_todo_time(@month, @year, "DESC")
-    records = @user.records.find_all_todo_time(@month, @year, "", 'wake')
-    sleep_records = @user.records.find_all_todo_time(@month, @year, "", 'sleep')
+    @from, @to = month_range(@month, @year)
+    @records = @user.records.find_all_todo_time(params[:page], @from, @to, "DESC")
 
-    @time = Record.time_to_string(records, "todo_time")
-    @sleep_time = Record.time_to_string(sleep_records, "todo_time")
-    @target_time = Record.time_to_string(records, "todo_target_time")
-    @sleep_target_time = Record.time_to_string(sleep_records, "todo_target_time")
+    #@from, @to = thirty_days_ago_range(to)
+    records = @user.records.find_all_todo_time(params[:page], @from, @to, "", 'wake')
+    sleep_records = @user.records.find_all_todo_time(params[:page], @from, @to, "", 'sleep')
+
+    @time, @sleep_time, @target_time, @sleep_target_time = record_to_string(records, sleep_records)
 
     @last_record = @user.records.last(:order => "todo_time")
-
     @friend_list = @user.friends.map{|u| [u.name, u.id]}
-  end
-
-  def list_all_records
-    @records = Record.find_all_records(params[:page])
   end
 
   def target_time_now
@@ -208,6 +205,41 @@ class MemberController < ApplicationController
     render :action => 'widget', :layout => false
   end
 
+  def set_graph_range
+    if request.post?
+      params[:startDateInput] ||= Time.now.ago(1.month)
+      params[:endDateInput] ||= Time.now
+
+      paramters = {
+        :order => "todo_time DESC",
+        :conditions => ["todo_time >= ? and todo_time <= ?", params[:startDateInput], params[:endDateInput]]
+      }
+
+      records = @user.records.wake.find(:all, paramters)
+      sleep_records = @user.records.sleep.find(:all, paramters)
+      @time, @sleep_time, @target_time, @sleep_target_time = record_to_string(records, sleep_records)
+
+      from = Time.parse(params[:startDateInput])
+      to  = Time.parse(params[:endDateInput])
+
+      render :update do |page|
+        page.replace_html 'show_graph', :partial => "show_graph"
+        page.replace_html 'date_range', :partial => "range_link", :locals => {:from => from, :to => to}
+        page.hide 'remote_graph'
+      end
+    else
+      render :update do |page|
+        page.replace_html 'remote_graph', :partial => "set_graph_range"
+        page.show 'remote_graph'
+      end
+    end
+  end
+
+  def set_default_option
+    session[params[:side_name].to_sym] = params[:side_status]
+    render :nothing => true
+  end
+
   def pie_widget_test1
      user = User.find(params[:id])
      @content = render_to_string(:partial => 'pie_widget', :locals => {:user => user}).to_json
@@ -271,5 +303,24 @@ class MemberController < ApplicationController
 
   def rand_word
     @word = GreatWord.find('random')
+  end
+
+  def record_to_string(records, sleep_records)
+    time = Record.time_to_string(records, "todo_time")
+    sleep_time = Record.time_to_string(sleep_records, "todo_time")
+    target_time = Record.time_to_string(records, "todo_target_time")
+    sleep_target_time = Record.time_to_string(sleep_records, "todo_target_time")
+    return time, sleep_time, target_time, sleep_target_time
+  end
+
+  def month_range(month = Time.now.month, year = Time.now.year)
+    month_selected = Time.local(year, month)
+    month_next = month_selected.next_month
+    return month_selected, month_next
+  end
+
+  def thirty_days_ago_range(now=Time.now)
+    thirty_days_ago = now.ago(31.days)
+    return thirty_days_ago, now
   end
 end

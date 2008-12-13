@@ -52,7 +52,7 @@
   <div class='talk'>
     <h2 class='result-title'>嘰嘰喳喳</h2>
     <% form_tag :controller => 'chats', :action => 'create' do %>
-      <div>我說 :<%= text_field :chats, :content, :size => 30, :maxlength => 50 %>
+      <div>我說 :<%= text_field :chats, :content, :size => 50, :maxlength => 50 %>
       <%= submit_tag '送出'%></div>
     <% end %>
     <div class='result-comment'>

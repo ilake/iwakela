@@ -111,15 +111,23 @@ module GroupsHelper
     title = []
     if type == 'public' && sort == 'id'
       title << "最新早起團"
-    elsif type == 'public' && sort == 'readed'
+    elsif type == 'public' && sort == 'chats_num'
       title << "活躍早起團"
     elsif type == 'private' && sort == 'id'
       title << "最新私人團"
-    elsif type == 'private' && sort == 'readed'
+    elsif type == 'private' && sort == 'chats_num'
       title << "活躍私人團"
     end
 
     title << link_to("  <<更多", :action => 'list_all_groups', :type => type, :sort => sort)
+    title.join("")
+  end
+
+  def group_status(group)
+    title = []
+    title << "<span class='alert'>私人</span>" if group.pri == 1
+    title << "<span class='alert'>已滿</span>" if group.fill == 1
+
     title.join("")
   end
 end

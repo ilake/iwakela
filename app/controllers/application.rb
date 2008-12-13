@@ -35,6 +35,15 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def user_default_sideber_option
+    @census_status = session[:census] ? session[:census] : 'show'
+    @number_clock_status = session[:number_clock] ? session[:number_clock] : 'show'
+    @alarm_clock_status = session[:alarm_clock] ? session[:alarm_clock] : 'show'
+    @sleep_button_status = session[:sleep_button] ? session[:sleep_button] : 'show'
+    @last_rsp_status = session[:last_rsp] ? session[:last_rsp] : 'show'
+  end
+
   def month_selected
     params[:date].nil? ? Time.now.month : params[:date][:month].to_i 
   end

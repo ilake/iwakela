@@ -5,114 +5,94 @@
          id = $('#user_id option:selected').val();
          window.open("http://iwakela.com/member/list/"+id);
        });
+
      });
    })(jQuery);
 </script>
-
-<div id="month-form">    
-  <% form_tag :controller => 'member', :action => 'list', :id => @user do %>
-    <%= render :partial => 'shared/date_select' %>
-  <% end %>
-</div>
-<div class="clear"></div>
-  <br />
-<!--div style='float:left;width:700px;'-->
-<div>
-  <%= render :partial => 'show_graph' %>
-</div>
-<div class='last_rsp'>
-  <% if @user.record_comments.count > 0 %>
-  <b>最新回應</b>
-    <% @user.record_comments.find(:all).each do |c| %>
-      <div style='padding:6px 0px 6px 0px;'>
-        <div><span class='no_line_name'><%= link_to_user(c.user, c.user.name) %></span> : </div>
-        <span class='no_line_name'>
-          <%= link_to truncate(c.content, 10), member_url(:action => 'show', :id => c.record)%>
-        </span>
-      </div>
-    <% end %>
-  <% end %>
-</div>
-<div>
-  <script type="text/javascript"><!--
-  google_ad_client = "pub-0501077200190082";
-  /* 728x90, 已建立 2008/7/9 */
-  google_ad_slot = "3098835849";
-  google_ad_width = 728;
-  google_ad_height = 90;
-  //-->
-  </script>
-  <script type="text/javascript"
-  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-  </script>
-</div>
-<br />
-<div class="clear"></div>
-<div id="remote"></div>
-
-<% unless is_owner?(@user)%>
-  <div class='group_feature rounded'>
-    <span>
-      <%= score_state(@user, '64')%>
-      <%= link_to '加入好友', friend_url(:action => 'add_friend', :name => @user.name), :method => :post %>
-    </span>
-    <span>
-    <%= link_to "#{@user.name}的個人檔案", :controller => 'user', :action => 'show', :id => @user.id %>
-    </span>
-    <span>
-      <%= select("user", "id", @friend_list, {:include_blank => "#{@user.name}的好友"}) %>
-    </span>
-    <span><%= success_census(@user) %></span>
-    <span><%= continuous_success_num(@user) %></span>
-    <span><%= all_average(@user) %></span>
-    <% if @user.group %>
-      <br />
-      <br />
-      <span><%= "參加了#{link_to_group(@user.group.name, @user.group.id)}" %></span>
-    <% end %>
-    <% unless @user.profile.others.blank? %>
-      <br />
-      <br />
-      <span>
-        <%= truncate(@user.profile.others, 50) %>
-      </span>
-
-    <% end %>
+<div class='record_content'>
+  <div class='graph_content'>
+    <div id='date_range'>
+      <%= render :partial => 'range_link', :locals => {:from => @from, :to => @to}%>
+    </div>
+    <div id="remote_graph"></div>
+    <div class="clear"></div>
+    <br />
+    <div id="show_graph">
+      <%= render :partial => 'show_graph' %>
+    </div>
   </div>
-<br />
-<hr>
-<% end %>
+  <div class="clear"></div>
+  <div>
+    <script type="text/javascript"><!--
+      google_ad_client = "pub-0501077200190082";
+      /* 728x90, 已建立 2008/7/9 */
+      google_ad_slot = "3098835849";
+      google_ad_width = 728;
+      google_ad_height = 90;
+      //-->
+    </script>
+    <script type="text/javascript"
+      src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+  </div>
+    <div id="month-form">    
+      <% form_tag :controller => 'member', :action => 'list', :id => @user do %>
+        <%= render :partial => 'shared/date_select' %>
+      <% end %>
+    </div>
+  <div class="clear"></div>
+  <div id="remote"></div>
 
-<% if is_owner?(@user)%>
-  <div class='group_feature rounded'>
-    <span>
-      <%= jquery_link_to_remote "設定目標時間", :update => 'remote', :url => {:action => 'target_time_now'} %>
-    </span>
-    <span>
-      <%= jquery_link_to_remote "#{image_tag("icon_new.gif")}設定睡覺目標時間", :update => 'remote', :url => {:action => 'sleep_target_time'} %>
-    </span>
-    <span>
-      <%= jquery_link_to_remote "補上起床時間", :update => 'remote', :url => {:action => 'new'} %>
-    </span>
-    <span>
-      <%= jquery_link_to_remote "補上睡覺時間", :update => 'remote', :url => {:action => 'new_sleep'} %>
-    </span> 
-    | 
-    <span><%=jquery_link_to_remote "設定今日目標", :update => 'remote', :url => {:controller => 'goals', :action => 'create', :id => @last_record}
-    %></span>
+  <% unless is_owner?(@user)%>
+    <% name = @user.name %>
+    <div class='group_feature rounded'>
+      <span>
+      <%= link_to "加#{name}為好友", friend_url(:action => 'add_friend', :name => name), :method => :post %>
+      </span>
+      <span>
+        <%= link_to "#{name}的個人檔案", :controller => 'user', :action => 'show', :id => @user.id %>
+      </span>
+      <span>
+        <%= select("user", "id", @friend_list, {:include_blank => "#{name}的好友"}) %>
+      </span>
+      <% if @user.group %>
+        <span><%= "參加了#{link_to_group(@user.group.name, @user.group.id)}" %></span>
+      <% end %>
+    </div>
+    <br />
+    <hr>
+  <% end %>
+
+  <% if is_owner?(@user)%>
+    <div class='group_feature rounded'>
+      <span>
+        <%= link_to_remote "設定目標時間", :update => 'remote', :url => {:action => 'target_time_now'} %>
+      </span>
+      <span>
+        <%= link_to_remote "#{image_tag("icon_new.gif")}設定睡覺目標時間", :update => 'remote', :url => {:action => 'sleep_target_time'} %>
+      </span>
+      <span>
+        <%= link_to_remote "補上起床時間", :update => 'remote', :url => {:action => 'new'} %>
+      </span>
+      <span>
+        <%= link_to_remote "補上睡覺時間", :update => 'remote', :url => {:action => 'new_sleep'} %>
+      </span> 
+      | 
+      <span><%=link_to_remote "設定今日目標", :update => 'remote', :url => {:controller => 'goals', :action => 'create', :id => @last_record}
+      %></span>
     <span>
       <%= select("user", "id", @friend_list, {:include_blank => '我的好友'}) %>
     </span>
     <%= link_to '好友設定', friend_url(:action => 'add_friend') %>
   </div>
 <% end %>
-<table>  
+<table class='padding_high'>  
   <thead>
     <th>起床時間</th>
     <th>晨間日記</th>
     <th>每日目標</th>
     <% if is_owner?(@user)%>
-    <th></th>
+      <th></th>
     <% end %>
     <th>回</th>
     <% if is_owner?(@user)%>
@@ -122,47 +102,66 @@
   <% @records.each do |record|  %>
     <% if record.todo_name == 'sleep' %>
       <tr class = sleep >
-    <% elsif !record.success %>
-      <tr class = target_fail>
-    <% else %>
-      <tr>
-    <% end %>
-        <td class='todo_time'>
-          <%= record_flag(record)%>
-          <%= exact_datetime_string(record.todo_time)%>
-          (<%= week_day(record.todo_time.wday)%>)
-        <% if is_owner?(@user)%>
-          <%=jquery_link_to_remote image_tag("pencil.png",
-                                             :border => "0"),
-                                             :update => 'remote',
-                                             :url => {:action => 'edit_time', :id => record.id}
-        %>
-        <% end %>
-        </td>
-        </td>
-        <td class='diary'>
-          <%=link_to_diary(record, record.content, nil) %>
-          <% if is_owner?(@user)%>
-            <%= link_to image_tag("pencil.png", :border => "0"), {:action => 'write_diary', :id => record.id} %>
+      <% elsif !record.success %>
+        <tr class = target_fail>
+        <% else %>
+          <tr>
+          <% end %>
+          <td class='todo_time'>
+            <%= record_flag(record)%>
+            <%= exact_datetime_string(record.todo_time)%>
+            (<%= week_day(record.todo_time.wday)%>)
+            <% if is_owner?(@user)%>
+              <%=link_to_remote image_tag("pencil.png",
+                                          :border => "0"),
+                                          :update => 'remote',
+                                          :url => {:action => 'edit_time', :id => record.id}
+            %>
           <% end %>
         </td>
-        <td class='goal'><%=link_to record.com_goal, member_url(:action => :show, :id => record) unless record.com_goal.blank?%></td>
+      </td>
+      <td class='diary'>
+        <%=link_to_diary(record, record.content, nil) %>
         <% if is_owner?(@user)%>
-        <td><%=jquery_link_to_remote image_tag("todo.png",
-                                               :border => "0"),
-                                               :update => 'remote',
-                                               :url => {:controller => 'goals', :action => 'create', :id => record.id}
+          <%= link_to image_tag("pencil.png", :border => "0"), {:action => 'write_diary', :id => record.id} %>
+        <% end %>
+      </td>
+      <td class='goal'><%=link_to record.com_goal, member_url(:action => :show, :id => record) unless record.com_goal.blank?%></td>
+      <% if is_owner?(@user)%>
+        <td><%=link_to_remote image_tag("todo.png",
+                                        :border => "0"),
+                                        :update => 'remote',
+                                        :url => {:controller => 'goals', :action => 'create', :id => record.id}
         %></td>
-        <% end %>
-        <td class='rsp'><%=record.comments.size%></td>
-        <% if is_owner?(@user)%>
-          <td><%=link_to_delete('member', record.id)%></td>
-        <% end %>
+    <% end %>
+    <td class='rsp'><%=record.comments.size%></td>
+    <% if is_owner?(@user)%>
+      <td><%=link_to_delete('member', record.id)%></td>
+    <% end %>
   </tr>
 <% end %>
-  <tr>
-  </tr>
+<tr>
+</tr>
 </table>
+<%= will_paginate @records %>
+</div>
+
+<% content_for :sider do %>
+  <script type="text/javascript">
+    hide_show_content("span.hide_side_census", ".side_census", 'census');
+    hide_show_content("span.hide_side_number_clock", ".number_clock", 'number_clock');
+    hide_show_content("span.hide_side_alarm_clock", ".alarm_clock", 'alarm_clock');
+    hide_show_content("span.hide_side_sleep_button", ".sleep_button", 'sleep_button');
+    hide_show_content("span.hide_side_last_rsp", ".last_rsp", 'last_rsp');
+  </script>
+
+  <div class="sidenav">
+    <%= render :partial => '/shared/sidebar', :locals => {:census_exist => true,
+                                                         :wake_exist   => true,
+                                                         :sleep_exist => true,
+                                                         :rsp_exist => true } %>
+  </div>
+  <% end %>
 
 <% @header = capture do %>
     <%= link_to "#{@user.name}的早起紀錄", home_url, :class => 'ebhead'%>

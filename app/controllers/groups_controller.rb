@@ -3,24 +3,12 @@ class GroupsController < ApplicationController
   before_filter :check_auth, :except =>[:index, :show]
 
   def index 
-    @latest_public_groups = Group.public.find(:all,
-                                               :order => 'id DESC',
-                                               :limit => 4)
-    @hottest_public_groups = Group.public.find(:all,
-                                                :order => 'readed DESC',
-                                                :limit => 4)
-
-    @latest_private_groups = Group.private.find(:all,
-                                                :order => 'id DESC',
-                                                :limit => 4)
-
-    @hottest_private_groups = Group.private.find(:all,
-                                                 :order => 'readed DESC',
-                                                 :limit => 4)
+    @latest_groups = Group.find(:all, :include => [:mugshot], :order => 'id DESC', :limit => 5)
+    @hottest_groups = Group.find_all_group(params[:page], 'chats_num', 5)
   end
 
   def list_all_groups
-    @groups = Group.find_group_rank(params[:page], params[:type], params[:sort])
+    @groups = Group.find_group_rank(params[:page], params[:sort])
   end
 
   def list
@@ -44,7 +32,6 @@ class GroupsController < ApplicationController
     @fail_members = @group.members.find_group_user_result(2)
     @sick_members = @group.members.find_group_user_result(3)
 
-    Group.increment_counter(:readed, @group.id)
   end
 
   def new

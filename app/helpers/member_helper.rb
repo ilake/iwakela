@@ -12,13 +12,13 @@ module MemberHelper
               <td class='diary'>#{link_to_diary(record, record.content) }</td>
               <td class='goal'>#{record.com_goal}</td>
               <td class='rsp'>#{record.comments.size}</td>
-              <td>#{jquery_link_to_remote image_tag("todo.png",
+              <td>#{link_to_remote image_tag("todo.png",
                                       :border => "0",
                                       :mouseover => image_path("todo_over.png")),
                                       :update => 'remote',
                                       :url => {:controller => 'goals', :action => 'create', :id => record.id}
                                       }</td>
-              <td>#{jquery_link_to_remote image_tag("journal.png",
+              <td>#{link_to_remote image_tag("journal.png",
                                       :border => "0",
                                       :mouseover => image_path("journal_over.png")),
                                       :update => 'remote',
@@ -36,5 +36,11 @@ module MemberHelper
     else
       image_tag('flag_green.png', :title => '不是補上或修改的紀錄')
     end
+  end
+
+  def set_range_link(from, to)
+      link_to_remote "<h3 class='border_padding'>
+      #{extract_date_string(from)} － #{extract_date_string(to)}
+      #{image_tag('button_n_arrow_down.gif')}</h3>", :url => {:action => 'set_graph_range'}
   end
 end

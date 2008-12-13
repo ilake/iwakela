@@ -252,47 +252,41 @@ class Record < ActiveRecord::Base
   end
 
   #make array to string
-  #[[5, 30.0], [6, 2.0]] => "[[5, 30.0], [6, 2.0]]"
+  #[[2008, 11, 5, 30.0], [2008, 11, 6, 2.0] => "[[2008, 11, 5, 30.0], [2008, 11, 6, 2.0]]"
   def self.time_to_string(records, time_type)
     time = ""
 
     if time_type == "todo_time"
       records.each do |record|
-        time << "[#{record.todo_time.day}, #{record.todo_time.hour + record.todo_time.min/60.0}],"
+        todo_time = record.todo_time
+        time << "[#{todo_time.to_i*1000}, #{todo_time.hour + todo_time.min/60.0}],"
       end
     else
       records.each do |record|
-        time << "[#{record.todo_target_time.day}, #{record.todo_target_time.hour + record.todo_target_time.min/60.0}]," if record.todo_target_time
+        target_time = record.todo_target_time
+        if target_time
+          time << "[#{target_time.to_i*1000}, #{target_time.hour + target_time.min/60.0}],"
+        end
       end
     end
     time.chop!
     "[#{time}]"
   end
 
-  def self.find_all_todo_time(month = Time.now.month, year = Time.now.year, option ="", type=nil)
-    #debugger
-    month_selected = Time.local(year, month)
-    month_next = month_selected.next_month
+  def self.find_all_todo_time(page, date_from, date_to, option ="", type=nil)
 
     params = {
       :order => "todo_time #{option}", 
-      :conditions => ["todo_time >= ? and todo_time <= ?", month_selected, month_next],
+      :conditions => ["todo_time >= ? and todo_time <= ?", date_from, date_to],
     }
 
     if type.blank?
-      self.all(params.merge!(:include => :comments))
+      self.paginate params.merge!(:page => page, :per_page => 7, :include => :comments)
     elsif type == 'sleep'
-      self.sleep.find(:all, params)
+      sleep.find(:all, params)
     else
-      self.wake.find(:all, params)
+      wake.find(:all, params)
     end
-  end
-
-  def self.find_all_records(params)
-    self.wake.paginate :page => params,
-                  :per_page => 10,
-                  :order => "id DESC", 
-                  :conditions => "content is not NULL"
   end
 
   def self.find_success_percent
@@ -304,7 +298,6 @@ class Record < ActiveRecord::Base
 
   def self.find_all_wake_up_today(params, res='none', per_page=10)
     cond = "records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"
-    #cond << "and users.id > 10"
 
     unless res == 'none'
       cond << "and records.success = #{res}" 
