@@ -19,6 +19,8 @@
                              "jquerypngfix.js",
                              "jquery-ui-personalized-1.5.3.min",
                              :cache => 'add_jrails' %>
+      <!--[if IE]><script language="javascript" type="text/javascript" src="/javascripts/excanvas.pack.js"></script><![endif]-->
+  <%= javascript_include_tag "jquery.flot.js" %>
 
   <%= yield :page_spec %>
 
