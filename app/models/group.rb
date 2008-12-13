@@ -77,12 +77,12 @@ class Group < ActiveRecord::Base
     end
   end
 
-  def self.find_group_rank(page, type='public', sort='id')
+  def self.find_group_rank(page, sort='id')
     order = "groups.#{sort} DESC"
-    self.send(type.to_sym).paginate :page => page,
-                                    :per_page => 10,
-                                    :include => :mugshot,
-                                    :order => order
+    self.paginate :page => page,
+                  :per_page => 10,
+                  :include => :mugshot,
+                  :order => order
   end
 
   def self.find_all_group(page, sort='id', per_page=5)
