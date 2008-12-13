@@ -4,7 +4,7 @@ module AllHelper
   SCORE_STATE = [38, 32, 20, 6, -6,-18,-30, -40, -48, -10000]
 
   def exact_datetime_string(datetime)
-    datetime.strftime("%m/%d  %H:%M")
+    datetime.strftime("%m/%d  %H:%M") if datetime
   end
 
   def extract_date_string(datetime)

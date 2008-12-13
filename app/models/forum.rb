@@ -23,10 +23,10 @@ class Forum < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
 
-  after_create :default_comment
+  before_save :set_last_comment_time
 
-  def default_comment
-    comments.create(:user_id => nil, :content => 'cant be seen')
+  def set_last_comment_time
+    self.last_comment_time = Time.now
   end
 
   def self.find_all_forum(params, group=nil)

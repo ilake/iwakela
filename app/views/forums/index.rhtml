@@ -13,8 +13,8 @@
     <tr>
       <td class='forum_subject'><%= link_to f.subject, :action => 'show', :id => f.id %></td>
       <td class='forum_author'><%= link_to_user(f.user, f.user.name) %></td>
-      <td><%= f.comments_count-1 if f.comments_count > 0%></td>
-      <td class='forum_created_at'><%= exact_datetime_string(f.last_comment.created_at) if f.last_comment %></td>
+      <td><%= f.comments_count.to_i %></td>
+      <td class='forum_created_at'><%= exact_datetime_string(f.last_comment_time) %></td>
     </tr>
   <% end %>
 </table>
