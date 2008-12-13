@@ -7,7 +7,7 @@ class MainController < ApplicationController
 
   def index
     @records = Record.find_all_wake_up_today(params[:page])
-    records = @records.size > 10 ? @records : Record.wake.find(:all, :order => 'todo_time DESC', :limit => 10) 
+    records = @records.size > 10 ? @records : Record.wake.find(:all, :order => 'todo_time DESC', :limit => 10, :conditions => ["todo_time < ?" Time.now ]) 
 
     @time = record_to_string(records)
   end
