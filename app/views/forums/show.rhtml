@@ -5,7 +5,7 @@
       <td>
         <b><%= @forum.subject %></b>
         <% if @forum.user == @me %>
-          <%= link_to '編輯', :action => 'edit', :id => @forum %> 
+          <%= link_to ' (編輯)', :action => 'edit', :id => @forum %> 
         <% end %>
       </td>
       <td class="forum-diary-time">
