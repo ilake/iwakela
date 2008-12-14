@@ -11,7 +11,12 @@ class CommentsController < ApplicationController
       @forum.save
     end
 
-    redirect_to :back
+    @comment = @forum.comments.last
+
+    respond_to do |format|
+      format.html {redirect_to :back}
+      format.js
+    end
   end
 
 end

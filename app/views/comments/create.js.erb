@@ -1,0 +1,2 @@
+$("#comments_list").append("<%= escape_javascript(render :partial => 'shared/comments', :locals => {:comment =>@comment })%>");
+$("#new_forum_comment form")[0].reset();

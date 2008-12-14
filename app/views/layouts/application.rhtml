@@ -10,17 +10,17 @@
 
   <title>早鳥網 一個紀錄幫助你早起的地方</title>
 
-  <%= stylesheet_link_tag "defaults", "itunes", "paginator", "flora.datepicker.css", :cache => 'fix_fuck_ie' %>
+  <%= stylesheet_link_tag "defaults", "itunes", "paginator", "flora.datepicker.css", :cache => 'eb_main_css' %>
   <%= stylesheet_link_tag "eb" %>
-  <%= javascript_include_tag "application.js" %>
   <%= javascript_include_tag "jquery",
                              "jrails",
                              "jquery.corner.js",
                              "jquerypngfix.js",
                              "jquery-ui-personalized-1.5.3.min",
-                             :cache => 'fix_fuck_ie' %>
+                             "jquery.flot.js",
+                             "application",
+                             :cache => 'eb_main_js' %>
       <!--[if IE]><script language="javascript" type="text/javascript" src="/javascripts/excanvas.pack.js"></script><![endif]-->
-  <%= javascript_include_tag "jquery.flot.js" %>
 
   <%= yield :page_spec %>
 
