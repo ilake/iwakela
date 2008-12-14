@@ -18,8 +18,8 @@
                              "jquerypngfix.js",
                              "jquery-ui-personalized-1.5.3.min",
                              "jquery.flot.js",
-                             "application",
-                             :cache => 'eb_main_js' %>
+                             :cache => 'rm_app_js' %>
+                             <%= javascript_include_tag "application" %>
       <!--[if IE]><script language="javascript" type="text/javascript" src="/javascripts/excanvas.pack.js"></script><![endif]-->
 
   <%= yield :page_spec %>

@@ -42,6 +42,6 @@ jQuery.fn.submitWithAjax = function() {
   })
 };
 
- $(document).ready(function(){
-   $("#new_forum_comment form").submitWithAjax();
- })
+// $(document).ready(function(){
+//   $("#new_forum_comment form").submitWithAjax();
+// })
