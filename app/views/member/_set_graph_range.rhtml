@@ -26,7 +26,7 @@
    })(jQuery);
  </script>
 
- <% form_remote_tag :url => {:action => 'set_graph_range'}, :html => {:id => 'graph_range'} do %>
+ <% form_remote_tag :url => {:action => 'set_graph_range', :id => @user}, :html => {:id => 'graph_range'} do %>
    <div class='setting-bg rounded' style='margin-top:15px;width:500px'>
      <span style='float:right;' class='close'>關閉</span>
      <b>日期範圍</b>

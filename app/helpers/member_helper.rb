@@ -41,6 +41,6 @@ module MemberHelper
   def set_range_link(from, to)
       link_to_remote "<h3 class='border_padding'>
       #{extract_date_string(from)} － #{extract_date_string(to)}
-      #{image_tag('button_n_arrow_down.gif')}</h3>", :url => {:action => 'set_graph_range'}
+      #{image_tag('button_n_arrow_down.gif')}</h3>", :url => {:action => 'set_graph_range', :id => @user }
   end
 end
