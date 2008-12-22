@@ -259,13 +259,21 @@ class Record < ActiveRecord::Base
     if time_type == "todo_time"
       records.each do |record|
         todo_time = record.todo_time
-        time << "[#{todo_time.to_i*1000}, #{todo_time.hour + todo_time.min/60.0}],"
+        if todo_time.hour <= 3
+          time << "[#{todo_time.to_i*1000}, #{24 + todo_time.hour + todo_time.min/60.0}],"
+        else
+          time << "[#{todo_time.to_i*1000}, #{todo_time.hour + todo_time.min/60.0}],"
+        end
       end
     else
       records.each do |record|
         target_time = record.todo_target_time
         if target_time
-          time << "[#{target_time.to_i*1000}, #{target_time.hour + target_time.min/60.0}],"
+          if target_time.hour <= 3
+            time << "[#{target_time.to_i*1000}, #{24 + target_time.hour + target_time.min/60.0}],"
+          else
+            time << "[#{target_time.to_i*1000}, #{target_time.hour + target_time.min/60.0}],"
+          end
         end
       end
     end

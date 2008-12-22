@@ -75,7 +75,7 @@
                 
               data,
               {
-                  yaxis: { minTickSize: 1 },
+                  yaxis: { ticks: 0},
                   xaxis: { mode: "time", minTickSize: [2, "day"], timeformat: "%y/%m/%d" },
                   lines: { show: true },
                   points: { show: true },
@@ -108,6 +108,8 @@
                           }
 
                           var time = ((y*1.0- integer*1).toFixed(2)*60.0).toFixed(0)
+
+                          integer = integer%24;
 
                           if (time.length == 1) {
                             var tiptime = integer + ":0" + time;
