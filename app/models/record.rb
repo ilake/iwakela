@@ -37,11 +37,11 @@ class Record < ActiveRecord::Base
 
   named_scope :success, :conditions => {:success => true}
   named_scope :fail, :conditions => {:success => false}
-#  named_scope :today,
-#              :conditions => ["todo_time > ? AND todo_time < ?", Time.now.midnight.to_s(:db), Time.now.tomorrow.midnight.to_s(:db)]
-
   named_scope :today,
-              :conditions => ["todo_time > ? AND todo_time < ?", Time.now.midnight, Time.now.tomorrow.midnight]
+              :conditions => ["todo_time > ? AND todo_time < ?", Time.now.midnight.to_s(:db), Time.now.tomorrow.midnight.to_s(:db)]
+
+#  named_scope :today,
+#              :conditions => ["todo_time > ? AND todo_time < ?", Time.now.midnight, Time.now.tomorrow.midnight]
   named_scope :week, :conditions => ["todo_time > ?", Time.now.beginning_of_week]
   named_scope :wake, :conditions => {:todo_name => 'wake_up'}
   named_scope :sleep, :conditions => {:todo_name => 'sleep'}
