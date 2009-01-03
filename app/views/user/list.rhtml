@@ -11,7 +11,7 @@
         <%= link_to_user(u, u.name, 'user') %>
       </h3>
       <p class="description">
-        <%= truncate(u.others, 50)%>
+        <%= truncate(u.others, :length => 50)%>
       </p>
       
     </div>

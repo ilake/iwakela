@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080916232411
+# Schema version: 20081227162431
 #
 # Table name: users
 #
@@ -17,6 +17,7 @@
 #  group_id                  :integer(11)     
 #  group_nickname            :string(255)     
 #  time_zone                 :string(255)     default("Taipei")
+#  sleep_target_time         :datetime        
 #
 
 #!/usr/math/bin/ruby
@@ -30,6 +31,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :scores
   has_many :great_words
+  has_one :setting
 
   composed_of :user_data, :mapping =>%w(name name)
 
@@ -81,6 +83,12 @@ class User < ActiveRecord::Base
   end.push(:to => :profile)
 
   delegate *field
+
+  setting = Setting.content_columns.inject([]) do |result, column|
+    result << column.name
+  end.push(:to => :setting)
+
+  delegate *setting
 
   attr_reader :password
 
@@ -151,7 +159,7 @@ class User < ActiveRecord::Base
   def self.find_all_users(params, page_size=12)
     self.paginate :page => params,
                   :per_page => page_size,
-                  :include => 'profile',
+                  :include => [:profile, :mugshot],
                   :order => "users.id DESC"
   end
 

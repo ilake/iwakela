@@ -7,8 +7,10 @@ class MainController < ApplicationController
 
   def index
     @records = Record.find_all_wake_up_today(params[:page])
-    records = @records.size > 7 ? @records : Record.wake.find(:all, :order => 'id DESC', :limit => 10, :conditions => ["todo_time < ?", Time.now ]) 
 
+    @user = User.find(:first, :include => :status, :order => 'statuses.average', :conditions => ["statuses.num > ? AND statuses.last_record_created_at > ? AND users.target_time_now is not NULL", 7, Time.now.ago(3.days)])
+
+    records = @user.records.wake.find(:all, :order => 'id DESC', :limit => 10, :conditions => ["todo_time < ?", Time.now ])
     @time = record_to_string(records)
   end
 
@@ -123,7 +125,6 @@ class MainController < ApplicationController
   end
 
   def test
-    render :layout => false
   end
 
   def record_to_string(records)

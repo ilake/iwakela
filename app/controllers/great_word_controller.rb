@@ -1,6 +1,12 @@
 class GreatWordController < ApplicationController
   helper :all
-  before_filter :check_auth
+  before_filter :check_auth, :except => :index
+
+  def index
+    @words = GreatWord.paginate :page => params[:page],
+                       :per_page => 20,
+                       :include => :user
+  end
 
   def new
     @great_word = GreatWord.new

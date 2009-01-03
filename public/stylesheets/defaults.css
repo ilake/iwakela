@@ -29,7 +29,7 @@ input {
 	font: normal 1.1em "Lucida Sans Unicode",sans-serif;
 }
 p,cite,code,ul {
-	font-size: 1.2em;
+	/*font-size: 1.2em;*/
 	padding-bottom: 1.2em;
 }
 h1 {

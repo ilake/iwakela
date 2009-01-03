@@ -1,3 +1,19 @@
+# == Schema Information
+# Schema version: 20081227162431
+#
+# Table name: games
+#
+#  id         :integer(11)     not null, primary key
+#  user_id    :integer(11)     
+#  name       :string(255)     
+#  salt       :string(255)     
+#  num        :integer(11)     default(0)
+#  today_num  :integer(11)     default(0)
+#  created_at :datetime        
+#  updated_at :datetime        
+#  desc       :text            
+#
+
 class Game < ActiveRecord::Base
   DEFAULT_METHODS = ["阿魯巴", "降龍十巴掌", "鐵頭功"]
   HUMANIZED_ATTRIBUTES = {

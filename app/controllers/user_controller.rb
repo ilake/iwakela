@@ -1,6 +1,6 @@
 class UserController < ApplicationController
   helper :all
-  before_filter :check_auth, :only =>[:edit, :edit_profile, :edit_password]
+  before_filter :check_auth, :only =>[:edit, :edit_profile, :edit_password, :edit_time_shift, :edit_username, :edit_email]
 
   #before_filter :check_owner, :only => [:edit, :edit_profile, :edit_password, :edit_username]
 
@@ -42,6 +42,19 @@ class UserController < ApplicationController
       end
     else
       @profile = @me.profile
+    end
+  end
+
+  def edit_time_shift
+    if request.post?
+      if @me.setting.update_attributes(params[:setting])
+        flash[:notice] = "變更完成"
+        redirect_to :controller => 'user', :action => 'edit', :id => @me.id
+      else
+        flash[:notice] = "變更失敗, 可能已有人使用"
+      end
+    else
+      @setting = @me.setting
     end
   end
 

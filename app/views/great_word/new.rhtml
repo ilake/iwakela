@@ -7,7 +7,7 @@
 <% end %>
 <h1>我貢獻過的</h1>
 <% @words.each do |word| %>
-  <div style='padding: 5px 0px 5px 0px'>
+  <div class='<%= cycle("bg-ly", "") %> pad-10 w-black'>
     <%= word.content %>
     <%= link_to '修改', word_path(:action => 'edit', :id => word) %> | 
     <%= link_to '刪除', word_path(:action => 'destroy', :id => word) %>

@@ -104,7 +104,7 @@ module AllHelper
 
   def link_to_user(u, text, cls=nil, img=false)
     str = "<span class='user_photo_small'>"
-    if u.mugshot && img
+    if img && u.mugshot
       str << "#{link_to image_tag(u.mugshot.public_filename(:small), :size =>'30x30'), {:controller => 'member', :action => 'list', :id => u}}</span>"
     elsif img
       str << "#{link_to image_tag("penguin_small.jpg"),{ :controller => 'member', :action => 'list', :id => u}}</span>"

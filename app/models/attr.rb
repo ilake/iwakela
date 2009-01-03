@@ -1,3 +1,13 @@
+# == Schema Information
+# Schema version: 20081227162431
+#
+# Table name: attrs
+#
+#  id      :integer(11)     not null, primary key
+#  game_id :integer(11)     
+#  name    :string(255)     
+#
+
 class Attr < ActiveRecord::Base
   HUMANIZED_ATTRIBUTES = {
     :name => "名稱",

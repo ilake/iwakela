@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080916232411
+# Schema version: 20081227162431
 #
 # Table name: great_words
 #
@@ -9,6 +9,7 @@
 #
 
 class GreatWord < ActiveRecord::Base
+  belongs_to :user
   HUMANIZED_ATTRIBUTES = {
     :content => "內容"
   }

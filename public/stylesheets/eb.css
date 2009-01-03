@@ -1,3 +1,4 @@
+/*  eb style */
 .title a {
   text-decoration:none;
 }
@@ -960,4 +961,70 @@ div.even{
   font-weight:bold;
   text-decoration:none;
   margin-top:10px;
+}
+
+.pad-10 {
+  padding: 10px;
+}
+.pad-l-10 {
+  padding-left: 10px;
+}
+
+.pad-t-5 {
+  padding-top: 5px;
+}
+
+.pad-5 {
+  padding: 5px;
+}
+
+.mar-10 {
+  margin: 10px;
+}
+
+.fl-l {
+  float: left;
+}
+
+.fl-r {
+  float: right;
+}
+
+.bg-lb{
+  background-color :#E1ECFE;
+}
+
+.bg-lg{
+  background-color :#B5EDBC;
+}
+
+.bg-or {
+  background-color :#FFEA70;
+}
+
+.bg-ly {
+  background-color :#FFFFEE;
+}
+
+.w-black {
+  color:#000000;
+}
+
+.wh-250 {
+  width:250px;
+}
+
+.wh-100 {
+  width:100px;
+}
+
+label {
+  color:#000000;
+  font-weight: bold;
+}
+
+.br-lb{
+  border-right:1px solid #CBCACA;
+  padding:5px;
+  margin:5px;
 }

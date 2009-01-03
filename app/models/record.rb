@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080916232411
+# Schema version: 20081227162431
 #
 # Table name: records
 #
@@ -253,13 +253,13 @@ class Record < ActiveRecord::Base
 
   #make array to string
   #[[2008, 11, 5, 30.0], [2008, 11, 6, 2.0] => "[[2008, 11, 5, 30.0], [2008, 11, 6, 2.0]]"
-  def self.time_to_string(records, time_type)
+  def self.time_to_string(records, time_type, time_shift=3)
     time = ""
 
     if time_type == "todo_time"
       records.each do |record|
         todo_time = record.todo_time
-        if todo_time.hour <= 3
+        if todo_time.hour <= time_shift
           time << "[#{todo_time.to_i*1000}, #{24 + todo_time.hour + todo_time.min/60.0}],"
         else
           time << "[#{todo_time.to_i*1000}, #{todo_time.hour + todo_time.min/60.0}],"
@@ -269,7 +269,7 @@ class Record < ActiveRecord::Base
       records.each do |record|
         target_time = record.todo_target_time
         if target_time
-          if target_time.hour <= 3
+          if target_time.hour <= time_shift
             time << "[#{target_time.to_i*1000}, #{24 + target_time.hour + target_time.min/60.0}],"
           else
             time << "[#{target_time.to_i*1000}, #{target_time.hour + target_time.min/60.0}],"
@@ -285,11 +285,12 @@ class Record < ActiveRecord::Base
 
     params = {
       :order => "todo_time #{option}", 
-      :conditions => ["todo_time >= ? and todo_time <= ?", date_from, date_to],
+      :conditions => ["todo_time >= ? and todo_time <= ?", date_from, date_to]
     }
 
     if type.blank?
-      self.paginate params.merge!(:page => page, :per_page => 7, :include => :comments)
+      #self.paginate params.merge!(:page => page, :per_page => 31, :include => :comments)
+      find(:all, params.merge!(:include => :comments))
     elsif type == 'sleep'
       sleep.find(:all, params)
     else

@@ -64,7 +64,7 @@ class MemberController < ApplicationController
   end
 
   def list
-    @from, @to = month_range(@month, @year)
+    @from, @to = month_range
     @records = @user.records.find_all_todo_time(params[:page], @from, @to, "DESC")
 
     #@from, @to = thirty_days_ago_range(to)
@@ -306,15 +306,16 @@ class MemberController < ApplicationController
   end
 
   def record_to_string(records, sleep_records)
-    time = Record.time_to_string(records, "todo_time")
-    sleep_time = Record.time_to_string(sleep_records, "todo_time")
-    target_time = Record.time_to_string(records, "todo_target_time")
-    sleep_target_time = Record.time_to_string(sleep_records, "todo_target_time")
+    time_shift = @user.time_shift
+    time = Record.time_to_string(records, "todo_time", time_shift)
+    sleep_time = Record.time_to_string(sleep_records, "todo_time", time_shift)
+    target_time = Record.time_to_string(records, "todo_target_time", time_shift)
+    sleep_target_time = Record.time_to_string(sleep_records, "todo_target_time", time_shift)
     return time, sleep_time, target_time, sleep_target_time
   end
 
-  def month_range(month = Time.now.month, year = Time.now.year)
-    month_selected = Time.local(year, month)
+  def month_range
+    month_selected = Time.local(@year, @month)
     month_next = month_selected.next_month
     return month_selected, month_next
   end

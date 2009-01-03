@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080916232411
+# Schema version: 20081227162431
 #
 # Table name: statuses
 #

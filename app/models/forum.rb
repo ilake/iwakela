@@ -1,15 +1,17 @@
 # == Schema Information
-# Schema version: 20080916232411
+# Schema version: 20081227162431
 #
 # Table name: forums
 #
-#  id             :integer(11)     not null, primary key
-#  subject        :string(255)     
-#  content        :text            
-#  created_at     :datetime        
-#  user_id        :integer(11)     not null
-#  comments_count :integer(11)     default(0)
-#  group_id       :integer(11)     
+#  id                :integer(11)     not null, primary key
+#  subject           :string(255)     
+#  content           :text            
+#  created_at        :datetime        
+#  user_id           :integer(11)     not null
+#  comments_count    :integer(11)     default(0)
+#  group_id          :integer(11)     
+#  last_comment_time :datetime        
+#  public            :integer(11)     
 #
 
 class Forum < ActiveRecord::Base
@@ -38,10 +40,10 @@ class Forum < ActiveRecord::Base
     else
       options = {
         :per_page => 20,
-        :conditions => 'forums.group_id is NULL'
+        :conditions => 'forums.group_id is NULL Or forums.public = 1'
       }
     end
 
-    self.paginate options.merge!(:page => params, :order => "last_comment_time DESC")
+    self.paginate options.merge!(:include => :user, :page => params, :order => "last_comment_time DESC")
   end
 end

@@ -1,5 +1,9 @@
   <%= render :partial => 'shared/announce'%>
   <div class='clear'></div>
+  <div class='eb_header'><%= @user.name %>的起床時間</div>
+  <%= render :partial => 'index_graph' %>
+  <div class='clear'></div>
+  <br />
   <%= render :partial => 'shared/records', :locals => {:records => @records}%>
   <%= will_paginate @records %>
   <div class='clear'></div>

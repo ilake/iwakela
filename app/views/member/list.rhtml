@@ -112,7 +112,7 @@
             <%= exact_datetime_string(record.todo_time)%>
             (<%= week_day(record.todo_time.wday)%>)
             <% if is_owner?(@user)%>
-              <%=link_to_remote image_tag("pencil.png",
+              <%= link_to_remote image_tag("pencil.png",
                                           :border => "0"),
                                           :update => 'remote',
                                           :url => {:action => 'edit_time', :id => record.id}
@@ -134,7 +134,7 @@
                                         :url => {:controller => 'goals', :action => 'create', :id => record.id}
         %></td>
     <% end %>
-    <td class='rsp'><%=record.comments.size%></td>
+    <td class='rsp'><%= @comment_siez ||= record.comments.size %></td>
     <% if is_owner?(@user)%>
       <td><%=link_to_delete('member', record.id)%></td>
     <% end %>
@@ -143,7 +143,7 @@
 <tr>
 </tr>
 </table>
-<%= will_paginate @records %>
+<%#= will_paginate @records %>
 </div>
 
 <% content_for :sider do %>

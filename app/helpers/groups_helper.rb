@@ -37,8 +37,12 @@ module GroupsHelper
   end
 
   def link_to_absence(group)
-    if @me.own_group == group || @me.group == group
-      link_to '我要請假', :action => 'ask_absence', :id => group.id
+    if (@me.own_group == group || @me.group == group) && @me.status.fight
+      link_to '我要請假',{ :action => 'absence', :id => group.id, :absence => '1'},
+                          :confirm => '你確定要請假嗎？', :method => :post
+    elsif (@me.own_group == group || @me.group == group) && !@me.status.fight
+      link_to '<span class="alert_red">取消請假</span>',{ :action => 'absence', :id => group.id},
+        :confirm => '你確定要取消嗎？', :method => :post
     end
   end
 

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080916232411
+# Schema version: 20081227162431
 #
 # Table name: targets
 #
@@ -8,6 +8,7 @@
 #  todo_target_time :datetime        
 #  week             :integer(11)     
 #  month            :integer(11)     
+#  todo_type        :integer(11)     default(0)
 #
 
 class Target < ActiveRecord::Base

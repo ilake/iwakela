@@ -10,7 +10,7 @@
 </div>
 <br />
   <div id='new_forum_comment'>
-    <% form_tag :controller => 'comments', :action => 'create', :id => item.id do%>
+    <% form_remote_tag :url => {:controller => 'comments', :action => 'create', :id => item.id} do%>
       回應<br />
       <%= text_area  'comments', 'content', :rows => '12', :cols => '72' %><br />
       <%= hidden_field_tag :model, item.class.to_s %>

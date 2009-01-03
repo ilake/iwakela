@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20081227162431
+#
+# Table name: talks
+#
+#  id         :integer(11)     not null, primary key
+#  game_id    :integer(11)     
+#  name       :string(255)     
+#  content    :text            
+#  created_at :datetime        
+#
+
 class Talk < ActiveRecord::Base
   belongs_to :game
   validates_presence_of :name, :content
