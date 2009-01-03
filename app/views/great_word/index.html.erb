@@ -1,0 +1,15 @@
+<%= link_to "我也要貢獻", word_path(:action => 'new'), {:popup => true} %>
+<table>
+  <thead>
+    <th class='wh-100'>提供人</th>
+    <th>佳句</th>
+  </thead>
+  <% @words.each do |word| %>
+    <tr class='<%= cycle("bg-ly", "") %>'>
+      <% user = word.user %>
+      <td><%= link_to_user user, user.name %></td>
+      <td><%= format_content word.content %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @words %>

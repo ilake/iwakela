@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20080916232411
+# Schema version: 20081227162431
 #
 # Table name: users
 #
@@ -17,6 +17,7 @@
 #  group_id                  :integer(11)     
 #  group_nickname            :string(255)     
 #  time_zone                 :string(255)     default("Taipei")
+#  sleep_target_time         :datetime        
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

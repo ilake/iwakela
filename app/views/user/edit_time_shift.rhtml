@@ -1,0 +1,55 @@
+<div class='fl-l wh-250'>
+  <div class='w-black bg-or pad-10'>
+    您現在的換日線時間是『<%= @setting.time_shift %>』點
+  </div>
+  <div>
+    <h1>我要設定換日線</h1>
+    <% form_for :time_shift, :url => {:action => 'edit_time_shift'} do |f|%>
+      <div class='pad-5'>
+        <%= label :setting, :time_shift, '凌晨0點'%>: <%= radio_button :setting, :time_shift, 0 %>
+      </div> 
+      <div class='pad-5'>
+        <%= label :setting, :time_shift, '凌晨1點'%>: <%= radio_button :setting, :time_shift, 1 %>
+      </div>
+      <div class='pad-5'>
+        <%= label :setting, :time_shift, '凌晨2點'%>: <%= radio_button :setting, :time_shift, 2 %>
+      </div>
+      <div class='pad-5'>
+        <%= label :setting, :time_shift, '凌晨3點'%>: <%= radio_button :setting, :time_shift, 3 %>
+      </div>
+      <div class='pad-5'>
+        <%= label :setting, :time_shift, '凌晨4點'%>: <%= radio_button :setting, :time_shift, 4 %>
+      </div>
+      <div class='pad-5'>
+        <%= label :setting, :time_shift, '凌晨5點'%>: <%= radio_button :setting, :time_shift, 5 %>
+      </div>
+      <div class='pad-5'>
+        <%= label :setting, :time_shift, '凌晨6點'%>: <%= radio_button :setting, :time_shift, 6 %>
+      </div>
+      <%= submit_tag "設定"%>
+    <% end %>
+  </div>
+  <hr>
+  <div>
+    <h1>上面都沒我要的時間</h1>
+    <% form_for :time_shift, :url => {:action => 'edit_time_shift'} do |f|%>
+      <div class='padding-10'>
+        我要的換日線是<%= select :setting, :time_shift, (0..23).inject([]){|h, v| h << [v,v]; h} %>點
+      </div>
+      <%= submit_tag "設定"%>
+    <% end %>
+  </div>
+</div>
+<div class='fl-r'>
+  <div class='pad-10 bg-lb mar-10 w-black rounded'>什麼是換日線</div>
+  <div class='pad-10 bg-lg mar-10 w-black'>
+    自己睡覺時間的曲線看起來很亂嗎? 改變一下"換日線" 就可以讓你的曲線看起來簡潔一點喔
+  </div>
+  <br />
+  <p>使用前</p>
+  <%= image_tag('time_shift_demo2.png')%>
+
+  <br />
+  <p>使用後</p>
+  <%= image_tag('time_shift_demo.png')%>
+</div>

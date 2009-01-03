@@ -1,17 +1,12 @@
 # == Schema Information
 # Schema version: 20081227162431
 #
-# Table name: games
+# Table name: settings
 #
 #  id         :integer(11)     not null, primary key
+#  time_shift :integer(11)     default(3)
+#  open       :integer(11)     default(0)
 #  user_id    :integer(11)     
-#  name       :string(255)     
-#  salt       :string(255)     
-#  num        :integer(11)     default(0)
-#  today_num  :integer(11)     default(0)
-#  created_at :datetime        
-#  updated_at :datetime        
-#  desc       :text            
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
