@@ -306,7 +306,8 @@ class MemberController < ApplicationController
   end
 
   def record_to_string(records, sleep_records)
-    time_shift = @user.time_shift
+    time_shift = @user.time_shift if @user
+    time_shift ||= 3
     time = Record.time_to_string(records, "todo_time", time_shift)
     sleep_time = Record.time_to_string(sleep_records, "todo_time", time_shift)
     target_time = Record.time_to_string(records, "todo_target_time", time_shift)
