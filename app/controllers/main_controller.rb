@@ -135,6 +135,10 @@ class MainController < ApplicationController
   def language
     #1是繁体 0 是简体
     session[:language] = params[:type] == 'tradition' ? 1 : 0
-    redirect_to :back
+    if request.env["HTTP_REFERER"]
+      redirect_to :back
+    else
+      redirect_to :controller => 'main', :action => 'index'
+    end
   end
 end
