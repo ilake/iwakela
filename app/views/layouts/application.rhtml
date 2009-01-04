@@ -92,15 +92,15 @@
     </div>
     <div class="auth">
       <% if @me %>
-        <%= "<span class='alert'>[#{t 'member.sick'}]</span>" unless @me.status.fight%>
-        <%= link_to_member(@me, "#{@me.name}#{t 'member.record_title'}")%> | 
+        <%= "<span class='alert'>[#{t('member.sick')}]</span>" unless @me.status.fight%>
+        <%= link_to_member(@me, "#{@me.name}#{t('member.record_title')}")%> | 
         <%= link_to_my_group %> |
-        <%= link_to t 'site.logout', :controller => 'main', :action => 'logout' %> | 
-        <%= link_to t 'member.setting', :controller => 'user', :action => 'edit', :id => @me.id %>
+        <%= link_to t('site.logout'), :controller => 'main', :action => 'logout' %> | 
+        <%= link_to t('member.setting'), :controller => 'user', :action => 'edit', :id => @me.id %>
       <% else%>
-        <%= link_to t 'site.login', :controller => 'main', :action => 'login' %> | 
-        <%= link_to t 'site.signup', :controller => 'main', :action => 'register' %> | 
-        <%= link_to t 'site.forget_password', :controller => 'main', :action => 'forget_password' %>
+        <%= link_to t('site.login'), :controller => 'main', :action => 'login' %> | 
+        <%= link_to t('site.signup'), :controller => 'main', :action => 'register' %> | 
+        <%= link_to t('site.forget_password'), :controller => 'main', :action => 'forget_password' %>
       <%end%>
     </div>
 </div>
