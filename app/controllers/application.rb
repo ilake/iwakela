@@ -4,12 +4,11 @@
 class ApplicationController < ActionController::Base
   # Pick a unique cookie name to distinguish our session data from others'
   include HoptoadNotifier::Catcher
-  require 'ruby-debug'
   session :session_key => '_earlybirds_session_id'
   require "sanitize"
 
   before_filter :check_user
-  before_filter :jumpback
+  #before_filter :jumpback
   before_filter :set_user_language  
 
   def check_user
@@ -65,17 +64,17 @@ class ApplicationController < ActionController::Base
 #    false 
 #  end
 
-  def rescue_action_in_public(exception)
-    case exception
-    when ActionController::RedirectBackError
-      jumpto = session[:jumpback] || {:controller => "main"}
-      redirect_to jumpto
-    when ActionController::RoutingError
-      redirect_to home_url
-    else
-      super
-    end
-  end
+#  def rescue_action_in_public(exception)
+#    case exception
+#    when ActionController::RedirectBackError
+#      jumpto = session[:jumpback] || {:controller => "main"}
+#      redirect_to jumpto
+#    when ActionController::RoutingError
+#      redirect_to home_url
+#    else
+#      super
+#    end
+#  end
 
   def set_user_language
     session[:language] ||= 1
