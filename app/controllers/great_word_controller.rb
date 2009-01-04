@@ -5,7 +5,8 @@ class GreatWordController < ApplicationController
   def index
     @words = GreatWord.paginate :page => params[:page],
                        :per_page => 20,
-                       :include => :user
+                       :include => :user,
+                       :order => "id DESC"
   end
 
   def new

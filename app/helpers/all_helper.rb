@@ -47,7 +47,7 @@ module AllHelper
 
   def exact_target_time(user)
     if time = user.target_time
-        "今日目標: #{extract_target_time(time)}"
+        "#{t('sider.today_target')}: #{extract_target_time(time)}"
     else
       link_to "<font color='red'>尚未設定目標起床時間</font>", :controller => 'member', :action => 'list'
     end
@@ -63,11 +63,11 @@ module AllHelper
   end
 
   def all_average(user)
-      %[平均時間#{user.status.average.strftime("%H:%M")}] if user.status.average
+      %[#{t('sider.average')}#{user.status.average.strftime("%H:%M")}] if user.status.average
   end
 
   def diff_value(user)
-      "平均離目標#{user.status.diff}分" if user.status.diff and user.target_time_now
+      "#{t('sider.diff')}#{user.status.diff}分" if user.status.diff and user.target_time_now
   end
 
   def exact_score(user)
@@ -83,17 +83,17 @@ module AllHelper
         st = image_tag('http://iwakela.com/images/arrow_up.png', :alt => '進步', :title => '進步' )
       end
 
-      "成功率#{ number_to_percentage(user.status.success_rate, :precision => 1) || 0} #{st}"
+      "#{t('sider.rate')}#{ number_to_percentage(user.status.success_rate, :precision => 1) || 0} #{st}"
   end
 
   def continuous_success_num(user)
     num = user.status.continuous_num
     if !num 
-     "連續早起0次"
+     "#{t('sider.continuous')}早起0次"
     elsif num < 0
-     "<span class='alert'>連續晚起 #{num.abs || 0}次</span>"
+     "<span class='alert'>#{t('sider.continuous')}晚起 #{num.abs || 0}次</span>"
     else
-     "連續早起 #{num.abs || 0}次"
+     "#{t('sider.continuous')}早起 #{num.abs || 0}次"
     end
   end
 
@@ -244,7 +244,7 @@ module AllHelper
 
   def link_to_my_group
     if @me.group
-      link_to @me.name+"#{t 'member.group_title'}", :controller => 'groups', :action => 'show', :id => @me.group_id
+      link_to @me.name+"#{t('member.group_title')}", :controller => 'groups', :action => 'show', :id => @me.group_id
     else
       "<span class='alert'>
       #{link_to '妳還沒有參加任何的早起團', :controller => 'groups', :action => 'index'}

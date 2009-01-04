@@ -4,10 +4,10 @@
 <%= link_to '我要發文', :action => 'new', :id => params[:id] %>
 <table>
   <thead>
-    <th>標題</th>
-    <th>作者</th>
-    <th>回應數</th>
-    <th>最後回應</th>
+    <th><%= t 'forum.title' %></th>
+    <th><%= t 'forum.author' %></th>
+    <th><%= t 'forum.rsp_num' %></th>
+    <th><%= t 'forum.last_rsp' %></th>
   </thead>
   <% @forums.each do |f|%>
     <tr>

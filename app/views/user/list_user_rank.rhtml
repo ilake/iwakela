@@ -1,12 +1,12 @@
-<span class='alert'>(最近3天)有上且(最少有七筆)紀錄而且(有設定每天的目標時間)才會出現在這裡</span>
+<div class='bg-lg pad-10 w-black fw-bold'><%= t 'rank.desc'%></div>
 <table>  
   <thead>
-    <th>暱稱</th>
-    <th>自介</th>
-    <th><%= link_to '比接近目標', :action => 'list_user_rank', :sort => 'diff' %></th>
-    <th><%= link_to '比起床時間', :action => 'list_user_rank', :sort => 'average' %></th>
-    <th><%= link_to '比成功率', :action => 'list_user_rank', :sort => 'success_rate' %></th>
-    <th><%= link_to '比連續天數', :action => 'list_user_rank', :sort => 'continuous_num' %></th>
+    <th><%= t 'member.nickname' %></th>
+    <th><%= t 'member.profile' %></th>
+    <th><%= link_to t('rank.diff'), :action => 'list_user_rank', :sort => 'diff' %></th>
+    <th><%= link_to t('rank.average'), :action => 'list_user_rank', :sort => 'average' %></th>
+    <th><%= link_to t('rank.rate'), :action => 'list_user_rank', :sort => 'success_rate' %></th>
+    <th><%= link_to t('rank.continuous'), :action => 'list_user_rank', :sort => 'continuous_num' %></th>
   </thead>
   <% @users.each do |u|  %>
     <tr class="<%= cycle('title','')%>">

@@ -131,4 +131,10 @@ class MainController < ApplicationController
     time = Record.time_to_string(records, "todo_time")
     return time
   end
+
+  def language
+    #1是繁体 0 是简体
+    session[:language] = params[:type] == 'tradition' ? 1 : 0
+    redirect_to :back
+  end
 end

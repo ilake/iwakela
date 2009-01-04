@@ -13,25 +13,25 @@
 
         var time_set = {
           "target": {
-              label: "目標時間",
+              label: "<%= t('record.target_time')%>",
               data: target_time,
               color: 3
             },
 
           "wake": {
-            label: "起床時間",
+            label: "<%= t('record.wake_time')%>",
             data: time,
             color: 1
             },
 
           "sleep_target": {
-            label: "目標睡覺時間",
+            label: "<%= t('record.sleep_target_time')%>",
             data: sleep_target_time,
             color: 0
           },
 
           "sleep": {
-            label: "睡覺時間",
+            label: "<%= t('record.sleep_time')%>",
             data: sleep_time,
             color: 2//,
             //lines: { show: false }

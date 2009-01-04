@@ -4,10 +4,12 @@
 "zh-CN":
   site:
     name: "早鸟网"
+    slogan: "早鸟网 一个帮助你早起的地方"
     logout: "登出"
     login: "登入"
     signup: "注册"
     forget_password: "忘记密码"
+    desc: " 你的作息时间不正常吗？ <br /> 人生中有许多的好习惯值得养成， <br /> 早鸟网是个提供你纪录调整作息, 规画每日目标的地方。 <br />" 
 
   menu:
     user: "使用者列表"
@@ -27,6 +29,10 @@
     record_title: "的早起日志" 
     group_title: "的早鸟团"
     setting: "个人设定"
+    friend: "我的好友"
+    friend_set: "好友设定"
+    nickname: "昵称"
+    profile: "自介"
 
   record:
     wake_goal: "设定早起目标"
@@ -34,6 +40,46 @@
     repair_wake: "补上起床时间"
     repair_sleep: "补上睡觉时间"
     today_goal: "设定今日目标"
+    wake_time: "起床时间"
+    sleep_time: "睡觉时间"
+    wake_diary: "晨间日记"
+    goal_daily: "每日目标"
+    target_time: "目标时间"
+    sleep_target_time: "目标睡觉时间"
+
+  sider:
+    name: "早起成果"
+    today_wake_time: "今天起床时间"
+    wake_up: "起床罗！"
+    sleep: "睡觉罗！"
+    last_rsp: "最新回应"
+    time_now: "纪录现在时间"
+    today_target: "今日目标"
+    rate: "成功率"
+    continuous: "连续"
+    average: "平均时间"
+    diff: "平均离目标"
+
+  group:
+    open: "我要开团"
+    latest: "最新的团"
+    desc: "私人团需由 团长 主动邀请团员加入, 公开团则否"
+
+  rank: 
+    desc: "最近3天有纪录而且有设定目标时间的排行榜"
+    diff: "比接近目标"
+    average: "比起床时间"
+    rate: "比成功率"
+    continuous: "比连续天数"
+
+  forum:
+    title: "标题"
+    author: "作者"
+    rsp_num: "回应数"
+    last_rsp: "最后回应"
+
+  word:
+    new: "我也要贡献"
 
   date:
     formats:

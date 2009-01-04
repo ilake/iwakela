@@ -4,10 +4,12 @@
 "zh-TW":
   site:
     name: "早鳥網"
+    slogan: "早鳥網 一個幫助你早起的地方"
     logout: "登出"
     login: "登入"
     signup: "註冊"
     forget_password: "忘記密碼"
+    desc: " 你的作息時間不正常嗎？ <br /> 人生中有許多的好習慣值得養成， <br /> 早鳥網是個提供你紀錄調整作息, 規畫每日目標的地方。 <br />" 
 
   menu:
     user: "使用者列表"
@@ -27,6 +29,10 @@
     record_title: "的起床日誌" 
     group_title: "的早鳥團"
     setting: "個人設定"
+    friend: "我的好友"
+    friend_set: "好友設定"
+    nickname: "暱稱"
+    profile: "自介"
 
   record:
     wake_goal: "設定早起目標"
@@ -34,6 +40,47 @@
     repair_wake: "補上起床時間"
     repair_sleep: "補上睡覺時間"
     today_goal: "設定今日目標"
+    wake_time: "起床時間"
+    sleep_time: "睡覺時間"
+    wake_diary: "晨間日記"
+    goal_daily: "每日目標"
+    target_time: "目標時間"
+    sleep_target_time: "目標睡覺時間"
+
+
+  sider:
+    name: "早起成果"
+    today_wake_time: "今天起床時間"
+    wake_up: "起床囉！"
+    sleep: "睡覺囉！"
+    last_rsp: "最新回應"
+    time_now: "紀錄現在時間"
+    today_target: "今日目標"
+    rate: "成功率"
+    continuous: "連續"
+    average: "平均時間"
+    diff: "平均離目標"
+
+  group:
+    open: "我要開團"
+    latest: "最新的團"
+    desc: "私人團需由 團長 主動邀請團員的加入, 公開團則否"
+
+  rank: 
+    desc: "最近3天有紀錄而且有設定目標時間的排行榜"
+    diff: "比接近目標"
+    average: "比起床時間"
+    rate: "比成功率"
+    continuous: "比連續天數"
+
+  forum:
+    title: "標題"
+    author: "作者"
+    rsp_num: "回應數"
+    last_rsp: "最後回應"
+
+  word:
+    new: "我也要貢獻"
 
   date:
     formats:

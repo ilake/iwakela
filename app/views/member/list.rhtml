@@ -81,16 +81,16 @@
       <span><%=link_to_remote t("record.today_goal"), :update => 'remote', :url => {:controller => 'goals', :action => 'create', :id => @last_record}
       %></span>
     <span>
-      <%= select("user", "id", @friend_list, {:include_blank => '我的好友'}) %>
+      <%= select("user", "id", @friend_list, {:include_blank => t('member.friend')}) %>
     </span>
-    <%= link_to '好友設定', friend_url(:action => 'add_friend') %>
+    <%= link_to t('member.friend_set'), friend_url(:action => 'add_friend') %>
   </div>
 <% end %>
 <table class='padding_high'>  
   <thead>
-    <th>起床時間</th>
-    <th>晨間日記</th>
-    <th>每日目標</th>
+    <th><%= t 'record.wake_time' %></th>
+    <th><%= t 'record.wake_diary' %></th>
+    <th><%= t 'record.goal_daily' %></th>
     <% if is_owner?(@user)%>
       <th></th>
     <% end %>
@@ -164,5 +164,5 @@
   <% end %>
 
 <% @header = capture do %>
-    <%= link_to "#{@user.name}的早起紀錄", home_url, :class => 'ebhead'%>
+    <%= link_to "#{@user.name}#{t('member.record_title')}", home_url, :class => 'ebhead'%>
 <% end %>

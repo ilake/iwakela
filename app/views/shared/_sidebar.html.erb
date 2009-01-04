@@ -1,10 +1,17 @@
 <% if census_exist %>
   <div id="overview-selector" class="selector">
     <span class="hide_side_census"><a href='#'><%= @census_status == 'show' ? '+' : '－'  %></a></span>
-    <span>早起成果</span>
+    <span><%= t('sider.name') %></span>
   </div>
   <ul class='side_census <%= @census_status %>'>
-    <%= render :partial => "shared/census"%>
+    <li class = "census"><%= exact_target_time(@user) %></li>
+    <li class = "census"><%= success_census(@user) %></li>
+    <li class = "census"><%= continuous_success_num(@user) %></li>
+    <li class = "census"><%= all_average(@user) %></li>
+    <li class = "census"><%= diff_value(@user) %></li>
+    <div class= "my_score_status">
+      <%= score_state(@user) %>
+    </div>
   </ul>
 <% end %>
 
@@ -12,7 +19,7 @@
   <% if  r = @user.today_record %>
     <div id="overview-selector" class="selector"> 
       <span class='hide_side_number_clock'><a href='#'><%= @number_clock_status == 'show' ? '+' : '－'  %></a></span>
-      <span>今天起床時間</span>
+      <span><%= t('sider.today_wake_time') %></span>
     </div>
     <div class='number_clock <%= @number_clock_status%>'>
       <%= image_tag(r.success ? 'thumbup.gif' : 'thumbdown.gif') %> <br />
@@ -21,19 +28,19 @@
   <% elsif @user == @me %>
     <div id="overview-selector" class="selector"> 
       <span class='hide_side_alarm_clock'><a href='#'><%= @alarm_clock_status == 'show' ? '+' : '－'  %></a></span>
-      <span>起床囉！</span>
+      <span><%= t('sider.wake_up') %></span>
     </div>
-    <div class='alarm_clock <%= @alarm_clock_status%>'> <%= "#{image_tag('clock.gif')}<br /> 紀錄現在時間" %> </div>
+    <div class='alarm_clock <%= @alarm_clock_status%>'> <%= "#{image_tag('clock.gif')}<br /> #{t('sider.time_now')}" %> </div>
   <% end %>
 <% end %>
 
 <% if sleep_exist && @user == @me %>
   <div id="overview-selector" class="selector">
     <span class='hide_side_sleep_button'><a href='#'><%= @sleep_button_status == 'show' ? '+' : '－'  %></a></span>
-    <span>睡覺囉！</span>
+    <span><%= t('sider.sleep') %></span>
   </div>
   <div class='sleep_button <%= @sleep_button_status%>'>
-    <%= "#{image_tag('sleep_time.png')}<br /> 紀錄現在時間" %>
+    <%= "#{image_tag('sleep_time.png')}<br /> #{t('sider.time_now')}" %>
   </div>
 <% end %>
 
@@ -44,7 +51,7 @@
           <%= @last_rsp_status == 'show' ? '+' : '－'  %>
         </a>
       </span>
-      <span>最新回應</span>
+      <span><%= t('sider.last_rsp') %></span>
     </div>
     <div class='last_rsp <%= @last_rsp_status%>'>
       <% if @user.record_comments.count > 0 %>

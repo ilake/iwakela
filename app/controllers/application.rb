@@ -78,7 +78,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_user_language
-    I18n.locale = LOCALES_AVAILABLE[0]
+    session[:language] ||= 1
+    I18n.locale = LOCALES_AVAILABLE[session[:language]]
   end
 
 end
