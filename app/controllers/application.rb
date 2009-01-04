@@ -10,11 +10,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :check_user
   before_filter :jumpback
-  #before_filter :set_time_zone
-
-  def set_time_zone
-    Time.zone = @me.time_zone if @me
-  end
+  before_filter :set_user_language  
 
   def check_user
     if uid = session[:uid]
@@ -35,7 +31,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
   def user_default_sideber_option
     @census_status = session[:census] ? session[:census] : 'show'
     @number_clock_status = session[:number_clock] ? session[:number_clock] : 'show'
@@ -80,6 +75,10 @@ class ApplicationController < ActionController::Base
     else
       super
     end
+  end
+
+  def set_user_language
+    I18n.locale = LOCALES_AVAILABLE[0]
   end
 
 end

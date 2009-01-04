@@ -66,19 +66,19 @@
   <% if is_owner?(@user)%>
     <div class='group_feature rounded'>
       <span>
-        <%= link_to_remote "設定目標時間", :update => 'remote', :url => {:action => 'target_time_now'} %>
+        <%= link_to_remote t("record.wake_goal"), :update => 'remote', :url => {:action => 'target_time_now'} %>
       </span>
       <span>
-        <%= link_to_remote "#{image_tag("icon_new.gif")}設定睡覺目標時間", :update => 'remote', :url => {:action => 'sleep_target_time'} %>
+        <%= link_to_remote t("record.sleep_goal"), :update => 'remote', :url => {:action => 'sleep_target_time'} %>
       </span>
       <span>
-        <%= link_to_remote "補上起床時間", :update => 'remote', :url => {:action => 'new'} %>
+        <%= link_to_remote t("record.repair_wake"), :update => 'remote', :url => {:action => 'new'} %>
       </span>
       <span>
-        <%= link_to_remote "補上睡覺時間", :update => 'remote', :url => {:action => 'new_sleep'} %>
+        <%= link_to_remote t("record.repair_sleep"), :update => 'remote', :url => {:action => 'new_sleep'} %>
       </span> 
       | 
-      <span><%=link_to_remote "設定今日目標", :update => 'remote', :url => {:controller => 'goals', :action => 'create', :id => @last_record}
+      <span><%=link_to_remote t("record.today_goal"), :update => 'remote', :url => {:controller => 'goals', :action => 'create', :id => @last_record}
       %></span>
     <span>
       <%= select("user", "id", @friend_list, {:include_blank => '我的好友'}) %>

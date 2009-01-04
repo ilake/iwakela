@@ -87,20 +87,20 @@
 <div class="container">
   <div class="top_bar">
     <div class='top_info'>
-      <span class='alert_red'>早鳥網</span> | 
-      <%= image_tag("icon_new.gif")%><%= link_to '名字對戰製造機', namepk_url %>
+      <span class='alert_red'><%= t 'site.name' %></span> | 
+      <%= image_tag("icon_new.gif")%><%= link_to t('pk_site.name'), namepk_url %>
     </div>
     <div class="auth">
       <% if @me %>
-        <%= "<span class='alert'>[請假中]</span>" unless @me.status.fight%>
-        <%= link_to_member(@me, "#{@me.name}的起床日誌")%> | 
+        <%= "<span class='alert'>[#{t 'member.sick'}]</span>" unless @me.status.fight%>
+        <%= link_to_member(@me, "#{@me.name}#{t 'member.record_title'}")%> | 
         <%= link_to_my_group %> |
-        <%= link_to '登出', :controller => 'main', :action => 'logout' %> | 
-        <%= link_to '個人設定', :controller => 'user', :action => 'edit', :id => @me.id %>
+        <%= link_to t 'site.logout', :controller => 'main', :action => 'logout' %> | 
+        <%= link_to t 'member.setting', :controller => 'user', :action => 'edit', :id => @me.id %>
       <% else%>
-        <%= link_to '登入', :controller => 'main', :action => 'login' %> | 
-        <%= link_to '註冊', :controller => 'main', :action => 'register' %> | 
-        <%= link_to '忘記密碼', :controller => 'main', :action => 'forget_password' %>
+        <%= link_to t 'site.login', :controller => 'main', :action => 'login' %> | 
+        <%= link_to t 'site.signup', :controller => 'main', :action => 'register' %> | 
+        <%= link_to t 'site.forget_password', :controller => 'main', :action => 'forget_password' %>
       <%end%>
     </div>
 </div>
@@ -110,7 +110,7 @@
     <% if @header %>
       <div class="header2 rounded">
         <div class="title">
-          <h1 style='display:none'>早鳥網</h1>
+          <h1 style='display:none'><%= t 'site.name '%></h1>
           <a href='<%= home_url %>'>
             <h1 class="ebhead">
               <%= @header %>
@@ -121,7 +121,7 @@
     <% else %>
       <div class="header rounded">
         <div class="title">
-          <h1 style='display:none'>早鳥網</h1>
+          <h1 style='display:none'><%= t 'site.name '%></h1>
           <a href='<%= home_url %>'>
             <h1 class="ebhead">
             </h1>
@@ -135,24 +135,24 @@
       <ul>
         <% if @me %>
           <%= link_tab([
-                       [ '首頁', 'main', 'index' ],
-                       [ '我的起床紀錄', 'member', 'list'],
-                       [ '早鳥團', 'groups', 'index' ],
-                       [ '嘰嘰喳喳', 'chats', 'list' ],
-                       [ '排行榜', 'user', 'list_user_rank' ],
-                       [ '討論區', 'forums', 'index' ],
-                       [ '名言佳句', 'great_word', 'index' ],
-                       [ '使用者列表', 'user', 'list' ]
+                       [ 'menu.index', 'main', 'index' ],
+                       [ 'menu.home', 'member', 'list'],
+                       [ 'menu.group', 'groups', 'index' ],
+                       [ 'menu.chat', 'chats', 'list' ],
+                       [ 'menu.rank', 'user', 'list_user_rank' ],
+                       [ 'menu.forum', 'forums', 'index' ],
+                       [ 'menu.word', 'great_word', 'index' ],
+                       [ 'menu.user', 'user', 'list' ]
           ]) %>
         <% else %>
           <%= link_tab([
-                       [ '首頁', 'main', 'index' ],
-                       [ '早鳥團', 'groups', 'index' ],
-                       [ '嘰嘰喳喳', 'chats', 'list' ],
-                       [ '排行榜', 'user', 'list_user_rank' ],
-                       [ '討論區', 'forums', 'index' ],
-                       [ '名言佳句', 'great_word', 'index' ],
-                       [ '使用者列表', 'user', 'list' ]
+                       [ 'menu.index', 'main', 'index' ],
+                       [ 'menu.group', 'groups', 'index' ],
+                       [ 'menu.chat', 'chats', 'list' ],
+                       [ 'menu.rank', 'user', 'list_user_rank' ],
+                       [ 'menu.forum', 'forums', 'index' ],
+                       [ 'menu.word', 'great_word', 'index' ],
+                       [ 'menu.user', 'user', 'list' ]
           ]) %>
         <% end %>
       </ul>

@@ -28,13 +28,13 @@ module AllHelper
     html = []
     links.each do |l|
       if l[1] == 'member' and controller.controller_name == 'member' and controller.action_name == l[2] and @user == @me
-          html << "<li class = 'current'>#{l[0]}</li>"
+          html << "<li class = 'current'>#{t(l[0])}</li>"
       elsif l[1] == 'member'
-        html << "<li>#{link_to(l[0], {:controller => l[1], :action => l[2], :id => session[:uid]} )}</li>"
+        html << "<li>#{link_to(t(l[0]), {:controller => l[1], :action => l[2], :id => session[:uid]} )}</li>"
       elsif controller.controller_name == l[1] and controller.action_name == l[2] 
-          html << "<li class = 'current'>#{l[0]}</li>"
+          html << "<li class = 'current'>#{t(l[0])}</li>"
       else
-        html << "<li>#{link_to(l[0], {:controller => l[1], :action => l[2] } )}</li>"
+        html << "<li>#{link_to(t(l[0]), {:controller => l[1], :action => l[2] } )}</li>"
       end
     end
     html.join
@@ -244,7 +244,7 @@ module AllHelper
 
   def link_to_my_group
     if @me.group
-      link_to @me.name+"的早鳥團", :controller => 'groups', :action => 'show', :id => @me.group_id
+      link_to @me.name+"#{t 'member.group_title'}", :controller => 'groups', :action => 'show', :id => @me.group_id
     else
       "<span class='alert'>
       #{link_to '妳還沒有參加任何的早起團', :controller => 'groups', :action => 'index'}
