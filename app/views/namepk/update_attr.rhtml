@@ -1,6 +1,12 @@
-<% form_for :attr, :url => namepk_url(:action => 'update_attr', :id => @attr.id, :game => params[:game]) do |f| %>
+<% form_for :attr, :url => namepk_url(:action => 'update_attr', :attr_id => @attr.id, :game => params[:id]) do |f| %>
   <%= error_messages_for :attr %>
   <%= f.text_field :name %>
+    <br />
+    <br />
+    <b class='w-red'>請輸入密碼</b>
+    <br />
+    <%= text_field_tag :pass_code, @pass_code %>
+    <br />
   <%= submit_tag %>
-  <%= link_to '取消', namepk_url(:action => 'adv_game_setting', :id => params[:game])%>
+  <%= link_to '取消', namepk_url(:action => 'adv_game_setting', :id => params[:id])%>
 <% end %>

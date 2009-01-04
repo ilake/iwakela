@@ -32,6 +32,7 @@ ActionController::Routing::Routes.draw do |map|
   map.friend 'friend/:action/:id', :controller => 'friend'
   map.user 'user/:action/:id', :controller => 'user'
   map.word 'word/:action/:id', :controller => 'great_word'
+  map.namepk_method 'namepk/:action/game/:id/method/:method_id', :controller => 'namepk'
   map.namepk 'namepk/:action/:id', :controller => 'namepk'
 
 

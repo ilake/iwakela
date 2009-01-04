@@ -1,6 +1,8 @@
 class NamepkController < ApplicationController
+  before_filter :check_user
   before_filter :siderbar
   before_filter :check_ip 
+  before_filter :check_code, :only => [:create_fight_methods, :adv_game_setting, :update_method, :update_attr, :update]
 
   def index
     @games = Game.find_hottest(params[:page], 20, 'games.today_num')
@@ -23,10 +25,24 @@ class NamepkController < ApplicationController
     render :action => 'new'
   end
 
-  def create_fight_methods
+  def edit
     @game = Game.find(params[:id]) 
+  end
+
+  def update
+    if @game.update_attributes(params[:game])
+      flash[:info] = '修改成功'
+      redirect_to :action => 'create_fight_methods', :id => @game.id
+    else
+      flash[:info] = '修改失敗'
+      render :action => 'edit'
+    end
+  end
+
+  def create_fight_methods
     if request.post?
-      @game.fight_methods.find_or_create(params[:fight_method])
+      @game.fight_methods.find_or_create(params[:fight_method]) 
+      flash.now[:info] = '新增成功'
     end
 
     @fight_method = @game.fight_methods.new
@@ -35,7 +51,6 @@ class NamepkController < ApplicationController
   end
 
   def adv_game_setting
-    @game = Game.find(params[:id]) 
     if request.post?
       if params[:fight_method]
         @game.fight_methods.find_or_create(params[:fight_method])
@@ -88,28 +103,28 @@ class NamepkController < ApplicationController
   end
 
   def update_method 
-    if @method = FightMethod.find(params[:id])
+    if @method = @game.fight_methods.find(params[:method_id])
       if request.post?
         if @method.update_attributes(params[:method])
           flash[:notice] = '更新成功'
-          redirect_to :action => 'adv_game_setting', :id => params[:game] and return
+          redirect_to :action => 'adv_game_setting', :id => params[:id] and return
         end
       end
-      render :action => 'update_method', :game => params[:game]
+      render :action => 'update_method', :id => params[:id]
     else
       redirect_to :back
     end
   end
 
   def update_attr
-    if @attr = Attr.find(params[:id])
+    if @attr = @game.attrs.find(params[:attr_id])
       if request.post?
         if @attr.update_attributes(params[:attr])
           flash[:notice] = '更新成功'
-          redirect_to :action => 'adv_game_setting', :id => params[:game] and return
+          redirect_to :action => 'adv_game_setting', :id => params[:id] and return
         end
       end
-      render :action => 'update_attr', :game => params[:game]
+      render :action => 'update_attr', :game => params[:id]
     else
       redirect_to :back
     end
@@ -128,5 +143,15 @@ class NamepkController < ApplicationController
       render :text => '阿鬼 別在玩啦！'  and return
     end  
   end 
+
+  def check_code
+    @game = Game.find(params[:id]) 
+    session[:code] = params[:pass_code] if params[:pass_code]
+    @pass_code = session[:code] 
+    if request.post? && @game.pass_code != @pass_code
+      flash[:info] = '密碼錯啦' 
+      redirect_to :back and return 
+    end
+  end
 
 end

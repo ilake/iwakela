@@ -1,7 +1,13 @@
-<% form_for :method, :url => namepk_url(:action => 'update_method', :id => @method.id, :game => params[:game]) do |f| %>
+<% form_for :method, :url => namepk_url(:action => 'update_method', :method_id => @method.id, :game => params[:id]) do |f| %>
   <%= error_messages_for :method %>
   <%= f.text_field :name %>
   <%= f.text_field :value %>
+    <br />
+    <br />
+    <b class='w-red'>請輸入密碼</b>
+    <br />
+    <%= text_field_tag :pass_code, @pass_code %>
+    <br />
   <%= submit_tag %>
-  <%= link_to '取消', namepk_url(:action => 'adv_game_setting', :id => params[:game])%>
+  <%= link_to '取消', namepk_url(:action => 'adv_game_setting', :id => params[:id])%>
 <% end %>

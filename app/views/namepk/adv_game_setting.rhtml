@@ -9,13 +9,20 @@
   <% form_for :attr, :url => {:action => 'adv_game_setting', :id => @game} do |f|%>
     <%= error_messages_for 'attr' %>
     <%= f.text_field :name, :title => '輸入角色屬性名稱, 例如:狗屎運', :class => 'populate'  %>
+
+    <br />
+    <br />
+    <b class='w-red'>請輸入密碼</b>
+    <br />
+    <%= text_field_tag :pass_code, @pass_code %>
+    <br />
     <%= submit_tag '新增' %>
   <% end %>
   <ul class='list'>
     <% @attrs.each do |attr|%>
       <li>
         <%= attr.name %>
-        <%= link_to '[修改]', namepk_url(:action => 'update_attr', :id => attr.id, :game => @game.id ) %>
+        <%= link_to '[修改]', namepk_url(:action => 'update_attr', :attr_id => attr.id, :id => @game.id ) %>
       </li>
     <% end %>
   </ul>
@@ -28,6 +35,13 @@
     <%= f.text_field :name, :size => '20', :title => '輸入招式名稱, 例如:打屁股', :class => 'populate' %>
     <label>傷害(上限200)</label>
     <%= f.text_field :value, :size => '10' %>
+
+    <br />
+    <br />
+    <b class='w-red'>請輸入密碼</b>
+    <br />
+    <%= text_field_tag :pass_code, @pass_code %>
+    <br />
     <%= submit_tag '新增' %>
   <% end %>
 
@@ -36,7 +50,7 @@
     <% @methods.each do |m|%>
       <li>
         <%= m.name %>  :  <%= m.value %>傷害  
-        <%= link_to '[修改]', namepk_url(:action => 'update_method', :id => m.id, :game => @game.id ) %>
+        <%= link_to '[修改]', namepk_method_url(:action => 'update_method', :id => @game.id, :method_id => m.id) %>
         <%#= link_to '[刪除]', namepk_url(:action => 'destroy', :id => m.id)%>
       </li>
     <% end %>

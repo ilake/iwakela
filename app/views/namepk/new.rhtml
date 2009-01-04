@@ -5,6 +5,13 @@
     <b>名稱</b>
     <br />
     <%= f.text_field :name, :title => '輸入名稱', :class => 'populate' %>
+    <br />
+    <br />
+
+    <b class='w-red'>密碼(有此密碼的人才能新增編輯招式, 忘了沒救啦, 請小心記得)</b>
+    <br />
+    <%= f.text_field :pass_code, :class => 'populate' %>
+    <br />
 
     <br />
     <b>描述</b>

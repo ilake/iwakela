@@ -75,10 +75,10 @@
    </script>
  <% end %>
  <div>
-   <h1 class='game_name'><%= @game.name %></h1>
+   <h1 class='game_name' style='float:left'><%= @game.name %></h1>
    <div class='adv_info'>
-     <%= link_to "#{image_tag('namepk/fist.jpeg')}幫它加招式", :action => 'create_fight_methods', :id => @game %>  | 
-     <%= link_to "#{@game.name}Talk", {:action => 'talks', :id => @game}, :popup => true %>
+     <%= link_to "#{image_tag('namepk/fist.jpeg')}設定", :action => 'create_fight_methods', :id => @game %>
+     <%#= link_to "#{@game.name}Talk", {:action => 'talks', :id => @game}, :popup => true %>
    </div>
  </div>
 

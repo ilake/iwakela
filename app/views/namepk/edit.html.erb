@@ -1,0 +1,22 @@
+<div class='light_back'>
+  <h1>編輯你的名字對戰</h1>
+  <% form_for :game, :url => {:action => 'update', :id => @game} do |f|%>
+    <%= error_messages_for :game %>
+    <b>名稱</b>
+    <br />
+    <%= f.text_field :name, :title => '輸入名稱', :class => 'populate' %>
+    <br />
+    <br />
+    <b>描述</b>
+    <br />
+    <%= f.text_area :desc, :title => '描述一下', :class => 'populate', :size => '35x5' %>
+    <br />
+    <br />
+    <br />
+    <b class='w-red'>請輸入密碼</b>
+    <br />
+    <%= text_field_tag :pass_code, @pass_code %>
+    <br />
+    <%= submit_tag '修改' %>
+  <% end %>
+</div>

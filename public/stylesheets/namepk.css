@@ -65,10 +65,6 @@ input {
   padding:5px;
 }
 
-.game_name {
-  float:left;
-}
-
 .list {
   margin:5px 15px;
   padding:5pt 25px 5px 5px;
@@ -165,4 +161,36 @@ div.result-comment-ceil {
   color: #FFFFFF;
   font-weight: bold;
   width:70%;
+}
+
+.w-red {
+  color:#FF0000;
+}
+
+.bg-lb{
+  background-color :#E1ECFE;
+}
+
+.bg-lg{
+  background-color :#B5EDBC;
+}
+
+.fw-bold{
+  font-weight: bold;
+}
+.pad-10 {
+  padding: 10px;
+}
+
+.game-setting
+{
+  float: left;
+  margin-right: -18.0em;
+  width: 90%;
+  padding:10px;
+  border:#DDDDDD;
+}
+
+.w-red a{
+  color:#FF0000;
 }

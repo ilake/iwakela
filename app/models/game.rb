@@ -18,15 +18,17 @@ class Game < ActiveRecord::Base
   DEFAULT_METHODS = ["阿魯巴", "降龍十巴掌", "鐵頭功"]
   HUMANIZED_ATTRIBUTES = {
     :name => "名稱",
-    :desc => "描述"
+    :desc => "描述",
+    :pass_code => "密碼"
   }
 
-  validates_presence_of :name, :desc
+  validates_presence_of :name, :desc, :pass_code
   validates_uniqueness_of :name, :case_sensitive => false
   validates_length_of :name, :within => 1..10
+  validates_length_of :pass_code, :within => 5..20
 
-  has_many :attrs  #角色屬性
-  has_many :fight_methods  #可能使用的招式
+  has_many :attrs, :dependent => :destroy  #角色屬性
+  has_many :fight_methods, :dependent => :destroy   #可能使用的招式
   has_many :talks
 
   before_create :set_salt

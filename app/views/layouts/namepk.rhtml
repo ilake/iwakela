@@ -25,8 +25,12 @@
 
   <div class="top_bar">
     <div class="top_info">
-      <span class='alert_red'>名字對戰製造機</span> | 
-      <%= link_to '早鳥網', home_url %>
+      <span class='alert_red'><%= t 'pk_site.name' %></span> | 
+      <%= link_to t('site.name'), home_url %>
+      <span class='w-red'>
+      <%= link_to "繁体版", :controller => 'main', :action => 'language', :type => 'tradition' %>
+      <%= link_to "简体版", :controller => 'main', :action => 'language', :type => 'simple' %>
+      </span>
     </div>
   </div>
 
@@ -34,7 +38,7 @@
 <div id="outer">
 	<div id="header" class='up_rounded'>
 		<div id="headercontent">
-      <h1><%= link_to '名字對戰製造機', :action => 'index' %></h1>
+      <h1><%= link_to t('pk_site.name'), :action => 'index' %></h1>
 		</div>
   </div>
   <div class='clear'></div>
