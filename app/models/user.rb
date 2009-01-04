@@ -272,6 +272,7 @@ class User < ActiveRecord::Base
   def create_default_user_setting
     self.create_profile
     self.create_status
+    self.create_setting
   end
 
   def self.today_earliest(result='success', num = 20)
