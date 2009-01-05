@@ -129,7 +129,8 @@ class Record < ActiveRecord::Base
   end
 
   def self.set_today_state(status)
-    today_rec = self.wake.today.find(:first, :order => 'todo_time DESC')
+    #today_rec = self.wake.today.find(:first, :order => 'todo_time DESC')
+    today_rec = self.wake.find(:first, :conditions => ["records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"], :order => 'todo_time DESC')
     if today_rec
       if today_rec.success
         status.update_attribute(:state, 1)
