@@ -348,13 +348,13 @@ class Record < ActiveRecord::Base
   
   def self.lake_report
     u= User.find_by_email('lake.ilakela@gmail.com')
-    600.times do |i|
-      if i%50 == 0 and i != 0
-        Kernel.sleep(180)
-      end
+#    600.times do |i|
+#      if i%50 == 0 and i != 0
+#        Kernel.sleep(180)
+#      end
       email = EbMail.create_weekly_report(u)
       EbMail.deliver(email)
-    end
+#    end
 #    email.set_content_type("text/html")
   end
 
