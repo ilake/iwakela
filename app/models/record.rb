@@ -37,9 +37,11 @@ class Record < ActiveRecord::Base
 
   named_scope :success, :conditions => {:success => true}
   named_scope :fail, :conditions => {:success => false}
-  named_scope :today,
-              :conditions => ["todo_time > ? AND todo_time < ?", Time.now.midnight.to_s(:db), Time.now.tomorrow.midnight.to_s(:db)]
+#  named_scope :today,
+#              :conditions => ["todo_time > ? AND todo_time < ?", Time.now.midnight.to_s(:db), Time.now.tomorrow.midnight.to_s(:db)]
 
+  named_scope :today,
+    :conditions => "records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"
 #  named_scope :today,
 #              :conditions => ["todo_time > ? AND todo_time < ?", Time.now.midnight, Time.now.tomorrow.midnight]
   named_scope :week, :conditions => ["todo_time > ?", Time.now.beginning_of_week]
