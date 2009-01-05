@@ -18,7 +18,7 @@
           <span class="listinfo">徵求<%= g.user_num %>名會員，目前共有<%= g.members_count %>名</span>   
         </div>
         <div id="description" class="description">
-          <%= h(truncate(g.condition, 200)) %>
+          <%= h(truncate(g.condition, :length => 200)) %>
         </div>
       </div>
       <div class="endOfItem"><!--IE--></div>      
@@ -55,7 +55,7 @@
           <span class="count">
             <%= link_to_group( small_mugshot(g), g.id) %>
             <span class="group_side_title">
-              <%= link_to_group(h(truncate(g.name, 9)), g.id) %>
+              <%= link_to_group(h(truncate(g.name, :length => 9)), g.id) %>
             </span>
           </div>
         <% end %>
