@@ -1,5 +1,14 @@
 <div class='setting-bg'>
-<b>我的起床目標時間</b>
+  <b class='w-black'>我的起床目標時間</b>
+  <br />
+  <br />
+  <div class='w-black'>
+    <% if @user.target_time_now %>
+      您設定的起床目標時間是<%= extract_target_time(@user.target_time_now) %>
+    <% else %>
+      您尚未設定目標時間
+    <% end %>
+  </div>
 <p>
 <div id = "select">
   <% form_tag :action => 'target_time_now' do |f|%>
