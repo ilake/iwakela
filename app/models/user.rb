@@ -149,7 +149,7 @@ class User < ActiveRecord::Base
   def self.authenticate_by_cookie(cookie)
     return nil if cookie.blank?
     pass, id, hash  = cookie.split(':')
-    user = find_by_id(id) 
+    user = find(id) 
 
     if user && encode(pass,user.password_salt) == hash
       user
@@ -277,9 +277,11 @@ class User < ActiveRecord::Base
 
   def self.today_earliest(result='success', num = 20)
     if result == 'success'
-      Record.wake.today.success.find(:all, :limit => num, :order => 'todo_time').map{|r|r.user}
+      #Record.wake.today.success.find(:all, :limit => num, :order => 'todo_time').map{|r|r.user}
+      Record.wake.success.find(:all, :conditions => ["records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"], :limit => num, :order => 'todo_time').map{|r|r.user}
+
     else
-      Record.wake.today.fail.find(:all, :limit => num, :order => 'id DESC').map{|r|r.user}
+      Record.wake.fail.find(:all, :conditions => ["records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"], :limit => num, :order => 'id DESC').map{|r|r.user}
     end
   end
 
