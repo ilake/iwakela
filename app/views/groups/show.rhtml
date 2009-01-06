@@ -24,7 +24,7 @@
 <div class='group_setting'>
   <div class='group_image'><%= big_mugshot(@group) %></div>
   <div>
-    <div>團名: <%= @group.name %></div>
+    <div>團名: <%= @group.name %><%= group_status(@group)%></div>
     <div>團長: <%= link_to_user(@group.owner, @group.owner.name) %></div>
     <div>團規: <%= @group.condition%></div>
     <div>團員(<%= @group.members_count %>人): <%= link_to_all_members(@members)%><%= link_to '>>更多', :action => 'list', :id => @group %></div>
