@@ -1,5 +1,6 @@
 <%= error_messages_for :mugshot %>
-
+<div class='bg-lg w-black pad-10 rounded'>檔名請儘量使用純英文字母的檔名</div>
+<br />
 <% form_for(:mugshot, :url => {:action => 'create', :id => params[:id]}, :html => { :multipart => true} ) do |f| -%>
   <p>
     <label for="mugshot">上傳圖片:</label>
