@@ -32,7 +32,7 @@ class Record < ActiveRecord::Base
   after_destroy :set_census, :conditions => {:todo_name => 'wake_up'}
   before_update :set_success
 
-  before_update :record_valid?, :conditions => {:todo_name => 'wake_up'}
+#  before_update :record_valid?, :conditions => {:todo_name => 'wake_up'}
   before_update :content_null?
 
   named_scope :success, :conditions => {:success => true}
