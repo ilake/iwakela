@@ -10,15 +10,15 @@
   <div class='title'>公 告 區  <%= link_to '(功能介紹)', :controller => 'main', :action => 'history'%></div>
   <div>
     <div style='padding-bottom:5px;'>
+    <span>新增<%= link_to '校正功能', user_url(:action => 'edit_time_offset')%>, 早鳥時間總是跟你的時間不同嗎, 現在無論妳跟早鳥時間差多少都沒問題啦<%= link_to '更多', main_url(:action => "records")%></span>
+    </div>
+    <div style='padding-bottom:5px;'>
       <%= image_tag("icon_new.gif")%>
       <span>換日線時間現在可以自己設定了, 請到『個人設定』, 團中發文可以直接分享到討論區了 <%= link_to '更多', main_url(:action => "records")%>
       </span>
     </div>
     <div style='padding-bottom:5px;'>
       <span>新增早鳥換日線為每天03:59; 修正別人頁面選擇時間的bug</span>
-    </div>
-    <div style='padding-bottom:5px;'>
-     <span>現在滑鼠移到圖上的圈圈可以看到當時的時間了 <%= link_to '更多', main_url(:action => "records")%></span>
     </div>
 
     <div>

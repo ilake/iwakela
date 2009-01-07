@@ -1,6 +1,6 @@
 class UserController < ApplicationController
   helper :all
-  before_filter :check_auth, :only =>[:edit, :edit_profile, :edit_password, :edit_time_shift, :edit_username, :edit_email]
+  before_filter :check_auth, :only =>[:edit, :edit_profile, :edit_password, :edit_time_shift, :edit_username, :edit_email, :edit_time_shift, :edit_time_offset]
 
   #before_filter :check_owner, :only => [:edit, :edit_profile, :edit_password, :edit_username]
 
@@ -63,13 +63,19 @@ class UserController < ApplicationController
       offset = count_time_offset(params[:date])
       if @me.setting.update_attributes(:time_offset => offset)
         flash[:notice] = "變更完成"
-        redirect_to :controller => 'user', :action => 'edit', :id => @me.id
+        #redirect_to :controller => 'user', :action => 'edit', :id => @me.id
       else
         flash[:notice] = "變更失敗, 可能已有人使用"
       end
     else
       @setting = @me.setting
     end
+  end
+
+  def test_time
+    headers["Content-Type"] = "text/javascript" #render js
+    time = Time.parse(params[:time]).since(@me.time_offset.hours)
+    render :text => "alert('你校正之後現在的時間是#{time.strftime("%Y/%m/%d %H:%M")}');"
   end
 
   def edit_password
