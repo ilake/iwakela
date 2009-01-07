@@ -184,7 +184,8 @@ border-color: red;
   background: #CC0000;
   color: #FFFFFF;
   font-weight: bold;
-  width:70%;
+  text-align: center;
+  /*width:70%;*/
 }
 
 .alert a{
@@ -982,6 +983,10 @@ div.even{
   margin: 10px;
 }
 
+.mar-b-10 {
+  margin-bottom: 10px;
+}
+
 .fl-l {
   float: left;
 }
@@ -1044,4 +1049,7 @@ div.dialog {
   border-right-color: #999;
   border-bottom-color: #999;
   background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif;
+}
+.center {
+  text-align:center;
 }

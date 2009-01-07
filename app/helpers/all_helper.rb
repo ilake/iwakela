@@ -99,7 +99,7 @@ module AllHelper
 
   def show_messages
     flh =  flash[:notice] || flash[:info]
-    "<span class='alert'>#{flh}</span>"  if flh
+    "<div class='bg-or pad-10 mar-b-10 w-black fw-bold center rounded'>#{flh}</div>"  if flh
   end
 
   def link_to_user(u, text, cls=nil, img=false)
