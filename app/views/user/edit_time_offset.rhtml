@@ -32,6 +32,7 @@
       <%= select_hour Time.now %>
       <%= select_minute Time.now %>
       <%= submit_tag "設定"%>
+      <%= link_to '設定完成', user_url(:action => 'edit')%>
     <% end %>
     <br />
     <div class='bg-lg w-black pad-10 wh-100 test-time rounded'>
