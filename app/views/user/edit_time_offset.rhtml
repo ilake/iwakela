@@ -1,0 +1,8 @@
+    <h1>我要調整時間</h1>
+    <span class='w-black'>早鳥時間需要再(＋/－)這個時間, 才會等於我的時間</span>
+    <% form_for :time_offset, :url => {:action => 'edit_time_offset'} do |f|%>
+      <%= select :date, :plus_minus, [['+', 'add'], ['－', 'minus']] %>
+      <%= select_hour Time.now %>
+      <%= select_minute Time.now %>
+      <%= submit_tag "設定"%>
+    <% end %>

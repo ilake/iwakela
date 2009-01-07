@@ -7,6 +7,8 @@
       <li class='pad-5'><%= link_to "修改帳號(信箱)", :controller => "user", :action => 'edit_email', :id => @me.id  %></li>
       <li class='pad-5'><%= link_to "修改個人檔案", :controller => "user", :action => 'edit_profile', :id => @me.id  %></li>
       <li class='pad-5'><%= image_tag("icon_new.gif")%><%= link_to "修改換日線時間", :controller => "user", :action => 'edit_time_shift', :id => @me.id  %></li>
+      <li class='pad-5'><%= image_tag("icon_new.gif")%><%= link_to "時間校正", :controller => "user", :action => 'edit_time_offset', :id => @me.id  %></li>
+    </ul>
     </ul>
   </div>
       <h3>部落格貼紙</h3><br />

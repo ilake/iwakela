@@ -58,6 +58,20 @@ class UserController < ApplicationController
     end
   end
 
+  def edit_time_offset
+    if request.post?
+      offset = count_time_offset(params[:date])
+      if @me.setting.update_attributes(:time_offset => offset)
+        flash[:notice] = "變更完成"
+        redirect_to :controller => 'user', :action => 'edit', :id => @me.id
+      else
+        flash[:notice] = "變更失敗, 可能已有人使用"
+      end
+    else
+      @setting = @me.setting
+    end
+  end
+
   def edit_password
     if request.post?
       if @user = @me.edit_password(params[:current_user], params[:user])
@@ -76,5 +90,11 @@ class UserController < ApplicationController
       flash[:notice] = "請更改自己的檔案"
       redirect_to :controller => 'main', :action => 'index'
     end
+  end
+
+  def count_time_offset(date)
+    symbol = date[:plus_minus] == 'add' ? 1 : -1
+    value = date[:hour].to_i + sprintf("%.2f", date[:minute].to_i/60.0).to_f
+    symbol*value
   end
 end

@@ -3,13 +3,14 @@ class MainController < ApplicationController
   layout "application"
   helper :all
 
-  before_filter :user_default_sideber_option, :only => [:index]
+  #before_filter :user_default_sideber_option, :only => [:index]
 
   def index
     @records = Record.find_all_wake_up_today(params[:page])
 
-    @user = User.find(:first, :include => :status, :order => 'statuses.average', :conditions => ["statuses.num > ? AND statuses.last_record_created_at > ? AND users.target_time_now is not NULL", 7, Time.now.ago(3.days)])
-
+    @user = User.find(:first, :joins => [:status], :order => 'statuses.average', :conditions => ["statuses.num > ? AND statuses.last_record_created_at > ? AND users.target_time_now is not NULL", 7, Time.now.ago(3.days)])
+    
+    @user ||= User.first
     records = @user.records.wake.find(:all, :order => 'id DESC', :limit => 10, :conditions => ["todo_time < ?", Time.now ])
     @time = record_to_string(records)
   end
@@ -45,7 +46,7 @@ class MainController < ApplicationController
           cookies.delete(:user_pass)
         end 
         
-        redirect_to :controller => 'member', :action => 'index'
+        redirect_to :controller => 'main', :action => 'index'
         #redirect_to(uri || {:controller => :member, :action => :index})
       else
         flash[:notice] = '名字或是密碼錯了喔'
@@ -134,7 +135,7 @@ class MainController < ApplicationController
 
   def language
     #1是繁体 0 是简体
-    session[:language] = params[:type] == 'tradition' ? 1 : 0
+    cookies[:language] = params[:type] == 'tradition' ? '1' : '0'
     if request.env["HTTP_REFERER"]
       redirect_to :back
     else

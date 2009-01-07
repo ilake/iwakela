@@ -1,10 +1,65 @@
-  <%= render :partial => 'shared/announce'%>
+  <%#= render :partial => 'shared/announce'%>
+<div class='announce_image'>
+  <%= image_tag("smallscreen.png")%><br />
+</div>
+
+<div class='announce_word'>
+  <%= t 'site.desc' %>
+</div>
+<div class='announce_last'>
+  <div class='title'>公 告 區  <%= link_to '(功能介紹)', :controller => 'main', :action => 'history'%></div>
+  <div>
+    <div style='padding-bottom:5px;'>
+      <%= image_tag("icon_new.gif")%>
+      <span>換日線時間現在可以自己設定了, 請到『個人設定』, 團中發文可以直接分享到討論區了 <%= link_to '更多', main_url(:action => "records")%>
+      </span>
+    </div>
+    <div style='padding-bottom:5px;'>
+      <span>新增早鳥換日線為每天03:59; 修正別人頁面選擇時間的bug</span>
+    </div>
+    <div style='padding-bottom:5px;'>
+     <span>現在滑鼠移到圖上的圈圈可以看到當時的時間了 <%= link_to '更多', main_url(:action => "records")%></span>
+    </div>
+
+    <div>
+      <%= link_to '>> 過往', main_url(:action => "records")%> 
+    </div>
+  </div>
+</div>
+
+<div class='clear'></div>
+<hr>
   <div class='clear'></div>
   <div class='eb_header'><%= @user.name %>的起床時間</div>
   <%= render :partial => 'index_graph' %>
   <div class='clear'></div>
   <br />
-  <%= render :partial => 'shared/records', :locals => {:records => @records}%>
+<% if @records %>
+<table>
+<% @records.each_with_index do |record, i| %>
+  <tr class="<%= cycle('','title')%>">
+    <td width = 2% class='td_index'><%= page_index(@records, i)%></td>
+    <td width = 15%><%= link_to_user(record.user, record.user.name, nil, true) %></td>
+    <td width = 15%><%= record.todo_time.strftime("%H:%M") %>起床</td>
+    <td width = 35%><%= link_to h(truncate(record.content, 30)),
+                                :controller => 'member',
+                                :action => 'show',
+                                :id => record.id %></td>
+    <td width = 40%>
+    <% if record.goal %>
+      <%= link_to record.goal, :controller => 'member', :action => 'show', :id => record.id %>
+    <% end %>
+    </td>
+  </tr> 
+<% end %>
+</table>
+<% else %>
+  <div class='dialog'>
+    <h1>現在沒有人, 因為我們都已經睡了</h1>
+    <br />
+    <img src="/images/linux.png" alt="早點睡阿"/>
+  </div>
+<% end %>
   <%= will_paginate @records %>
   <div class='clear'></div>
   <div align="center">

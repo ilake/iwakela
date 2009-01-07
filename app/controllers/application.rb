@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   def check_user
     if uid = session[:uid]
-      @me = User.find_by_id(uid)
+      @me ||= User.find(uid)
     elsif @me = User.authenticate_by_cookie(cookies[:user_pass])
       session[:uid] = @me.id
       cookies[:user_pass] = @me.gen_cookie
@@ -77,8 +77,8 @@ class ApplicationController < ActionController::Base
 #  end
 
   def set_user_language
-    session[:language] ||= 1
-    I18n.locale = LOCALES_AVAILABLE[session[:language]]
+    cookies[:language] ||= '1'
+    I18n.locale = LOCALES_AVAILABLE[cookies[:language].to_i]
   end
 
 end

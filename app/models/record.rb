@@ -239,11 +239,12 @@ class Record < ActiveRecord::Base
 
   def record_valid?
     time = self.todo_time
-    if time > Time.now
-      false
-    elsif self.user.records.wake.find(:all, :conditions => ['todo_time < ? and todo_time > ?', time.tomorrow.at_beginning_of_day, time.at_beginning_of_day]).blank?
-      true 
-    end
+#    if time > Time.now
+#      false
+#    elsif self.user.records.wake.find(:all, :conditions => ['todo_time < ? and todo_time > ?', time.tomorrow.at_beginning_of_day, time.at_beginning_of_day]).blank?
+#      true 
+#    end
+    self.user.records.wake.find(:all, :conditions => ['todo_time < ? and todo_time > ?', time.tomorrow.at_beginning_of_day, time.at_beginning_of_day]).blank?
   end
 
   def content_null?

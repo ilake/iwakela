@@ -9,6 +9,8 @@
 #  user_id    :integer(11)     
 #
 
+#time_shift : 換日線
+#time_offset : 校正早鳥與user 端的誤差
 class Setting < ActiveRecord::Base
   belongs_to :user
 end

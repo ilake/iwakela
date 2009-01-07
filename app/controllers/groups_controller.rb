@@ -1,15 +1,15 @@
 class GroupsController < ApplicationController
   helper :all
-  before_filter :check_auth, :except =>[:index, :show, :list_all_groups]
+  before_filter :check_auth, :except =>[:index, :show]
 
   def index 
     @latest_groups = Group.find(:all, :include => [:mugshot], :order => 'id DESC', :limit => 5)
     @hottest_groups = Group.find_all_group(params[:page], 'chats_num', 5)
   end
 
-  def list_all_groups
-    @groups = Group.find_group_rank(params[:page], params[:sort])
-  end
+#  def list_all_groups
+#    @groups = Group.find_group_rank(params[:page], params[:sort])
+#  end
 
   def list
     @group = Group.find(params[:id])

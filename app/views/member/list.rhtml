@@ -37,7 +37,9 @@
   </div>
     <div id="month-form">    
       <% form_tag :controller => 'member', :action => 'list', :id => @user do %>
-        <%= render :partial => 'shared/date_select' %>
+        <%= select_year year_selected, :end_year => Time.now.year %>
+        <%= select_month month_selected, :use_month_numbers => true %> 月紀錄
+        <%= submit_tag "我要看" %>
       <% end %>
     </div>
   <div class="clear"></div>
