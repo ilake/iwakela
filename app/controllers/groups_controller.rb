@@ -7,9 +7,9 @@ class GroupsController < ApplicationController
     @hottest_groups = Group.find_all_group(params[:page], 'chats_num', 5)
   end
 
-#  def list_all_groups
-#    @groups = Group.find_group_rank(params[:page], params[:sort])
-#  end
+  def list_all_groups
+    @groups = Group.find_group_rank(params[:page], params[:sort])
+  end
 
   def list
     @group = Group.find(params[:id])
