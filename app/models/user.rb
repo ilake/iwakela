@@ -288,7 +288,7 @@ class User < ActiveRecord::Base
 
 
     else
-      records = Record.wake.fail.find(:all, :select => :user_id, :conditions => ["records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"], :limit => num, :order => 'id DESC').map{|r|r.user}
+      records = Record.wake.fail.find(:all, :select => :user_id, :conditions => ["records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"], :limit => num, :order => 'id DESC')
     end
 
       User.find(:all, :conditions => {:id => records.map{|r|r.user_id}}, :include => :mugshot)
