@@ -23,14 +23,14 @@ class Chat < ActiveRecord::Base
                     :order => 'created_at DESC',
                     :limit => '100',
                     :include => :user,
-                    :conditions => ["groups.group_id = ?", group]
+                    :conditions => ["chats.group_id = ?", group]
     else
       self.paginate :page => params,
                     :per_page => per_page,
                     :order => 'created_at DESC',
                     :limit => '100',
                     :include => :user,
-                    :conditions => "groups.group_id is NULL"
+                    :conditions => "chats.group_id is NULL"
     end
   end
 end
