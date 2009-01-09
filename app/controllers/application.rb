@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   def check_user
     if uid = session[:uid]
-      @me ||= User.find(uid)
+      @me ||= User.find(uid, :include => :status)
     elsif @me = User.authenticate_by_cookie(cookies[:user_pass])
       session[:uid] = @me.id
       cookies[:user_pass] = @me.gen_cookie

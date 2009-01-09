@@ -23,22 +23,14 @@ class Record < ActiveRecord::Base
 
   before_create :set_time
   before_create :set_todo_name
-
   before_create :set_target_time
-
-  before_create :set_success
-
-  after_save    :set_census, :conditions => {:todo_name => 'wake_up'}
-  after_destroy :set_census, :conditions => {:todo_name => 'wake_up'}
-  before_update :set_success
-
-#  before_update :record_valid?, :conditions => {:todo_name => 'wake_up'}
-  before_update :content_null?
+  before_create :set_success, :if => Proc.new {|record| record.todo_name == 'wake_up'}
+  before_update :set_success, :if => Proc.new {|record|  record.todo_name == 'wake_up' && record.todo_time_changed? }
+  after_save    :set_census,  :if => Proc.new {|record| record.todo_name == 'wake_up' && record.todo_time_changed? }
+  after_destroy :set_census,  :if => Proc.new {|record|  record.todo_name == 'wake_up' }
 
   named_scope :success, :conditions => {:success => true}
   named_scope :fail, :conditions => {:success => false}
-#  named_scope :today,
-#              :conditions => ["todo_time > ? AND todo_time < ?", Time.now.midnight.to_s(:db), Time.now.tomorrow.midnight.to_s(:db)]
 
   named_scope :today,
     :conditions => "records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"
@@ -48,7 +40,7 @@ class Record < ActiveRecord::Base
   named_scope :wake, :conditions => {:todo_name => 'wake_up'}
   named_scope :sleep, :conditions => {:todo_name => 'sleep'}
 
-  named_scope :have_content, :conditions => "content is not NULL"
+  named_scope :have_content, :conditions => "content is not NULL and content <> ''"
 
   #validates_length_of :content, :minimum => 1, :on => :update
   #after_create :set_average, :set_continuous_num, :set_successful_rate
@@ -189,22 +181,6 @@ class Record < ActiveRecord::Base
 
   public
 
-#  def self.count_score
-#    total = self.count
-#    total = total > 21 ? 21 : total
-#
-#    a = self.find(:all, :order => "id DESC", :limit => 21)
-#    a.delete(false)
-#    wake_count = a.size
-#    sleep_count = total - wake_count
-#
-#    wake_score = wake_count * user.scores.find_by_name('wake').value
-#    sleep_score = sleep_count * user.scores.find_by_name('sleep').value
-#
-#    total_score = wake_score - sleep_score 
-#    user.status.update_attribute(:score, total_score)
-#  end
-
   def set_success
     unless self.todo_target_time.blank?
       self.success = self.todo_time > self.todo_target_time ? false : true
@@ -217,38 +193,13 @@ class Record < ActiveRecord::Base
   def self.todo(name, params=nil)
     params[:todo_name] = name
     record = self.new(params)
-
-    if name == 'wake_up'
-      if record.record_valid?
-        if record.save
-          record
-        end
-      end
-    else
-      if record.save
-        record
-      end
-    end
+    record if record.save
   end
 
   def self.find_last_day
     if time = self.find(:first, :order => 'todo_time DESC')
       time.todo_time.at_beginning_of_day
     end
-  end
-
-  def record_valid?
-    time = self.todo_time
-#    if time > Time.now
-#      false
-#    elsif self.user.records.wake.find(:all, :conditions => ['todo_time < ? and todo_time > ?', time.tomorrow.at_beginning_of_day, time.at_beginning_of_day]).blank?
-#      true 
-#    end
-    self.user.records.wake.find(:all, :conditions => ['todo_time < ? and todo_time > ?', time.tomorrow.at_beginning_of_day, time.at_beginning_of_day]).blank?
-  end
-
-  def content_null?
-    self.content = nil if self.content.blank?
   end
 
   def lastest_target_time
@@ -318,7 +269,7 @@ class Record < ActiveRecord::Base
 
     self.wake.paginate :page => params,
                   :per_page => per_page,
-    #              :include => [:user, {:user => :mugshot}],
+                  :include => [:user, {:user => :mugshot}],
                   :conditions => cond
   end
 

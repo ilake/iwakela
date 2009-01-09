@@ -90,6 +90,12 @@ class User < ActiveRecord::Base
 
   delegate *setting
 
+  status = Status.content_columns.inject([]) do |result, column|
+    result << column.name
+  end.push(:to => :status)
+
+  delegate *status
+
   attr_reader :password
 
   def validate
@@ -254,7 +260,7 @@ class User < ActiveRecord::Base
     end
     self.paginate :page => page,
                   :per_page => 10,
-                  :include => :status,
+                  :include => [:status, :mugshot, :profile],
                   :order => order,
                   :conditions => ["statuses.num > ? AND statuses.last_record_created_at > ? AND users.target_time_now is not NULL", 7, Time.now.ago(3.days)]
   end
@@ -278,10 +284,13 @@ class User < ActiveRecord::Base
   def self.today_earliest(result='success', num = 20)
     if result == 'success'
       #Record.wake.today.success.find(:all, :limit => num, :order => 'todo_time').map{|r|r.user}
-      Record.wake.success.find(:all, :conditions => ["records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"], :limit => num, :order => 'todo_time').map{|r|r.user}
+      records = Record.wake.success.find(:all, :select => :user_id, :conditions => ["records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"], :limit => num, :order => 'todo_time')
+
+      User.find_all_by_id(records.map{|r|r.user_id}, :include => :mugshot)
 
     else
-      Record.wake.fail.find(:all, :conditions => ["records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"], :limit => num, :order => 'id DESC').map{|r|r.user}
+      records = Record.wake.fail.find(:all, :select => :user_id, :conditions => ["records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"], :limit => num, :order => 'id DESC').map{|r|r.user}
+      User.find_all_by_id(records.map{|r|r.user_id}, :include => :mugshot)
     end
   end
 

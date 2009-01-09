@@ -92,7 +92,7 @@
     </div>
     <div class="auth">
       <% if @me %>
-        <%= "<span class='alert'>[#{t('member.sick')}]</span>" unless @me.status.fight%>
+        <%= "<span class='alert'>[#{t('member.sick')}]</span>" unless @me.fight%>
         <%= link_to_member(@me, "#{@me.name}#{t('member.record_title')}")%> | 
         <%= link_to_my_group %> |
         <%= link_to t('site.logout'), :controller => 'main', :action => 'logout' %> | 

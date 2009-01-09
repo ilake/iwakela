@@ -1,7 +1,7 @@
 class ForumsController < ApplicationController
   helper :all
 
-  before_filter :check_auth, :except =>[:index, :show]
+  before_filter :check_auth, :only =>[:new, :create, :edit, :update]
 
   def index
     if params[:group]

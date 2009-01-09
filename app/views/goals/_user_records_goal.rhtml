@@ -1,5 +1,5 @@
 <% @me.goals.active.find(:all, :order => "id DESC").each do |g|%>
   <% if g.choosed == 1%>
-    <%= h(truncate(g.name, 4))%><%= state_image(g.done) %>
+    <%= h(truncate(g.name, :length => 4))%><%= state_image(g.done) %>
   <% end %>
 <% end %>

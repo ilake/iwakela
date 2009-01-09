@@ -63,19 +63,11 @@ class Group < ActiveRecord::Base
   end
 
   def pri
-    if state == 1 || state == 3
-      @pri ||= 1
-    else
-      @pri ||= 0
-    end
+    state == 1 || state == 3
   end
 
   def fill
-    if state == 2 || state == 3 || members.count == user_num
-      @fill ||= 1
-    else
-      @fill ||= 0
-    end
+    state == 2 || state == 3 || members_count == user_num
   end
 
   def self.find_group_rank(page, sort='id')

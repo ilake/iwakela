@@ -11,10 +11,10 @@
   <% @users.each do |u|  %>
     <tr class="<%= cycle('title','')%>">
       <td class="user-name"><%= link_to_user(u, u.name, nil, true) %></td>    
-      <td class="user-rank-profile"><%= link_to_user(u, truncate(u.profile.others, 20)) %></td>    
-      <td><%= u.status.diff %>分鐘</td>    
-      <td><%= extract_target_time(u.status.average) %></td>    
-      <td><%= number_to_percentage(u.status.success_rate, :precision => 1)%></td>    
+      <td class="user-rank-profile"><%= link_to_user(u, truncate(u.others, :length => 20)) %></td>    
+      <td><%= u.diff %>分鐘</td>    
+      <td><%= extract_target_time(u.average) %></td>    
+      <td><%= number_to_percentage(u.success_rate, :precision => 1)%></td>    
       <td><%= continuous_success_num(u) %></td>    
     </tr>
   <% end %>

@@ -129,8 +129,8 @@ module GroupsHelper
 
   def group_status(group)
     title = []
-    title << "<span class='alert'>私人</span>" if group.pri == 1
-    title << "<span class='alert'>已滿</span>" if group.fill == 1
+    title << "<span class='alert'>私人</span>" if group.pri 
+    title << "<span class='alert'>已滿</span>" if group.fill
 
     title.join("")
   end

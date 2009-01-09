@@ -136,7 +136,7 @@ module AllHelper
 
   def link_to_diary(r, text, size=32, cls=nil)
     if size
-      link_to format_content(truncate(text, size)), {:controller => 'member', :action => 'show', :id => r}, cls
+      link_to format_content(truncate(text, :length => size)), {:controller => 'member', :action => 'show', :id => r}, cls
     else
       link_to format_content(text), {:controller => 'member', :action => 'show', :id => r}, cls
     end
