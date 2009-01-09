@@ -286,12 +286,12 @@ class User < ActiveRecord::Base
       #Record.wake.today.success.find(:all, :limit => num, :order => 'todo_time').map{|r|r.user}
       records = Record.wake.success.find(:all, :select => :user_id, :conditions => ["records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"], :limit => num, :order => 'todo_time')
 
-      User.find_all_by_id(records.map{|r|r.user_id}, :include => :mugshot)
 
     else
       records = Record.wake.fail.find(:all, :select => :user_id, :conditions => ["records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"], :limit => num, :order => 'id DESC').map{|r|r.user}
-      User.find_all_by_id(records.map{|r|r.user_id}, :include => :mugshot)
     end
+
+      User.find(:all, :conditions => {:id => records.map{|r|r.user_id}}, :include => :mugshot)
   end
 
   def count_score(cond=nil)
