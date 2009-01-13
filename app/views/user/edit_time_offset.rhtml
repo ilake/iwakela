@@ -1,24 +1,8 @@
   <script type='text/javascript'>
-        function time_now() {
-          var t = new Date();
-          var year = t.getFullYear();
-          var month = t.getMonth();
-          month+=1;
-
-          var day = t.getDate();
-          var hours = t.getHours();
-          var minutes = t.getMinutes();
-          var seconds = t.getSeconds();
-
-          var now = year+"-"+ month+"-"+ day+"-"+ hours+":"+ minutes+":"+ seconds
-          return now;
-        }
-
     $(function() {
 
         $('.test-time').click(function(){
-          var now = time_now();
-          $.get('/user/test_time', {time: now}, null, "script");
+          $.get('/user/test_time', null, null, "script");
 
           return false;
         });

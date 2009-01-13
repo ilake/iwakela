@@ -55,7 +55,7 @@
           var now = time_now();
           if (flag) {
             flag = false;
-            window.location = '/member/wake_up?time='+now;
+            window.location = '/member/wake_up';
           }
 
           return false;
@@ -66,7 +66,7 @@
 
           if (flag) {
             flag = false;
-            window.location = '/member/sleep?time='+now
+            window.location = '/member/sleep'
           }
 
           return false;
@@ -103,7 +103,7 @@
         <%= link_to t('site.forget_password'), :controller => 'main', :action => 'forget_password' %>
       <%end%>
       <span class='w-red'>
-      <%= link_to "繁体版", :controller => 'main', :action => 'language', :type => 'tradition' %>
+      <%= link_to "繁體版", :controller => 'main', :action => 'language', :type => 'tradition' %>
       <%= link_to "简体版", :controller => 'main', :action => 'language', :type => 'simple' %>
       </span>
     </div>

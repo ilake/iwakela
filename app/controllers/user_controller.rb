@@ -74,7 +74,7 @@ class UserController < ApplicationController
 
   def test_time
     headers["Content-Type"] = "text/javascript" #render js
-    time = Time.parse(params[:time]).since(@me.time_offset.hours)
+    time = Time.now.since(@me.time_offset.hours)
     render :text => "alert('你校正之後現在的時間是#{time.strftime("%Y/%m/%d %H:%M")}');"
   end
 

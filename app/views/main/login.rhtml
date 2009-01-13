@@ -1,11 +1,11 @@
-<table>
 <% form_for :user,@user, :url => {:action => 'login'} do |f| -%>
+<table>
   <tr><td>會員帳號(E-Mail):</td><td><%= f.text_field :email %>(例:iwakela@gmail.com)</td>
     <tr><td>密碼:</td><td><%= f.password_field :password %></td>
   <tr><td><%= check_box_tag :remember %></td><td> 不登出,下次不用打密碼</td>
   <tr><td><%= submit_tag "進入" %></td><td>
-<% end -%>
 </table>
+<% end -%>
 <br />
 <script type="text/javascript"><!--
   google_ad_client = "pub-0501077200190082";

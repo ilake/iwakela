@@ -77,7 +77,7 @@ class ApplicationController < ActionController::Base
 #  end
 
   def set_user_language
-    cookies[:language] ||= '1'
+    cookies[:language] ||= '0'
     I18n.locale = LOCALES_AVAILABLE[cookies[:language].to_i]
   end
 

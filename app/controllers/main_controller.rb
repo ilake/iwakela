@@ -135,8 +135,8 @@ class MainController < ApplicationController
   end
 
   def language
-    #1是繁体 0 是简体
-    cookies[:language] = params[:type] == 'tradition' ? '1' : '0'
+    #0是繁体 1是简体
+    cookies[:language] = params[:type] == 'tradition' ? '0' : '1'
     if request.env["HTTP_REFERER"]
       redirect_to :back
     else

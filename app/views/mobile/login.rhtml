@@ -1,0 +1,10 @@
+<card title="iwakela login" newcontext="true" > 
+<go method="post" href="/mobile/login"/>
+  <table columns="2">
+    <tr><td>(E-Mail):</td><td><%= text_field :user, :email %>(sample:iwakela@gmail.com)</td></tr>
+    <tr><td>password:</td><td><%= password_field :user, :password %></td></tr>
+    <tr><td><%= check_box_tag :remember %></td><td> remember</td></tr>
+    <tr><td><%= submit_tag "login" %></td></tr>
+  </table>
+</go>
+</card>  
