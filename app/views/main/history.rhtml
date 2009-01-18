@@ -22,6 +22,12 @@
   <li>
   <a href=#score>什麼是狀態</a>
   </li>
+  <li>
+  <a href=#time_shift>什麼是換日線</a>
+  </li>
+  <li>
+  <a href=#time_offset>什麼是時間校正</a>
+  </li>
   </ul>
   <hr>
   <ul>
@@ -109,5 +115,21 @@
 
       <br /><a href=#>Top</a><hr><br />
     </p>
+    <p>
+      <li><a name=time_shift><b>什麼是換日線</b></a></li>
+      <div>自己睡覺時間的曲線看起來很亂嗎? 改變一下"換日線" 就可以讓你的曲線看起來簡潔一點喔</div>
+      <p>使用前</p>
+      <%= image_tag('time_shift_demo2.png')%>
+
+      <br />
+      <p>使用後</p>
+      <%= image_tag('time_shift_demo.png')%>
+      <br /><a href=#>Top</a><hr><br />
+    </p>
+    <p>
+      <li><a name=time_offset><b>什麼是時間校正</b></a></li>
+      <div>因為早鳥的使用者遍布海內外, 使用者的平台也是五花八門, 所以早鳥提供了時間校正的功能, 無論您當地的時間與早鳥偏差多少, 都能幫您校正, 馬上使用<%= link_to '校正功能', user_url(:action => 'edit_time_offset')%></div>
+    <p>
+      <br /><a href=#>Top</a><hr><br />
   </ul>
 </div>

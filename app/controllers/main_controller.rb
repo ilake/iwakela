@@ -36,6 +36,7 @@ class MainController < ApplicationController
   def login
     if request.method == :post
       if @user = User.authenticate(params[:user])
+        reset_session
         session[:uid] = @user.id
 
         uri = session[:original_uri]
@@ -47,11 +48,19 @@ class MainController < ApplicationController
           cookies.delete(:user_pass)
         end 
         
-        redirect_to :controller => 'main', :action => 'index'
+        if params[:style] == 'mobile'
+          redirect_to :controller => 'mobile', :action => 'home' and return
+        else
+          redirect_to :controller => 'main', :action => 'index' and return
+        end
         #redirect_to(uri || {:controller => :member, :action => :index})
       else
         flash[:notice] = '名字或是密碼錯了喔'
       end
+    end
+
+    if params[:style] == 'mobile'
+      render :template => 'mobile/login', :layout => 'mobile' and return
     end
   end
 
@@ -84,15 +93,27 @@ class MainController < ApplicationController
     reset_session
     flash[:info] = '您已經登出'
 
-    redirect_to :controller => 'main', :action => 'index'
+    if params[:style] == 'mobile'
+      redirect_to :controller => 'mobile', :action => 'index'
+    else
+      redirect_to :controller => 'main', :action => 'index'
+    end
   end
 
   def forget_password
-    return unless request.post?
-    if user = User.send_reset_email(params[:user][:email])
-      flash[:info] = "密碼重設的信件已經寄到您的信箱 #{user.email}"
+    if request.post?
+      if user = User.send_reset_email(params[:user][:email])
+        flash.now[:info] = "密碼重設的信件已經寄到您的信箱 #{user.email}"
+      else
+        flash.now[:info] = "沒有這個人: #{params[:email]}"
+      end
+    end
+
+    if params[:style] == 'mobile'
+      @style = 'mobile'
+      render :action => 'forget_password', :layout => 'mobile'
     else
-      flash[:info] = "沒有這個人: #{params[:email]}"
+      render :action => 'forget_password'
     end
   end
 

@@ -108,7 +108,6 @@ class MemberController < ApplicationController
   def wake_up
     if @me.today_record
       flash[:notice] = "沒有人一直在早起的啦"
-      redirect_to :action => 'list', :id => @me.id
     else
       begin 
         @record = @me.records.create(:todo_time => Time.now.since(@me.time_offset.hours))
@@ -118,12 +117,16 @@ class MemberController < ApplicationController
       end
 
       if @record.errors.empty?
-        flash[:info] = "早安喔, 可以寫一下給今日的話, 鼓勵一下自己喔"
+        flash[:info] = "早安喔"
       else
         flash[:notice] = "不能設定現在之後的時間喔"
       end
 
-      render :action => 'update'
+      if params[:style] == 'mobile'
+        redirect_to :controller => 'mobile', :action => 'home' and return
+      else
+        render :action => 'update'
+      end
     end 
   end
 
@@ -141,7 +144,12 @@ class MemberController < ApplicationController
       flash[:notice] = "不能設定現在之後的時間喔"
     end
 
-    render :action => 'update'
+    if params[:style] == 'mobile'
+      redirect_to :controller => 'mobile', :action => 'home' and return
+    else
+      render :action => 'update'
+    end
+
   end
 
   def edit_time

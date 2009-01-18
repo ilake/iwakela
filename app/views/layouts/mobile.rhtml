@@ -1,5 +1,37 @@
-<?xml version="1.0"?>  
-<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN" "http://www.wapforum.org/DTD/wml_1.1.xml">  
-<wml>  
-  <%= yield %>
-</wml>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content="早鳥網 一個幫助你早起的地方"/>
+    <meta name="keywords" content="早鳥網,iwakela,晨型人,早晨,早睡早起,時間管理,人生,生活,生涯,規畫,早起,早鳥,早睡,作息時間,早起團,早安,紀錄,early,bird,birds,earlybird,earlybirds"/> 
+    <meta name="author" content="lake"/> 
+    <%= stylesheet_link_tag "eb_mobile" %>
+
+    <title><%= t 'site.slogan' %></title>
+  </head>
+  <body>
+    <div class="top_bar">
+      <div class="auth">
+        <% if @me %>
+          <%= link_to t('site.logout'), :controller => 'main', :action => 'logout', :style => 'mobile' %> | 
+          <%= link_to t('member.setting'), :controller => 'mobile', :action => 'edit', :id => @me.id %>
+        <% else%>
+          <%= link_to t('site.login'), :controller => 'main', :action => 'login', :style => 'mobile'  %> | 
+          <%= link_to t('site.forget_password'), :controller => 'main', :action => 'forget_password', :style => 'mobile'  %>
+        <%end%>
+      </div>
+    </div>
+  <div class="main">
+      <%= show_mobile_messages %>
+      <% if @me %>
+        <div class='bg-lb pad-5 mar-5'>
+          <%= link_to '紀錄', mobile_url(:action => 'home')%>
+          <%= link_to '列表', mobile_url(:action => 'list')%>
+        </div>
+      <% end%>
+    <%= yield %>
+    </div>
+  </body>
+</html>

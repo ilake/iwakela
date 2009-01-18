@@ -103,8 +103,7 @@
         <%= link_to t('site.forget_password'), :controller => 'main', :action => 'forget_password' %>
       <%end%>
       <span class='w-red'>
-      <%= link_to "繁體版", :controller => 'main', :action => 'language', :type => 'tradition' %>
-      <%= link_to "简体版", :controller => 'main', :action => 'language', :type => 'simple' %>
+      <%= language_mobile_setting %>
       </span>
     </div>
 </div>

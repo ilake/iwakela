@@ -1,0 +1,11 @@
+<% if r = @me.today_record %>
+  <%= "您起床時間是#{extract_target_time(r.todo_time)}"%>
+<% else %>
+  <%= button_to '我起床了', {:controller => 'member', :action => 'wake_up', :style => 'mobile'}%>
+<% end %>
+<br />
+<br />
+<%= button_to '我要睡了', {:controller => 'member', :action => 'sleep', :style => 'mobile'}%>
+<% if sr = @me.today_sleep_record %>
+  <%= "您睡覺時間是#{extract_target_time(sr.todo_time)}"%>
+<% end %>

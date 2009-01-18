@@ -11,4 +11,19 @@ module ApplicationHelper
     html
   end
 
+  def show_messages
+    flh =  flash[:notice] || flash[:info]
+    "<div class='bg-or pad-10 mar-b-10 w-black fw-bold center rounded'>#{flh}</div>"  if flh
+  end
+
+  def language_mobile_setting
+    if cookies[:language] == '0'
+      "#{link_to "简体版", :controller => 'main', :action => 'language', :type => 'simple'}
+      #{link_to "手机版", :controller => 'mobile', :action => 'index'}"
+    else
+      "#{link_to "繁體版", :controller => 'main', :action => 'language', :type => 'tradition'}
+      #{link_to "手機版", :controller => 'mobile', :action => 'index'}"
+    end
+  end
+
 end

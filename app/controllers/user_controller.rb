@@ -62,13 +62,18 @@ class UserController < ApplicationController
     if request.post?
       offset = count_time_offset(params[:date])
       if @me.setting.update_attributes(:time_offset => offset)
-        flash[:notice] = "變更完成"
-        #redirect_to :controller => 'user', :action => 'edit', :id => @me.id
+        flash.now[:notice] = "變更完成"
       else
-        flash[:notice] = "變更失敗, 可能已有人使用"
+        flash.now[:notice] = "變更失敗, 可能已有人使用"
       end
     else
       @setting = @me.setting
+    end
+
+    if params[:style] == 'mobile'
+      render :template => 'mobile/edit_time_offset', :layout => 'mobile'
+    else
+      render :action => 'edit_time_offset'
     end
   end
 

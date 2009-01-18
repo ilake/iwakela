@@ -1,0 +1,8 @@
+<table>
+  <% @records.each do |r|%>
+    <tr class=<%= record_style(r) %>>
+      <td><%= exact_datetime_string(r.todo_time)%></td>
+      <td><%= link_to_mobile_delete(r.id)%></td>
+    </tr>
+  <% end %>
+</table>

@@ -50,7 +50,11 @@ class ApplicationController < ActionController::Base
     unless session[:uid]
       flash[:notice] = '您需要先登入喔'
       session[:original_uri] = request.request_uri
-      redirect_to :controller => 'main', :action => 'login'
+      if params[:style] == 'mobile'
+        redirect_to :controller => 'main', :action => 'login'
+      else
+        redirect_to :controller => 'main', :action => 'login'
+      end
     end
   end
 

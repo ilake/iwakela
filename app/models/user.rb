@@ -214,7 +214,18 @@ class User < ActiveRecord::Base
 
   def today_record
     record = self.records.wake.last(:order => 'todo_time')
-    if record && record.todo_time.at_beginning_of_day == Time.now.at_beginning_of_day
+    user = record.user
+    if record && record.todo_time.at_beginning_of_day == Time.now.since(user.time_offset.hours).at_beginning_of_day
+      record
+    else
+      nil
+    end
+  end
+
+  def today_sleep_record
+    record = self.records.sleep.last(:order => 'todo_time')
+    user = record.user
+    if record && record.todo_time.at_beginning_of_day == Time.now.since(user.time_offset.hours).at_beginning_of_day
       record
     else
       nil
