@@ -3,6 +3,7 @@ class ChatsController < ApplicationController
   before_filter :check_auth, :only => 'create'
 
   def create
+    redirect_to :back and return unless params[:chats]
     params[:chats][:group_id] = params[:group_id]
     @me.chats.create(params[:chats])
     redirect_to :back
