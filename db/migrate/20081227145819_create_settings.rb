@@ -6,9 +6,9 @@ class CreateSettings < ActiveRecord::Migration
       t.belongs_to :user
     end
 
-    User.all.each do |u|
-      u.create_setting
-    end
+#    User.all.each do |u|
+#      Setting.create(:user_id => u.id) unless u.setting
+#    end
   end
 
   def self.down

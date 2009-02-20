@@ -4,11 +4,11 @@ class MoveCensusProfileToStatus < ActiveRecord::Migration
     add_column :statuses, :success_rate, :integer
     add_column :statuses, :continuous_num, :integer
     
-    User.find(:all).each do |u|
-      u.status.update_attributes(:average => u.profile.average,
-                               :success_rate => u.profile.success_rate,
-                               :continuous_num => u.profile.continuous_num)
-    end
+#    User.find(:all).each do |u|
+#      u.status.update_attributes(:average => u.profile.average,
+#                               :success_rate => u.profile.success_rate,
+#                               :continuous_num => u.profile.continuous_num)
+#    end
 
     remove_column :profiles, :average
     remove_column :profiles, :success_rate

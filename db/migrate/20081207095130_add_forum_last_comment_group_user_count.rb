@@ -4,17 +4,17 @@ class AddForumLastCommentGroupUserCount < ActiveRecord::Migration
     add_column :groups, :members_count, :integer
     rename_column :groups, :readed, :chats_num
 
-    Forum.all.each do |f|
-      f.last_comment_time = f.comments.last.created_at
-      f.save!
-    end
-
-    Group.all.each do |g|
-      g.members_count = g.members.count
-      g.save
-    end
-
-    Group.count_7_days_chats_num
+#    Forum.all.each do |f|
+#      f.last_comment_time = f.comments.last.created_at
+#      f.save!
+#    end
+#
+#    Group.all.each do |g|
+#      g.members_count = g.members.count
+#      g.save
+#    end
+#
+#    Group.count_7_days_chats_num
   end
 
   def self.down
