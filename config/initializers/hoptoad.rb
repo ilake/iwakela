@@ -1,4 +1,4 @@
 HoptoadNotifier.configure do |config|
-  config.api_key = '9d5282c83ba521438fc796e05e71d40e'
+  config.api_key = 'dd6af9551efa4c48d765e9175443d733'
   config.ignore_only  = (HoptoadNotifier::IGNORE_DEFAULT.dup << 'ActionController::UnknownAction')
 end
