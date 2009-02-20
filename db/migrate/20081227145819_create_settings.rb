@@ -7,7 +7,7 @@ class CreateSettings < ActiveRecord::Migration
     end
 
     User.all.each do |u|
-      u.create_setting
+      Setting.create(:user_id => u.id)
     end
   end
 

@@ -1,12 +1,14 @@
 class AddForumLastCommentGroupUserCount < ActiveRecord::Migration
   def self.up
-    add_column :forums, :last_comment_time, :datetime
-    add_column :groups, :members_count, :integer
-    rename_column :groups, :readed, :chats_num
+    #add_column :forums, :last_comment_time, :datetime
+    #add_column :groups, :members_count, :integer
+    #rename_column :groups, :readed, :chats_num
 
     Forum.all.each do |f|
-      f.last_comment_time = f.comments.last.created_at
-      f.save!
+      if f.comments && f.comments.last
+        f.last_comment_time = f.comments.last.created_at
+        f.save!
+      end
     end
 
     Group.all.each do |g|
