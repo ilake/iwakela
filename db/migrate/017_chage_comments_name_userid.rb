@@ -1,6 +1,6 @@
 class ChageCommentsNameUserid < ActiveRecord::Migration
   def self.up
-    Comment.delete_all
+    #Comment.delete_all
     remove_column :comments, :name
     add_column :comments, :user_id, :integer
   end

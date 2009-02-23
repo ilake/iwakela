@@ -3,6 +3,8 @@
 #    begin
 #      I18n.translate('activerecord.errors.messages').update( {
 #      #  @@default_error_messages.update( {
+#      #I18n.translate('activerecord.errors.messages').update( {
+#        @@default_error_messages.update( {
 #        :inclusion => "超過範圍",
 #        :exclusion => "中文2",
 #        :invalid => "中文3",

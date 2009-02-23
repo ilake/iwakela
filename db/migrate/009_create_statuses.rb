@@ -6,9 +6,9 @@ class CreateStatuses < ActiveRecord::Migration
       t.column :state, :integer, :default => 0
     end
 
-    User.find(:all).each do |u|
-      Status.create(:user_id => u.id)
-    end
+#    User.find(:all).each do |u|
+#      Status.create(:user_id => u.id)
+#    end
   end
 
   def self.down
