@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   def validate
-    errors.add_to_base("Wrong Email style") unless email =~ /^([_a-z0-9-]+)(\.[_a-z0-9-]+)*(\+[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/
+    errors.add_to_base("Wrong Email style") unless email =~ /^([_A-Za-z0-9-]+)(\.[_A-Za-z0-9-]+)*(\+[_A-Za-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/
   end
 
   def target_time(time=Time.now)
