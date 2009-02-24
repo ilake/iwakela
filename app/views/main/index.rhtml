@@ -29,7 +29,7 @@
 <div class='clear'></div>
 <hr>
   <div class='clear'></div>
-  <div class='eb_header'><%= @user.name %>的起床時間</div>
+  <div class='eb_header'><%= @user.name if @user%>的起床時間</div>
   <%= render :partial => 'index_graph' %>
   <div class='clear'></div>
   <br />

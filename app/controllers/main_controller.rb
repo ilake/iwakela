@@ -12,8 +12,8 @@ class MainController < ApplicationController
 #    @user = User.find(:first, :joins => [:status], :order => 'statuses.average', :conditions => ["statuses.num > ? AND statuses.last_record_created_at > ? AND users.target_time_now is not NULL", 7, Time.now.ago(3.days)])
     
     @user ||= User.first
-    records = @user.records.wake.find(:all, :order => 'id DESC', :limit => 10, :conditions => ["todo_time < ?", Time.now ])
-    @time = record_to_string(records)
+    records = @user.records.wake.find(:all, :order => 'id DESC', :limit => 10, :conditions => ["todo_time < ?", Time.now ]) if @user
+    @time = record_to_string(records) if records
   end
 
   def register
@@ -147,7 +147,17 @@ class MainController < ApplicationController
     end
   end
 
-  def test
+  def test 
+    cookies[:key] = "val"
+    logger.info "----------#{cookies[:key]}-------11-----"
+  end
+
+  def test1
+    logger.info "----------#{cookies[:key]}-------22-----"
+    logger.info "----------#{cookies[:key].inspect}-------22-22----"
+    cookies[:key] = "newval"
+    logger.info "----------#{cookies[:key]}-------33-----"
+    render :nothing => true
   end
 
   def record_to_string(records)
