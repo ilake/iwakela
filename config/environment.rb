@@ -3,7 +3,7 @@
 # Uncomment below to force Rails into production mode when
 # you don't control web/app server and can't set it the proper way
 ENV['RAILS_ENV'] ||= 'production'
-ENV['HOME'] = '/home/iwakela' if ENV['RAILS_ENV'] == 'production'
+#ENV['HOME'] = '/home/iwakela' if ENV['RAILS_ENV'] == 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
@@ -62,7 +62,7 @@ end
 require "errors"
 #require 'acts_as_ferret'
 require 'smtp_tls'
-ActionController::Base.asset_host = "iwakela.com"
+#ActionController::Base.asset_host = "iwakela.com" if ENV['RAILS_ENV'] == 'production'
 ActionMailer::Base.delivery_method = :smtp 
 #ActionMailer::Base.server_settings = {
 ActionMailer::Base.smtp_settings = {
