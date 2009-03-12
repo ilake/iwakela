@@ -9,13 +9,7 @@
   <meta name="author" content="lake"/> 
 
   <title><%= t 'site.slogan' %></title>
-  <%= stylesheet_link_tag "defaults", "itunes", "paginator", "flora.datepicker.css", :cache => 'eb_main_css' %>
-  <%= stylesheet_link_tag "eb" %>
-  <!--script src="http://www.google.com/jsapi"></script>
-  <script>
-    google.load("jquery", "1");
-    google.load("jqueryui", "1");
-  </script-->
+  <%= stylesheet_link_tag "defaults", "itunes", "paginator", "flora.datepicker.css", "eb", :cache => 'main' %>
   <%= javascript_include_tag "jquery",
                              "jquery-ui-personalized-1.5.3.min",
                              "jrails",
@@ -23,13 +17,7 @@
                              "jquerypngfix.js",
                              "application",
                              :cache => 'addappjs0312' %>
-  <%#= javascript_include_tag "jquery" %>
-  <%#= javascript_include_tag "jquery-ui-personalized-1.5.3.min" %>
-  <%#= javascript_include_tag "jrails" %>
-  <%#= javascript_include_tag "jquery.corner.js" %>
-  <%#= javascript_include_tag "jquerypngfix.js" %>
   <%= javascript_include_tag "jquery.flot.js" %>
-  <%#= javascript_include_tag "application" %>
       <!--[if IE]><script language="javascript" type="text/javascript" src="/javascripts/excanvas.pack.js"></script><![endif]-->
 
   <%= yield :page_spec %>
