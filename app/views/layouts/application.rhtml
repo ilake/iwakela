@@ -16,20 +16,20 @@
     google.load("jquery", "1");
     google.load("jqueryui", "1");
   </script-->
-  <%#= javascript_include_tag "jquery",
+  <%= javascript_include_tag "jquery",
                              "jquery-ui-personalized-1.5.3.min",
                              "jrails",
                              "jquery.corner.js",
                              "jquerypngfix.js",
                              "jquery.flot.js",
-                             :cache => 'rm_app_js' %>
-  <%= javascript_include_tag "jquery" %>
-  <%= javascript_include_tag "jquery-ui-personalized-1.5.3.min" %>
-  <%= javascript_include_tag "jrails" %>
-  <%= javascript_include_tag "jquery.corner.js" %>
-  <%= javascript_include_tag "jquerypngfix.js" %>
-  <%= javascript_include_tag "jquery.flot.js" %>
-  <%= javascript_include_tag "application" %>
+                             :cache => 'js0312' %>
+  <%#= javascript_include_tag "jquery" %>
+  <%#= javascript_include_tag "jquery-ui-personalized-1.5.3.min" %>
+  <%#= javascript_include_tag "jrails" %>
+  <%#= javascript_include_tag "jquery.corner.js" %>
+  <%#= javascript_include_tag "jquerypngfix.js" %>
+  <%#= javascript_include_tag "jquery.flot.js" %>
+  <%#= javascript_include_tag "application" %>
       <!--[if IE]><script language="javascript" type="text/javascript" src="/javascripts/excanvas.pack.js"></script><![endif]-->
 
   <%= yield :page_spec %>
