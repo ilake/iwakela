@@ -105,8 +105,7 @@ module AllHelper
   def link_to_user(u, text, cls=nil, img=false)
     str = "<span class='user_photo_small'>"
     if img && u.mugshot
-      #str << "#{link_to image_tag(u.mugshot.public_filename(:small), :size =>'30x30'), {:controller => 'member', :action => 'list', :id => u}}</span>"
-      str << "#{link_to image_tag(u.mugshot.public_filename, :size =>'30x30'), {:controller => 'member', :action => 'list', :id => u}}</span>"
+      str << "#{link_to image_tag(u.mugshot.public_filename(:small), :size =>'30x30'), {:controller => 'member', :action => 'list', :id => u}}</span>"
     elsif img
       str << "#{link_to image_tag("penguin_small.jpg"),{ :controller => 'member', :action => 'list', :id => u}}</span>"
     end
@@ -263,8 +262,7 @@ module AllHelper
 
   def small_mugshot(item, title=nil)
     if @small_mugshot = item.mugshot
-      #image_tag(@small_mugshot.public_filename(:small), :title => title ||= item.name)
-      image_tag(@small_mugshot.public_filename, :title => title ||= item.name, :size =>'30x30')
+      image_tag(@small_mugshot.public_filename(:small), :title => title ||= item.name)
     else 
       image_tag("penguin_small.jpg", :title => title )
     end
