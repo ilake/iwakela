@@ -48,7 +48,11 @@ class MemberController < ApplicationController
   #destroy the record
   def destroy
     @me.records.find(params[:id]).destroy
-    redirect_to :back
+    if request.env["HTTP_REFERER"].blank?
+      redirect_to :controller => 'member', :action => 'list'
+    else
+      redirect_to :back
+    end
   end
 
   def show
