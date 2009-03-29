@@ -1,6 +1,7 @@
 <div class='bg-lg pad-10 w-black fw-bold'><%= t 'rank.desc'%></div>
 <table>  
   <thead>
+    <th><%= t 'member.rank' %></th>
     <th><%= t 'member.nickname' %></th>
     <th><%= t 'member.profile' %></th>
     <th><%= link_to t('rank.diff'), :action => 'list_user_rank', :sort => 'diff' %></th>
@@ -8,8 +9,9 @@
     <th><%= link_to t('rank.rate'), :action => 'list_user_rank', :sort => 'success_rate' %></th>
     <th><%= link_to t('rank.continuous'), :action => 'list_user_rank', :sort => 'continuous_num' %></th>
   </thead>
-  <% @users.each do |u|  %>
+  <% @users.each_with_index do |u, i|  %>
     <tr class="<%= cycle('title','')%>">
+      <td class="user-rank"><%= page_index(@users, i)%></td>    
       <td class="user-name"><%= link_to_user(u, u.name, nil, true) %></td>    
       <td class="user-rank-profile"><%= link_to_user(u, truncate(u.others, :length => 20)) %></td>    
       <td><%= u.diff %>分鐘</td>    

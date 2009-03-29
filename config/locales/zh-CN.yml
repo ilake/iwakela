@@ -25,6 +25,7 @@
     name: "姓名对战制造机"
 
   member:
+    rank: "排名"
     sick: "请假中"
     record_title: "的早起日志" 
     group_title: "的早鸟团"
