@@ -1,6 +1,7 @@
 production:
   adapter: mysql
-  database: iwakela_earlybirds
-  username: iwakela_iwakela
-  password: plokmiju1@3$5^
-  host: localhost
+  database: iwakela0_iwakela
+  username: iwakela0_iwakela
+  password: plokmiju1
+  encoding: utf8
+
