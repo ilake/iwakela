@@ -1,0 +1,19 @@
+<table>
+  <thead>
+    <th><%= t 'forum.title' %></th>
+    <th><%= t 'forum.author' %></th>
+    <th><%= t 'forum.rsp_num' %></th>
+    <th><%= t 'forum.last_rsp' %></th>
+  </thead>
+  <% @forums.each do |f|%>
+    <tr>
+      <td class='forum_subject'>
+        <%= link_to f.subject, :action => 'show', :id => f.id %> 
+      </td>
+      <td class='forum_author'><%= link_to_user(f.user, f.user.name) %></td>
+      <td><%= f.comments_count.to_i %></td>
+      <td class='forum_created_at'><%= exact_datetime_string(f.last_comment_time) %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @forums %>

@@ -1,0 +1,20 @@
+<%= render :partial => 'shared/sub_nav' %>
+<br />
+<div class='pad-10 fw-bold bg-lb rounded'>
+  <%= link_to '其他留言', :controller => 'messages', :action => 'index', :id => @user %>
+</div>
+<br />
+
+<div class='uniq_message'>
+  <%= render :partial => 'shared/message_comments', :locals => {:message => @message}%>
+  <% if @message.reply && @user.see_msg_right(@message, @me) %>
+    <div class='comment_reply_content'>
+      <%= render :partial => 'shared/message_comments', :locals => {:message => @message.reply}%>
+    </div>
+  <% elsif @message.reply %>
+    <div class='comment_reply_content'>
+      Sealed Reply
+    </div>
+  <% end %>
+</div>
+

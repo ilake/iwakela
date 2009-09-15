@@ -1,0 +1,31 @@
+<%= render :partial => 'shared/sub_nav' %>
+<br />
+<div id="month-form">    
+  <% form_tag :controller => 'member', :action => 'list_journal', :id => @user do %>
+    <%= select_year year_selected, :end_year => Time.now.year %>
+    <%= select_month month_selected, :use_month_numbers => true %> 月紀錄
+    <%= submit_tag "我要看" %>
+  <% end %>
+</div>
+
+<div class='clear'></div>
+<% own_right = is_owner? %>
+
+<div class='daylight-list'>
+  <span class='journal-title journal-daylight'>
+    <%= t "journal.daylight" %>
+  </span>
+  <span class='journal-status journal-logo-daylight'></span>
+  <%= render :partial => 'list_journal_partial',
+    :locals => {:downlimit_date => @downlimit_date, :record_timeline => @record_timeline, :own_right => own_right} %>
+</div>
+
+<div class='night-list'>
+  <span class='journal-title journal-night'>
+    <%= t "journal.night" %>
+  </span>
+  <span class='journal-status journal-logo-night'></span>
+  <%= render :partial => 'list_journal_partial',
+    :locals => {:downlimit_date => @night_downlimit_date, :record_timeline => @night_record_timeline, :own_right => own_right} %>
+</div>
+

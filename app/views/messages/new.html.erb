@@ -1,0 +1,23 @@
+<% form_for(@message) do |f| %>
+  <%= f.error_messages %>
+  <%= hidden_field_tag 'id', @message.master_id %>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :master_id %>
+  <%= f.hidden_field :message_id  %>
+    <div class='journal-content-title'>留言標題</div>
+    <div class='journal-content'>
+    <%= f.text_field :subject %>
+    </div>
+    <div class='journal-content-title'>留言內容</div>
+    <%= f.text_area :content, :class => 'mceMsgEditor' %>
+
+    <div class='journal-content-title'>公開/隱藏</div>
+    <% SEALED.each do |k,v| %>
+      <span><%= v %><%= radio_button("message", "public", k) %></span>
+    <% end %>
+    <br />
+    <br />
+    <%= f.submit '建立' %>
+<% end %>
+
+<%= link_to 'Back', messages_path %>

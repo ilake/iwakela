@@ -1,0 +1,9 @@
+<% form_for :service_profile, :url => {:action => 'edit_service_profile'} do |f|%>
+  <%= f.hidden_field :service, :value => 'plurk' %>
+  <div>帳號:</div>
+  <%= f.text_field :name %>
+  <div>密碼:</div>
+  <%= f.password_field :password %>
+  <br />
+  <%= submit_tag '確定' %>
+<% end %>

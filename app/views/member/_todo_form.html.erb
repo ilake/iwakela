@@ -1,0 +1,302 @@
+  <div class='clear'></div>
+
+  <div id='daily-goals' style='display:none'>
+    <div class='daily-goals-list'>
+      <span class='daily-goals-title'>習慣性目標列表</span>
+      <div name='daily-goals-submit' class='daily-goals-submit' > 
+        <span class='w-red fw-bold'>目標名稱:</span> <%= text_field :goals, :name, :value => '您以後想常做的' %> <%= submit_tag "新增目標", :id => "goal_submit" %> 
+      </div>
+        <table>
+          <thead id='new_goal_pos'>
+            <th>目標名稱</th>
+            <th>完成</th>
+            <th>放棄</th>
+            <th>刪除</th>
+            <%= content_tag(:th, '今天要做') if show %>
+            <th>總計次數</th>
+          </thead>
+          <tbody class='active_goals_list'>
+          <% @daily_goals.each do |g|%>
+            <%= render :partial => '/goals/new_goal', :locals => {:g => g, :show => show}%>
+          <% end %>
+          </tbody>
+        </table>
+
+        <table>
+          <tr id='new_goal_pos'>
+            <th>已放棄的目標</th>
+            <th>還要做</th>
+            <th>總計次數</th>
+          </tr>
+          <tbody class='giveup_goals_list'>
+          <% @daily_giveup_goals.each do |g|%>
+            <%= render :partial => '/goals/unactive_goal', :locals => {:g => g}%>
+          <% end %>
+          </tbody>
+        </table>
+        <table>
+          <thead id='new_goal_pos'>
+            <th>已完成的目標</th>
+            <th>還要做</th>
+            <th>累計總數</th>
+          </thead>
+          <tbody class='comlete_goals_list'>
+            <% @daily_complete_goals.each do |g|%>
+              <%= render :partial => '/goals/unactive_goal', :locals => {:g => g}%>
+            <% end %>
+          </tbody>
+        </table>
+
+    </div>
+    <div class='daily-goals-help'>
+      <div>
+        什麼是習慣性目標勒?
+      </div>
+      <div>
+        習慣性目標就是讓您用來設定 你想養成的習慣 或者 是你想持續努力的目標
+      </div>
+      <br />
+      <div>
+        除此之外習慣性目標還提供了次數累計的功能, 在數量表填入數目後就會自動累計該目標的數量
+      </div>
+    </div>
+  </div>
+  <table style='display:none;'>
+    <tr class='today_one_goal'>
+    <td> </td>
+    <td class="goal_done">
+      <input type="checkbox" value="1" name="item[1][done]" id="item_1_done" checked="checked"/>
+    </td>
+    <td class="goal_name"></td>
+
+    <td class="goal_hidden_name" style='display:none;'>
+      <input type="hidden" value="0" name="item[1][name]" id="item_1_name"/>
+    </td>
+    <td class="goal_comment">
+      <input type="text" value="" name="item[1][comment]" id="item_1_comment"/>
+    </td>
+    <td class="goal_value">
+      <input type="text" value="0" size="10" name="item[1][value]" id="item_1_value"/>
+    </td>
+    <td class="goal_rank">
+      <input type="text" value="0" size="3" name="item[1][rank]" id="item_1_rank"/>
+    </td>
+    <td class="goal_del">
+      <%= b_image_tag("delete.png", :border => "0")%>
+    </td>
+    <td class="goal_type">
+      <input id="item_1_type" name="item[1][goal_type]" type="hidden" value="daily" />
+    </td>
+    <td class="goal_old_value">
+      <input id="item_1_old_value" name="item[1][old_value]" type="hidden" value="0" />
+    </td>
+  </tr>
+  </table>
+<script type="text/javascript">
+  (function($){
+     function check_goals_exist() {
+       if($('.today-goals-list tr:not(.no-goals)').size() > 0 ) {
+         $('.no-goals').hide();
+         $('.have-goals').show();
+       }
+       else {
+         $('.no-goals').show();
+         $('.have-goals').hide();
+       }
+     }
+
+     function ajax_create(act, pos, goals) {
+       $.ajax({
+          url:  '/goals/'+act, 
+          type: 'POST',
+          data: goals,
+          dataType:  'html',
+          success:function(html){
+            $(pos).after(html);
+            $('td.change_goal_status').unbind('click', change_goal_status).bind('click', change_goal_status);
+            $('td.goal_to_today_range').unbind('click', goal_to_today_range).bind('click', goal_to_today_range);
+          },
+          error:function(html){
+            alert(html.responseText);
+          }
+        });
+     }
+
+     function goal_create(act, pos, choosed){
+       var goals = {};
+
+       goals['goals[name]'] = $('#goals_name').val();
+       //goals['goals[choosed]'] = choosed;
+       goals['show'] = <%= show %>;
+
+       ajax_create(act, pos, goals)
+       return false;
+     }
+
+     function ajax_change_goal_status(goals, pos, tr) {
+       $.ajax({
+          url:  '/goals/change_goal_status', 
+          type: 'POST',
+          data: goals,
+          success:function(html){
+            $(pos).prepend(html);
+            $('.change_goal_status').unbind('click', change_goal_status).bind('click', change_goal_status);
+            $('td.goal_to_today_range').unbind('click', goal_to_today_range).bind('click', goal_to_today_range);
+            tr.remove();
+          },
+          error:function(html){
+            alert(html.responseText);
+          }
+        });
+     }
+
+     function change_goal_status() {
+       var pos = '.active_goals_list'
+       var goals = {}
+       var answer;
+
+       var tr = $(this).parent();
+       goals['id'] = tr.attr('goal_id');
+       goals['status'] = $(this).attr('status');
+       goals['show'] = <%= show %>;
+
+       switch(goals['status']) {
+         case '0': 
+           pos = '.active_goals_list';
+           break;
+         case '1': 
+           pos = '.comlete_goals_list';
+           break;
+         case '2': 
+           pos = '.giveup_goals_list';
+           break;
+         case '-1':
+           answer = confirm("該目標已往的紀錄也會被刪除喔, 確定要刪除嗎？");
+           if (!answer) {
+             return false;
+           }
+           break;
+       }
+
+       ajax_change_goal_status(goals, pos, tr);
+     }
+
+     function today_goal_del(){
+       var goal      = $(this).parent();
+       var g_id      = goal.attr('goal_id');
+       var type      = goal.find('.goal_type input').attr("value");
+       var old_value = goal.find('.goal_old_value input').attr("value");
+
+       var detail_id = goal.find('.goal_detail').attr("detail_id");
+
+       if (detail_id) {
+           $.ajax({
+              url:  '/member/cut_goal_total_val', 
+              type: 'POST',
+              data: {id: g_id, old_value: old_value, detail_id: detail_id},
+              success:function(){
+                goal.remove();
+              }
+           });
+       }
+       else {
+         goal.remove();
+       }
+       check_goals_exist();
+       //$(this).parent().remove();
+     }
+
+     function goal_to_today_range(click) {
+       var new_goal;
+
+       if (click == 'once') {
+         var g_id = 'once';
+         var text = $(".once_goal_name input").val();
+         var comment = '';
+         var type = 'once';
+
+         if (!text){
+           alert('No Content');
+           return flase;
+         }
+       }
+       else {
+         var g_id = $(this).parent().attr('goal_id');
+         var text = $(this).parent().find(".goal_name").html()
+         var comment = $(this).parent().find(".goal_comment input").val();
+         var type = 'daily';
+       }
+
+       new_goal = $('.today_one_goal').clone();
+       new_goal.removeClass('today_one_goal');
+
+       new_goal.attr("goal_id", g_id);
+       
+       new_goal.find('.goal_done input').attr("name", "item["+g_id+"][done]");
+
+       new_goal.find('.goal_name').html(text);
+
+       new_goal.find('.goal_hidden_name input').attr("name", "item["+g_id+"][name]");
+       new_goal.find('.goal_hidden_name input').attr("value", text);
+
+       new_goal.find('.goal_comment input').attr("name", "item["+g_id+"][comment]");
+       new_goal.find('.goal_comment input').attr("value", comment);
+
+      // if (click != 'once') {
+         new_goal.find('.goal_value input').attr("name", "item["+g_id+"][value]");
+      // }
+     //  else {
+     //    new_goal.find('.goal_value').html("");
+     //  }
+
+       new_goal.find('.goal_rank input').attr("name", "item["+g_id+"][rank]");
+
+       new_goal.find('.goal_type input').attr("name", "item["+g_id+"][goal_type]");
+       new_goal.find('.goal_type input').attr("value", type);
+
+       new_goal.find('.goal_old_value input').attr("name", "item["+g_id+"][old_value]");
+
+       new_goal.find('.goal_del').bind('click', today_goal_del);
+       new_goal.show();
+
+       $('.today-goals-list').append(new_goal);
+       check_goals_exist();
+     }
+
+   $(document).ready(function(){
+       $('.toggle_minus').hide();
+
+       $('#goal_submit').bind('click', function() {
+         goal_create('create', '#new_goal_pos', '1');
+         });
+
+       $('.change_goal_status').bind('click', change_goal_status);
+
+       $('td.goal_to_today_range').bind('click', goal_to_today_range);
+
+       $('#once_goal_submit').bind('click', function(){
+         goal_to_today_range('once');
+         });
+
+       $('#today_goals .goal_del').bind('click', today_goal_del);
+
+       $('.daily-goals-add').toggle(
+         function(){
+           $('.toggle_plus').hide();
+           $('.toggle_minus').show();
+           $('#daily-goals').show();
+         },
+         function(){
+           $('.toggle_plus').show();
+           $('.toggle_minus').hide();
+           $('#daily-goals').hide();
+         });
+
+       $('.once-goal-add').click(function(){
+           $('.once-goal-form').toggle();
+       });
+
+       check_goals_exist();
+    });
+  })(jQuery);
+</script>

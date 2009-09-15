@@ -1,0 +1,130 @@
+<% content_for :js_ready do %>
+  <script type='text/javascript'>
+    $(function() {
+        $('#custom').click(function(){
+           $('#range_time').toggle();
+        });
+    });
+  </script>
+<% end %>
+<%= render :partial => 'shared/sub_nav' %>
+<br />
+<span class='fl-l mar-r-10'>
+  <%= link_to_user(@user, @user.name, nil, true)%>
+</span>
+<div class='clear'></div>
+<% if user_content_right(:todo_pri) %>
+  <div class='graph_content'>
+    <div id='date_range'>
+      <% now = Time.now %>
+      <%= link_to_remote '一週', :url => {:action => 'set_graph_range',
+                                 :startDateInput => now.ago(1.week),
+                                 :endDateInput => now } %>
+      <%= link_to_remote '一個月', :url => {:action => 'set_graph_range',
+         :startDateInput => now.ago(1.month),
+         :endDateInput => now } %>
+      <%= link_to_remote '三個月' , :url => {:action => 'set_graph_range',
+                                 :startDateInput => now.ago(3.month),
+                                 :endDateInput => now }%>
+      <%= link_to_remote '六個月' , :url => {:action => 'set_graph_range',
+                                 :startDateInput => now.ago(6.month),
+                                 :endDateInput => now }%>
+       <a href='#' id='custom'>自訂區間</a>
+         <%= b_image_tag("ajaxloading/ajax-loader.gif", :id => 'loading') %>
+       <div id='range_time' style='display:none'>
+         <% form_remote_tag :url => {:action => 'set_graph_range'} do %>
+           <%= select_date Time.today, :prefix => 'startDate' %>  => 
+           <%= select_date Time.today, :prefix => 'endDate'  %>
+           <%= submit_tag "查詢" %>
+         <% end %>
+       </div>
+    </div>
+    <div class="clear"></div>
+    <div id="show_graph">
+      <%= render :partial => 'show_graph' %>
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class= "my_score_status">
+    <%= score_state(@user) %>
+  </div>
+  <table cellspacing="0" class="census-list">
+    <tbody>
+      <tr>
+        <th>積分</th>
+        <td>
+          <strong><%= @user.status.score %></strong>
+        </td>
+      </tr>
+      <tr class='even'>
+        <th>日誌總數</th>
+        <td>
+          <strong><%= @diary_count %></strong>
+        </td>
+      </tr>
+      <tr>
+        <th>紀錄總數</th>
+        <td>
+          <strong><%= @record_count %></strong>
+        </td>
+      </tr>
+      <tr class='even'>
+        <th><%= t('sider.rate') %></th>
+        <td>
+          <strong><%= number_to_percentage(@user.status.success_rate, :precision => 1) || 0%></strong>
+        </td>
+      </tr>
+      <tr>
+        <th>連續次數</th>
+        <td>
+          <strong><%= continuous_success_num(@user)%></strong>
+        </td>
+      </tr>
+      <tr class='even'>
+        <th><%= t('sider.average') %></th>
+        <td>
+          <strong><%= @user.status.average.strftime("%H:%M") if @user.status.average%></strong>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+    <span class='fw-bold w-black'>最後紀錄是:</span>
+    <%= journal_link(@last_record, @user)%>
+  <br />
+  <br />
+  <div class='mar-b-40'>
+    <span class='fw-bold w-black'>一週目標起床時間</span>
+    <%= link_to '目標設定', user_url(:action => 'edit', :anchor => 'wake_goal') if is_owner? %>
+    <table cellspacing="0" class='pad-10'>
+      <thead><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></thead>
+      <tbody>
+        <tr>
+          <% @wake_target_time_array.each do |t| %>
+            <td><%= t.to_s(:hm) if t%></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <span class='fw-bold w-black'>一週目標睡覺時間</span>
+    <%= link_to '目標設定', user_url(:action => 'edit', :anchor => 'sleep_goal') if is_owner? %>
+    <table cellspacing="0" class='pad-10'>
+      <thead><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></thead>
+      <tbody>
+        <tr>
+          <% @sleep_target_time_array.each do |t| %>
+            <td><%= t.to_s(:hm) if t%></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div id="journal-all" class="no-journal">
+    <div class='no-content'>
+      被設為隱藏
+    </div>
+  </div>
+<% end %>

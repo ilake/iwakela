@@ -1,0 +1,66 @@
+<%= render :partial => 'shared/sub_nav'%>
+<% if user_content_right(:todo_pri) %>
+<div class='mar-t-10 mar-b-10 pad-10 fw-bold bg-lb rounded'>
+  <%= link_to_user(@user, @user.name, nil, true)%>
+  <% if is_owner?%>
+    <span class='daily-goals-add'>
+      <%= b_image_tag('toggle_plus.gif', :class => 'toggle_plus')%>
+      <%= b_image_tag('toggle_minus.gif', :class => 'toggle_minus')%>
+      <a href='#daily-goals-submit'>習慣性目標</a>
+    </span>
+  <% end %>
+</div>
+<%= render :partial => 'todo_form', :locals => {:show => false}  %>
+<div class='clear mar-t-10'></div>
+<%= select("goal", "id", @goal_lists)%>
+todo數: <%= @total %>
+累計總數: <%= @goal.total %>
+<table id='today_goals'>
+  <thead>
+    <th>時間</th>
+    <th>成功</th>
+    <th>名稱</th>
+    <th>備註</th>
+    <th>數量</th>
+  </thead>
+  <tbody>
+    <% @group_details.keys.sort{|a,b| b <=> a}.each do |g|%>
+      <tr><td><h3><%= g.to_s(:ym)%></h3></td></tr>
+      <% @group_details[g].each do |gd| %>
+        <tr class=<%= cycle :odd, :even %>>
+          <td class="goal_time"><%= goal_journal_link gd, @user%></td>
+          <td class="goal_done"><%= state_image(gd.done ==1) %></td>
+          <td class="goal_name"><%= gd.name %></td>
+          <td class="goal_comment"><%= gd.comment %></td>
+          <% 
+            gv = gd.value
+            iv = gd.value.to_i
+            value = gv == iv ? iv : gv
+          %>
+          <%= content_tag(:td,  value, :class => 'goal_value') %>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @details unless @details.blank? %>
+<% content_for :js_ready do %>
+  <script type='text/javascript'>
+    $(function() {
+        $('#goal_id').attr('value', '<%=params[:goal_id]%>');
+
+        $("#goal_id").change(function(){
+          id = $('#goal_id option:selected').val();
+          window.location = "/member/todo/<%= @user.id %>?goal_id="+id;
+          });
+        });
+</script>
+<% end %>
+
+<% else %>
+  <div id="journal-all" class="no-journal">
+    <div class='no-content'>
+      被設為隱藏
+    </div>
+  </div>
+<% end %>

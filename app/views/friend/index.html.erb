@@ -1,0 +1,44 @@
+<%= render :partial => 'shared/sub_nav' %>
+<% if user_content_right(:friend_pri) %>
+<div class='top-function-menu rounded'>
+  <%= link_to_user(@user, @user.name, nil, true)%>
+  | 
+<%= content_tag(:span, (link_to "加#{@user.name}為好友", friend_url(:action => 'add_friend', :name => @user.name), :method => :post)) unless is_owner? %>
+ <%= content_tag(:span, (link_to t('member.friend_set'), friend_url(:action => 'add_friend'))) if is_owner?  %>
+ <%= content_tag(:span, (link_to "好友", friend_url(:action => 'list', :id => @user)))  %>
+ <%= content_tag(:span, (link_to "誰加好友", friend_url(:action => 'list_friends', :id => @user)))  %>
+ <%= content_tag(:span, (link_to "好友排行榜", friend_url(:action => 'list_user_rank', :id => @user)))  %>
+</div>
+
+<p>
+  <%= today_show %>
+</p>
+<% @friends.each do |u| %>
+  <div class='people'>
+    <div class="thumbnail">
+      <%= link_to_user_image(u, 'user')%>
+    </div>
+    <div class="pic">
+      <h3 class="title">
+        <%= link_to_user(u, u.name, 'user') %>
+      </h3>
+      <p class="description">
+        <%= truncate(u.profile.others, :length => 50)%>
+      </p>
+      
+    </div>
+  </div>
+<% end %>
+<div class='clear'></div>
+<%= will_paginate @friends %>
+<% else %>
+<span class='fl-l mar-r-10'>
+  <%= link_to_user(@user, @user.name, nil, true)%>
+</span>
+<div class='clear'></div>
+  <div id="journal-all" class="no-journal">
+    <div class='no-content'>
+      被設為隱藏
+    </div>
+  </div>
+<% end %>

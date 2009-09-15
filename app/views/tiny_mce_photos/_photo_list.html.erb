@@ -1,0 +1,36 @@
+<% unless photos.empty? %>
+<ul class="curblyadvimage_list">
+<% photos.each do |p| %>
+<li id="<%= p.id %>" class="">
+  <div class="thumbs">
+    <%= t 'curblyadvimage.insert' %>:
+    <br/>
+    <a onclick="select_thumb(this);return false;" href="#_thumb">
+      <%= t 'curblyadvimage.thumb' %>
+    </a>
+    <br/>
+    <a onclick="select_thumb(this);return false;" href="#_medium">
+      <%= t 'curblyadvimage.medium' %>
+    </a>
+    <br/>
+    <a onclick="select_thumb(this);return false;" href="#">
+      <%= t 'curblyadvimage.large' %>
+    </a>
+    <br/>
+    <a style="float: right; font-size: 12px;" onclick="$(this).parents('li').removeClass('selected');return false;" href="#">
+      <%= t 'curblyadvimage.cancel' %>
+    </a>
+  </div>
+  <a onclick="select_image(this);return false;" href="#">
+    <img src="<%= p.public_filename(:thumb) %>" alt="<%= p.name %>"/>
+  </a>
+</li>
+<% end %>
+</ul>
+<br style="clear:both;" />
+<div style="float:right;margin-bottom:10px;">
+<%= will_paginate photos, :renderer => 'RemoteLinkRenderer' %>
+</div>
+<% else %>
+No Images Uploaded Yet.
+<% end %>

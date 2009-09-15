@@ -1,0 +1,32 @@
+<h1>Editing message</h1>
+
+<% form_for(@message) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :subject %><br />
+    <%= f.text_field :subject %>
+  </p>
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </p>
+  <p>
+    <%= f.label :public %><br />
+    <%= f.text_field :public %>
+  </p>
+  <p>
+    <%= f.label :message_id %><br />
+    <%= f.text_field :message_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @message %> |
+<%= link_to 'Back', messages_path %>

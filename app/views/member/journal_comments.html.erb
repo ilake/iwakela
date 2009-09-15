@@ -1,0 +1,22 @@
+<%= render :partial => 'shared/sub_nav' %>
+<br />
+<table>  
+  <thead>
+    <th>回應者</th>
+    <th>內容</th>
+    <th>回應時間</th>
+  </thead>
+  <tbody>
+  <% @record_comments.each do |c|  %>
+    <tr>
+      <td class="user-name"><%= link_to_user(c.user, c.user.name, nil, true) %></td>    
+      <td class="comment-content">
+        <%= (format_content(c.content)) %>
+        <%= link_to '...<<全文>>', member_url(:action => 'journal', :record_id => c.record) %>
+      </td> 
+      <td><%= c.created_at.to_s(:date)%></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<%= will_paginate @record_comments %>

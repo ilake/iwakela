@@ -1,0 +1,11 @@
+<tr goal_id=<%=g.id%>>
+  <td class="goal_name"><%= h(g.name) %></td>
+  <td class="change_goal_status" status='1'><a href='javascript:;' class='journal-img journal-todo-complete'></a></td>
+  <td class="change_goal_status" status='2'><a href='javascript:;' class='journal-img journal-giveup'></a></td>
+  <td class="change_goal_status" status='-1'><a href='javascript:;' class='journal-img journal-todo-del'></a></td>
+  <% if show%>
+    <td class="goal_to_today_range"><a href='javascript:;' class='journal-img journal-to-today'></a></td>
+  <% end %>
+  <td class="goal_total_num"><%= g.total %></td>
+</tr>
+

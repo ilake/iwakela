@@ -1,0 +1,4 @@
+<h1>請選擇要發佈的分類</h1>
+<% CATEGORIES.each do |key, value| %>
+  <%= link_to value, :action => 'new', :id => params[:id], :category => key %>
+<% end %>

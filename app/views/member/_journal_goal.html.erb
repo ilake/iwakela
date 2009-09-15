@@ -1,0 +1,25 @@
+<table id='today_goals'>
+  <th> </th>
+  <th> </th>
+  <th> </th>
+  <th>數量</th>
+  <% today_goals.each do |goal|%>
+    <tr>
+      <td class="goal_done">
+        <%= state_image(goal.done ==1) %>
+      </td>
+      <td class="goal_name">
+        <%= h(goal.name) %>
+      </td>
+      <td class="goal_comment">
+        <%= goal.comment %>
+      </td>
+      <% 
+        gv = goal.value
+        iv = goal.value.to_i
+        value = gv == iv ? iv : gv
+      %>
+      <%= content_tag(:td,  value, :class => 'goal_value') %>
+    </tr>
+  <% end %>
+</table>

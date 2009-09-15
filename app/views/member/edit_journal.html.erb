@@ -1,0 +1,12 @@
+<div class='clear'></div>
+<span class='journal-title'>今日日誌</span>
+
+<span class="comment-diary-time">
+  <%= exact_datetime_string(@record.todo_time)%>(星期<%= week_day(@record.todo_time.wday) %>)
+</span>
+<div id='edit-journal'>
+  <% form_for @record, :url => member_url(:action => 'update', :id => @record ) do |f| %>
+      <%= render :partial => 'journal_form', :locals => {:record => @record}%>
+  <% end %>
+</div>
+<%= render :partial => 'todo_form', :locals => {:show => true} %>
