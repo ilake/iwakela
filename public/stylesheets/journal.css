@@ -1,0 +1,273 @@
+.journal-title, .journal-time {
+  padding: 3px;
+  font-weight: bold;
+  color: #000000;
+  font-size:19px;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+#journal-all {
+  float: left;
+  width: 700px;
+  border: 1px solid #CACACA;
+  padding: 3px;
+  margin-top:5px;
+}
+
+.no-journal {
+}
+
+.no-content {
+  font-weight: bold;
+	font-size: 120%;
+  text-align: center;
+  padding-top: 135px;
+  height: 275px;
+}
+
+.journal-content-title {
+  background-color:#5C83BC;
+  border: 1px solid #666666;
+  padding: 3px;
+  font-weight: bold;
+  font-size:16px;
+  margin-bottom:5px;
+  color:#FAE977;
+}
+.journal-content{
+  padding: 10px;
+  margin: 10px 0 10px 0;
+}
+
+#side-journal-list {
+  overflow-x: hidden;
+  width: 240px;
+  height: 400px;
+  border: 1px solid #CACACA;
+  padding-left:1px;
+  margin-top:5px;
+}
+
+.jentry {
+  margin: 0 0 3px;
+  padding:3px;
+  height: 32px;
+  width: 210px;
+  line-height: 14px;
+  font-size: 11px;
+  color:#666666;
+}
+.side-journal-list-entry a{
+  color:#0066FF;
+  text-decoration: none;
+  font-weight: bold;
+  font-size:12px;
+}
+.journal-state{
+  width:20px;
+  height:20px;
+  float:left;
+}
+
+.journal-feel-title {
+  padding: 3px;
+  font-weight: bold;
+  font-size:14px;
+  margin-bottom:5px
+}
+
+.journal-comment{
+  float: left;
+  width: 700px;
+}
+
+#today_goals {
+  color:#000000;
+}
+
+#journal-all table{
+}
+
+#today_goals th, #today_goals tr, #today_goals td {
+  padding: 3px;
+}
+
+.comment-content a{
+  color:#696969;
+  text-decoration: none;
+}
+
+#today_goals tr, #daily-goals tr {
+  border-bottom:0px;
+}
+
+.goal_name{
+}
+.goal_time{
+  color:#666666;
+}
+.goal_comment{
+  color:#444444;
+}
+
+#daily-goals {
+  margin-top:10px;
+  padding: 3px;
+  border: 1px solid #444444;
+  float:left;
+}
+
+.daily-goals-title {
+  padding: 3px;
+  font-weight: bold;
+  font-size:14px;
+  margin-bottom:5px;
+  color:#338833;
+}
+
+.journal-submit {
+  margin-top:10px;
+}
+
+.daily-goals-submit, .once-goal-form {
+  border-bottom: 1px dotted #3E5F9D;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#edit-journal {
+  border: 1px solid #CACACA;
+  padding: 3px;
+  margin-top:5px;
+}
+
+#edit-journal a, #daily-goals a{
+  color:#0060BF;
+  font-weight: bold;
+}
+
+#edit-journal p{
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.daily-goals-list {
+  float:left;
+  width:700px;
+  border-right: 1px dotted #3E5F9D;
+}
+
+.daily-goals-help {
+  padding:5px;
+  margin:5px;
+  background-color:#FFCC66;
+  font-weight: bold;
+  float:right;
+  line-height: 20px;
+  width:200px;
+}
+
+thead th {
+  border: 0px;
+}
+
+#side-journal-list-top{
+  float:right;
+  font-weight: bold;
+}
+#side-journal-list-top a{
+  text-decoration:none;
+}
+
+.journal-night {
+  background-color :#BBBBBB;
+}
+
+.journal-daylight {
+  background-color :#FFF7DB;
+}
+
+#journal-list {
+  width: 460px;
+  border: 1px solid #CACACA;
+  padding-left:1px;
+  margin-top:5px;
+}
+
+.night-list {
+  float:right;
+}
+
+.daylight-list {
+  float:left;
+}
+
+.jlist-entry {
+  padding:3px;
+  line-height: 14px;
+  font-size: 11px;
+  color:#666666;
+}
+
+.journal-list-entry {
+  padding:6px 6px 20px 6px;
+  border-bottom: 1px dotted #3E5F9D;
+}
+
+.journal-list-entry a{
+  color:#0066FF;
+  text-decoration: none;
+  font-weight: bold;
+  font-size:12px;
+}
+
+.journal-content a{
+  color:#0077DD;
+  font-weight:normal;
+}
+
+.jlist-time{
+  font-weight: bold;
+  font-size:16px;
+  color:#000000;
+  float:left;
+}
+
+.list-journal-time {
+  margin-left:60px;
+}
+
+.journal-time-target {
+  float:right;
+  color:#000000;
+  font-weight:bold;
+  padding-left:6px;
+  border-left:1px dotted #3E5F9D;
+}
+
+#latest-journal-rsp {
+  overflow-x: hidden;
+  width: 240px;
+  border: 1px solid #CACACA;
+  padding-left:1px;
+  margin-top:5px;
+}
+
+.journal-encourage {
+  font-weight: bold;
+  padding:3px;
+  float:right;
+  color:#FAE977;
+  border:2px solid #CACACA;
+  background-color:#0066FF;
+  
+}
+a.journal-encourage {
+  text-decoration:none;
+}
+.journal-top {
+  width:700px;
+  float:left;
+  margin-top:10px;
+}

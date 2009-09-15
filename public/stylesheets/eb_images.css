@@ -1,0 +1,87 @@
+/* score */
+.my_score_status a {
+  background-image :url(/images/score/sprite-score_128_32.gif);
+  background-repeat: no-repeat;
+  width:128px;
+  height:128px;
+  display:block;
+}
+.sprite-superman_128 { background-position: 0px 0px; } 
+.sprite-victory_128 { background-position: -128px 0px ; } 
+.sprite-exciting_128 { background-position: -256px 0px ; } 
+.sprite-happy_128 { background-position: -384px -0px ; } 
+.sprite-Nothing_128 { background-position: -0px -128px; } 
+.sprite-unhappy_128 { background-position: -128px -128px; } 
+.sprite-electricshock_128 { background-position: -256px -128px; } 
+.sprite-beaten_128 { background-position: -384px -128px; } 
+.sprite-cry_128 { background-position: -0px -256px; } 
+.sprite-eyesdroped_128 { background-position: -128px -256px; } 
+
+#group_score_rank .g_score a {
+  background-image :url(/images/score/sprite-score_128_32.gif);
+  background-repeat: no-repeat;
+  width:32px;
+  height:32px;
+  display:block;
+}
+.sprite-superman_32 { background-position: -384px -256px; } 
+.sprite-victory_32 { background-position: -416px -256px; } 
+.sprite-happy_32 { background-position: -447px -256px; } 
+.sprite-exciting_32 { background-position: -478px -256px; } 
+.sprite-Nothing_32 { background-position: -384px -288px; } 
+.sprite-unhappy_32 { background-position: -416px -288px; } 
+.sprite-beaten_32 { background-position: -448px -288px; } 
+.sprite-cry_32 { background-position: -480px -288px; } 
+.sprite-eyesdroped_32 { background-position: -384px -320px; } 
+.sprite-electricshock_32 { background-position: -416px -320px; } 
+
+
+/* normal */
+.journal-img {
+  background-image :url(/images/eb_all.png);
+  background-repeat: no-repeat;
+  width:16px;
+  height:16px;
+  margin-left: auto;
+  margin-right: auto;
+  display:block;
+}
+
+.journal-todo-complete { background-position: -48px -16px; } 
+.journal-giveup { background-position: -16px -16px; } 
+.journal-to-today { background-position: 0px 0px; } 
+.journal-todo-del { background-position: -16px 0px; } 
+a.journal-todo-del:hover { background-position: -32px 0px; } 
+.journal-todo-back { background-position: -32px -16px; } 
+.journal-todo-plug{ background-position: -48px 0px; } 
+.journal-todo-min{ background-position: 0px -16px; } 
+
+.journal-status {
+  background-image :url(/images/eb_all.png);
+  background-repeat: no-repeat;
+  width:32px;
+  height:32px;
+  display:block;
+}
+.journal-logo-daylight {
+   background-position: 0px -32px; 
+   float:left;
+   margin-right:6px;
+}
+.journal-logo-night{
+   background-position: -32px -32px; 
+   float:left;
+   margin-right:6px;
+}
+.hide-show-img {
+  background-image :url(/images/eb_all.png);
+  background-repeat: no-repeat;
+  width:18px;
+  height:18px;
+}
+.show-plus{
+   background-position: 0px -64px; 
+}
+.hide-minus{
+   background-position: -18px -64px; 
+}

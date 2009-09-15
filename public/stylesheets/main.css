@@ -1,0 +1,1612 @@
+/*#############################################################
+Name: Transparentia
+Date: 2006-08-20
+Description: Simple, lightweight and slightly blue.
+Author: Viktor Persson
+URL: http://templates.arcsin.se
+
+Feel free to use and modify but please provide credits.
+#############################################################*/
+
+/* standard elements */
+* {
+	margin: 0;
+	padding: 0;
+}
+a {
+	color: #36C;
+}
+a:hover {
+	color: #06F;
+}
+body {
+	color: #444;
+	font: normal 90.0% "Lucida Sans Unicode",sans-serif;
+	margin: 0;
+}
+input {
+	color: #555;
+	font: normal 1.1em "Lucida Sans Unicode",sans-serif;
+}
+p,cite,code,ul {
+	/*font-size: 1.2em;*/
+	padding-bottom: 1.2em;
+}
+h1 {
+	font-size: 1.4em;
+	margin-bottom: 4px;
+}
+code {
+	background: url(/images/bgcode.gif);
+	border: 1px solid #F0F0F0;
+	border-left: 6px solid #39F;
+	color: #555;
+	display: block;
+	font: normal 1.1em "Lucida Sans Unicode",serif;
+	margin-bottom: 12px;
+	padding: 8px 10px;
+	white-space: pre;
+}
+cite {
+	background: url(/images/quote.gif) no-repeat;
+	color: #666;
+	display: block;
+	font: normal 1.3em "Lucida Sans Unicode",serif;
+	padding-left: 28px;
+}
+h1,h2,h3 {
+	color: #367EA6;
+	padding-top: 6px;
+}
+
+/* misc */
+.clearer {
+	clear: both;
+}
+
+/* structure */
+.container {
+	margin: 0 auto;
+	padding-bottom: 6px;
+	width: 1000px;
+}
+
+.top_bar {
+	text-align: right;
+  margin-right: 18px;
+  margin-bottom: 5px;
+}
+.top_bar a{
+	text-align: right;
+	padding: 8px;
+}
+
+.header {
+	background: url(/images/header.jpg) repeat-x;
+}
+
+.header2 {
+	background: url(/images/header2.jpg) repeat-x;
+}
+
+.header a{
+  color: #FFF;
+}
+
+.header2 a{
+  color: #FFF;
+}
+
+/* title */
+.title h1 {
+  color : #FFF;
+	font: normal 3em Verdana,sans-serif;
+	height: 100px;
+	line-height: 100px;
+	margin-bottom: 8px;
+  margin-left: 20%;
+  padding-bottom: 10px;
+/*	text-align: center; */
+}
+
+/* navigation */
+.navigation {
+	margin-bottom: 4px;
+}
+.navigation a {
+	background-color: #4A91C3;
+	color: #FFF;
+	float: left;
+	font: bold 1.2em "Trebuchet MS",sans-serif;
+	/*padding: 8px 0;*/
+	width: 19%;
+	border-right: 1px solid #FFF;
+	text-align: center;
+	text-decoration: none;
+}
+.navigation a:hover {
+	background-color: #000;
+	color: #FFF;
+}
+
+/* main */
+.main {
+	clear: both;
+	padding: 0px 18px 8px 18px;
+}
+
+/* content */
+.record_content {
+	float: right;
+	width: 780px;
+}
+.content .item {
+	padding: 6px 0px;
+	/*border: 1px solid #EEE;*/
+	background: #FFF;
+	margin-bottom: 8px;
+}
+.content .descr {
+	color: #333;
+	margin-bottom: 6px;
+}
+
+/* search form */
+form {
+	padding: 0 0 6px 8px;
+}
+.styled {
+	border: 1px solid #DDD;
+	padding: 4px;
+}
+.button {
+	background: url(/images/search.gif) no-repeat left bottom;
+	border: none;
+	height: 27px;
+	width: 27px;
+}
+
+/* footer */
+.footer {
+	background: #FFF;
+	border: 1px solid #EEE;
+	color: #666;
+	font-size: 1.1em;
+	margin: 0 auto;
+	text-align: center;
+	padding: 6px;
+	width: 720px;
+}
+.footer a {
+	color: #36C;
+	text-decoration: none;
+}
+.footer a:hover {
+	color: #06F;
+	text-decoration: underline;
+}
+
+/* main left */
+.sidenav h1,.sidenav ul {
+	padding-left: 10px;
+}
+.sidenav {
+	/*background: #EEE;*/
+	border: 1px solid #C2CFF1;
+	float: left;
+	width: 155px;
+}
+.sidenav h1 {
+	color: #C86B41;
+	font-size: 1.2em;
+	height: 20px;
+	margin-top: 1.2em;
+}
+.sidenav ul {
+	margin: 0;
+	padding: 0;
+}
+.sidenav li {
+	color: #000000;
+	font-size: 14px;
+	border-top: none;
+	list-style: none;
+	margin: 0;
+}
+.sidenav li a {
+	color: #777;
+	display: block;
+	padding: 3px 6px 3px 14px;
+	text-decoration: none;
+}
+.sidenav li a:hover {
+	color: #111;
+	background: #38c8a3;
+}
+
+.hide {
+  display:none;
+}
+
+.unfold {
+}
+
+
+/* ---- ( iTunes CSS ) ---- */
+table { 
+	font: 100% Verdana, Arial, Helvetica, sans-serif;
+	color: #000;
+	text-align: left;
+	border-collapse: collapse;
+	/*border: 1px solid #666666;*/
+	border-top: none;	
+}
+table a {
+	text-decoration: underline;
+}
+/*table a:visited {
+	text-decoration: none;
+}*/
+tr.odd {
+	background-color: #ebf3ff;
+}
+tr a {
+	color: #000000;
+	text-decoration: none;
+}
+/*tr:hover a {
+	color: #ffffff;
+}
+tr:hover, tr.odd:hover {
+	background-color: #3d80df;
+	color: #ffffff;
+}*/
+caption {
+	height: 45px;
+	line-height: 44px;
+	color: #60634E;
+	font-weight: bold;
+	text-align: center;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	background: #ffffff no-repeat;
+	background-position: 50% top;
+	border-left: 2px solid #616161;
+	border-right: 2px solid #616161;
+}
+thead th {
+	font-size: 105%;
+	color: #000;
+	background: #ffffff repeat-x;
+	height: 33px;
+	border-bottom: 1px solid #dadada;
+}
+thead th:hover {
+	background: #ffffff repeat-x;
+	
+}
+tr {
+	vertical-align: top;
+	border-bottom: 1px solid #dadada;*/
+}
+
+tr,th,td {
+	padding: 0.55em;
+	/*padding: 2px;*/
+}
+td {
+/*	border-left: 1px solid #dadada;*/
+/*	border-right: 1px solid #dadada;*/
+}
+
+tfoot tr {
+	background: #fff repeat-x;
+}
+tfoot td, tfoot th{
+	color: #000;
+	border: 0px;
+}
+
+
+
+.pagination {
+  padding: 3px;
+  margin: 3px;
+}
+.pagination a {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  text-decoration: none;
+  color: #000099;
+}
+.pagination a:hover, .pagination a:active {
+  color: #000;
+}
+.pagination span.current {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  font-weight: bold;
+  background-color: #68A9E3;
+  color: #FFF;
+}
+.pagination span.disabled {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  color: #ddd;
+}
+
+
+/* Main Flora Style Sheet for jQuery UI ui-datepicker */
+#ui-datepicker-div, .ui-datepicker-inline {
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 14px;
+	padding: 0;
+	margin: 0;
+	background: #E0F4D7;
+	width: 185px;
+}
+#ui-datepicker-div {
+	display: none;
+	border: 1px solid #FF9900;
+	z-index: 10;
+}
+.ui-datepicker-inline {
+	float: left;
+	display: block;
+	border: 0;
+}
+.ui-datepicker-rtl {
+	direction: rtl;
+}
+.ui-datepicker-dialog {
+	padding: 5px !important;
+	border: 4px ridge #83C948 !important;
+}
+button.ui-datepicker-trigger {
+	width: 25px;
+}
+img.ui-datepicker-trigger {
+	margin: 2px;
+	vertical-align: middle;
+}
+.ui-datepicker-prompt {
+	float: left;
+	padding: 2px;
+	background: #E0F4D7;
+	color: #000;
+}
+*html .ui-datepicker-prompt {
+	width: 185px;
+}
+.ui-datepicker-control, .ui-datepicker-links, .ui-datepicker-header, .ui-datepicker {
+	clear: both;
+	float: left;
+	width: 100%;
+	color: #FFF;
+}
+.ui-datepicker-control {
+	background: #FF9900;
+	padding: 2px 0px;
+}
+.ui-datepicker-links {
+	background: #E0F4D7;
+	padding: 2px 0px;
+}
+.ui-datepicker-control, .ui-datepicker-links {
+	font-weight: bold;
+	font-size: 80%;
+	letter-spacing: 1px;
+}
+.ui-datepicker-links label {
+	padding: 2px 5px;
+	color: #888;
+}
+.ui-datepicker-clear, .ui-datepicker-prev {
+	float: left;
+	width: 34%;
+}
+.ui-datepicker-rtl .ui-datepicker-clear, .ui-datepicker-rtl .ui-datepicker-prev {
+	float: right;
+	text-align: right;
+}
+.ui-datepicker-current {
+	float: left;
+	width: 30%;
+	text-align: center;
+}
+.ui-datepicker-close, .ui-datepicker-next {
+	float: right;
+	width: 34%;
+	text-align: right;
+}
+.ui-datepicker-rtl .ui-datepicker-close, .ui-datepicker-rtl .ui-datepicker-next {
+	float: left;
+	text-align: left;
+}
+.ui-datepicker-header {
+	padding: 1px 0 3px;
+	background: #83C948;
+	text-align: center;
+	font-weight: bold;
+	height: 1.3em;
+}
+.ui-datepicker-header select {
+	background: #83C948;
+	color: #000;
+	border: 0px;
+	font-weight: bold;
+}
+.ui-datepicker {
+	background: #CCC;
+	text-align: center;
+	font-size: 100%;
+}
+.ui-datepicker a {
+	display: block;
+	width: 100%;
+}
+.ui-datepicker-title-row {
+	background: #B1DB87;
+	color: #000;
+}
+.ui-datepicker-title-row .ui-datepicker-week-end-cell {
+	background: #B1DB87;
+}
+.ui-datepicker-days-row {
+	background: #FFF;
+	color: #666;
+}
+.ui-datepicker-week-col {
+	background: #B1DB87;
+	color: #000;
+}
+.ui-datepicker-days-cell {
+	color: #000;
+	border: 1px solid #DDD;
+}
+.ui-datepicker-days-cell a {
+	display: block;
+}
+.ui-datepicker-week-end-cell {
+	background: #E0F4D7;
+}
+.ui-datepicker-unselectable {
+	color: #888;
+}
+.ui-datepicker-week-over, .ui-datepicker-week-over .ui-datepicker-week-end-cell {
+	background: #B1DB87 !important;
+}
+.ui-datepicker-days-cell-over, .ui-datepicker-days-cell-over.ui-datepicker-week-end-cell {
+	background: #FFF !important;
+	border: 1px solid #777;
+}
+* html .ui-datepicker-title-row .ui-datepicker-week-end-cell {
+	background: #B1DB87 !important;
+}
+* html .ui-datepicker-week-end-cell {
+	background: #E0F4D7 !important;
+	border: 1px solid #DDD !important;
+}
+* html .ui-datepicker-days-cell-over {
+	background: #FFF !important;
+	border: 1px solid #777 !important;
+}
+* html .ui-datepicker-current-day {
+	background: #83C948 !important;
+}
+.ui-datepicker-today {
+	background: #B1DB87 !important;
+}
+.ui-datepicker-current-day {
+	background: #83C948 !important;
+}
+.ui-datepicker-status {
+	background: #E0F4D7;
+	width: 100%;
+	font-size: 80%;
+	text-align: center;
+}
+#ui-datepicker-div a, .ui-datepicker-inline a {
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+	background: none;
+	color: #000;
+}
+.ui-datepicker-inline .ui-datepicker-links a {
+	padding: 0 5px !important;
+}
+.ui-datepicker-control a, .ui-datepicker-links a {
+	padding: 2px 5px !important;
+	color: #000 !important;
+}
+.ui-datepicker-title-row a {
+	color: #000 !important;
+}
+.ui-datepicker-control a:hover {
+	background: #FDD !important;
+	color: #333 !important;
+}
+.ui-datepicker-links a:hover, .ui-datepicker-title-row a:hover {
+	background: #FFF !important;
+	color: #333 !important;
+}
+.ui-datepicker-multi .ui-datepicker {
+	border: 1px solid #83C948;
+}
+.ui-datepicker-one-month {
+	float: left;
+	width: 185px;
+}
+.ui-datepicker-new-row {
+	clear: left;
+}
+.ui-datepicker-cover {
+	display: none;
+	display/**/: block;
+	position: absolute;
+	z-index: -1;
+	filter: mask();
+	top: -4px;
+	left: -4px;
+	width: 193px;
+	height: 200px;
+}
+
+
+/*  eb style */
+.title a {
+  text-decoration:none;
+}
+
+.title a:hover {
+  text-decoration:none;
+}
+
+select {
+  border: 0pt none;
+}
+
+#day {
+  margin-left:700px;
+}
+
+td.diary {
+  width: 225px;
+}
+
+td.diary-long {
+  width: 300px;
+}
+
+td.goal{
+  width: 225px;
+}
+
+td.rsp {
+  width: 30px;
+}
+
+td.todo_time {
+  width: 160px;
+}
+td.comment-diary-time {
+  width: 1000px;
+  color :#A0AC89;
+}
+td.comment-diary {
+  width: 1000px;
+}
+td.comment-time {
+  width: 510px;
+}
+div.comment-response {
+  font-weight: bold;
+	font-size: 120%;
+}
+td.medium-font {
+  font-weight: bold;
+	font-size: 120%;
+}
+td.user-name {
+  width: 150px;
+}
+
+td.user-title {
+  width: 200px;
+}
+td.user-rank-profile {
+  width: 150px;
+}
+
+td.user-profile {
+  width: 1000px;
+}
+td.comment-diary-user {
+  /*width: 1000px;*/
+}
+
+#diary.showdiary {
+	border-left: none;
+	border-right: none;
+}
+
+tr.title a{
+  color:   #000000;
+  text-decoration: underline;
+}
+
+td.showdiary-time {
+  width: 1500px;
+}
+
+td.showdiary-content{
+  width: 1275px;
+}
+.current {
+  background: #BABABA;
+	padding: 10px;
+}
+
+#sidetitle {
+  color :#D6BC89;
+}
+
+
+#remote_diary .tdinline div{
+  display: inline;
+}
+
+.pagination {
+  padding: 3px;
+  margin: 3px;
+}
+.pagination a {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  text-decoration: none;
+  color: #000099;
+}
+.pagination a:hover, .pagination a:active {
+  color: #000;
+}
+.pagination span.current {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  font-weight: bold;
+  background-color: #68A9E3;
+  color: #FFF;
+}
+.pagination span.disabled {
+  padding: 2px 5px 2px 5px;
+  margin: 2px;
+  color: #ddd;
+}
+
+#month-form {  
+  float: left;
+}
+
+#placeholder {
+  float :left;
+  width: 660px;
+  height: 300px;
+}
+
+#user-show {
+  /*float: left;*/
+}
+
+#profile {
+}
+.fieldWithoutErrors,
+.fieldWithErrors
+{
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+
+  /* !!HACK!! IE will not use this because it does not understand !important.  Border is not needed for firefox, so make it 0px!*/
+  border-width: 0px !important;    
+  /*for IE!*/
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+}
+
+.fieldWithErrors
+{
+  display: inline;
+  width: 30px;
+  background: pink;
+  background-color:pink;
+  outline-color: red;
+
+/*for IE!*/
+border-color: red;
+}
+
+/* Browser support may be limited here...*/
+.fieldWithErrors input,
+.fieldWithErrors select,
+.fieldWithErrors textarea
+{
+  background: pink;
+  background-color: pink;
+}
+
+.alert {
+  padding: 2px 5px 2px 5px;
+  background: #CC0000;
+  color: #FFFFFF;
+  font-weight: bold;
+  text-align: center;
+  width:70%;
+}
+
+.alert a{
+  color : #FFFFFF;
+}
+
+.announce {
+  background-color:#FFF1A8
+  font-weight:bold;
+  display:block;
+}
+
+span.memo {
+  color : #666666;
+}
+
+.ebhead {
+  color : #090F15;
+}
+
+div.today_result {
+  float:left;
+  line-height:16px;
+  width:auto;
+}
+
+div.success_users {
+  float:left;
+  margin-bottom:10px;
+  margin-right:15px;
+  padding-right:15px;
+  width:180px;
+}
+
+div.fail_users {
+  padding-right:15px;
+  float:left;
+  margin-bottom:10px;
+  width:135px;
+}
+
+div.talk {
+  border-right:1px solid #CBCACA;
+  margin-right:15px;
+  float:left;
+  width:580px;
+}
+
+h2.result-title {
+  color:#663300 !important;
+  font-size:16px;
+  letter-spacing:2px;
+  margin:0px;
+  padding-top:0px;
+}
+
+div.result-comment-ceil {
+  float:left;
+  padding:10px;
+  border-top: 1px solid #EFEFEF;
+  width:540px;
+}
+.poo {
+  position:absolute;
+  padding-top:80px;  
+  padding-left:-10px;  
+}
+
+.orz {
+  position:absolute;
+  padding-top:20px;  
+  padding-left:80px;  
+}
+
+.bird-down {
+  position:relative;
+  padding-top:10px;  
+}
+
+.h-time {
+  color:#BBBBBB;
+}
+
+.faq {
+  font-weight: normal;
+  line-height: 26px;
+  font-size: 12px;
+}
+
+.clickme {
+  border:1px solid #777777;
+}
+.lazybird {
+  position:relative;
+  padding-top:0px;
+  padding-left:0px;
+}
+.clickme {
+ color:#F7D785;
+}
+
+div.set-feature {
+  background-color: #68A9E3;
+}
+td.comment-time {
+  width: 510px;
+}
+div.comment-response {
+  font-weight: bold;
+	font-size: 120%;
+}
+td.medium-font {
+  font-weight: bold;
+	font-size: 120%;
+}
+
+td.comment-diary-user {
+  /*width: 1000px;*/
+}
+
+#diary.showdiary {
+	border-left: none;
+	border-right: none;
+}
+
+tr.title {
+  background:   #d8dfe7;
+}
+
+#month-form {  
+  float: left;
+  display: block;
+}
+
+b.placeholder-time {
+  clear: both;
+}
+
+#user-show {
+  /*float: left;*/
+}
+
+div.auth {
+  padding-top: 5px;
+	font-size: 90%;
+  font-weight: bold;
+}
+
+div.auth a{
+  text-decoration: none;
+}
+
+#profile {
+}
+.fieldWithoutErrors,
+.fieldWithErrors
+{
+  outline-width: 1px;
+  outline-color: white;
+  outline-style: solid;
+
+  /* !!HACK!! IE will not use this because it does not understand !important.  Border is not needed for firefox, so make it 0px!*/
+  border-width: 0px !important;    
+  /*for IE!*/
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+}
+
+.fieldWithErrors
+{
+  display: inline;
+  width: 30px;
+  background: pink;
+  background-color:pink;
+  outline-color: red;
+
+/*for IE!*/
+border-color: red;
+}
+
+/* Browser support may be limited here...*/
+.fieldWithErrors input,
+.fieldWithErrors select,
+.fieldWithErrors textarea
+{
+  background: pink;
+  background-color: pink;
+}
+
+.announce {
+  background: #FFF1A8;
+  font-weight: bold;
+}
+
+span.memo {
+  color : #666666;
+}
+
+div.today_result {
+  float:left;
+  line-height:16px;
+  width:auto;
+}
+
+h2.result-title {
+  color:#663300 !important;
+  font-size:16px;
+  letter-spacing:2px;
+  margin:0px;
+  padding-top:0px;
+}
+
+.poo {
+  position:absolute;
+  padding-top:80px;  
+  padding-left:-10px;  
+}
+
+.orz {
+  position:absolute;
+  padding-top:20px;  
+  padding-left:80px;  
+}
+
+.bird-down {
+  position:relative;
+  padding-top:10px;  
+}
+
+.h-time {
+  color:#BBBBBB;
+}
+
+.faq {
+  font-weight: normal;
+  line-height: 26px;
+  font-size: 12px;
+}
+
+.clickme {
+  border:1px solid #777777;
+}
+.lazybird {
+  position:relative;
+  padding-top:0px;
+  padding-left:0px;
+}
+.clickme {
+ color:#F7D785;
+}
+
+div.setting-bg{
+  background-color:#E1ECFE;
+  padding:5px;
+}
+
+img{
+  border:0px;
+}
+
+td.forum_created_at{
+  width: 100px;
+}
+
+td.forum_subject{
+  width: 400px;
+}
+
+td.forum_author{
+  width: 100px;
+}
+
+td.forum-diary-time {
+  width: 500px;
+  color :#A0AC89;
+}
+
+td.forum-content{
+  line-height: 30px;
+  width: 1000px;
+}
+
+.call_state{
+  float:left;
+}
+
+.call_data{
+  float:left;
+}
+
+.call_block {
+ border-bottom: 1px solid #dadada;
+ float:left;
+ width:760px;
+ padding: 10px 5px 10px 0px;
+}
+
+.clear {
+  clear:both;
+  line-height: 0px;
+} 
+
+tr.target_fail {
+  background: #FFEA70;
+}
+
+tr.sleep {
+  background: #dddddd;
+}
+
+.announce_word {
+  float: left;
+  width: 460px;
+	line-height: 35px;
+  font-size:17px;
+}
+
+.announce_last{
+  border-left: 1px solid #EFEFEF;
+  float: left;
+  width: 350px;
+  padding-left:5px;
+}
+.announce_image {
+  float: left;
+  padding-right:20px;
+  padding-bottom:10px;
+  text-align: center;
+}
+
+.picture_border {
+  border:1px solid #CBCACA;
+}
+
+div.comment_title {
+  padding: 5px 0px 0px 0px;
+}
+div.comment_content {
+  border-bottom:1px solid #CBCACA;
+  padding: 10px 0px 10px 0px;
+  line-height : 22px;
+}
+span.no_line_name a{
+  text-decoration: none;
+  color: #0033CC;
+}
+span.no_line_name a:hover {
+  text-decoration: underline;
+  color: #0033CC;
+}
+
+td.group_name{
+  width: 200px;
+}
+
+td.group_owner{
+  width: 100px;
+}
+
+td.group_condition{
+  width: 500px;
+}
+
+.group_feature span{
+  padding: 0px 5px 0px 5px;
+}
+
+.group_feature{
+  padding: 10px 10px 10px 10px;
+  background-color: #E1ECFE;
+  margin: 0px 0px 5px 0px;
+}
+
+div.group_feature a{
+	color: #1010C8;
+}
+
+div.group_setting {
+  background-color: #B5EDBC;
+  padding: 5px 5px 5px 10px;
+  margin: 0px 0px 5px 0px;
+  color: #000000;
+  line-height: 19px;
+}
+div.group_setting a{
+	color: #1010C8;
+}
+
+.group_setting div{
+  padding: 1px 0px 1px 0px;
+}
+
+div.group_board{
+  padding: 5px 5px 5px 10px;
+}
+
+div.group_news{
+  padding: 5px 5px 5px 10px;
+  background-color: #FFEA70;
+  margin: 0px 0px 5px 0px;
+  color: #000000;
+}
+
+div.member_result{
+  float:left;
+  line-height:16px;
+  border-right:1px solid #CBCACA;
+  padding-right:15px;
+  margin-bottom:10px;
+  width:120px;
+  color: #000000;
+}
+
+div.member_result div {
+  padding: 5px 5px 5px 5px;
+}
+
+div.ban{
+  border:1px solid #CBCACA;
+}
+
+
+td.member-profile {
+  width: 400px;
+}
+
+.paginate {
+  float:left;
+}
+
+.black {
+  color: #1010C8;
+}
+
+.attendance_rate {
+  float:left;
+  color:#000000;
+}
+
+.attendance_rate div{
+  padding: 3px 0px 3px 0px;
+}
+
+div.even{
+  background:   #d8dfe7;
+  margin: 10px 0px 10px 0px;
+  padding: 3px 0px 3px 0px;
+}
+
+.number_clock {
+  text-align: center;
+  width: 70%;
+  margin: 5px 20px;
+  padding: 3px;
+  background-color: #b8d9f3;
+}
+
+.alarm_clock {
+ text-align:center; 
+ border-bottom: 1px solid white; 
+ padding-bottom: 5px;
+}
+
+.sleep_button {
+ text-align:center; 
+ border-bottom: 1px solid white; 
+ padding-bottom: 5px;
+}
+
+.alarm_clock a{
+  text-decoration: none;
+}
+
+.people {
+  border-color:-moz-use-text-color -moz-use-text-color #CCCCCC;
+  border-style:none none dotted;
+  float:left;
+  text-align:left;
+  padding :2px;
+  margin: 5px;
+  width:330px;
+  height :110px;
+}
+
+.new_people {
+  float:left;
+  text-align:left;
+  padding :2px;
+  margin: 5px;
+  width:130px;
+  height :110px;
+}
+
+.thumbnail {
+  background:#FFFFFF none repeat scroll 0%;
+  border:1px solid #DDDDDD;
+  float:left;
+  height:100px;
+  width:100px;
+  overflow:hidden;
+  padding:2px;
+}
+.people .info {
+  margin-left:80px;
+  vertical-align:bottom;
+}
+.people .title {
+  clear:none;
+}
+
+.people p.description {
+  font-size:90%;
+}
+
+.my_friend {
+  width :400px;
+  float :left;
+}
+
+
+.add_friend_block {
+  border-bottom : 1px solid #EFEFEF;
+  padding-bottom: 10px;
+}
+
+.friend_list {
+  padding:5px;
+}
+
+.new_friend_list {
+  width:350px;
+  float:left;
+}
+
+.last_rsp {
+  float:left;
+  padding-top:10px;
+  padding-left:10px;
+  width:170px;
+}
+
+.my_score_status {
+  border-bottom:1px solid white;
+  padding-bottom:5px;
+  text:center;
+  text-align:center;
+}
+
+.ui-tabs-hide { display: none; }
+
+.attendance_rate li {
+  border: 1px solid #FAFAFA;
+  border-top: none;
+  list-style: none;
+  margin: 0;
+}
+
+.announce_last .title {
+  color :#FF0A00;
+  padding-bottom:5px;
+}
+
+.group_setting .group_image {
+  width:100px;
+  float:left;
+  padding-right:10px;
+}
+
+.my_diary{
+  width :440px;
+  float :left;
+}
+
+.update_info{
+  width:330px;
+  float:left;
+}
+
+#nice_words{
+  float:left;
+  color:#000000;
+  background-color: #B5EDBC;
+  margin-bottom:10px;
+  padding: 10px;
+  line-height:20px;
+}
+
+.content_padding{
+  padding:5px;
+}
+
+#group_score_rank img{
+  width   :32px;
+  height  :32px;
+}
+
+.top_info {
+	text-align: left;
+  font-size:14px;
+  width:260px;
+  float:left;
+  font-weight:bold;
+}
+
+.alert_red {
+  color:#C62B26;
+}
+
+#overviewLegend {
+  float:right;
+}
+
+#show_graph{
+}
+
+#choices {
+  float: right;
+  margin-bottom: 20px;
+}
+
+#menu {
+  background:transparent url(/images/bgul.gif) repeat-x scroll 0% 50%;
+  height:40px;
+  padding:0em 1em;
+  position:relative;
+}
+
+#menu ul {
+  position:absolute;
+  top:10px;
+}
+
+#menu ul li {
+  display:inline;
+  position:relative;
+}
+
+#menu ul li a.active {
+  background-color:#DDDDDD;
+}
+
+#menu ul li a {
+  font-size:16px;
+  padding:10px;
+  text-decoration:none;
+}
+.border_padding {
+  border:1px solid #EFEFEF;
+  padding:5px;
+  width:380px;
+}
+
+.graph_content tr{
+  padding:2px;
+}
+
+.graph_content td{
+  padding:2px;
+}
+
+/* group item*/
+.group_item {
+ clear:both;
+}
+
+.group_item .title {
+  margin:0px 0px 5px 15px;
+  font-size:16px;
+  font-weight:bold;
+}
+.group_item .title a {
+  color:#105CB6;
+}
+
+.group_item .group_photo {
+  float:left;
+  text-align:center;
+  width:170px;
+}
+.group_item .group_photo img {
+  border:1px solid #CCCCCC;
+  padding:5px;
+  vertical-align:bottom;
+}
+
+.group_item .content {
+  margin-left:175px;
+}
+
+.group_item .others, .item .description {
+  margin-bottom:10px;
+}
+.others {
+  color:#999999;
+}
+
+.group_item .endOfItem {
+  clear:both;
+  height:10px;
+}
+
+.group_sidenav {
+	float: left;
+	width: 155px;
+  padding:0px 0px 5px 0px;
+}
+
+.group_sidenav a{
+  text-decoration:none;
+}
+
+.smallList .smallItem {
+  border-bottom:1px solid #E0E0E0;
+  margin-bottom:5px;
+  padding-bottom:5px;
+  padding-left:5px;
+}
+
+#overview-selector {
+  color: #000000;
+  font-size:16px;
+  background-color: #C2CFF1;
+  padding:2px;
+}
+
+#overview-selector a{
+  text-decoration:none;
+  padding:2px;
+  color: #FFFFFF;
+}
+
+.bold-link a{
+  font-size: 20px;
+  color: #FE3032;
+}
+
+.census {
+	padding: 3px 6px 3px 10px;
+}
+
+#index_placeholder {
+  float :right;
+  width: 950px;
+  height: 150px;
+}
+
+.top-people {
+  float:left;
+  text-align:center;
+  padding:2px;
+  margin: 5px;
+  width:130px;
+  height :110px;
+}
+
+.top-people-desc {
+  border: 1px solid #C62B26;
+  color:#000000;
+  float:left;
+  text-align:center;
+  width:25px;
+  height :110px;
+  padding-top:20px;
+}
+
+.td_index {
+  text-align:center;
+}
+
+.eb_header {
+  color:#3399CC;
+  font-size:20px;
+  font-weight:bold;
+  text-decoration:none;
+  margin-top:10px;
+}
+
+.pad-10 {
+  padding: 10px;
+}
+.pad-l-10 {
+  padding-left: 10px;
+}
+
+.pad-t-5 {
+  padding-top: 5px;
+}
+
+.pad-5 {
+  padding: 5px;
+}
+
+.mar-10 {
+  margin: 10px;
+}
+
+.mar-b-10 {
+  margin-bottom: 10px;
+}
+
+.fl-l {
+  float: left;
+}
+
+.fl-r {
+  float: right;
+}
+
+.bg-lb{
+  background-color :#E1ECFE;
+}
+
+.bg-lg{
+  background-color :#B5EDBC;
+}
+
+.bg-or {
+  background-color :#FFEA70;
+}
+
+.bg-ly {
+  background-color :#FFFFEE;
+}
+
+.w-black {
+  color:#000000;
+}
+
+.w-red a{
+  color:#FF0000;
+}
+
+.wh-250 {
+  width:250px;
+}
+
+.wh-100 {
+  width:100px;
+}
+
+.fw-bold{
+  font-weight: bold;
+}
+
+label {
+  color:#000000;
+  font-weight: bold;
+}
+
+.br-lb{
+  border-right:1px solid #CBCACA;
+  padding:5px;
+  margin:5px;
+}
+div.dialog {
+  width: 25em;
+  height:200px;
+  padding: 0 4em;
+  margin: 4em auto 0 auto;
+  border-right-color: #999;
+  border-bottom-color: #999;
+  background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif;
+}
+.center {
+  text-align:center;
+}
