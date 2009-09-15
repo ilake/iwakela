@@ -7,10 +7,6 @@
   text-decoration:none;
 }
 
-select {
-  border: 0pt none;
-}
-
 #day {
   margin-left:700px;
 }
@@ -28,11 +24,13 @@ td.goal{
 }
 
 td.rsp {
-  width: 30px;
+  width: 50px;
 }
 
 td.todo_time {
-  width: 160px;
+  width: 200px;
+  color: #000000;
+  font-weight:bold;
 }
 td.comment-diary-time {
   width: 1000px;
@@ -133,8 +131,8 @@ td.showdiary-content{
 
 #placeholder {
   float :left;
-  width: 660px;
-  height: 300px;
+  width: 700px;
+  height: 327px;
 }
 
 #user-show {
@@ -272,7 +270,8 @@ div.result-comment-ceil {
 .faq {
   font-weight: normal;
   line-height: 26px;
-  font-size: 12px;
+  font-size: 14px;
+  color:#000000;
 }
 
 .clickme {
@@ -399,45 +398,6 @@ h2.result-title {
   padding-top:0px;
 }
 
-.poo {
-  position:absolute;
-  padding-top:80px;  
-  padding-left:-10px;  
-}
-
-.orz {
-  position:absolute;
-  padding-top:20px;  
-  padding-left:80px;  
-}
-
-.bird-down {
-  position:relative;
-  padding-top:10px;  
-}
-
-.h-time {
-  color:#BBBBBB;
-}
-
-.faq {
-  font-weight: normal;
-  line-height: 26px;
-  font-size: 12px;
-}
-
-.clickme {
-  border:1px solid #777777;
-}
-.lazybird {
-  position:relative;
-  padding-top:0px;
-  padding-left:0px;
-}
-.clickme {
- color:#F7D785;
-}
-
 div.setting-bg{
   background-color:#E1ECFE;
   padding:5px;
@@ -525,9 +485,20 @@ div.comment_title {
   padding: 5px 0px 0px 0px;
 }
 div.comment_content {
-  border-bottom:1px solid #CBCACA;
   padding: 10px 0px 10px 0px;
   line-height : 22px;
+}
+
+div.uniq_message{
+  border-bottom:2px dotted #CBCACA;
+  padding:6px;
+}
+
+div.comment_reply_content {
+  border-left:3px solid #CBCACA;
+  margin: 0px 0px 5px 40px;
+  padding: 10px 0px 0px 10px;
+  line-height : 12px;
 }
 span.no_line_name a{
   text-decoration: none;
@@ -807,28 +778,28 @@ div.even{
   margin-bottom: 20px;
 }
 
-#menu {
+.menu {
   background:transparent url(/images/bgul.gif) repeat-x scroll 0% 50%;
   height:40px;
   padding:0em 1em;
   position:relative;
 }
 
-#menu ul {
+.menu ul {
   position:absolute;
   top:10px;
 }
 
-#menu ul li {
+.menu ul li {
   display:inline;
   position:relative;
 }
 
-#menu ul li a.active {
+.menu ul li a.active {
   background-color:#DDDDDD;
 }
 
-#menu ul li a {
+.menu ul li a {
   font-size:16px;
   padding:10px;
   text-decoration:none;
@@ -983,8 +954,17 @@ div.even{
   margin: 10px;
 }
 
+.mar-r-10 {
+  margin-right: 10px;
+}
 .mar-b-10 {
   margin-bottom: 10px;
+}
+.mar-b-40 {
+  margin-bottom: 40px;
+}
+.mar-t-10 {
+  margin-top: 10px;
 }
 
 .fl-l {
@@ -1011,8 +991,15 @@ div.even{
   background-color :#FFFFEE;
 }
 
+.bg-lgray{
+  background-color :#D7D7D7;
+}
+
 .w-black {
   color:#000000;
+}
+.w-red {
+  color:#FF0000;
 }
 
 .w-red a{
@@ -1052,4 +1039,63 @@ div.dialog {
 }
 .center {
   text-align:center;
+}
+
+#date_range {
+  padding: 4px;
+  font-weight: bold;
+}
+
+table.census-list {
+  text-align:center;
+  border-collapse:collapse;
+  border-spacing:0;
+  float:left;
+  width:200px;
+  margin-right:30px;
+}
+table.census-list td {
+  color:#74B2BF;
+}
+table.census-list th {
+  text-align:right;
+  font-style:normal;
+  font-weight:400
+}
+
+#user-settings {
+  float:left;
+  width:180px;
+  border-right:5px solid #BABABA;
+}
+
+#user-settings div{
+  padding:5px;
+}
+
+.user-setting-content {
+  padding:30px 10px 10px 10px;
+  float:left;
+  width:700px;
+}
+
+option {
+  border: 0.5px dotted #BABABA;
+  padding:2px;
+}
+
+.button-to {
+  float: left;
+}
+
+.top-function-menu {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-weight:bold;
+  background-color:#E1ECFE;
+}
+
+.hidden {
+  display: none;
 }

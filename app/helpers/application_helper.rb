@@ -6,7 +6,7 @@ module ApplicationHelper
     html =''
     str.each_char do |c|
       c = (c == ':') ? 'colon' : c
-      html << (image_tag "numbers/#{c}.png", :size => '16x21')
+      html << (b_image_tag "numbers/#{c}.png", :size => '16x21')
     end
     html
   end
@@ -26,4 +26,22 @@ module ApplicationHelper
     end
   end
 
+  def _back_image_path(source, back_host_const_name)
+    if Object.const_defined?(back_host_const_name)
+      host = Object.const_get(back_host_const_name)
+      unless source =~ %r{^[-a-z]+://}
+        source = "http://#{host}:#{request.port}/images/#{source}"
+      end
+    else
+      image_path(source) 
+    end
+  end
+  
+  def b_image_path(source)
+    _back_image_path(source, 'BACKOFFICE_IMAGE_HOST')
+  end 
+    
+  def b_image_tag(source, options = {})
+    image_tag(b_image_path(source), options)
+  end  
 end

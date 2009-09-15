@@ -1,6 +1,4 @@
-<% if census_exist %>
   <div id="overview-selector" class="selector">
-    <span class="hide_side_census"><a href='#'><%= @census_status == 'show' ? '+' : '－'  %></a></span>
     <span><%= t('sider.name') %></span>
   </div>
   <ul class='side_census <%= @census_status %>'>
@@ -13,12 +11,9 @@
       <%= score_state(@user) %>
     </div>
   </ul>
-<% end %>
 
-<% if wake_exist %>
   <% if  r = @user.today_record %>
     <div id="overview-selector" class="selector"> 
-      <span class='hide_side_number_clock'><a href='#'><%= @number_clock_status == 'show' ? '+' : '－'  %></a></span>
       <span><%= t('sider.today_wake_time') %></span>
     </div>
     <div class='number_clock <%= @number_clock_status%>'>
@@ -27,16 +22,13 @@
     </div>
   <% elsif @user == @me %>
     <div id="overview-selector" class="selector"> 
-      <span class='hide_side_alarm_clock'><a href='#'><%= @alarm_clock_status == 'show' ? '+' : '－'  %></a></span>
       <span><%= t('sider.wake_up') %></span>
     </div>
     <div class='alarm_clock <%= @alarm_clock_status%>'> <%= "#{image_tag('clock.gif')}<br /> #{t('sider.time_now')}" %> </div>
   <% end %>
-<% end %>
 
-<% if sleep_exist && @user == @me %>
+<% if @user == @me %>
   <div id="overview-selector" class="selector">
-    <span class='hide_side_sleep_button'><a href='#'><%= @sleep_button_status == 'show' ? '+' : '－'  %></a></span>
     <span><%= t('sider.sleep') %></span>
   </div>
   <div class='sleep_button <%= @sleep_button_status%>'>
@@ -44,13 +36,7 @@
   </div>
 <% end %>
 
-<% if rsp_exist %>
     <div id="overview-selector" class="selector">
-      <span class='hide_side_last_rsp'>
-        <a href='#'>
-          <%= @last_rsp_status == 'show' ? '+' : '－'  %>
-        </a>
-      </span>
       <span><%= t('sider.last_rsp') %></span>
     </div>
     <div class='last_rsp <%= @last_rsp_status%>'>
@@ -65,4 +51,3 @@
         <% end %>
       <% end %>
     </div>
-  <% end %>

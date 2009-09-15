@@ -10,7 +10,7 @@ module GroupsHelper
 
   def link_to_fire(group, user)
     if @me.own_group == group && @me != user
-      link_to image_tag("delete.png",
+      link_to b_image_tag("delete.png",
                       :border => "0",
                       :mouseover => image_path("delete_over.gif")),
                       {:action => 'fire', :id => user.id},
@@ -79,7 +79,7 @@ module GroupsHelper
 
   def link_to_set_title(group, user)
     if @me.own_group == group
-      link_to image_tag("pencil.png",
+      link_to b_image_tag("pencil.png",
                       :border => "0",
                       :mouseover => image_path("pencil_over.png")),
                       :action => 'edit_member_title', :id => user.id

@@ -2,6 +2,9 @@
 <b>功能介紹, 早鳥功能基本的使用說明</b>
   <ul>
   <li>
+    <a href=#time_offset><span class='w-red'>(重要)</span>時間校正</a>
+  </li>
+  <li>
   <a href=#target_time>設定早起的目標時間</a>
   </li>
   <li>
@@ -11,10 +14,7 @@
   <a href=#add>起床忘記紀錄, 如何補上起床時間</a>
   </li>
   <li>
-  <a href=#edit_time>如何修改起床時間</a>
-  </li>
-  <li>
-  <a href=#todo>什麼是每日目標</a>
+  <a href=#todo>什麼是習慣性目標, 今日目標</a>
   </li>
   <li>
   <a href=#group>什麼是早鳥團</a>
@@ -25,36 +25,46 @@
   <li>
   <a href=#time_shift>什麼是換日線</a>
   </li>
-  <li>
-  <a href=#time_offset>什麼是時間校正</a>
-  </li>
   </ul>
   <hr>
   <ul>
     <p>
+      <li><a name=time_offset><b>什麼是時間校正</b></a></li>
+      <div>因為早鳥的使用者遍布海內外, 使用者的平台也是五花八門, 所以早鳥提供了時間校正的功能, 無論您當地的時間與早鳥偏差多少, 都能幫您校正</div> 
+      紅色時間部份乃是你現在在早鳥的時間, 如與您當地時間不合請馬上使用
+      <%= setting_link '校正功能', 'edit_time_offset' %>
+      將早鳥時間調整到與您當地時間相同為止
+      <br />
+      <br />
+      <%= link_to b_image_tag('/tutorial/offset.png', :class => 'picture_border'), user_url(:action => :edit, :anchor => 'edit_time_offset')%>
+    </p>
+      <br /><a href=#>Top</a><hr><br />
+    <p>
       <li><a name=target_time><b>如何設定早起目標時間</b></a></li>
-      <div>可以在自己的早起紀錄, 選擇設定早起的目標 </div>
-      <%= image_tag('eb_target_time.png', :class => 'picture_border')%>
+      <div>可以在設定頁面, 設定早起的目標, <%= setting_link '馬上設定', 'wake_goal'%> </div>
+      <%= b_image_tag('/tutorial/wake_goal.png', :class => 'picture_border')%>
 
       <br /><br />
-      <div>每天都可以有不同的早起目標時間 </div>
-      <%= image_tag('eb_target_time2.png', :class => 'picture_border')%>
+      <div>可以在統計頁面看到一週的目標</div>
+      <%= b_image_tag('/tutorial/wake_goals.png', :class => 'picture_border')%>
 
       <br /><a href=#>Top</a><hr><br />
     </p>
 
     <p>
       <li><a name=census><b>如何知道改變作息起床的效果</b></a></li>
-      <div>可以知道自己的成功率, 連續天數, 平均時間</div>
-      <%= image_tag('eb_census1.png', :class => 'picture_border')%>
+      <div>可以在統計頁面看到知道自己的成功率, 連續天數, 平均時間</div>
+      <%= b_image_tag('/tutorial/census_values.png', :class => 'picture_border')%>
 
       <br /><br />
       <div>每月的早起紀錄圖</div>
-      <%= image_tag('eb_census2.png', :class => 'picture_border')%>
+      <%= b_image_tag('/tutorial/eb_census2.png', :class => 'picture_border')%>
 
       <br /><br />
-      <div>從紀錄的背景色可以知道成功失敗, 白色就是成功, 黃色就是失敗</div>
-      <%= image_tag('eb_census3.png', :class => 'picture_border')%>
+      <div>從每天日誌旁都可以看到一面旗幟 跟符號, 勾勾就是代表有早起, 打叉就是晚起啦</div>
+      <div>綠旗<%= record_flag(0)%>則是代表您是按鬧鐘用當下時間起床的, 黃旗<%= record_flag(1) %>則是代表您有修改過時間或者是補上的紀錄</div>
+      <%= b_image_tag('/tutorial/journal_state.png', :class => 'picture_border')%>
+      <%= b_image_tag('/tutorial/journal_state2.png', :class => 'picture_border')%>
 
       <br /><a href=#>Top</a><hr><br />
     </p>
@@ -62,38 +72,34 @@
     <p>
       <li><a name=add><b>如何補上紀錄</b></a></li>
       <div>可以在自己的早起紀錄, 補上之前的紀錄 </div>
-      <%= image_tag('eb_add_time.png', :class => 'picture_border')%>
+      <%= b_image_tag('/tutorial/journal_add.png', :class => 'picture_border')%>
 
-      <br /><br />
-      <div>今天之前的紀錄都可以補上</div>
-      <%= image_tag('eb_add_time2.png', :class => 'picture_border')%>
 
       <br /><a href=#>Top</a><hr><br />
     </p>
 
     <p>
-      <li><a name=edit_time><b>如何修改起床時間</b></a></li>
-      <div>可以編輯某天的起床時間</div>
-      <%= image_tag('eb_edit_todo_time.png', :class => 'picture_border')%>
+      <li><a name=todo><b>什麼是習慣性目標, 今日目標</b></a></li>
+      <div>
+        你的每篇日誌, 你都可以附上該日的目標而目標又分為兩種一種是 您想要長期努力的習慣型(例如運動), 一種是偶發型(例如下班去買醬油)
+        <div>
+          習慣性目標就是讓您用來設定 你想養成的習慣 或者 是你想持續努力的目標
+        </div>
+        <div>
+          除此之外習慣性目標還提供了次數累計的功能, 在數量表填入數目後就會自動累計該目標的數量
+          當目標完成後, 或者是你暫時不想做了, 可以將它放進完成區或者是放棄區
+        </div>
+      </div>
+      <br />
+      <%= b_image_tag('/tutorial/todo_all.png')%>
 
-      <br /><a href=#>Top</a><hr><br />
-    </p>
-
-    <p>
-      <li><a name=todo><b>什麼是每日目標</b></a></li>
-      <div>你可以在這邊設定你每天要做的事情, 完成目標後也可以做勾選, 紀錄提醒自己今天做了沒。</div>
-      <%= image_tag('eb_todo.png')%>
-
-      <br /><br />
-      <div>每天的目標列表, 當然當天也可以選擇做或不做</div>
-      <%= image_tag('eb_todo2.png')%>
 
       <br /><a href=#>Top</a><hr><br />
     </p>
     <p>
       <li><a name=group><b>什麼是早鳥團</b></a></li>
       <div>你可以開屬於自己的團, 可以參加別人的團, 跟朋友一起加油, 一起保持早起的好習慣。</div>
-      <%= image_tag('eb_group.png')%>
+      <%= b_image_tag('eb_group.png')%>
 
 
       <br /><a href=#>Top</a><hr><br />
@@ -101,16 +107,16 @@
     <p>
       <li><a name=score><b>什麼是狀態</b></a></li>
       <div>根據妳最近的紀錄有著簡單的評分機制, 每個分數就會有相對應的狀態, 共有十種, 這不是公仔, 我想不要收集比較好 @@</div>
-      <%= image_tag('score/0/superman_64.png', :alt => '超人')%>
-      <%= image_tag('score/1/victory_64.png', :alt => '勝利')%>
-      <%= image_tag('score/2/exciting_64.png', :alt => '興奮')%>
-      <%= image_tag('score/3/happy_64.png', :alt => '高興')%>
-      <%= image_tag('score/4/Nothing_64.png', :alt => '普普')%>
-      <%= image_tag('score/5/unhappy_64.png', :alt => '不高興')%>
-      <%= image_tag('score/6/beaten_64.png', :alt => '痛痛')%>
-      <%= image_tag('score/7/cry_64.png', :alt => '哭哭')%>
-      <%= image_tag('score/8/eyesdroped_64.png', :alt => '眼珠子掉啦')%>
-      <%= image_tag('score/9/electricshock_64.png', :alt => '死掉啦')%>
+      <%= b_image_tag('score/0/superman_64.png', :alt => '超人')%>
+      <%= b_image_tag('score/1/victory_64.png', :alt => '勝利')%>
+      <%= b_image_tag('score/2/exciting_64.png', :alt => '興奮')%>
+      <%= b_image_tag('score/3/happy_64.png', :alt => '高興')%>
+      <%= b_image_tag('score/4/Nothing_64.png', :alt => '普普')%>
+      <%= b_image_tag('score/5/unhappy_64.png', :alt => '不高興')%>
+      <%= b_image_tag('score/6/beaten_64.png', :alt => '痛痛')%>
+      <%= b_image_tag('score/7/cry_64.png', :alt => '哭哭')%>
+      <%= b_image_tag('score/8/eyesdroped_64.png', :alt => '眼珠子掉啦')%>
+      <%= b_image_tag('score/9/electricshock_64.png', :alt => '死掉啦')%>
 
 
       <br /><a href=#>Top</a><hr><br />
@@ -119,17 +125,12 @@
       <li><a name=time_shift><b>什麼是換日線</b></a></li>
       <div>自己睡覺時間的曲線看起來很亂嗎? 改變一下"換日線" 就可以讓你的曲線看起來簡潔一點喔</div>
       <p>使用前</p>
-      <%= image_tag('time_shift_demo2.png')%>
+      <%= b_image_tag('time_shift_demo2.png')%>
 
       <br />
       <p>使用後</p>
-      <%= image_tag('time_shift_demo.png')%>
+      <%= b_image_tag('time_shift_demo.png')%>
       <br /><a href=#>Top</a><hr><br />
     </p>
-    <p>
-      <li><a name=time_offset><b>什麼是時間校正</b></a></li>
-      <div>因為早鳥的使用者遍布海內外, 使用者的平台也是五花八門, 所以早鳥提供了時間校正的功能, 無論您當地的時間與早鳥偏差多少, 都能幫您校正, 馬上使用<%= link_to '校正功能', user_url(:action => 'edit_time_offset')%></div>
-    <p>
-      <br /><a href=#>Top</a><hr><br />
   </ul>
 </div>

@@ -1,15 +1,16 @@
 # == Schema Information
-# Schema version: 20081227162431
+# Schema version: 20090809070358
 #
 # Table name: goals
 #
-#  id      :integer(11)     not null, primary key
-#  user_id :integer(11)     
-#  choosed :integer(11)     
+#  id      :integer(4)      not null, primary key
+#  user_id :integer(4)      
+#  choosed :integer(4)      
 #  done    :boolean(1)      
 #  name    :string(255)     
 #  comment :text            
-#  rank    :integer(11)     default(0)
+#  rank    :integer(4)      default(0)
+#  total   :integer(4)      default(0)
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

@@ -1,6 +1,7 @@
 <div class='comment_title'>
   <span class='no_line_name'><%= link_to_user(comment.user, comment.user.name)%></span>
   <span class='h-time'>(<%= extract_datetime_string(comment.created_at) %>)</span>
+  <span><%= index %> 樓</span>
 </div>
 <div class='comment_content'>
   <%= (format_content(comment.content)) %>

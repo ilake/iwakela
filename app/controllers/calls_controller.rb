@@ -22,7 +22,7 @@ class CallsController < ApplicationController
   def update
     @call = Call.find(params[:id])
     @call.update_attribute(:accepter_id, @me.id)
-    flash[:notice] = "感謝您的幫忙"
+    notice_stickie("感謝您的幫忙")
     redirect_to :action => 'index'
   end
 

@@ -5,13 +5,15 @@ class GoalsController < ApplicationController
   def create
     if request.post?
       new_goal = @me.goals.create(params[:goals])
-      if @me.save
-        flash[:info] = "設定完成"
+      if new_goal.errors.empty?
+        notice_stickie("設定完成")
         if new_goal.choosed == -1
           render :partial => 'member/temp_goal', :locals => {:g => new_goal}
         else
-          render :partial => 'member/new_goal', :locals => {:g => new_goal}
+          render :partial => 'goals/new_goal', :locals => {:g => new_goal, :show => params[:show] == 'true'}
         end
+      else
+        render :text => new_goal.errors.full_messages.join(','), :status => 400
       end
     else
       @record = @me.records.find(params[:id], :order => "id DESC")
@@ -50,9 +52,23 @@ class GoalsController < ApplicationController
     redirect_to :controller => 'member', :action => 'list'
   end
 
-  def destroy
-    @me.goals.find(params[:id]).destroy
-    render :nothing => true
-  end
+  def change_goal_status 
+    if request.post?
+      goal = @me.goals.find(params[:id])
 
+      unless @me.goals.find(:first, :conditions => {:name => goal.name, :status => params[:status].to_i})
+        goal.change_goal_status(params[:status].to_i)
+        case params[:status]
+        when '0'
+          render :partial => 'goals/new_goal', :locals => {:g => goal, :show => params[:show] == 'true'}
+        when '1', '2'
+          render :partial => 'goals/unactive_goal', :locals => {:g => goal, :show => params[:show] == 'true'}
+        when '-1'
+          render :nothing => true
+        end
+      else
+        render :nothing => true
+      end
+    end
+  end
 end

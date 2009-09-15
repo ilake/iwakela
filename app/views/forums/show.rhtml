@@ -1,11 +1,13 @@
-<%= link_to '回到列表', :action => 'index', :group => @forum.group %>
+<div class='top-function-menu rounded'>
+  <%= link_to '回到列表', :action => 'index', :group => @forum.group %>
+</div>
 <table>
   <tbody>
     <tr>
       <td>
         <b><%= @forum.subject %></b>
         <% if @forum.user == @me %>
-          <%= link_to ' (編輯)', :action => 'edit', :id => @forum %> 
+          <%= "(#{t 'forum.status'})" if @forum.public == 2 %>
         <% end %>
       </td>
       <td class="forum-diary-time">
@@ -13,9 +15,27 @@
         <%= link_to_user(@forum.user, @forum.user.name) %>
       </td>
     </tr>
+    <% admin_area do%>
+      <tr>
+        <td>
+          <%= button_to '編輯', {:action => 'edit', :id => @forum } %> 
+          <%= button_to '開放', {:action => 'update_pulic', :id => @forum, :forum => {:public => 1} } if @forum.public == 2 %>
+          <%= button_to '放入審核', {:action => 'update_pulic', :id => @forum, :forum => {:public => 2} } if @forum.public == 1 %>
+          <%= button_to '刪除', {:action => 'destroy', :id => @forum }, :confirm => '妳確定要刪除嗎?' %>
+        </td>
+      </tr>
+    <% end %>
+    <% if is_owner?(@forum.user)%>
+      <tr>
+        <td>
+          <%= button_to '編輯', {:action => 'edit', :id => @forum } %> 
+          <%= button_to '刪除', {:action => 'destroy', :id => @forum }, :confirm => '妳確定要刪除嗎?' %>
+        </td>
+      </tr>
+    <% end %>
     <tr>
       <td class="forum-content">
-        <%= (format_content(@forum.content)) %>
+        <%= @forum.content %>
       </td>
     </tr>
   </tbody>

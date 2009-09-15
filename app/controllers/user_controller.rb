@@ -21,59 +21,74 @@ class UserController < ApplicationController
   def edit
     if request.post?
       if @me.update_attributes(params[:user])
-        flash[:notice] = "變更完成"
+        notice_stickie("設定完成")
         redirect_to :controller => 'user', :action => 'edit', :id => @me.id
       else
-        flash[:notice] = "變更失敗, 可能已有人使用"
+        @me = User.find(@me.id)
+        error_stickie("設定失敗, 可能已有人使用")
       end
-    else
-      @profile = @me.profile
     end
+    @targets = @me.targets.wake.find(:all, :order => 'week')
+    @sleep_targets = @me.targets.sleep.find(:all, :order => 'week')
+    @user = User.find(@me)
+    @time_now = user_now
+    @setting = @me.setting
   end
-  alias_method :edit_username, :edit
 
+  alias_method :edit_username, :edit
   def edit_profile
     if request.post?
       if @me.profile.update_attributes(params[:profile])
-        flash[:notice] = "變更完成"
-        redirect_to :controller => 'user', :action => 'edit', :id => @me.id
+        notice_stickie("設定完成")
       else
-        flash[:notice] = "變更失敗, 可能已有人使用"
+        error_stickie("設定失敗, 可能已有人使用")
       end
-    else
-      @profile = @me.profile
     end
+    redirect_to :controller => 'user', :action => 'edit', :id => @me.id
   end
 
   def edit_time_shift
     if request.post?
       if @me.setting.update_attributes(params[:setting])
-        flash[:notice] = "變更完成"
+        notice_stickie("設定完成")
         redirect_to :controller => 'user', :action => 'edit', :id => @me.id
       else
-        flash[:notice] = "變更失敗, 可能已有人使用"
+        error_stickie("設定失敗")
       end
-    else
-      @setting = @me.setting
     end
+  end
+  alias_method :edit_pri_settings, :edit_time_shift
+
+  def edit_service_profile
+    if request.post?
+      service = @me.service_profiles.find_or_initialize_by_service(params[:service_profile][:service])
+      service.attributes = params[:service_profile]
+      if service.save
+        notice_stickie("設定完成")
+      else
+        error_stickie("設定失敗")
+      end
+    end
+    redirect_to :controller => 'user', :action => 'edit', :id => @me.id
   end
 
   def edit_time_offset
     if request.post?
       offset = count_time_offset(params[:date])
-      if @me.setting.update_attributes(:time_offset => offset)
-        flash.now[:notice] = "變更完成"
+      time_offset = @me.setting.time_offset + offset 
+      if @me.setting.update_attributes(:time_offset => time_offset)
+        time_now = Time.now.since(@me.setting.time_offset.hours)
+        notice_stickie("設定完成, 您現在的時間是<span class='w-red'>#{time_now.to_s(:date)}</span> 時間不正確還需要修正嗎? #{@template.link_to 'YES', :action => 'edit', :anchor => 'edit_time_offset'}")
       else
-        flash.now[:notice] = "變更失敗, 可能已有人使用"
+        error_stickie("設定失敗")
       end
-    else
-      @setting = @me.setting
     end
 
     if params[:style] == 'mobile'
+      @time_now = Time.now.since(@me.setting.time_offset.hours)
       render :template => 'mobile/edit_time_offset', :layout => 'mobile'
     else
-      render :action => 'edit_time_offset'
+      redirect_to :controller => 'user', :action => 'edit', :id => @me.id
     end
   end
 
@@ -86,19 +101,23 @@ class UserController < ApplicationController
   def edit_password
     if request.post?
       if @user = @me.edit_password(params[:current_user], params[:user])
-        flash[:notice] = "變更完成"
-        redirect_to :controller => 'user', :action => 'edit', :id => @user.id
+        notice_stickie("設定完成")
       else
-        flash[:notice] = "變更失敗, 密碼打錯了啦"
+        error_stickie("設定失敗, 密碼打錯了啦")
       end
     end
+    redirect_to :controller => 'user', :action => 'edit', :id => @me.id
   end
 
+  def user_offset_time
+    time_now = Time.now.since(@me.setting.time_offset.hours)
+    render :text => time_now.to_s(:date)
+  end
 
   private
   def check_owner
     unless params[:id].to_i == @me.id
-      flash[:notice] = "請更改自己的檔案"
+      warning_stickie("請更改自己的檔案")
       redirect_to :controller => 'main', :action => 'index'
     end
   end

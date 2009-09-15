@@ -1,11 +1,11 @@
 # == Schema Information
-# Schema version: 20081227162431
+# Schema version: 20090809070358
 #
 # Table name: great_words
 #
-#  id      :integer(11)     not null, primary key
+#  id      :integer(4)      not null, primary key
 #  content :text            
-#  user_id :integer(11)     
+#  user_id :integer(4)      
 #
 
 class GreatWord < ActiveRecord::Base

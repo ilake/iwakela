@@ -1,50 +1,63 @@
 # == Schema Information
-# Schema version: 20081227162431
+# Schema version: 20090809070358
 #
 # Table name: records
 #
-#  id               :integer(11)     not null, primary key
+#  id               :integer(4)      not null, primary key
 #  todo_name        :string(255)     
 #  todo_time        :datetime        
 #  todo_target_time :datetime        
-#  user_id          :integer(11)     not null
+#  user_id          :integer(4)      not null
 #  content          :text            
 #  success          :boolean(1)      default(TRUE)
 #  goal             :text            
 #  com_goal         :text            
-#  state            :integer(11)     
-#  readed           :integer(11)     default(0)
+#  state            :integer(4)      
+#  readed           :integer(4)      default(0)
+#  feeling          :string(255)     
+#  title            :string(255)     
+#  content2         :text            
+#  pri              :integer(4)      default(0)
 #
 
+#pri 0 是公開, 1是private
+#state 0 是即時, 1是補上
 class Record < ActiveRecord::Base
+  include Common
   belongs_to :user
 
   has_many :comments, :as => :record
+  has_many :goal_details, :dependent => :destroy
 
   before_create :set_time
   before_create :set_todo_name
   before_create :set_target_time
   before_create :set_success, :if => Proc.new {|record| record.todo_name == 'wake_up'}
   before_update :set_success, :if => Proc.new {|record|  record.todo_name == 'wake_up' && record.todo_time_changed? }
-  after_save    :set_census,  :if => Proc.new {|record| record.todo_name == 'wake_up' && record.todo_time_changed? }
-  after_destroy :set_census,  :if => Proc.new {|record|  record.todo_name == 'wake_up' }
+  #如果編輯跑去編時間
+  before_update :set_record_state, :if => Proc.new{|record| record.todo_time_changed?}
+
+
+  after_save    :set_today_status_average_diff,  :if => Proc.new {|record| record.todo_name == 'wake_up' && record.todo_time_changed? }
+  after_destroy :set_today_status_average_diff,  :if => Proc.new {|record|  record.todo_name == 'wake_up' }
+
+  after_create :set_records_num_and_last_record_time
+  after_destroy :set_records_num_and_last_record_time
+  after_create  :send_plurk_msg
 
   named_scope :success, :conditions => {:success => true}
   named_scope :fail, :conditions => {:success => false}
-
-  named_scope :today,
-    :conditions => "records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"
-#  named_scope :today,
-#              :conditions => ["todo_time > ? AND todo_time < ?", Time.now.midnight, Time.now.tomorrow.midnight]
+  named_scope :today, :conditions => "records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"
   named_scope :week, :conditions => ["todo_time > ?", Time.now.beginning_of_week]
   named_scope :wake, :conditions => {:todo_name => 'wake_up'}
+  named_scope :daylight,  :conditions => {:todo_name => 'wake_up'}
   named_scope :sleep, :conditions => {:todo_name => 'sleep'}
+  named_scope :night, :conditions => {:todo_name => 'sleep'}
+  named_scope :by_time, :order => "todo_time DESC"
+  named_scope :public, :conditions => {:pri => 0}
 
   named_scope :have_content, :conditions => "content is not NULL and content <> ''"
-
-  #validates_length_of :content, :minimum => 1, :on => :update
-  #after_create :set_average, :set_continuous_num, :set_successful_rate
-  #acts_as_ferret :fields => [:content]
+  has_many :pushs
 
   def set_time
     self.todo_time ||= Time.now
@@ -62,60 +75,62 @@ class Record < ActiveRecord::Base
     end
   end
 
-  def set_census
-    user = self.user
-    status  = user.status
-    scores = user.scores
-    user.records.set_average(status)
-    user.records.set_successful_rate(status)
-    user.records.set_continuous_num(status)
-    user.records.set_today_state(status)
-    user.records.set_records_num(status)
-    user.records.set_last_record_time(status)
-    user.records.set_diff_time(status)
-    user.records.set_score(status, scores)
+  def set_record_state
+    self.state = '1'
+  end
+
+  def set_today_status_average_diff
+    @user = self.user
+    @status  = user.status
+    #set_today_state 非統一做
+    user.records.set_today_state(@status)
+
+    #平均, 平均差雖然也是績效之一  可是沒來的不知道要怎樣算
+    user.records.set_average(@status)
+    user.records.set_diff_time(@status)
+
     true
   end
 
-  #只算最近21筆紀錄, 來算分數
-  def self.set_score(status, scores)
-    total = self.wake.count
-    total = total > 21 ? 21 : total
+  #這是紀錄日誌總數
+  def set_records_num_and_last_record_time
+    @user ||= self.user
+    @status  ||= user.status
 
-    a = self.wake.find(:all, :order => "id DESC", :limit => total).map(&:success)
-    cont_count = status.continuous_num
-    
-    total_score = Record.count_total_score(a, cont_count)
-    status.update_attribute(:score, total_score)
+    @user.records.set_records_num(@status)
+    @user.records.set_last_record_time(@status)
+    #砍日誌, goal 的次數也要重新算
+    @user.goals.each do |goal|
+      goal.total = goal.goal_details.be_done.sum(:value)
+      goal.save!
+    end
   end
 
-  private
-  def self.count_total_score(array, cont_count)
-    total = array.size
-    cont_count ||= -1000
 
-    array.delete(false)
-    success_count = array.size
-    fail_count = total - success_count
-    if cont_count >= 0 
-      cont_count = cont_count > total ? total : cont_count
-    else
-      cont_count = cont_count.abs > total ? total*-1 : cont_count
-    end
+  #只算最近21筆紀錄, 來算分數
+  #def self.set_score(status, scores)
+  def self.set_score(status, user)
+#    total = self.wake.count
+#    total = total > 21 ? 21 : total
 
-#42, -63
-#  -10 0 10 20 30 40  
-    success_score = success_count + cont_count
-    fail_score = fail_count * 2
-
-    total_score = success_score - fail_score
+    #a = self.wake.find(:all, :order => "id DESC", :limit => total).map(&:success)
+    #最近21天的成功次數有多少
+    success_count = self.wake.success.count(:all, :order => "id DESC", :conditions => "records.todo_time > '#{user.time_now.ago(21.days).at_beginning_of_day.to_s(:db)}'")
+    total_score = success_count*4
+    total_score = 100 if total_score > 100
+#    cont_count = status.continuous_num
+#    
+#    total_score = Record.count_total_score(a, cont_count)
+    status.update_attribute(:score, total_score)
   end
   public
 
+  #在status 那邊存最後一次紀錄的時間  用來在 User.find_user_no_records 做檢查
   def self.set_last_record_time(status)
     status.update_attribute(:last_record_created_at, self.find_last_day)
   end
 
+  #在status 儲存 日誌總數
   def self.set_records_num(status)
     status.update_attribute(:num, self.count)
   end
@@ -125,17 +140,18 @@ class Record < ActiveRecord::Base
     today_rec = self.wake.find(:first, :conditions => ["records.todo_time > '#{Time.now.at_beginning_of_day.to_s(:db)}' AND records.todo_time < '#{Time.now.tomorrow.midnight.to_s(:db)}'"], :order => 'todo_time DESC')
     if today_rec
       if today_rec.success
-        status.update_attribute(:state, 1)
+        status.update_attributes(:state => 1, :fight => true)
       else
-        status.update_attribute(:state, 2)
+        status.update_attributes(:state => 2, :fight => true)
       end
       # 如果今天有來, 表示取消請假狀態
-      status.update_attribute(:fight, true)
+      #status.update_attribute(:fight, true)
     else
-      status.update_attribute(:state, 0)
+      status.update_attributes(:state => 0)
     end
   end
   
+  #平均只算最近的21 筆資料
   def self.set_average(status)
     average = self.count_average
     status.update_attribute(:average, average)
@@ -162,11 +178,15 @@ class Record < ActiveRecord::Base
     status.update_attribute(:success_rate, records_success_percent)
   end
 
-  def self.set_continuous_num(status)
-    last_success = self.find_last_success
-    last_fail = self.find_last_fail
+  def self.set_continuous_num(status, user)
+    last_success = self.wake.success.last
+    last_fail = self.wake.fail.last
 
-    if last_fail.nil?
+    all_days = last_success ? Common.cal_days_interval(last_success.todo_time, user.time_now) : 0
+    #沒來的就算晚起
+    if all_days > 1
+      num = -1*(all_days-1)
+    elsif last_fail.nil?
       num = self.wake.count
     elsif last_success.nil? 
       num = self.wake.count*-1
@@ -179,11 +199,21 @@ class Record < ActiveRecord::Base
     status.update_attribute(:continuous_num, num)
   end
 
-  public
 
+  def send_plurk_msg
+    services = self.user.service_profiles.find(:all)
+    services.each do |s|
+      case s.service
+      when 'plurk'
+        system "rake send_plurk RAILS_ENV=#{Rails.env} SERVICE_ID=#{s.id} RECORD_ID=#{self.id} &"
+      end
+    end
+  end
+
+  #把user 設定的 X:20分 弄成 X:20分59秒
   def set_success
     unless self.todo_target_time.blank?
-      self.success = self.todo_time > self.todo_target_time ? false : true
+      self.success = self.todo_time > self.todo_target_time.since(59.seconds) ? false : true
     else
       self.success = true 
     end
@@ -255,9 +285,12 @@ class Record < ActiveRecord::Base
 
   def self.find_success_percent
     records_success = self.wake.success.count
-    records_all = self.wake.count 
-    records_all = 1 if records_all.zero?
-    100*(records_success / records_all.to_f)
+    if self.wake.first
+      all_days = Common.cal_days_interval(self.wake.first.todo_time, Time.now)
+      100*(records_success / all_days.to_f)
+    else
+      0
+    end
   end
 
   def self.find_all_wake_up_today(params, res='none', per_page=10)
@@ -267,7 +300,7 @@ class Record < ActiveRecord::Base
       cond << "and records.success = #{res}" 
     end
 
-    self.wake.paginate :page => params,
+    self.wake.public.paginate :page => params,
                   :per_page => per_page,
                   :include => [:user, {:user => :mugshot}],
                   :conditions => cond
@@ -276,14 +309,6 @@ class Record < ActiveRecord::Base
   def self.find_yesterday_records
     self.wake.find(:all, :conditions => ["content is not NULL and todo_time > ?", Time.now.midnight.yesterday],
                     :limit => 5)
-  end
-
-  def self.find_last_success
-    self.wake.success.find(:first, :order => 'todo_time DESC')
-  end
-
-  def self.find_last_fail
-    self.wake.fail.find(:first, :order => 'todo_time DESC')
   end
 
   def self.find_continuous_num(start_time, end_time)
@@ -303,28 +328,16 @@ class Record < ActiveRecord::Base
   
   def self.lake_report
     u= User.find_by_email('lake.ilakela@gmail.com')
-#    600.times do |i|
+    #50.times do |i|
 #      if i%50 == 0 and i != 0
 #        Kernel.sleep(180)
 #      end
       email = EbMail.create_weekly_report(u)
       EbMail.deliver(email)
-#    end
+    #end
 #    email.set_content_type("text/html")
   end
 
-  def self.test_sleep
-    5.times do |i| Kernel.sleep(i); puts i;  end
-#    a = []
-#    600.times do |i|
-#      if i%60 == 0 and i != 0
-#        puts a.inspect
-#        a.clear
-#        sleep(60)
-#      end
-#      a << i
-#    end
-  end
 
   def self.find_week_record
     record = self.wake.find(:all, :conditions => ["todo_time > ?", Time.now.beginning_of_week])
@@ -367,4 +380,30 @@ class Record < ActiveRecord::Base
     user.records.map(&:id)
   end
 
+  def status_desc
+    success ? I18n.t('record.success_status') : I18n.t('record.fail_status') 
+  end
+
+  private
+#  先用單純的算法, 21天內成功幾次就幾分
+#  def self.count_total_score(array, cont_count)
+#    total = array.size
+#    cont_count ||= -1000
+#
+#    array.delete(false)
+#    success_count = array.size
+#    fail_count = total - success_count
+#    if cont_count >= 0 
+#      cont_count = cont_count > total ? total : cont_count
+#    else
+#      cont_count = cont_count.abs > total ? total*-1 : cont_count
+#    end
+#
+##42, -63
+##  -10 0 10 20 30 40  
+#    success_score = success_count + cont_count
+#    fail_score = fail_count * 2
+#
+#    total_score = success_score - fail_score
+#  end
 end

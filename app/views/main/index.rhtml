@@ -1,6 +1,6 @@
   <%#= render :partial => 'shared/announce'%>
 <div class='announce_image'>
-  <%= image_tag("smallscreen.png")%><br />
+  <%= b_image_tag("smallscreen.png")%><br />
 </div>
 
 <div class='announce_word'>
@@ -10,7 +10,7 @@
   <div class='title'>公 告 區  <%= link_to '(功能介紹)', :controller => 'main', :action => 'history'%></div>
   <div>
     <div style='padding-bottom:5px;'>
-      <%= image_tag("icon_new.gif")%>
+      <%= b_image_tag("icon_new.gif")%>
       <span>新增手機版介面
       </span>
     </div>
@@ -40,15 +40,8 @@
     <td width = 2% class='td_index'><%= page_index(@records, i)%></td>
     <td width = 15%><%= link_to_user(record.user, record.user.name, nil, true) %></td>
     <td width = 15%><%= record.todo_time.strftime("%H:%M") %>起床</td>
-    <td width = 35%><%= link_to h(truncate(record.content, :length => 30)),
-                                :controller => 'member',
-                                :action => 'show',
-                                :id => record.id %></td>
-    <td width = 40%>
-    <% if record.goal %>
-      <%= link_to record.goal, :controller => 'member', :action => 'show', :id => record.id %>
-    <% end %>
-    </td>
+    <td width = 35%><%= link_to h(truncate(record.title, :length => 10)),
+      journals_url(:id => record.user, :record_id => record) %></td>
   </tr> 
 <% end %>
 </table>

@@ -65,7 +65,7 @@ class GroupsController < ApplicationController
 
 
     if @group.update_attributes(g)
-      flash[:notice] = '更新成功'
+      notice_stickie('更新成功')
       redirect_to :action => 'show', :id => @group
     else
       render :action => 'edit'
@@ -83,18 +83,18 @@ class GroupsController < ApplicationController
 
       if @group = Group.create(params[:group])
         if @group.errors.empty? && @me.change_group(@group)
-          flash[:notice] = "開團成功"
+          notice_stickie("開團成功")
           redirect_to :action => "show", :id => @group.id
         else
-          flash[:notice] = "開團失敗, 請重新在設定一次"
+          error_stickie("開團失敗, 請重新在設定一次")
           render :action => 'new'
         end
       else
-        flash[:notice] = "開團失敗, 請重新在設定一次"
+        error_stickie("開團失敗, 請重新在設定一次")
         render :action => 'new'
       end
     else
-      flash[:notice] = "一個人限開一團"
+      warning_stickie("一個人限開一團, 請先退出你原本的團隊")
       redirect_to :action => "index"
     end
   end
@@ -102,10 +102,10 @@ class GroupsController < ApplicationController
   def join
     @group = Group.find(params[:id])
     if @group.get_in?(@me) && @me.change_group(@group)
-      flash[:notice] = "加入成功"
+      notice_stickie("加入成功")
       redirect_to :action => "show", :id => @group.id
     else
-      flash[:notice] = "你已經有參加其他團了或者是團隊已滿"
+      warning_stickie("你已經有參加其他團了或者是團隊已滿")
       redirect_to :action => "index"
     end
   end
@@ -114,21 +114,21 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     if user = User.find_by_name(params[:user][:name])
       if @group.get_in?(user) && @group.owner == @me && user.change_group(@group)
-        flash[:notice] = '加入完成'
+        notice_stickie('加入完成')
         redirect_to :action => "show", :id => @group.id
       else
-        flash[:notice] = "他已經有參加其他團了或者是團隊已滿"
+        warning_stickie("他已經有參加其他團了或者是團隊已滿")
         redirect_to :action => "index"
       end
     else
-      flash[:notice] = '沒有這個使用者喔'
+      error_stickie('沒有這個使用者喔')
       redirect_to :back
     end
   end
 
   def fire
     if params[:id] == @me.id
-      flash[:notice] = '沒有在開除自己的啦'
+      warning_stickie('沒有在開除自己的啦')
     else
       @user = @me.own_group.members.find(params[:id])
       @user.change_group(nil, nil)
@@ -138,7 +138,7 @@ class GroupsController < ApplicationController
 
   def quit 
     if @me.own_group
-      flash[:notice] = '必須把團長移交給其他人才可以退團'
+      warning_stickie('必須把團長移交給其他人才可以退團')
     elsif @me.group
       @me.change_group(nil, nil)
     end
@@ -152,20 +152,20 @@ class GroupsController < ApplicationController
       @group.owner = @user
       @group.save
 
-      flash[:notice] = '移交完成'
+      notice_stickie('移交完成')
       redirect_to :action => "show", :id => @group.id
     else
-      flash[:notice] = '沒有該名使用者或者該使用者不是本團團員'
+      warning_stickie('沒有該名使用者或者該使用者不是本團團員')
       redirect_to :back
     end
   end
 
   def absence
     if params[:absence] == '1'
-      flash[:notice] = '請假成功(沒來做紀錄將一直保持請假)'
+      notice_stickie('請假成功(沒來做紀錄將一直保持請假)')
       @me.status.update_attribute(:fight, false)
     else
-      flash[:notice] = '已經取消請假狀態'
+      notice_stickie('已經取消請假狀態')
       @me.status.update_attribute(:fight, true)
     end
     redirect_to :action => "show", :id => params[:id]
@@ -174,7 +174,7 @@ class GroupsController < ApplicationController
   def destroy
     @group = Group.find(params[:id])
     @group.destroy
-    flash[:notice] = '解散成功'
+    notice_stickie('解散成功')
     redirect_to :action => "index"
   end
 

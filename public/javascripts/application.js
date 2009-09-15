@@ -1,6 +1,5 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
-//
 hide_show_content = function(button_cls, content_cls, name){
   (function($){
    $(document).ready(function(){
@@ -42,6 +41,13 @@ jQuery.ajaxSetup({
 //  })
 //};
 
-// $(document).ready(function(){
-//   $("#new_forum_comment form").submitWithAjax();
-// })
+ $(document).ready(function(){
+     $('#loading').hide();
+     $('#loading').ajaxStart(function(){
+       $('#loading').show();
+       });
+
+     $('#loading').ajaxStop(function(){
+       $('#loading').hide();
+       });
+ })

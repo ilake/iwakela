@@ -1,7 +1,23 @@
-# Chinese (Taiwan) translations for Ruby on Rails
+# Taiwan translations for Ruby on Rails
 # by tsechingho (http://github.com/tsechingho)
  
 "zh-TW":
+  message:
+    guestbook: '留言'
+
+  curblyadvimage:
+    upload_tilte: "上傳新圖片"
+    upload_submit: "上傳"
+    list: '列表'
+    avail_list: '請點擊你要插入的圖片'
+    loading: '載入中'
+    insert: '插入'
+    cancel: '取消'
+    preview: '預覽'
+    thumb: '小'
+    medium: '中'
+    large: '大'
+
   site:
     name: "早鳥網"
     slogan: "早鳥網 一個幫助你早起的地方"
@@ -10,6 +26,7 @@
     signup: "註冊"
     forget_password: "忘記密碼"
     desc: " 你的作息時間不正常嗎？ <br /> 人生中有許多的好習慣值得養成， <br /> 早鳥網是個提供你紀錄調整作息, 規畫每日目標的地方。 <br />" 
+    resend_confirm: "重新認證"
 
   menu:
     user: "使用者列表"
@@ -20,6 +37,15 @@
     chat:  "嘰嘰喳喳"
     home:  "我的起床紀錄"
     index: "首頁"
+    census: "統計"
+    journal: "晨間日誌"
+    night_journal: "晚間日誌"
+    todo: "Todo"
+    messages: "留言"
+    setting: "日誌設定"
+    profile: "個人檔案"
+    friends: "朋友"
+    newbie: "新手上路"
 
   pk_site:
     name: "名字對戰製造機"
@@ -29,7 +55,7 @@
     sick: "請假中"
     record_title: "的起床日誌" 
     group_title: "的早鳥團"
-    setting: "個人設定"
+    setting: "設定"
     friend: "我的好友"
     friend_set: "好友設定"
     nickname: "暱稱"
@@ -47,7 +73,9 @@
     goal_daily: "每日目標"
     target_time: "目標時間"
     sleep_target_time: "目標睡覺時間"
-
+    wake_status: '心情'
+    success_status: '早起成功'
+    fail_status: '早起失敗'
 
   sider:
     name: "早起成果"
@@ -79,6 +107,11 @@
     author: "作者"
     rsp_num: "回應數"
     last_rsp: "最後回應"
+    status: '文章還在審核中, 目前只有您看得見'
+
+  journal:
+    night: '晚間日記'
+    daylight: '晨間日記'
 
   word:
     new: "我也要貢獻"
@@ -167,9 +200,20 @@
   activerecord:
     models:
       user: "使用者"
+      forum: "論壇"
+      message: "留言"
     attributes:
       user:
         name: "姓名"
+      goal:
+        name: "名稱"
+      forum:
+        subject: "標題"
+        content: "內容"
+      message:
+        subject: "標題"
+        content: "內容"
+        
 
     errors:
       template:

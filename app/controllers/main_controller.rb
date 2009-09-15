@@ -1,5 +1,6 @@
 class MainController < ApplicationController
-  #require "sparklines"
+  require 'rss/2.0'
+  require 'open-uri'
   layout "application"
   helper :all
 
@@ -12,7 +13,7 @@ class MainController < ApplicationController
 #    @user = User.find(:first, :joins => [:status], :order => 'statuses.average', :conditions => ["statuses.num > ? AND statuses.last_record_created_at > ? AND users.target_time_now is not NULL", 7, Time.now.ago(3.days)])
     
     @user ||= User.first
-    records = @user.records.wake.find(:all, :order => 'id DESC', :limit => 10, :conditions => ["todo_time < ?", Time.now ]) if @user
+    records = @user.records.wake.find(:all, :order => 'id DESC', :limit => 1, :conditions => ["todo_time < ?", Time.now ]) if @user
     @time = record_to_string(records) if records
   end
 
@@ -20,15 +21,15 @@ class MainController < ApplicationController
     if request.post?
       @user = User.new(params[:user])
 
-      if @user.yahoo_userhash != nil
-        @user.password_hash = "000" 
-        @user.password_salt = "000"
-      end
+#      if @user.yahoo_userhash != nil
+#        @user.password_hash = "000" 
+#        @user.password_salt = "000"
+#      end
 
       if @user.save
-        flash[:info] = '註冊成功了'
-        session[:uid] = @user.id
-        redirect_to :controller => 'member',:action => 'index'
+        User.send_confirm_email(@user.email)
+        notice_stickie("註冊成功了, 確認信已寄出, 請前往信箱確認開通帳號")
+        redirect_to :controller => 'main',:action => 'index'
       end
     end
   end
@@ -36,26 +37,29 @@ class MainController < ApplicationController
   def login
     if request.method == :post
       if @user = User.authenticate(params[:user])
-        reset_session
-        session[:uid] = @user.id
+        if @user.errors.empty?
+          reset_session
+          session[:uid] = @user.id
 
-        uri = session[:original_uri]
-        session[:original_uri] = nil
+          uri = session[:original_uri]
+          session[:original_uri] = nil
 
-        if params[:remember] == '1'
-          cookies[:user_pass] = @user.gen_cookie
+          if params[:remember] == '1'
+            cookies[:user_pass] = @user.gen_cookie
+          else
+            cookies.delete(:user_pass)
+          end 
+
+          if params[:style] == 'mobile'
+            redirect_to :controller => 'mobile', :action => 'home' and return
+          else
+            redirect_to :controller => 'main', :action => 'index' and return
+          end
         else
-          cookies.delete(:user_pass)
-        end 
-        
-        if params[:style] == 'mobile'
-          redirect_to :controller => 'mobile', :action => 'home' and return
-        else
-          redirect_to :controller => 'main', :action => 'index' and return
+          error_stickie("您的email還沒經過認證 #{@template.link_to t('site.resend_confirm'), :controller => 'main', :action => 'resend_confirm'} ")
         end
-        #redirect_to(uri || {:controller => :member, :action => :index})
       else
-        flash[:notice] = '名字或是密碼錯了喔'
+        error_stickie('帳號或是密碼錯了')
       end
     end
 
@@ -91,7 +95,7 @@ class MainController < ApplicationController
   def logout
     cookies.delete(:user_pass)
     reset_session
-    flash[:info] = '您已經登出'
+    notice_stickie("您已經登出")
 
     if params[:style] == 'mobile'
       redirect_to :controller => 'mobile', :action => 'index'
@@ -103,9 +107,9 @@ class MainController < ApplicationController
   def forget_password
     if request.post?
       if user = User.send_reset_email(params[:user][:email])
-        flash.now[:info] = "密碼重設的信件已經寄到您的信箱 #{user.email}"
+        notice_stickie("密碼重設的信件已經寄到您的信箱 #{user.email}")
       else
-        flash.now[:info] = "沒有這個人: #{params[:email]}"
+        warning_stickie("沒有這個人: #{params[:email]}")
       end
     end
 
@@ -117,14 +121,24 @@ class MainController < ApplicationController
     end
   end
 
+  def resend_confirm
+    if request.post?
+      if user = User.send_confirm_email(params[:user][:email])
+        notice_stickie("帳號確認的信件已經寄到您的信箱 #{user.email}")
+      else
+        warning_stickie("沒有這個人: #{params[:email]}")
+      end
+    end
+  end
+
   def reset_password
     case request.method
     when :post
       if User.reset_password(session[:uid], params[:user][:password], params[:user][:password_confirmation])
-        flash[:info] = "變更成功"
+        notice_stickie("變更成功")
         redirect_to :controller => "main", :action => "index"
       else
-        flash[:info] = "變更失敗"
+        error_stickie("變更失敗")
       end
     when :get
       if user = User.check_reset_code(params[:reset_code])
@@ -134,30 +148,44 @@ class MainController < ApplicationController
     end
   end
 
+  def confirm_email
+    if request.get?
+      if user = User.check_confirm_email_code(params[:confirm_code])
+        notice_stickie("帳號已開通, 已可登入")
+        redirect_to :controller => "main", :action => "index"
+      end
+    end
+  end
+
   def search
     case params[:search_item][:search_type].to_i
     when 0
       @users = User.find_by_contents("*#{params[:query]}*", :page =>params[:page], :per_page => 20)
-      flash[:info] = "查無此人" if @users.empty?
+      warning_stickie("查無此人") if @users.empty?
       render :template => 'user/list'
     when 1
       @records = Record.find_by_contents("*#{params[:query]}*", :page =>params[:page], :per_page => 20)
-      flash[:info] = "沒有這樣的日誌" if @records.empty?
+      warning_stickie("沒有這樣的日誌") if @records.empty?
       render :template => 'shared/search'
     end
   end
 
   def test 
-    cookies[:key] = "val"
-    logger.info "----------#{cookies[:key]}-------11-----"
+    feed_url = 'http://www.bnext.com.tw/RssFeedPreferred_Focus'
+    output = "<h1>My RSS Reader</h1>" 
+    open(feed_url) do |http|
+      response = http.read
+      @result = RSS::Parser.parse(response, false)
+      #title display link date
+#      @result.items.each_with_index do |item, i|
+#        output += "#{link_to} #{i+1}. #{item.title}<br />" if i < 10  
+#      end  
+    end
+
   end
 
-  def test1
-    logger.info "----------#{cookies[:key]}-------22-----"
-    logger.info "----------#{cookies[:key].inspect}-------22-22----"
-    cookies[:key] = "newval"
-    logger.info "----------#{cookies[:key]}-------33-----"
-    render :nothing => true
+  def ajax
+    render :json => {:name => 'lake'}.to_json
   end
 
   def record_to_string(records)

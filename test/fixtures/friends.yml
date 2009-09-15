@@ -1,10 +1,10 @@
 # == Schema Information
-# Schema version: 20081227162431
+# Schema version: 20090809070358
 #
 # Table name: friends
 #
-#  user_id   :integer(11)     not null
-#  friend_id :integer(11)     not null
+#  user_id   :integer(4)      not null
+#  friend_id :integer(4)      not null
 #
 
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html

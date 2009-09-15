@@ -3,8 +3,8 @@
 <br />
 <div id="comments_list">
 <% unless item.comments.nil? %>
-  <% item.comments.valid.each do |c| %>
-    <%= render :partial => 'shared/comments', :locals => {:comment => c}%>
+  <% item.comments.valid.each_with_index do |c, index| %>
+    <%= render :partial => 'shared/comments', :locals => {:comment => c, :index => index+1}%>
   <% end %>
 <% end %>
 </div>
@@ -13,7 +13,7 @@
     <%# form_remote_tag :url => {:controller => 'comments', :action => 'create', :id => item.id} do%>
     <% form_tag :controller => 'comments', :action => 'create', :id => item.id do%>
       回應<br />
-      <%= text_area  'comments', 'content', :rows => '12', :cols => '72' %><br />
+      <%= text_area  'comments', 'content', :rows => '12', :cols => '60' %><br />
       <%= hidden_field_tag :model, item.class.to_s %>
       <%= submit_tag '送出'%>
     <% end %>

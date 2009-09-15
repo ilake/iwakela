@@ -1,7 +1,9 @@
 <div class='clear'></div>
+<div class='pad-10 fw-bold bg-lb rounded'>
+  <%= link_to '回到你的朋友列表', friend_url(:action => 'list', :id => @me) %>
+</div>
 <br />
 <div class='my_friend'>
-  <%= link_to '回到你的日誌', member_url(:action => 'list') %>
   <div class='add_friend_block'>
     <h1>請輸入妳想要新增的好友名稱</h1>
     <% form_tag :action => 'add_friend' do %>
@@ -13,8 +15,8 @@
 
   <div>
     <h1>你的好友列表</h1>
-    <% @me.friends.each do |u|%>
-      <div class='friend_list'><%= link_to_user(u, u.name) %> <%= link_to_delete('friend', u.id)%></div>
+    <% @friends.each do |u|%>
+      <div class='friend_list'><%= link_to_user(u, u.name, nil, true) %> <%= link_to_delete('friend', u.id)%></div>
     <% end %>
   </div>
 </div>

@@ -1,11 +1,11 @@
 # == Schema Information
-# Schema version: 20081227162431
+# Schema version: 20090809070358
 #
 # Table name: calls
 #
-#  id          :integer(11)     not null, primary key
-#  demander_id :integer(11)     
-#  accepter_id :integer(11)     
+#  id          :integer(4)      not null, primary key
+#  demander_id :integer(4)      
+#  accepter_id :integer(4)      
 #  title       :string(255)     
 #  time        :datetime        
 #

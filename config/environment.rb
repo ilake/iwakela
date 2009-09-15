@@ -6,7 +6,7 @@ ENV['RAILS_ENV'] ||= 'production'
 #ENV['HOME'] = '/home/iwakela' if ENV['RAILS_ENV'] == 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -55,23 +55,29 @@ Rails::Initializer.run do |config|
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
 
+
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
   #config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.delivery_method = :activerecord
+
+  #config.gem "adzap-ar_mailer", :lib => 'action_mailer/ar_mailer', :source => 'http://gems.github.com'
 end
+require 'json'
 require "errors"
-#require 'acts_as_ferret'
-require 'smtp_tls'
+
+#require 'smtp_tls'
 #ActionController::Base.asset_host = "iwakela.com" if ENV['RAILS_ENV'] == 'production'
 ActionMailer::Base.delivery_method = :smtp 
-#ActionMailer::Base.server_settings = {
+
 ActionMailer::Base.smtp_settings = {
+  :enable_starttls_auto => true,
   :address => "smtp.gmail.com",
   :port => "587",
   :domain => "localhost.localdomain",
   :authentication => :plain,
   :user_name => "lake.ilakela@gmail.com",
-  :password => "poiuytr4321"
+  :password => "poiuytr4321",
 }
 
 ENV['TZ'] = 'Asia/Taipei'
@@ -86,4 +92,3 @@ LOCALES_AVAILABLE = Dir["#{LOCALES_DIRECTORY}/*.{rb,yml}"].collect do |locale_fi
       I18n.load_path << locale_file
             File.basename(File.basename(locale_file, ".rb"), ".yml")
 end.uniq.sort.reverse
-

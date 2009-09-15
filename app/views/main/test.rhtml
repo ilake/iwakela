@@ -1,1 +1,68 @@
-<%= "AB\r\nCD"%>
+<script type="text/javascript">
+  (function($){
+     function change(data) {
+       alert(data.name);
+     }
+
+     $(document).ready(function(){
+
+       $("#menu li ul").hide(); 
+
+       $("#menu li").hover(
+         function () {
+         $(this).children("ul").show();
+         },function(){
+         $(this).children("ul").hide();
+       });//hover
+
+
+       $('.play').click(function() {
+         $('.mp3').trigger("click");
+       });
+
+       $('.test').click(function() {
+         $.ajax({
+            url:       'ajax', 
+            data:      { ice_code: '2000'}, 
+            dataType:  'json',
+            success:   change
+         });
+       });
+
+//       $('#rss').cycle({ 
+//         fx:     'scrollUp', 
+//         timeout: 6000, 
+//         delay:  -3000 
+//       })
+
+     });
+
+   })(jQuery);
+ </script>
+ <style>
+   #rss {
+     background-color:#EEEEEE;
+     border:1px solid #DDDDDD;
+     height:330px;
+     width:650px;
+  }
+  </style>
+
+ <ul id="menu">
+   <li class="menu">Sub 1
+     <ul>
+       <li>test 1</li>
+       <li>test 2</li>
+       <li>test 3</li>
+       <li>test 4</li>
+     </ul>
+   </li>
+   <li class="menu">Sub 2
+     <ul>
+       <li>test 1</li>
+       <li>test 2</li>
+       <li>test 3</li>
+       <li>test 4</li>
+     </ul>
+   </li>
+ </ul>

@@ -13,8 +13,8 @@ table a {
 /*table a:visited {
 	text-decoration: none;
 }*/
-tr.odd {
-	background-color: #ebf3ff;
+tr.even {
+  background: #F9F9F9 none repeat scroll 0 0;
 }
 tr a {
 	color: #000000;

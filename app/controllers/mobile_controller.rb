@@ -12,6 +12,7 @@ class MobileController < ApplicationController
   end
 
   def edit_time_offset
+    @time_now = Time.now.since(@me.setting.time_offset.hours)
   end
 
   private

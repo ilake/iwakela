@@ -1,18 +1,18 @@
-<h1>發表心得</h1>
+<h1><%= CATEGORIES[params[:category]] %></h1>
 
-<% form_tag :action => 'create', :group_id => params[:id] do %>
+<% form_tag :action => 'create', :group_id => params[:id], :category => params[:category] do %>
   <%= error_messages_for 'forum' %>
   <% if params[:id] %>
-    <p class='br-lb bg-lb'><label for="forum_public">也發佈在討論區?</label>
-      <%= check_box 'forum', 'public', :checked => 'checked' %>
-      </p>
+    <!--p class='br-lb bg-lb'><label for="forum_public">也公開發佈在討論區?</label>
+      <%#= check_box 'forum', 'public', :checked => 'checked' %>
+      </p-->
     <% end %>
 
   <p class='br-lb bg-lb'><label for="forum_subject">標題</label><br/>
     <%= text_field 'forum', 'subject' %></p>
 
   <p class='br-lb bg-lb'><label for="forum_content">內容</label><br/>
-    <%= text_area 'forum', 'content', :size => '60x30' %></p>
+    <%= text_area 'forum', 'content', :class => "mceEditor" %></p>
 
   <%= submit_tag "確定完成" %>
   <%= link_to '取消', :action => 'index' %>

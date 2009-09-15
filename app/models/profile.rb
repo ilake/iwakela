@@ -1,10 +1,10 @@
 # == Schema Information
-# Schema version: 20081227162431
+# Schema version: 20090809070358
 #
 # Table name: profiles
 #
-#  id           :integer(11)     not null, primary key
-#  user_id      :integer(11)     
+#  id           :integer(4)      not null, primary key
+#  user_id      :integer(4)      
 #  others       :text            
 #  sex          :string(255)     
 #  birth        :text            
@@ -17,6 +17,7 @@
 #  photo        :string(255)     
 #  connect      :string(255)     
 #  email_weekly :boolean(1)      default(TRUE)
+#  dream_word   :text            
 #
 
 class Profile < ActiveRecord::Base

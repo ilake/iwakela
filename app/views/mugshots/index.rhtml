@@ -1,3 +1,3 @@
 <% @mugshots.each do |thumb|-%>
-  <%= link_to image_tag(thumb.public_filename(:small)), thumb.public_filename %>
+  <%= link_to b_image_tag(thumb.public_filename(:small)), thumb.public_filename %>
 <% end -%>

@@ -8,6 +8,11 @@
       <%= @record.user.name %>
     </td>
   </tr>
+    <td>
+      <%= FEELINGS[@record.feeling] %>
+    </td>
+  <tr>
+  </tr>
   <tr>
     <td class="comment-diary">
       <%= format_content(@record.content) %>

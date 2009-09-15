@@ -9,69 +9,15 @@
   <meta name="author" content="lake"/> 
 
   <title><%= t 'site.slogan' %></title>
-  <%= stylesheet_link_tag "defaults", "itunes", "paginator", "flora.datepicker.css", "eb", :cache => 'main' %>
-  <%= javascript_include_tag "jquery",
-                             "jquery-ui-personalized-1.5.3.min",
-                             "jrails",
-                             "jquery.corner.js",
-                             "jquerypngfix.js",
-                             "application",
-                             :cache => 'addappjs0312' %>
-  <%= javascript_include_tag "jquery.flot.js" %>
-      <!--[if IE]><script language="javascript" type="text/javascript" src="/javascripts/excanvas.pack.js"></script><![endif]-->
+  <%= stylesheet_link_merged :base %>
+  <%= javascript_include_tag 'jquery-1.3.2.min.js'%>
+  <!--script src="http://www.google.com/jsapi"></script>
+  <script>
+    google.load("jquery", "1.3.2");
+  </script-->
+  <%= javascript_include_merged :base %>
 
   <%= yield :page_spec %>
-
-  <script type='text/javascript'>
-        function time_now() {
-          var t = new Date();
-          var year = t.getFullYear();
-          var month = t.getMonth();
-          month+=1;
-
-          var day = t.getDate();
-          var hours = t.getHours();
-          var minutes = t.getMinutes();
-          var seconds = t.getSeconds();
-
-          var now = year+"-"+ month+"-"+ day+"-"+ hours+":"+ minutes+":"+ seconds
-          return now;
-        }
-
-    $(function() {
-        $('.rounded').corner();
-        $("img").pngfix();
-
-        var flag = true;
-
-        $('.alarm_clock').click(function(){
-          var now = time_now();
-          if (flag) {
-            flag = false;
-            window.location = '/member/wake_up';
-          }
-
-          return false;
-          });
-
-        $('.sleep_button').click(function(){
-          var now = time_now();
-
-          if (flag) {
-            flag = false;
-            window.location = '/member/sleep'
-          }
-
-          return false;
-          });
-
-        $('.my_score_status').click(function(){
-          window.location = '/main/history#score'
-
-          return false;
-          });
-    });
-  </script>
 </head>
 
 <body>
@@ -79,11 +25,11 @@
   <div class="top_bar">
     <div class='top_info'>
       <span class='alert_red'><%= t 'site.name' %></span> | 
-      <%= image_tag("icon_new.gif")%><%= link_to t('pk_site.name'), namepk_url %>
+      <%= link_to t('pk_site.name'), namepk_url %>
     </div>
     <div class="auth">
       <% if @me %>
-        <%= "<span class='alert'>[#{t('member.sick')}]</span>" unless @me.fight%>
+        <%= "<span class='alert'>[#{t('member.sick')}]</span>" unless @me.status.fight%>
         <%= link_to_member(@me, "#{@me.name}#{t('member.record_title')}")%> | 
         <%= link_to_my_group %> |
         <%= link_to t('site.logout'), :controller => 'main', :action => 'logout' %> | 
@@ -92,6 +38,7 @@
         <%= link_to t('site.login'), :controller => 'main', :action => 'login' %> | 
         <%= link_to t('site.signup'), :controller => 'main', :action => 'register' %> | 
         <%= link_to t('site.forget_password'), :controller => 'main', :action => 'forget_password' %>
+        <%= link_to t('site.resend_confirm'), :controller => 'main', :action => 'resend_confirm' %>
       <%end%>
       <span class='w-red'>
       <%= language_mobile_setting %>
@@ -102,7 +49,7 @@
   <div class="main">
 
     <% if @header %>
-      <div class="header2 rounded">
+      <!--div class="header2 rounded">
         <div class="title">
           <h1 style='display:none'><%= t 'site.name '%></h1>
           <a href='<%= home_url %>'>
@@ -111,9 +58,9 @@
             </h1>
           </a>
         </div>
-      </div>
+      </div-->
     <% else %>
-      <div class="header rounded">
+      <!--div class="header rounded">
         <div class="title">
           <h1 style='display:none'><%= t 'site.name '%></h1>
           <a href='<%= home_url %>'>
@@ -121,22 +68,24 @@
             </h1>
           </a>
         </div>
-      </div>
+      </div-->
     <% end %>
-    <div id="menu">
+   <%= render_stickies%>
+    <div class="menu">
       <!-- HINT: Set the class of any menu link below to "active" to make it appear active -->
 
       <ul>
         <% if @me %>
           <%= link_tab([
                        [ 'menu.index', 'main', 'index' ],
-                       [ 'menu.home', 'member', 'list'],
+                       [ 'menu.home', 'member', 'journal'],
                        [ 'menu.group', 'groups', 'index' ],
                        [ 'menu.chat', 'chats', 'list' ],
                        [ 'menu.rank', 'user', 'list_user_rank' ],
                        [ 'menu.forum', 'forums', 'index' ],
                        [ 'menu.word', 'great_word', 'index' ],
-                       [ 'menu.user', 'user', 'list' ]
+                       [ 'menu.user', 'user', 'list' ],
+                       [ 'menu.newbie', 'main', 'history' ]
           ]) %>
         <% else %>
           <%= link_tab([
@@ -146,16 +95,22 @@
                        [ 'menu.rank', 'user', 'list_user_rank' ],
                        [ 'menu.forum', 'forums', 'index' ],
                        [ 'menu.word', 'great_word', 'index' ],
-                       [ 'menu.user', 'user', 'list' ]
+                       [ 'menu.user', 'user', 'list' ],
+                       [ 'menu.newbie', 'main', 'history' ]
           ]) %>
         <% end %>
       </ul>
     </div>
-    <br />
+    <!--[if lte IE 6]>
+    <div style="background-color:#DDECFF;margin:5px 0 5px 0;padding:3px 10px 3px 10px;border-color:#F6F6F6; border-style:solid;border-width:2px;">
+      <p><font size="2"><strong>您好</strong>，您目前使用的是舊版的<del>IE 6.0網路瀏覽器</del>，建議使用更快、更好用的瀏覽器！ 如：<big><a target="_blank" href="http://briian.com/?p=5726"><u>Google瀏覽器</u> <font color="red">(推薦!)</font></a></big>、<a target="_blank" href="http://briian.com/?p=6248">Firefox</a>、<a target="_blank" href="http://briian.com/?p=6264">Opera</a>、<a target="_blank" href="http://briian.com/?p=6139">Safari</a> 或 <a target="_blank" href="http://briian.com/?p=6166">IE
+            8.0</a>。</font></p>
+    </div>
+    <![endif]-->
 		<div class="content">
 	    
 			<div class="item">
-        <%= show_messages %>
+        <%#= show_messages %>
         <%= yield %>
         <%= yield :sider %>
 			</div>
@@ -170,18 +125,31 @@
     <%= link_to '新朋友註冊', :controller => 'main', :action => 'register'%>
   </div>
 
- <% if RAILS_ENV == "production" -%>
-   <!-- google analytic -->
-   <script type="text/javascript">
-     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-     document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-   </script>
-   <script type="text/javascript">
-     var pageTracker = _gat._getTracker("UA-4497093-1");
-     pageTracker._initData();
-     pageTracker._trackPageview();
-   </script>
- <% end %>
+  <% if RAILS_ENV == "production" -%>
+    <!-- google analytic -->
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+      </script>
+      <script type="text/javascript">
+        var pageTracker = _gat._getTracker("UA-4497093-1");
+        pageTracker._initData();
+        pageTracker._trackPageview();
+        </script>
+      <% end %>
+
+
+      <%= javascript_include_tiny_mce_if_used %> 
+      <%= tiny_mce if using_tiny_mce? %>
+
+
+      <script type='text/javascript'>
+        $(function() {
+            $('.rounded').corner();
+            $("img").pngfix();
+        });
+      </script>
+      <%= yield :js_ready %>
 </div>
 </body>
 

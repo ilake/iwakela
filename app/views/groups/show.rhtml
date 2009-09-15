@@ -1,5 +1,4 @@
 <% content_for :page_spec do %>
-  <%= stylesheet_link_tag "flora_tabs.css" %>
   <script>
     $(document).ready(function() {
       $(".attendance_rate > ul").tabs();
@@ -83,8 +82,10 @@
   <div id="group_score_rank">
     <% @score_rank_members.each do |m|%>
       <div>
-       <%= score_state(m, '32')%><%= link_to_user(m, m.name)%>
+        <span class='g_score' style='float:left;'><%= score_state(m, '32')%></span>
+        <%= link_to_user(m, m.name)%>
       </div>
+      <div class='clear'></div>
     <% end %>
   </div>
 

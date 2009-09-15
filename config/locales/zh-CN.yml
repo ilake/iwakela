@@ -2,6 +2,19 @@
 # by tsechingho (http://github.com/tsechingho)
  
 "zh-CN":
+  curblyadvimage:
+    upload_tilte: "上传新图片"
+    upload_submit: "上传"
+    list: '列表'
+    avail_list: '请点击你要插入的图片'
+    loading: '载入中'
+    insert: '插入'
+    cancel: '取消'
+    preview: '预览'
+    thumb: '小'
+    medium: '中'
+    large: '大'
+    
   site:
     name: "早鸟网"
     slogan: "早鸟网 一个帮助你早起的地方"
@@ -10,6 +23,7 @@
     signup: "注册"
     forget_password: "忘记密码"
     desc: " 你的作息时间不正常吗？ <br /> 人生中有许多的好习惯值得养成， <br /> 早鸟网是个提供你纪录调整作息, 规画每日目标的地方。 <br />" 
+    resend_confirm: "重新認證"
 
   menu:
     user: "使用者列表"
@@ -20,6 +34,13 @@
     chat:  "闲聊区"
     home:  "我的起床纪录"
     index: "首页"
+    census: "統計"
+    journal: "日誌"
+    todo: "Todo"
+    messages: "留言"
+    profile: "個人檔案"
+    friends: "朋友"
+    newbie: "新手上路"
 
   pk_site:
     name: "姓名对战制造机"
@@ -29,7 +50,7 @@
     sick: "请假中"
     record_title: "的早起日志" 
     group_title: "的早鸟团"
-    setting: "个人设定"
+    setting: "设定"
     friend: "我的好友"
     friend_set: "好友设定"
     nickname: "昵称"
@@ -47,6 +68,9 @@
     goal_daily: "每日目标"
     target_time: "目标时间"
     sleep_target_time: "目标睡觉时间"
+    wake_status: '心情'
+    success_status: '早起成功'
+    fail_status: '早起失敗'
 
   sider:
     name: "早起成果"
@@ -78,6 +102,7 @@
     author: "作者"
     rsp_num: "回应数"
     last_rsp: "最后回应"
+    status: "文章还在审核中, 目前只有您看得见"
 
   word:
     new: "我也要贡献"
@@ -164,6 +189,22 @@
       skip_last_comma: true
   
   activerecord:
+    models:
+      user: "使用者"
+      forum: "論壇"
+      message: "留言"
+    attributes:
+      user:
+        name: "姓名"
+      goal:
+        name: "名稱"
+      forum:
+        subject: "標題"
+        content: "內容"
+      message:
+        subject: "標題"
+        content: "內容"
+
     errors:
       template:
         header:

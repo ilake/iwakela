@@ -2,7 +2,7 @@ require 'will_paginate/core_ext'
 
 module WillPaginate
   # A mixin for ActiveRecord::Base. Provides +per_page+ class method
-  # and makes +paginate+ finders possible with some method_missing magic.
+  # and hooks things up to provide paginating finders.
   #
   # Find out more in WillPaginate::Finder::ClassMethods
   #
@@ -18,9 +18,9 @@ module WillPaginate
 
     # = Paginating finders for ActiveRecord models
     # 
-    # WillPaginate adds +paginate+ and +per_page+ methods to ActiveRecord::Base
-    # class methods and associations. It also hooks into +method_missing+ to
-    # intercept pagination calls to dynamic finders such as
+    # WillPaginate adds +paginate+, +per_page+ and other methods to
+    # ActiveRecord::Base class methods and associations. It also hooks into
+    # +method_missing+ to intercept pagination calls to dynamic finders such as
     # +paginate_by_user_id+ and translate them to ordinary finders
     # (+find_all_by_user_id+ in this case).
     # 
@@ -184,18 +184,26 @@ module WillPaginate
         unless options[:select] and options[:select] =~ /^\s*DISTINCT\b/i
           excludees << :select # only exclude the select param if it doesn't begin with DISTINCT
         end
+
         # count expects (almost) the same options as find
         count_options = options.except *excludees
 
         # merge the hash found in :count
         # this allows you to specify :select, :order, or anything else just for the count query
         count_options.update options[:count] if options[:count]
+        
+        # we may be in a model or an association proxy
+        klass = (@owner and @reflection) ? @reflection.klass : self
+        
+        # forget about includes if they are irrelevant (Rails 2.1)
+        if count_options[:include] and
+            klass.private_methods.include?('references_eager_loaded_tables?') and
+            !klass.send(:references_eager_loaded_tables?, count_options)
+          count_options.delete :include
+        end
 
         # we may have to scope ...
         counter = Proc.new { count(count_options) }
-
-        # we may be in a model or an association proxy!
-        klass = (@owner and @reflection) ? @reflection.klass : self
 
         count = if finder.index('find_') == 0 and klass.respond_to?(scoper = finder.sub('find', 'with'))
                   # scope_out adds a 'with_finder' method which acts like with_scope, if it's present

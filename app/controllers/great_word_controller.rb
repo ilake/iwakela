@@ -19,7 +19,7 @@ class GreatWordController < ApplicationController
 
     if @great_word = @me.great_words.create(params[:great_word])
       if @great_word.errors.empty?
-        flash[:notice] = '新增成功'
+        notice_stickie('新增成功')
         redirect_to :action => 'new' and return
       end
     end 
@@ -36,7 +36,7 @@ class GreatWordController < ApplicationController
     if great_word.destroy
       redirect_to :back
     else
-      flash[:notice] = '刪除失敗'
+      error_stickie('刪除失敗')
       redirect_to :action => 'list' 
     end
   end
@@ -49,7 +49,7 @@ class GreatWordController < ApplicationController
     @great_word = @me.great_words.find(params[:id])
 
     if @great_word.update_attributes(params[:great_word])
-      flash[:notice] = '更新成功'
+      notice_stickie('更新成功')
       redirect_to :action => 'new'
     else
       render :action => 'edit'

@@ -1,17 +1,18 @@
 # == Schema Information
-# Schema version: 20081227162431
+# Schema version: 20090809070358
 #
 # Table name: games
 #
-#  id         :integer(11)     not null, primary key
-#  user_id    :integer(11)     
+#  id         :integer(4)      not null, primary key
+#  user_id    :integer(4)      
 #  name       :string(255)     
 #  salt       :string(255)     
-#  num        :integer(11)     default(0)
-#  today_num  :integer(11)     default(0)
+#  num        :integer(4)      default(0)
+#  today_num  :integer(4)      default(0)
 #  created_at :datetime        
 #  updated_at :datetime        
 #  desc       :text            
+#  pass_code  :string(255)     
 #
 
 class Game < ActiveRecord::Base

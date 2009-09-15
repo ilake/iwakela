@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :messages, :new => {:reply => :get}, :except => [:show, :destroy]
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -28,6 +30,36 @@ ActionController::Routing::Routes.draw do |map|
   # map.root :controller => "welcome"
 
   map.home '', :controller => 'main', :action => 'index'
+
+#  map.journals 'journals/:id/:record_id',
+#                  :controller => 'member', :action => 'journal'
+#  map.night_journals 'night_journals/:id/:record_id',
+#                  :controller => 'member', :action => 'night_journal'
+
+  map.journal 'journal/:id/:year/:month/:day',
+                  :controller => 'member',
+                  :action => 'journal',
+                  :year  => nil,
+                  :month => nil,
+                  :day => nil,
+                  :requirements => {
+                    :year => /(\d{4})/,  
+                    :day => /(\d{1,2})/,  
+                    :month => /(\d{1,2})/ 
+                  } 
+
+  map.night_journal 'night_journal/:id/:year/:month/:day',
+                  :controller => 'member',
+                  :action => 'night_journal',
+                  :year  => nil,
+                  :month => nil,
+                  :day => nil,
+                  :requirements => {
+                    :year => /(\d{4})/,  
+                    :day => /(\d{1,2})/,  
+                    :month => /(\d{1,2})/ 
+                  } 
+
   map.member 'member/:action/:id', :controller => 'member'
   map.friend 'friend/:action/:id', :controller => 'friend'
   map.user 'user/:action/:id', :controller => 'user'
@@ -42,8 +74,16 @@ ActionController::Routing::Routes.draw do |map|
                 :controller => "main",
                 :action => "reset_password"
 
+  map.connect "main/confirm_email/:confirm_code",
+                :conditions => { :method => :get },
+                :controller => "main",
+                :action => "confirm_email"
+
   map.main 'main/:action/:id', :controller => 'main'
   # See how all your routes lay out with "rake routes"
+  #For customize the image upload view
+  map.connect '/javascripts/tiny_mce/plugins/curblyadvimage/image.htm', :controller => 'tiny_mce_photos', :action => 'curblyadvimage'
+
 
   # Install the default routes as the lowest priority.
   map.connect ':controller/:action'

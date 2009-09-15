@@ -1,13 +1,13 @@
 # == Schema Information
-# Schema version: 20081227162431
+# Schema version: 20090809070358
 #
 # Table name: fight_methods
 #
-#  id         :integer(11)     not null, primary key
-#  game_id    :integer(11)     
+#  id         :integer(4)      not null, primary key
+#  game_id    :integer(4)      
 #  name       :string(255)     
-#  fight_type :integer(11)     default(0)
-#  value      :integer(11)     default(0)
+#  fight_type :integer(4)      default(0)
+#  value      :integer(4)      default(0)
 #
 
 class FightMethod < ActiveRecord::Base

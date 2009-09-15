@@ -6,6 +6,7 @@ class ChatsController < ApplicationController
     redirect_to :back and return unless params[:chats]
     params[:chats][:group_id] = params[:group_id]
     @me.chats.create(params[:chats])
+    request.env["HTTP_REFERER"] ||= home_url
     redirect_to :back
   end
 

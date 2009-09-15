@@ -1,3 +1,5 @@
+#!/usr/bin/env script/runner
+
 backup = "#{RAILS_ROOT}/log/#{RAILS_ENV}.log.template"
 source = "#{RAILS_ROOT}/log/#{RAILS_ENV}.log"
 `cp #{source} #{backup}; cat /dev/null > #{source}`

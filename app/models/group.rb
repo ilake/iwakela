@@ -1,18 +1,18 @@
 # == Schema Information
-# Schema version: 20081227162431
+# Schema version: 20090809070358
 #
 # Table name: groups
 #
-#  id            :integer(11)     not null, primary key
+#  id            :integer(4)      not null, primary key
 #  name          :string(255)     
 #  board         :text            
 #  condition     :text            
-#  user_num      :integer(11)     
-#  state         :integer(11)     default(0)
+#  user_num      :integer(4)      
+#  state         :integer(4)      default(0)
 #  created_at    :datetime        
-#  owner_id      :integer(11)     
-#  chats_num     :integer(11)     default(0)
-#  members_count :integer(11)     
+#  owner_id      :integer(4)      
+#  chats_num     :integer(4)      
+#  members_count :integer(4)      
 #
 
 class Group < ActiveRecord::Base
@@ -35,24 +35,25 @@ class Group < ActiveRecord::Base
   validates_length_of :name, :within => 1..10
   validates_length_of :condition, :within => 1..300
   validates_numericality_of :user_num, :only_integer => true
-  validates_inclusion_of :user_num, :in => 1..30
+  #validates_inclusion_of :user_num, :in => 1..30
 
   def self.human_attribute_name(attr)
     HUMANIZED_ATTRIBUTES[attr.to_sym] || super
   end
 
-  def self.count_all_group_user_attendance
-    now = Time.now
-    self.find(:all).each do |g|
-        g.members.find(:all).each do |m|
-        total_join_days = ((now.at_beginning_of_day - m.status.group_join_date)/86400).to_i
-        total_join_days = 1 if total_join_days.zero?
-        record_nums =  m.records.wake.count(:all, :conditions => ['todo_time > ? ', m.status.group_join_date.tomorrow])
-        attendance = record_nums/total_join_days.to_f
-        m.status.update_attribute(:attendance, attendance*100)
-      end
-    end
-  end
+#TODO REMOVE  
+#  def self.count_all_group_user_attendance
+#    now = Time.now
+#    self.find(:all).each do |g|
+#        g.members.find(:all).each do |m|
+#        total_join_days = ((now.at_beginning_of_day - m.status.group_join_date)/86400).to_i
+#        total_join_days = 1 if total_join_days.zero?
+#        record_nums =  m.records.wake.count(:all, :conditions => ['todo_time > ? ', m.status.group_join_date.tomorrow])
+#        attendance = record_nums/total_join_days.to_f
+#        m.status.update_attribute(:attendance, attendance*100)
+#      end
+#    end
+#  end
 
   def self.group_chats_num_reset
     Group.update_all(:chats_num=> 0)
@@ -87,11 +88,12 @@ class Group < ActiveRecord::Base
                   :order => order
   end
 
-  def self.count_7_days_chats_num
-    all.each do |group|
-      group.chats_num = group.chats.count(:all, :conditions => {:created_at => Time.now.ago(7.days)..Time.now})
-      group.members_count = group.members.count
-      group.save!
-    end
-  end
+  #TODO REMOVE 
+#  def self.count_7_days_chats_num
+#    all.each do |group|
+#      group.chats_num = group.chats.count(:all, :conditions => {:created_at => Time.now.ago(7.days)..Time.now})
+#      group.members_count = group.members.count
+#      group.save!
+#    end
+#  end
 end

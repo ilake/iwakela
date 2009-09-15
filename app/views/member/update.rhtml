@@ -7,11 +7,21 @@
   <br />
   <div>
     <% form_for @record, :url => member_url(:action => 'update', :id => @record ) do |f| %>
-      <p><%= f.text_area 'content', :rows => '8', :cols => '36' %></p>
+      <p>標題</p>
+      <p><%= f.text_field :title, :value => "#{@record.todo_time.to_s(:ymd)}日誌"%></p>
+      <p>
+      <% FEELINGS.each do |k,v| %>
+        <span><%= v %><%= radio_button("record", "feeling", k) %></span>
+      <% end %>
+    </p>
+    <p>昨日檢討</p>
+      <p><%= f.text_area 'content2', :rows => '20', :cols => '36', :class => 'mceEditor' %></p>
+    <p>今日日誌</p>
+      <p><%= f.text_area 'content', :rows => '20', :cols => '36', :class => 'mceEditor' %></p>
       <%= submit_tag '完成' %>
-      <%= link_to_cancel('member', '懶得寫') %>
-<% end %>
-</div>
+      <%= link_to_cancel('member', '等下再寫') %>
+    <% end %>
+  </div>
 </div>
 
 <div class='update_info'>
@@ -32,7 +42,8 @@
   <%= link_to "我也要貢獻", word_path(:action => 'new'), {:popup => true} %>
 </div>
 <div id='nice_words' class='rounded'>
-  <%= render :partial => 'word', :locals => {:word => @word} %>
+
+  <p><%= format_content(@word.content) if @word %></p>
 </div>
 
 <div class='clear'></div>

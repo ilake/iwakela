@@ -1,36 +1,386 @@
+<% content_for :js_ready do %>
+  <script type='text/javascript'>
+    function parse_anchor(str) {
+      if (str.match('#')) { // the URL contains an anchor
+        // click the navigation item corresponding to the anchor
+        return str.split('#')[1];
+      }
+      else {
+        return 'change_pic';
+      }
+    }
+    
+    function user_offset_time(){
+    
+      $.ajax({
+        url: '/user/user_offset_time',
+        type: 'GET',
+        dataType: 'text',
+        success: function(text){
+          $('.eb_offset_time').html(text);
+        }
+      });
+
+      setTimeout('user_offset_time()', 60000);
+    }
+    $(document).ready(function(){
+        var anchor = parse_anchor(location.hash);
+        $('#'+anchor).show();
+        $('.'+anchor).addClass('current');
+
+
+        $('#user-settings div').click(function(){
+          $('#user-settings div').removeClass('current');
+          $('.user-setting-content').hide();
+          var anchor = $(this).attr('class');
+          $(this).addClass('current');
+          $('#'+anchor).show();
+
+        });
+
+        $('.test-time').click(function(){
+          $.get('/user/test_time', null, null, "script");
+
+          return false;
+        });
+
+        user_offset_time();
+    });
+  </script>
+<% end %>
 <div>
-  <div>
-    <ul>
-      <li class='pad-5'><%= link_to '更改圖像', :controller => 'mugshots', :action => 'new'%></li>
-      <li class='pad-5'><%= link_to "修改你的暱稱", :controller => "user", :action => 'edit_username', :id => @me.id %></li>
-      <li class='pad-5'><%= link_to "修改你的密碼", :controller => "user", :action => 'edit_password', :id => @me.id  %></li>
-      <li class='pad-5'><%= link_to "修改帳號(信箱)", :controller => "user", :action => 'edit_email', :id => @me.id  %></li>
-      <li class='pad-5'><%= link_to "修改個人檔案", :controller => "user", :action => 'edit_profile', :id => @me.id  %></li>
-      <li class='pad-5'><%= image_tag("icon_new.gif")%><%= link_to "修改換日線時間", :controller => "user", :action => 'edit_time_shift', :id => @me.id  %></li>
-      <li class='pad-5'><%= image_tag("icon_new.gif")%><%= link_to "時間校正", :controller => "user", :action => 'edit_time_offset', :id => @me.id  %></li>
-    </ul>
-    </ul>
+  <div id='user-settings'>
+      <div class='edit_time_offset'>
+        <a href='#edit_time_offset'>時間校正</a>
+      </div>
+      <div class='wake_goal'>
+        <a href='#wake_goal'>設定目標起床時間</a>
+      </div>
+      <div class='sleep_goal'>
+        <a href='#sleep_goal'>設定目標睡覺時間</a>
+      </div>
+      <div class='pri_settings'>
+        <a href='#pri_settings'>隱私設定</a>
+      </div>
+      <div class='change_pic'>
+        <a href='#change_pic'>更改圖像</a>
+      </div>
+      <div class='edit_username'>
+        <a href='#edit_username'>修改暱稱</a>
+      </div>
+      <div class='edit_password'>
+        <a href='#edit_password'>修改密碼</a>
+      </div>
+      <div class='edit_email'>
+        <a href='#edit_email'>修改帳號(信箱)</a>
+      </div>
+      <div class='edit_profile'>
+        <a href='#edit_profile'>修改個人檔案</a>
+      </div>
+      <div class='edit_time_shift' class=''>
+        <a href='#edit_time_shift'>修改換日線時間</a>
+      </div>
+      <div class='edit_plurk'>
+        <a href='#edit_plurk'>Plurk 帳密</a>
+      </div>
+      <div class='blog_stick'>
+        <a href='#blog_stick'>blog 貼紙</a>
+      </div>
+    </div>
   </div>
-      <h3>部落格貼紙</h3><br />
-  <div style='padding:0px 10px 0px 10px;float:left;'>
-    <div style='border-right:1px solid #EFEFEF; padding:0px 10px 0px 0px;float:left;' >
-      <%= image_tag('ebwidget1.png')%>
+  <div class='user-setting-content' id='change_pic' style='display:none'>
+    <%= error_messages_for :mugshot %>
+    <div class='bg-lg w-black pad-10 rounded'>檔名請儘量使用純英文字母的檔名</div>
+    <br />
+    <% form_for(:mugshot, :url => {:action => 'create', :id => params[:id]}, :html => { :multipart => true} ) do |f| -%>
+      <p>
+        <label for="mugshot">上傳圖片:</label>
+        <%= f.file_field :uploaded_data %>
+      </p>
+      <p>
+        <%= submit_tag '送出' %>
+      </p>
+    <% end -%>
+  </div>
+  <div class='user-setting-content ' id='edit_username' style='display:none'>
+    <% form_for :user, @me, :url => {:action => 'edit', :id => @me.id} do |f|%>
+      暱稱:<br />
+      <%= f.text_field :name %>
+      <%= submit_tag "變更"%>
+      <%= link_to '取消', :controller => 'member', :action => 'list', :id => @me %>
+    <% end %>
+  </div>
+  <div class='user-setting-content' id='edit_password' style='display:none'>
+    <% form_for :user, :url => {:action => 'edit_password'} do |f|%>
+      <ul>
+        <li>舊密碼<%= password_field :current_user, :old_password %></li>
+        <li>新密碼<%= password_field :user, :password %></li>
+        <li>請再輸入一次<%= password_field :user, :password_confirmation %></li>
+      </ul>
+      <%= submit_tag "變更"%>
+    <% end %>
+  </div>
+  <div class='user-setting-content' id='edit_email' style='display:none'>
+    <% form_for :user, @me, :url => {:action => 'edit'} do |f|%>
+      帳號(信箱):<br />
+      <%= f.text_field :email %>
+      <%= submit_tag "變更"%>
+    <% end %>
+  </div>
+  <div class='user-setting-content' id='edit_profile' style='display:none'>
+    <% form_for :profile, @me.profile, :url => {:action => 'edit_profile'} do |f|%>
+      <div>自介:</div>
+      <%= f.text_area :others, :rows => '4', :cols => '40' %>
+      <div>性別:</div>
+      <%= f.text_field :sex %>
+      <div>興趣:</div>
+      <%= f.text_field :interest %>
+      <div>連絡方式:</div>
+      <%= f.text_field :connect %>
+      <div>相簿:</div>
+      <%= f.text_field :photo %>
+      <div>生日:</div>
+      <%= f.text_field :birth %>
+      <div>星座:</div>
+      <%= f.text_field :star %>
+      <div>血型:</div>
+      <%= f.text_field :blood %>
+      <div>住址:</div>
+      <%= f.text_field :address %>
+      <div>學校:</div>
+      <%= f.text_field :school%>
+      <div>職業:</div>
+      <%= f.text_field :job %>
+      <div><%= submit_tag "變更"%>
+        <%= link_to '取消', :controller => 'main', :action => 'index' %></div>
+    <% end %>
+  </div>
+  <div class='user-setting-content' id='edit_time_shift' style='display:none'>
+    <div class='w-black bg-or pad-10 mar-10'>
+      您現在的換日線時間是『<%= @me.setting.time_shift %>』點
     </div>
-    <div style='float:left;'>
-      <textarea cols='50' rows='6'><script src="http://iwakela.com/member/widget?id=<%= @me.id%>"></script></textarea>
+    <div class='fl-l pad-5' style='border-right:2px dotted #BABABA;'>
+      <h1>我要設定換日線</h1>
+      <% form_for :time_shift, :url => {:action => 'edit_time_shift'} do |f|%>
+        <div class='pad-5'>
+          <%= label :setting, :time_shift, '凌晨0點'%>: <%= radio_button :setting, :time_shift, 0 %>
+        </div> 
+        <div class='pad-5'>
+          <%= label :setting, :time_shift, '凌晨1點'%>: <%= radio_button :setting, :time_shift, 1 %>
+        </div>
+        <div class='pad-5'>
+          <%= label :setting, :time_shift, '凌晨2點'%>: <%= radio_button :setting, :time_shift, 2 %>
+        </div>
+        <div class='pad-5'>
+          <%= label :setting, :time_shift, '凌晨3點'%>: <%= radio_button :setting, :time_shift, 3 %>
+        </div>
+        <div class='pad-5'>
+          <%= label :setting, :time_shift, '凌晨4點'%>: <%= radio_button :setting, :time_shift, 4 %>
+        </div>
+        <div class='pad-5'>
+          <%= label :setting, :time_shift, '凌晨5點'%>: <%= radio_button :setting, :time_shift, 5 %>
+        </div>
+        <div class='pad-5'>
+          <%= label :setting, :time_shift, '凌晨6點'%>: <%= radio_button :setting, :time_shift, 6 %>
+        </div>
+        <%= submit_tag "設定"%>
+      <% end %>
     </div>
+    <div class='fl-l pad-5' >
+      <h1>都沒我要的時間</h1>
+      <% form_for :time_shift, :url => {:action => 'edit_time_shift'} do |f|%>
+        <div class='padding-10'>
+          我要的換日線是<%= select :setting, :time_shift, (0..23).inject([]){|h, v| h << [v,v]; h} %>點
+        </div>
+        <%= submit_tag "設定"%>
+      <% end %>
+    </div>
+
+    <div class='fl-r'>
+      <div class='pad-10 bg-lb mar-10 w-black rounded'>什麼是換日線</div>
+      <div class='pad-10 bg-lg mar-10 w-black'>
+        自己睡覺時間的曲線看起來很亂嗎? 改變一下"換日線" 就可以讓你的曲線看起來簡潔一點喔
+      </div>
+      <br />
+      <p>使用前</p>
+      <%= b_image_tag('time_shift_demo2.png')%>
+
+      <br />
+      <p>使用後</p>
+      <%= b_image_tag('time_shift_demo.png')%>
+    </div>
+  </div>
+  <div class='user-setting-content' id='edit_time_offset' style='display:none'>
+    <div class='w-black bg-or pad-10 mar-10'>
+      <h1>我要調整時間(把早鳥時間校正成跟您的時間相同)</h1>
+      <h4 class='fl-l'>你現在的早鳥時間是<span class='eb_offset_time w-red mar-r-10'><%= @time_now.to_s(:date) %></span></h4>
+      <%= b_image_tag("ajaxloading/ajax-loader.gif") %>
+      <br />
+      <br />
+      <span class='w-black'>我的早鳥時間需要再(＋/－)這個時間, 才會等於我這邊的時間</span>
+      <% form_for :time_offset, :url => {:action => 'edit_time_offset'} do |f|%>
+        <%= select :date, :plus_minus, [['+', 'add'], ['－', 'minus']] %>
+        <%= select_hour 0 %>時
+        <%= select_minute 0 %>分
+        <%= submit_tag "設定"%>
+        <%= link_to '設定完成', user_url(:action => 'edit')%>
+      <% end %>
+    </div>
+  </div>
+  <div class='user-setting-content' id='edit_plurk' style='display:none'>
+    <% form_for :service_profile, :url => {:action => 'edit_service_profile'} do |f|%>
+      <%= f.hidden_field :service, :value => 'plurk' %>
+      <div>帳號:</div>
+      <%= f.text_field :name %>
+      <div>密碼:</div>
+      <%= f.password_field :password %>
+      <br />
+      <%= submit_tag '確定' %>
+    <% end %>
   </div>
 
-  <div style='padding:0px 10px 0px 10px;float:left;'>
-    <div style='border-right:1px solid #EFEFEF; padding:0px 10px 0px 0px;float:left;' >
-      <%= image_tag('ebwidget2.png')%>
+  <div class='user-setting-content' id='blog_stick' style='display:none'>
+    <h3>部落格貼紙</h3><br />
+    <div style='padding:0px 10px 0px 10px;float:left;'>
+      <div style='border-right:1px solid #EFEFEF; padding:0px 10px 0px 0px;float:left;' >
+        <%= b_image_tag('ebwidget1.png')%>
+      </div>
+      <div style='float:left;'>
+        <textarea cols='50' rows='6'><script src="http://iwakela.com/member/widget?id=<%= @me.id%>"></script></textarea>
+      </div>
     </div>
-    <div style='float:left;'>
-      <textarea cols='52' rows='6'><script src="http://iwakela.com/member/pie_widget?id=<%= @me.id%>"></script></textarea>
+
+    <div style='padding:0px 10px 0px 10px;float:left;'>
+      <div style='border-right:1px solid #EFEFEF; padding:0px 10px 0px 0px;float:left;' >
+        <%= b_image_tag('ebwidget2.png')%>
+      </div>
+      <div style='float:left;'>
+        <textarea cols='52' rows='6'><script src="http://iwakela.com/member/pie_widget?id=<%= @me.id%>"></script></textarea>
+      </div>
     </div>
   </div>
-</div>
+  <div class='user-setting-content' id='wake_goal' style='display:none'>
+    <div class='setting-bg'>
+      <b class='w-black'>我的起床目標時間</b>
+      <br />
+      <br />
+      <div class='w-black'>
+        <% if @me.target_time_now %>
+          您設定的起床目標時間是<%= extract_target_time(@me.target_time_now) %>
+        <% else %>
+          您尚未設定目標時間
+        <% end %>
+      </div>
+      <p>
+        <div id = "select">
+          <% form_tag :controller => 'member', :action => 'target_time_now' do |f|%>
+            每天
 
-<div class='clear'></div>
+            <%= select_hour Time.now %>時
+            <%= select_minute Time.now %>分
+            <%= submit_tag "設定完成" %>
+            <%= link_to_cancel  %>
+          <% end %>
+        </div>
+      </p>
+      <br />
+      <hr>
+      <p>
+        可設定一個禮拜內不同起床時間, 如果這邊有設定就是以這邊的目標為準
+        <div id = "select">
+          <% form_tag :controller => 'targets', :action => 'target_time_week' do |f|%>
+            每週
+            <%= select_week %>
+            <%= select_hour Time.now %>時
+            <%= select_minute Time.now %>分
+            <%= submit_tag "設定完成" %>
+            <%= link_to_cancel %>
+          <% end %>
+          <table>
+            <th>星期</th>
+            <th>起床目標時間</th>
+            <th>刪除</th>
+            <% @targets.each do |t|%>
+              <tr>
+                <td><%= AllHelper::WEEK_DAYS[t.week] %></td>
+                <td><%= extract_target_time(t.todo_target_time)%></td>
+                <td><%= link_to_delete('targets', t.id)%> </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </p>
+    </div>
+  </div>
+  <div class='user-setting-content' id='sleep_goal' style='display:none'>
+    <div class='setting-bg'>
+      <b class='w-black'>我的睡覺目標時間</b>
+      <br />
+      <br />
+      <div class='w-black'>
+        <%if @me.sleep_target_time %>
+          您設定的睡覺目標時間是<%= extract_target_time(@me.sleep_target_time)%>
+        <% else %>
+          您尚未設定目標時間
+        <% end %>
+      </div>
+      <p>
+        <div id = "select">
+          <% form_tag :controller => 'member', :action => 'sleep_target_time' do |f|%>
+            每天
+
+            <%= select_hour Time.now %>時
+            <%= select_minute Time.now %>分
+            <%= submit_tag "設定完成" %>
+            <%= link_to_cancel  %>
+          <% end %>
+        </div>
+      </p>
+      <br />
+      <hr>
+      <p>
+        可設定一個禮拜內不同目標睡覺時間, 如果這邊有設定就是以這邊的目標為準
+        <div id = "select">
+          <% form_tag :controller => 'targets', :action => 'sleep_target_time_week' do |f|%>
+            每週
+            <%= select_week %>
+            <%= select_hour Time.now %>時
+            <%= select_minute Time.now %>分
+            <%= submit_tag "設定完成" %>
+            <%= link_to_cancel %>
+          <% end %>
+          <table>
+            <th>星期</th>
+            <th>睡覺目標時間</th>
+            <th>刪除</th>
+            <% @sleep_targets.each do |t|%>
+              <tr>
+                <td><%= AllHelper::WEEK_DAYS[t.week] %></td>
+                <td><%= extract_target_time(t.todo_target_time)%></td>
+                <td><%= link_to_delete('targets', t.id)%> </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </p>
+    </div>
+  </div>
+  <div class='user-setting-content' id='pri_settings' style='display:none'>
+    <% form_for :setting, :url => {:controller => 'user', :action => 'edit_pri_settings'} do %>
+      <% PRI_OPTIONS.each do |pri, name|%>
+        <div class='pad-5'>
+          <span class='w-black fw-bold'><%= name %></span>
+          <br />
+          <% SEALED.each do |k, v| %>
+            <%= v %> <%= radio_button(:setting, pri, k)%>
+          <% end %>
+        </div>
+        <br />
+      <% end %>
+        <%= submit_tag '送出' %>
+    <% end %>
+  </div>
+
+  <div class='clear'></div>
 <hr>
-<%= render :partial => 'shared/profiles', :locals => {:user => @me, :profile => @profile}%>
+<%= render :partial => 'shared/profiles', :locals => {:user => @me, :profile => @me.profile}%>

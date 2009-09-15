@@ -1,7 +1,7 @@
 <tr goal_id=<%=g.id%>>
   <td class="goal_tmp_name"><%= h(g.name) %></td>
   <td class="goal_tmp_comment"><%= text_fields(g, g.comment)%></td>
-  <td class="goal_del"><%= image_tag("delete.png", :border => "0")%></td>
-  <td class="goal_down_tmp"><%= image_tag("down_todo.png", :border => "0", :size => "18x18")%></td>
+  <td class="goal_del"><%= b_image_tag("delete.png", :border => "0")%></td>
+  <td class="goal_down_tmp"><%= b_image_tag("down_todo.png", :border => "0", :size => "18x18")%></td>
   <td class="goal_rank"><%= rank_fields(g, g.rank)%></td>
 </tr>

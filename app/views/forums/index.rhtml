@@ -1,7 +1,15 @@
-<% if params[:id] %>
-  <%= link_to '回到早起團', :controller => 'groups', :action => 'show', :id => params[:id] %>
-<% end %>
-<%= link_to '我要發文', :action => 'new', :id => params[:id] %>
+<div class='top-function-menu rounded'>
+  <% if params[:id] %>
+    <%= link_to '回到早起團', :controller => 'groups', :action => 'show', :id => params[:id] %>
+  <% end %>
+
+  <%= link_to_unless_current '全部', {:action => 'index', :category => 'all'} %>
+  <% CATEGORIES.each do |key, value| %>
+    <%= link_to_unless_current value, {:action => 'index', :category => key} %>
+  <% end %>
+  | <%= link_to '我要發文', :action => 'categories', :id => params[:id] %>
+  | <%= link_to_unless_current '待審核區', {:action => 'list'} if @me && @me.id == ADMIN_ID %>
+</div>
 <table>
   <thead>
     <th><%= t 'forum.title' %></th>
@@ -11,7 +19,10 @@
   </thead>
   <% @forums.each do |f|%>
     <tr>
-      <td class='forum_subject'><%= link_to f.subject, :action => 'show', :id => f.id %></td>
+      <td class='forum_subject'>
+        <%= link_to f.subject, :action => 'show', :id => f.id %> 
+        <%= "<span class='w-red'>(#{t 'forum.status'})</span>" if f.public == 2 %>
+      </td>
       <td class='forum_author'><%= link_to_user(f.user, f.user.name) %></td>
       <td><%= f.comments_count.to_i %></td>
       <td class='forum_created_at'><%= exact_datetime_string(f.last_comment_time) %></td>

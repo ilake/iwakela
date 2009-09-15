@@ -40,7 +40,7 @@
   </div>
   <div class="contenth">
     <% if r = user.today_record %>
-      <div style='font-size:100%'>今日起床 <%= extract_target_time(r.todo_time)%><%= image_tag(r.success ? 'http://iwakela.com/images/thumbup.gif' : 'http://iwakela.com/images/thumbdown.gif', :size => '20x20') %></div>
+      <div style='font-size:100%'>今日起床 <%= extract_target_time(r.todo_time)%><%= b_image_tag(r.success ? 'thumbup.gif' : 'thumbdown.gif', :size => '20x20') %></div>
     <% else %>
       <div style='font-size:100%'>今日起床 <span style='color:#F00'>還沒做紀錄</span></div>
     <% end %>

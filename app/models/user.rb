@@ -1,9 +1,9 @@
 # == Schema Information
-# Schema version: 20081227162431
+# Schema version: 20090809070358
 #
 # Table name: users
 #
-#  id                        :integer(11)     not null, primary key
+#  id                        :integer(4)      not null, primary key
 #  name                      :string(255)     
 #  password_salt             :string(255)     
 #  password_hash             :string(255)     
@@ -14,7 +14,7 @@
 #  reset_password_code       :string(255)     
 #  reset_password_code_until :datetime        
 #  yahoo_userhash            :string(255)     
-#  group_id                  :integer(11)     
+#  group_id                  :integer(4)      
 #  group_nickname            :string(255)     
 #  time_zone                 :string(255)     default("Taipei")
 #  sleep_target_time         :datetime        
@@ -29,18 +29,19 @@ class User < ActiveRecord::Base
   has_many :goals
   has_many :forums
   has_many :comments
-  has_many :scores
   has_many :great_words
-  has_one :setting
-
-  composed_of :user_data, :mapping =>%w(name name)
+  has_many :service_profiles
+  has_many :leave_messages, :class_name => 'Message', :foreign_key => :user_id
+  has_many :own_messages, :class_name => 'Message', :foreign_key => :master_id, :conditions => {:message_id => nil}, :include => :reply
+  has_many :own_messages_and_reply, :class_name => 'Message', :foreign_key => :master_id, :include => :reply
 
   #我發表過forum的comments
   #Its sql :
   #SELECT comments.* FROM comments INNER JOIN forums ON comments.record_id = forums.id AND comments.record_type = 'Forum' WHERE ((forums.user_id = 2))
   #example : u.forums.find(:all).map {|a| a.comments}  ===  u.forum_comments
   has_many :forum_comments, :through => :forums, :source => :comments  
-  has_many :record_comments, :through => :records, :source => :comments, :order => "created_at DESC", :limit => 6
+  has_many :latest_record_comments, :through => :records, :source => :comments,:include => [:user, :record] , :order => "created_at DESC", :limit => 6
+  has_many :record_comments, :through => :records, :source => :comments, :order => "created_at DESC"
 
   #forum 裡有我的 comments的 forum, 找出 forum array
   has_many :forums_has_comments,
@@ -56,11 +57,16 @@ class User < ActiveRecord::Base
 
   has_many :demands, :foreign_key => 'demander_id', :class_name => 'Call'
   has_many :accepts, :foreign_key => 'accepter_id', :class_name => 'Call'
+  has_many :tiny_mce_photos
+  has_many :pushs
 
   has_one :own_group, :foreign_key => "owner_id", :class_name => 'Group'
   has_one :profile
   has_one :status
   has_one :mugshot
+  has_one :setting
+  has_one :about_state    #用來存email 是否認證
+
 
   belongs_to :group
   has_and_belongs_to_many :friends,
@@ -68,6 +74,13 @@ class User < ActiveRecord::Base
             :join_table => "friends",
             :association_foreign_key => "friend_id",
             :foreign_key => "user_id"
+
+  has_and_belongs_to_many :be_friends,
+            :class_name => "User",
+            :join_table => "friends",
+            :association_foreign_key => "user_id",
+            :foreign_key => "friend_id"
+
 
   after_create :create_default_user_setting
 
@@ -78,24 +91,6 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of   :email, :case_sensitive => false
 
-  field = Profile.content_columns.inject([]) do |result, column|
-    result << column.name
-  end.push(:to => :profile)
-
-  delegate *field
-
-  setting = Setting.content_columns.inject([]) do |result, column|
-    result << column.name
-  end.push(:to => :setting)
-
-  delegate *setting
-
-  status = Status.content_columns.inject([]) do |result, column|
-    result << column.name
-  end.push(:to => :status)
-
-  delegate *status
-
   attr_reader :password
 
   def validate
@@ -103,20 +98,22 @@ class User < ActiveRecord::Base
   end
 
   def target_time(time=Time.now)
-    if target = self.targets.wake.find_by_week(time.wday)
+    user_time = time.since(self.setting.time_offset.hours)
+    if target = self.targets.wake.find_by_week(user_time.wday)
       target_time = target.todo_target_time
-      Time.local(time.year.to_i, time.month.to_i, time.day.to_i, target_time.hour, target_time.min, 0)
+      Time.local(user_time.year.to_i, user_time.month.to_i, user_time.day.to_i, target_time.hour, target_time.min, 0)
     elsif target_time = self.target_time_now
-      Time.local(time.year.to_i, time.month.to_i, time.day.to_i, target_time.hour, target_time.min, 0)
+      Time.local(user_time.year.to_i, user_time.month.to_i, user_time.day.to_i, target_time.hour, target_time.min, 0)
     end
   end
 
   def target_sleep_time(time=Time.now)
-    if target = self.targets.sleep.find_by_week(time.wday)
+    user_time = time.since(self.setting.time_offset.hours)
+    if target = self.targets.sleep.find_by_week(user_time.wday)
       target_time = target.todo_target_time
-      Time.local(time.year.to_i, time.month.to_i, time.day.to_i, target_time.hour, target_time.min, 0)
+      Time.local(user_time.year.to_i, user_time.month.to_i, user_time.day.to_i, target_time.hour, target_time.min, 0)
     elsif target_time = self.sleep_target_time
-      Time.local(time.year.to_i, time.month.to_i, time.day.to_i, target_time.hour, target_time.min, 0)
+      Time.local(user_time.year.to_i, user_time.month.to_i, user_time.day.to_i, target_time.hour, target_time.min, 0)
     end
   end
 
@@ -146,10 +143,13 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(h)
-    user = find_by_email(h[:email])
-    if user && encode(h[:password], user.password_salt) == user.password_hash
-      user
-    end
+      user = find_by_email(h[:email])
+      if user && encode(h[:password], user.password_salt) == user.password_hash && user.about_state.confirm_email
+        user
+      elsif user && !user.about_state.confirm_email
+        user.errors.add(:email, "no_confirm") 
+        user
+      end
   end
 
   def self.authenticate_by_cookie(cookie)
@@ -193,6 +193,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.send_confirm_email(email)
+    if user = self.find_by_email(email)
+      user.about_state.confirm_email_until = 1.month.from_now
+      user.about_state.confirm_email_code = self.random_str
+      user.about_state.save!
+      EbMail.deliver_confirm_email(user)
+      user
+    end
+  end
+
   def self.reset_password(uid, pwd, pwd_confirm)
     user = self.find(uid)
     if ((pwd == pwd_confirm) && !pwd_confirm.blank?)
@@ -212,10 +222,25 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.check_confirm_email_code(code)
+    if state = AboutState.find_by_confirm_email_code(code)
+      user = state.user
+      if user && user.about_state.confirm_email_until && Time.now < user.about_state.confirm_email_until
+        user.about_state.confirm_email = true
+        user.about_state.save!
+        user
+      else
+        nil
+      end
+    else
+      nil
+    end
+  end
+
   def today_record
     record = self.records.wake.last(:order => 'todo_time')
     user = record.user if record
-    if record && record.todo_time.at_beginning_of_day == Time.now.since(user.time_offset.hours).at_beginning_of_day
+    if record && record.todo_time.at_beginning_of_day == Time.now.since(user.setting.time_offset.hours).at_beginning_of_day
       record
     else
       nil
@@ -225,7 +250,7 @@ class User < ActiveRecord::Base
   def today_sleep_record
     record = self.records.sleep.last(:order => 'todo_time')
     user = record.user if record
-    if record && record.todo_time.at_beginning_of_day == Time.now.since(user.time_offset.hours).at_beginning_of_day
+    if record && record.todo_time.at_beginning_of_day == Time.now.since(user.setting.time_offset.hours).at_beginning_of_day
       record
     else
       nil
@@ -240,27 +265,31 @@ class User < ActiveRecord::Base
     self.find(:all, :include => :status, :conditions => ['statuses.state = ?', state])
   end
 
-  #最近一個禮拜有紀錄的
-  def self.find_user_no_records
-    self.find(:all).each do |u|
-      if u.status.last_record_created_at 
-        if u.status.last_record_created_at > Time.now.ago(7.days)
-          u.status.update_attribute(:fight, true)
-        else
-          u.status.update_attribute(:fight, false)
-        end
-      else
-        u.status.update_attribute(:fight, false)
-      end
-    end
-  end
+#TODO REMOVE
+  #最近一個月有紀錄 fight => true, 否則 fight => false
+#  def self.find_user_no_records
+#    self.find(:all).each do |u|
+#      if u.status.last_record_created_at 
+#        if u.status.last_record_created_at > Time.now.ago(1.month)
+#          u.status.update_attribute(:fight, true)
+#        else
+#          u.status.update_attribute(:fight, false)
+#        end
+#      else
+#        u.status.update_attribute(:fight, false)
+#      end
+#    end
+#  end
 
   #daily 
-  def self.reset_all_state
-    Status.update_all("state = 0", "fight = true")
-    Status.update_all("state = 3", "fight = false")
-    Game.update_all("today_num = 0")
-  end
+  #每天把還有在來的做狀態的處理, fight true 基本上是有在來的, 所以每天臨晨把 state 初始化
+  #就是說還沒來 所以是缺席
+#TODO REMOVE
+#  def self.reset_all_state
+#    Status.update_all("state = 0", "fight = true")
+#    Status.update_all("state = 3", "fight = false")
+#    Game.update_all("today_num = 0")
+#  end
 
   def self.find_user_rank(page, sort)
     sort ||= 'diff'
@@ -274,6 +303,19 @@ class User < ActiveRecord::Base
                   :include => [:status, :mugshot, :profile],
                   :order => order,
                   :conditions => ["statuses.num > ? AND statuses.last_record_created_at > ? AND users.target_time_now is not NULL", 7, Time.now.ago(3.days)]
+  end
+
+  def self.find_friends_rank(page, sort)
+    sort ||= 'diff'
+    if ["success_rate", "continuous_num"].include?(sort)
+      order = "statuses.#{sort} DESC"
+    else
+      order = "statuses.#{sort}"
+    end
+    self.paginate :page => page,
+                  :per_page => 10,
+                  :include => [:status, :mugshot, :profile],
+                  :order => order
   end
 
   def change_group(group, join=true)
@@ -290,6 +332,7 @@ class User < ActiveRecord::Base
     self.create_profile
     self.create_status
     self.create_setting
+    self.create_about_state
   end
 
   def self.today_earliest(result='success', num = 20)
@@ -312,6 +355,22 @@ class User < ActiveRecord::Base
     total_score = Record.count_total_score(a, cont_count)
   end
 
+  def see_msg_right(message, me)
+    message.public == 0 || self == me || message.user == me || (message.parent_msg && message.parent_msg.user == me)
+  end
+
+  def see_journal_right(record, me)
+    record.pri == 0 || self == me
+  end
+
+  def own_right(me)
+    self == me
+  end
+
+  def time_now
+    Time.now.since(self.setting.time_offset.hours)
+  end
+
   private 
   def self.random_str
     [Array.new(6){rand(256).chr}.join].pack("m").chomp
@@ -322,3 +381,29 @@ class User < ActiveRecord::Base
   end
 
 end
+#has_many :scores
+#
+#  field = Profile.content_columns.inject([]) do |result, column|
+#    result << column.name
+#  end.push(:to => :profile)
+#
+#  delegate *field
+#
+#  setting = Setting.content_columns.inject([]) do |result, column|
+#    result << column.name
+#  end.push(:to => :setting)
+#
+#  delegate *setting
+#
+#  status = Status.content_columns.inject([]) do |result, column|
+#    result << column.name
+#  end.push(:to => :status)
+#
+#  delegate *status
+#
+#  about_state = AboutState.content_columns.inject([]) do |result, column|
+#    result << column.name
+#  end.push(:to => :about_state)
+#
+#  delegate *about_state
+

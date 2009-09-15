@@ -1,14 +1,14 @@
 # == Schema Information
-# Schema version: 20081227162431
+# Schema version: 20090809070358
 #
 # Table name: targets
 #
-#  id               :integer(11)     not null, primary key
-#  user_id          :integer(11)     not null
+#  id               :integer(4)      not null, primary key
+#  user_id          :integer(4)      not null
 #  todo_target_time :datetime        
-#  week             :integer(11)     
-#  month            :integer(11)     
-#  todo_type        :integer(11)     default(0)
+#  week             :integer(4)      
+#  month            :integer(4)      
+#  todo_type        :integer(4)      default(0)
 #
 
 class Target < ActiveRecord::Base

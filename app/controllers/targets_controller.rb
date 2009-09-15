@@ -7,7 +7,7 @@ class TargetsController < ApplicationController
       target.todo_target_time = target_time( params[:date][:hour], params[:date][:minute] )
 
       if target.save
-        flash[:info] = "設定完成"
+        notice_stickie("設定完成")
         redirect_to :back
       end
     else
@@ -22,7 +22,7 @@ class TargetsController < ApplicationController
       target.todo_type = 1
 
       if target.save
-        flash[:info] = "設定完成"
+        notice_stickie("設定完成")
         redirect_to :back
       end
     else

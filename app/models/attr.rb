@@ -1,10 +1,10 @@
 # == Schema Information
-# Schema version: 20081227162431
+# Schema version: 20090809070358
 #
 # Table name: attrs
 #
-#  id      :integer(11)     not null, primary key
-#  game_id :integer(11)     
+#  id      :integer(4)      not null, primary key
+#  game_id :integer(4)      
 #  name    :string(255)     
 #
 

@@ -34,9 +34,9 @@
   <div class='fail_users'>
     <span class='lazybird'>
       <span class='clickme'>點我, 點我</span>
-      <%= image_tag('lazybird.gif')%>
+      <%= b_image_tag('lazybird.gif')%>
     </span>
-    <%= image_tag('poo.gif', :class => 'poo')%>
+    <%= b_image_tag('poo.gif', :class => 'poo')%>
     <h2 class='result-title'>懶鳥區<%=@totoal_fail%>人</h2>
     <% @lazy_users.each do |lu|%>
       <div class='fail_one'><%= where_is_me(lu, lu.name) %></div>
@@ -46,7 +46,7 @@
       <b>只有後20名失敗的才會在這</b>
     <% end -%>
     <div class='clear'></div>
-    <%= image_tag('orz.gif', :class => 'orz')%>
+    <%= b_image_tag('orz.gif', :class => 'orz')%>
   </div>
 
   <div class='talk'>
