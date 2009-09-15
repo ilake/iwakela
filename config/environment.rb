@@ -67,7 +67,6 @@ require 'json'
 require "errors"
 
 #require 'smtp_tls'
-#ActionController::Base.asset_host = "iwakela.com" if ENV['RAILS_ENV'] == 'production'
 ActionMailer::Base.delivery_method = :smtp 
 
 ActionMailer::Base.smtp_settings = {

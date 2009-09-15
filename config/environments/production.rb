@@ -19,3 +19,4 @@ config.action_controller.perform_caching             = true
 # config.action_mailer.raise_delivery_errors = false
 #
 EB_HOST = 'iwakela.com'
+ActionController::Base.asset_host = "iwakela.com"

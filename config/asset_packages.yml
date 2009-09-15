@@ -1,0 +1,22 @@
+--- 
+javascripts: 
+- base: 
+  - jquery.corner
+  - application
+  - jquery-ui-tab-1.6b.min
+  - jquery-ui-personalized-1.5.3.min
+  - jquerypngfix
+  - excanvas.pack
+  - jrails
+  - jquery.flot.pack
+  - stickies
+stylesheets: 
+- base: 
+  - eb
+  - defaults
+  - paginator
+  - itunes
+  - flora_tabs
+  - eb_images
+  - stickies
+  - journal

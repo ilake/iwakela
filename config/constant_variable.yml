@@ -1,0 +1,25 @@
+feelings:
+  study: 努力
+  health: 健康
+  appreciate: 感謝
+
+categories:
+  info: 早起資訊
+  study: 進修資訊
+  chat: 談天說地
+  
+confirm_category:
+  - bad
+
+pri_options:
+  record_pri: 日誌預設
+  census_pri: 統計
+  todo_pri: TODO
+  friend_pri: 朋友
+
+sealed:
+  0: 公開
+  1: 隱藏
+  
+
+admin_id: 2

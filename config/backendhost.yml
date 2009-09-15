@@ -1,0 +1,6 @@
+development:
+  backoffice_image_host: 'localhost'
+
+production:
+  backoffice_image_host: 'img.iwakela.com'
+
