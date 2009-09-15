@@ -13,6 +13,6 @@
 
 #用來存email 是否認證
 class AboutState < ActiveRecord::Base
-  validates_uniqueness_of :confirm_email_code
+  #validates_uniqueness_of :confirm_email_code
   belongs_to :user
 end
