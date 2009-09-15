@@ -225,7 +225,7 @@ class User < ActiveRecord::Base
   def self.check_confirm_email_code(code)
     if state = AboutState.find_by_confirm_email_code(code)
       user = state.user
-      if user && user.about_state.confirm_email_until && Time.now < user.about_state.confirm_email_until
+      if user && user.about_state.confirm_email_until && (Time.now < user.about_state.confirm_email_until)
         user.about_state.confirm_email = true
         user.about_state.save!
         user
