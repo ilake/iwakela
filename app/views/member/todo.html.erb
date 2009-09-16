@@ -12,6 +12,7 @@
 </div>
 <%= render :partial => 'todo_form', :locals => {:show => false}  %>
 <div class='clear mar-t-10'></div>
+<% if @goal %>
 <%= select("goal", "id", @goal_lists)%>
 todo數: <%= @total %>
 累計總數: <%= @goal.total %>
@@ -44,6 +45,9 @@ todo數: <%= @total %>
   </tbody>
 </table>
 <%= will_paginate @details unless @details.blank? %>
+<% else %>
+  現在沒有設定任何的目標
+<% end %>
 <% content_for :js_ready do %>
   <script type='text/javascript'>
     $(function() {
