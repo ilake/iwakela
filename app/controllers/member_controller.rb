@@ -284,7 +284,7 @@ class MemberController < ApplicationController
 
   def journal
     @last_day = if params[:record_id]
-                  @record = @user.record.wake.find(params[:record_id])
+                  @record = @user.records.wake.find(params[:record_id])
                   find_last_day(@record.todo_time.year, @record.todo_time.month, @record.todo_time.day)
                 else
                   find_last_day(params[:year], params[:month], params[:day])
