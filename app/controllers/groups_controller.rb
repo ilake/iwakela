@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   helper :all
-  before_filter :check_auth, :except =>[:index, :show]
+  before_filter :check_auth, :except =>[:index, :show, :list_all_groups]
 
   def index 
     @latest_groups = Group.find(:all, :include => [:mugshot], :order => 'id DESC', :limit => 5)

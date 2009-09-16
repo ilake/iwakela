@@ -1,6 +1,6 @@
 <%= render :partial => 'shared/sub_nav'%>
 <% if user_content_right(:todo_pri) %>
-<div class='mar-t-10 mar-b-10 pad-10 fw-bold bg-lb rounded'>
+<div class='top-function-menu rounded'>
   <%= link_to_user(@user, @user.name, nil, true)%>
   <% if is_owner?%>
     <span class='daily-goals-add'>
