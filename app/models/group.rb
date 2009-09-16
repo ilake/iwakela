@@ -35,7 +35,7 @@ class Group < ActiveRecord::Base
   validates_length_of :name, :within => 1..10
   validates_length_of :condition, :within => 1..300
   validates_numericality_of :user_num, :only_integer => true
-  #validates_inclusion_of :user_num, :in => 1..30
+  validates_inclusion_of :user_num, :in => 1..50
 
   def self.human_attribute_name(attr)
     HUMANIZED_ATTRIBUTES[attr.to_sym] || super

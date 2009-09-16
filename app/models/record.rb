@@ -110,17 +110,10 @@ class Record < ActiveRecord::Base
   #只算最近21筆紀錄, 來算分數
   #def self.set_score(status, scores)
   def self.set_score(status, user)
-#    total = self.wake.count
-#    total = total > 21 ? 21 : total
-
-    #a = self.wake.find(:all, :order => "id DESC", :limit => total).map(&:success)
     #最近21天的成功次數有多少
     success_count = self.wake.success.count(:all, :order => "id DESC", :conditions => "records.todo_time > '#{user.time_now.ago(21.days).at_beginning_of_day.to_s(:db)}'")
     total_score = success_count*4
     total_score = 100 if total_score > 100
-#    cont_count = status.continuous_num
-#    
-#    total_score = Record.count_total_score(a, cont_count)
     status.update_attribute(:score, total_score)
   end
   public
