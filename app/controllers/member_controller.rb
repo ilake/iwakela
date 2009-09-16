@@ -323,7 +323,7 @@ class MemberController < ApplicationController
 
     params[:goal_id] ||= @goal_lists[0][1] unless @goal_lists.blank?
 
-    @goal = Goal.find(params[:goal_id])
+    @goal = Goal.find_by_id(params[:goal_id])
     @details = @goal.goal_details.by_time.paginate :page => params[:page],
       :per_page => 20, :include => :record if params[:goal_id]
     @group_details = @details.group_by{|g| g.created_at.at_beginning_of_month}
