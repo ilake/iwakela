@@ -595,6 +595,7 @@ td.member-profile {
 .attendance_rate {
   float:left;
   color:#000000;
+  width: 232px;
 }
 
 .attendance_rate div{
