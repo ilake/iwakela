@@ -21,7 +21,7 @@
             </div>
             <div class='journal-content' >
               <% if !r.content.blank? %>
-                <%= format_content(truncate(r.content,200)) %>
+                <%= format_content(truncate(r.content, :length => 200)) %>
               <% else %>
                 今日日誌是空的<%= "要填寫嗎 #{link_to 'YES', member_url(:action => 'edit_journal', :id => r, :anchor => 'tjournal' )}" if own_right %>
               <% end %>
