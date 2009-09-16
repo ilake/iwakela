@@ -18,7 +18,7 @@ class FriendController < ApplicationController
                                       :per_page => 12,
                                       :include => [:profile, :mugshot],
                                       :order => "users.id DESC"
-    @num = @friends.size
+    @num = @user.friends.count
     render :action => 'index'
   end
 
