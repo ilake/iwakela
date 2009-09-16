@@ -56,7 +56,7 @@ class MainController < ApplicationController
             redirect_to :controller => 'main', :action => 'index' and return
           end
         else
-          error_stickie("您的email還沒經過認證 #{@template.link_to t('site.resend_confirm'), :controller => 'main', :action => 'resend_confirm'} ")
+          error_stickie("您的email還沒經過認證 #{@template.link_to t('site.resend_confirm'), :controller => 'main', :action => 'resend_confirm'}, 如果您的帳號當初是亂填的, 請來信iwakela@gmail.com跟站長要求更正 ")
         end
       else
         error_stickie('帳號或是密碼錯了')
