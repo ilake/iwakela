@@ -15,7 +15,7 @@
 <%= select("goal", "id", @goal_lists)%>
 todo數: <%= @total %>
 累計總數: <%= @goal.total %>
-<table id='today_goals'>
+<table>
   <thead>
     <th>時間</th>
     <th>成功</th>
@@ -27,7 +27,7 @@ todo數: <%= @total %>
     <% @group_details.keys.sort{|a,b| b <=> a}.each do |g|%>
       <tr><td><h3><%= g.to_s(:ym)%></h3></td></tr>
       <% @group_details[g].each do |gd| %>
-        <tr class=<%= cycle :odd, :even %>>
+        <tr class='<%= cycle :odd, :even %> pad-5' style='border: 0px;'>
           <td class="goal_time"><%= goal_journal_link gd, @user%></td>
           <td class="goal_done"><%= state_image(gd.done ==1) %></td>
           <td class="goal_name"><%= gd.name %></td>

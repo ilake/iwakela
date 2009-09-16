@@ -229,7 +229,7 @@ div.talk {
   border-right:1px solid #CBCACA;
   margin-right:15px;
   float:left;
-  width:580px;
+  width:578px;
 }
 
 h2.result-title {
@@ -601,11 +601,10 @@ td.member-profile {
   padding: 3px 0px 3px 0px;
 }
 
-div.even{
-  background:   #d8dfe7;
-  margin: 10px 0px 10px 0px;
-  padding: 3px 0px 3px 0px;
+.even {
+  background: #FFFFEE none repeat scroll 0 0;
 }
+
 
 .number_clock {
   text-align: center;

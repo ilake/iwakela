@@ -63,7 +63,7 @@
   <% end %>
   <div class='result-comment'>
     <% @chat.each do |c|%>
-      <div class='result-comment-ceil'>
+      <div class='<%= cycle :odd, :even %> result-comment-ceil'>
         <div><%= link_to_member(c.user, c.user.name)  %>
           <span class='h-time'><%= "#{distance_of_time_in_words_to_now(c.created_at)} ago"%></span>
         </div>
