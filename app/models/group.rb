@@ -41,20 +41,6 @@ class Group < ActiveRecord::Base
     HUMANIZED_ATTRIBUTES[attr.to_sym] || super
   end
 
-#TODO REMOVE  
-#  def self.count_all_group_user_attendance
-#    now = Time.now
-#    self.find(:all).each do |g|
-#        g.members.find(:all).each do |m|
-#        total_join_days = ((now.at_beginning_of_day - m.status.group_join_date)/86400).to_i
-#        total_join_days = 1 if total_join_days.zero?
-#        record_nums =  m.records.wake.count(:all, :conditions => ['todo_time > ? ', m.status.group_join_date.tomorrow])
-#        attendance = record_nums/total_join_days.to_f
-#        m.status.update_attribute(:attendance, attendance*100)
-#      end
-#    end
-#  end
-
   def self.group_chats_num_reset
     Group.update_all(:chats_num=> 0)
   end
@@ -87,13 +73,4 @@ class Group < ActiveRecord::Base
                   :include =>  [:mugshot, :owner],
                   :order => order
   end
-
-  #TODO REMOVE 
-#  def self.count_7_days_chats_num
-#    all.each do |group|
-#      group.chats_num = group.chats.count(:all, :conditions => {:created_at => Time.now.ago(7.days)..Time.now})
-#      group.members_count = group.members.count
-#      group.save!
-#    end
-#  end
 end

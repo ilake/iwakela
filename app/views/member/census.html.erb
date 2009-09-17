@@ -49,42 +49,33 @@
     <%= score_state(@user) %>
   </div>
   <table cellspacing="0" class="census-list">
+    <thead>
+      <th>每日統計一次</th>
+    </thead>
     <tbody>
       <tr>
-        <th>積分</th>
-        <td>
-          <strong><%= @user.status.score %></strong>
-        </td>
+        <td>積分</td>
+        <td><strong><%= @user.status.score %></strong></td>
       </tr>
       <tr class='even'>
-        <th>日誌總數</th>
-        <td>
-          <strong><%= @diary_count %></strong>
-        </td>
+        <td>日誌總數</td>
+        <td><strong><%= @diary_count %></strong></td>
       </tr>
       <tr>
-        <th>紀錄總數</th>
-        <td>
-          <strong><%= @record_count %></strong>
-        </td>
+        <td>紀錄總數</td>
+        <td><strong><%= @record_count %></strong></td>
       </tr>
       <tr class='even'>
-        <th><%= t('sider.rate') %></th>
-        <td>
-          <strong><%= number_to_percentage(@user.status.success_rate, :precision => 1) || 0%></strong>
-        </td>
+        <td><%= t('sider.rate') %></td>
+        <td><strong><%= number_to_percentage(@user.status.success_rate, :precision => 1) || 0%></strong></td>
       </tr>
       <tr>
-        <th>連續次數</th>
-        <td>
-          <strong><%= continuous_success_num(@user)%></strong>
-        </td>
+        <td>連續次數</td>
+        <td><strong><%= continuous_success_num(@user)%></strong></td>
       </tr>
       <tr class='even'>
-        <th><%= t('sider.average') %></th>
-        <td>
-          <strong><%= @user.status.average.strftime("%H:%M") if @user.status.average%></strong>
-        </td>
+        <td><%= t('sider.average') %></td>
+        <td><strong><%= @user.status.average.strftime("%H:%M") if @user.status.average%></strong></td>
       </tr>
     </tbody>
   </table>
