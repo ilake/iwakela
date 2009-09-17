@@ -2,5 +2,5 @@ development:
   backoffice_image_host: 'localhost'
 
 production:
-  backoffice_image_host: 'img.iwakela.com'
+  backoffice_image_host: 'www.iwakela.com'
 

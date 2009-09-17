@@ -256,13 +256,23 @@
   <div class='user-setting-content' id='wake_goal' style='display:none'>
     <div class='setting-bg'>
       <b class='w-black'>我的起床目標時間</b>
+      <table cellspacing="0" class='pad-10'>
+        <thead><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></thead>
+        <tbody>
+          <tr>
+            <% @wake_target_time_array.each do |t| %>
+              <td><%= t.to_s(:hm) if t%></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
       <br />
       <br />
       <div class='w-black'>
         <% if @me.target_time_now %>
           您設定的起床目標時間是<%= extract_target_time(@me.target_time_now) %>
         <% else %>
-          您尚未設定目標時間
+          您尚未設定目標起床時間
         <% end %>
       </div>
       <p>
@@ -309,13 +319,23 @@
   <div class='user-setting-content' id='sleep_goal' style='display:none'>
     <div class='setting-bg'>
       <b class='w-black'>我的睡覺目標時間</b>
+      <table cellspacing="0" class='pad-10'>
+        <thead><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></thead>
+        <tbody>
+          <tr>
+            <% @sleep_target_time_array.each do |t| %>
+              <td><%= t.to_s(:hm) if t%></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
       <br />
       <br />
       <div class='w-black'>
         <%if @me.sleep_target_time %>
           您設定的睡覺目標時間是<%= extract_target_time(@me.sleep_target_time)%>
         <% else %>
-          您尚未設定目標時間
+          您尚未設定目標睡覺時間
         <% end %>
       </div>
       <p>

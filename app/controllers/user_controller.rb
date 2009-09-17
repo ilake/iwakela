@@ -33,6 +33,16 @@ class UserController < ApplicationController
     @user = User.find(@me)
     @time_now = user_now
     @setting = @me.setting
+
+    @wake_target_time_array = Array.new(7, @user.target_time)
+    @user.targets.wake.each do |t|
+      @wake_target_time_array[t.week] = t.todo_target_time
+    end
+
+    @sleep_target_time_array = Array.new(7, @user.sleep_target_time)
+    @user.targets.sleep.each do |t|
+      @sleep_target_time_array[t.week] = t.todo_target_time
+    end
   end
 
   alias_method :edit_username, :edit
