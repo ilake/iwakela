@@ -3,16 +3,17 @@
     <%= link_to_user(message.user, message.user.name, nil, true)%>
   </span>
   <span class='comment_subject'>
-    <%= @user.see_msg_right(message, @me) ? message.subject : '私密留言' %>
+    <%= @user.see_msg_right(message, @me) ? message.subject : t('msg.pri') %>
   </span>
   <span class='h-time'>(<%= extract_datetime_string(message.created_at) %>)</span>
   <span>
-    <%= link_to '回應', reply_new_message_path(:id => @user, :message_id => message) if is_owner?&& !message.reply && !message.message_id%>
+    <%= link_to t('msg.reply'), reply_new_message_path(:id => @user, :message_id => message) if is_owner?&& !message.reply && !message.message_id%>
   </span>
   <span>
-    <%= link_to '刪除', :action => 'destroy', :id => message, :user_id => @user, :confirm => '確定嗎?', :method => :delete  if message.user == @me || is_owner?%>
+    <%= link_to t('action.destroy'), :action => 'destroy', :id => message, :user_id => @user,
+      :confirm => t('action.destroyornot'), :method => :delete  if message.user == @me || is_owner?%>
   </span>
 </div>
 <div class='comment_content'>
-  <%= @user.see_msg_right(message, @me) ? format_content(message.content) : '私密留言'  %>
+  <%= @user.see_msg_right(message, @me) ? format_content(message.content) : t('msg.pri')  %>
 </div>

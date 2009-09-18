@@ -24,7 +24,7 @@ class Goal < ActiveRecord::Base
   named_scope :active, :conditions => {:status => 0}
   named_scope :complete, :conditions => {:status => 1}
   named_scope :giveup, :conditions => {:status => 2}
-  named_scope :no_once, :conditions => "name <> 'once'"
+  named_scope :no_once, :conditions => "name <> '單次目標'"
 
   named_scope :by_rank, :order => 'rank'
 

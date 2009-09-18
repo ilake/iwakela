@@ -3,118 +3,228 @@
  
 "zh-TW":
   message:
-    guestbook: '留言'
+    guestbook: 留言
 
   curblyadvimage:
-    upload_tilte: "上傳新圖片"
-    upload_submit: "上傳"
-    list: '列表'
-    avail_list: '請點擊你要插入的圖片'
-    loading: '載入中'
-    insert: '插入'
-    cancel: '取消'
-    preview: '預覽'
-    thumb: '小'
-    medium: '中'
-    large: '大'
+    upload_tilte: 上傳新圖片
+    upload_submit: 上傳
+    list: 列表
+    avail_list: 請點擊你要插入的圖片
+    loading: 載入中
+    insert: 插入
+    cancel: 取消
+    preview: 預覽
+    thumb: 小
+    medium: 中
+    large: 大
 
   site:
-    name: "早鳥網"
-    slogan: "早鳥網 一個幫助你早起的地方"
-    logout: "登出"
-    login: "登入"
-    signup: "註冊"
-    forget_password: "忘記密碼"
-    desc: " 你的作息時間不正常嗎？ <br /> 人生中有許多的好習慣值得養成， <br /> 早鳥網是個提供你紀錄調整作息, 規畫每日目標的地方。 <br />" 
-    resend_confirm: "重新認證"
+    name: 早鳥網
+    slogan: 早鳥網 一個幫助你早起的地方
+    logout: 登出
+    login: 登入
+    signup: 註冊
+    forget_password: 忘記密碼
+    desc:  你的作息時間不正常嗎？ <br /> 人生中有許多的好習慣值得養成， <br /> 早鳥網是個提供你紀錄調整作息, 規畫每日目標的地方。 <br /> 
+    resend_confirm: 重新認證
+
+  action:
+    edit: 編輯
+    add: 新增 
+    save: 儲存
+    cancel: 取消
+    destroy: 刪除
+    encourage: 鼓勵
+    destroyornot: 你確定要刪除嗎
 
   menu:
-    user: "使用者列表"
-    word: "名言佳句"
-    forum: "討論區"
-    rank:  "排行榜"
-    group: "早鳥團"
-    chat:  "嘰嘰喳喳"
-    home:  "我的紀錄"
-    index: "首頁"
-    census: "統計"
-    journal: "晨間日誌"
-    night_journal: "晚間日誌"
-    todo: "Todo"
-    messages: "留言"
-    setting: "日誌設定"
-    profile: "個人檔案"
-    friends: "朋友"
-    newbie: "新手上路"
+    user: 使用者列表
+    word: 名言佳句
+    forum: 討論區
+    rank:  排行榜
+    group: 早鳥團
+    chat:  嘰嘰喳喳
+    home:  我的紀錄
+    index: 首頁
+    census: 統計
+    journal: 晨間日誌
+    night_journal: 晚間日誌
+    todo: 目標
+    messages: 留言
+    setting: 日誌設定
+    profile: 個人檔案
+    friends: 朋友
+    newbie: 新手上路
 
   pk_site:
-    name: "名字對戰製造機"
+    name: 名字對戰製造機
 
   member:
-    rank: "排名"
-    sick: "請假中"
-    record_title: "的起床日誌" 
-    group_title: "的早鳥團"
-    setting: "設定"
-    friend: "我的好友"
-    friend_set: "好友設定"
-    nickname: "暱稱"
-    profile: "自介"
+    rank: 排名
+    sick: 請假中
+    record_title: 的起床日誌 
+    group_title: 的早鳥團
+    setting: 設定
+    friend: 我的好友
+    friend_set: 好友設定
+    nickname: 暱稱
+    profile: 自介
 
   record:
-    wake_goal: "設定早起目標"
-    sleep_goal: "設定睡覺目標時間"
-    repair_wake: "補上起床時間"
-    repair_sleep: "補上睡覺時間"
-    today_goal: "設定今日目標"
-    wake_time: "起床時間"
-    sleep_time: "睡覺時間"
-    wake_diary: "晨間日記"
-    goal_daily: "每日目標"
-    target_time: "目標時間"
-    sleep_target_time: "目標睡覺時間"
-    wake_status: '心情'
-    success_status: '早起成功'
-    fail_status: '早起失敗'
+    wake_goal: 設定早起目標
+    sleep_goal: 設定睡覺目標時間
+    repair_wake: 補上起床時間
+    repair_sleep: 補上睡覺時間
+    today_goal: 設定今日目標
+    wake_time: 起床時間
+    sleep_time: 睡覺時間
+    wake_diary: 晨間日記
+    goal_daily: 每日目標
+    target_time: 目標時間
+    sleep_target_time: 目標睡覺時間
+    wake_status: 心情
+    success_status: 早起成功
+    fail_status: 早起失敗
 
   sider:
-    name: "早起成果"
-    today_wake_time: "今天起床時間"
-    wake_up: "起床囉！"
-    sleep: "睡覺囉！"
-    last_rsp: "最新回應"
-    time_now: "紀錄現在時間"
-    today_target: "今日目標"
-    rate: "成功率"
-    continuous: "連續"
-    average: "平均時間"
-    diff: "平均離目標"
+    name: 早起成果
+    today_wake_time: 今天起床時間
+    wake_up: 起床囉！
+    sleep: 睡覺囉！
+    last_rsp: 最新回應
+    time_now: 紀錄現在時間
+    today_target: 今日目標
+    rate: 成功率
+    continuous: 連續
+    average: 平均時間
+    diff: 平均離目標
 
   group:
-    open: "我要開團"
-    latest: "最新的團"
-    desc: "私人團需由 團長 主動邀請團員的加入, 公開團則否"
+    open: 我要開團
+    latest: 最新的團
+    desc: 私人團需由 團長 主動邀請團員的加入, 公開團則否
 
   rank: 
-    desc: "最近3天有紀錄而且有設定目標時間的排行榜"
-    diff: "比接近目標"
-    average: "比起床時間"
-    rate: "比成功率"
-    continuous: "比連續天數"
+    desc: 最近3天有紀錄而且有設定目標時間的排行榜
+    diff: 比接近目標
+    average: 比起床時間
+    rate: 比成功率
+    continuous: 比連續天數
 
   forum:
-    title: "標題"
-    author: "作者"
-    rsp_num: "回應數"
-    last_rsp: "最後回應"
-    status: '文章還在審核中, 目前只有您看得見'
+    title: 標題
+    author: 作者
+    rsp_num: 回應數
+    last_rsp: 最後回應
+    status: 文章還在審核中, 目前只有您看得見
 
   journal:
-    night: '晚間日記'
-    daylight: '晨間日記'
+    jtemp: 日誌
+    night: 晚間日記
+    daylight: 晨間日記
+    title: 標題
+    time: 時間
+    y_inquest: 昨日檢討
+    t_jour: 今日日誌
+    t_target: 今日目標
+    list: 列表
+    noset: 尚未設定
+    add: 補上日誌
+    add_now: 紀錄現在時間
+    hide: 該日記已被設為隱藏
+    no_record: 該日還沒有紀錄喔
+    target_time: 目標時間
+    no_target_time: 尚未設定目標時間
+    is_blank: 是空的
+    addornot: 要補上嗎
+    addjour: 補上日誌
+    jou_hide: 日誌隱藏
+    jour_none: 日誌未填寫
+    isee: 我要看
+    puborhide: 公開/隱藏
+    addtodaygoal: 新增今日目標
+    adddailygoal: 加進習慣性目標
+    dotoday: 只有今天要做的目標
+    done: 已完成
+    nogoal: 還沒有任何的目標
+
+  census:
+    score: 積分
+    jtotal: 日誌總數
+    rtotal: 紀錄總數
+    rate: 成功率
+    cont: 連續次數
+    avg: 平均時間
+    lastr: 最後紀錄是
+    wtarget: 一週目標起床時間
+    starget: 一週目標睡覺時間
+    tset: 目標設定
+    hide: 設為隱藏
+
+  todo:
+    daily: 習慣性目標
+    num: 執行次數
+    total: 累計總數
+    time: 時間
+    success: 成功
+    name: 名稱
+    comment: 備註
+    tnum: 數量
+    nogoal: 沒有設定任何目標
+    hide: 被設為隱藏
+    list: 習慣性目標列表
+    gname: 目標名稱
+    done: 完成
+    giveup: 放棄
+    destroy: 刪除
+    ggoal: 已放棄的目標
+    dgoal: 已完成的目標
+    back: 還要做
+    tdo: 今天要做
+    add: 新增目標
+    dodaily: 您想長期執行的目標
+    order: 順序
+    destroyall: 該目標已往的紀錄也會被刪除喔, 確定要刪除嗎？
+    desc1: 什麼是習慣性目標勒?
+    desc2: 習慣性目標就是讓您用來設定 你想養成的習慣 或者 是你想持續努力的目標
+    desc3: 除此之外習慣性目標還提供了次數累計的功能, 在數量表填入數目後就會自動累計該目標的數量
+    desc4: PS 您可以在每天的日誌裡添加您該天的目標
+
+  msg:
+    title: 留言標題
+    content: 留言內容
+    puborhide: 公開/隱藏
+    add: 留言
+    pri: 私密留言
+    reply: 回應
+
+  user:
+    head: 頭像
+    nickname: 暱稱
+    profile: 自介
+    gender: 性別
+    interest: 興趣
+    contact: 聯絡方式
+    album: 相簿
+    birth: 生日
+    star: 星座
+    blood: 血型
+    address: 住址
+    school: 學校
+    career: 職業
+  
+  friend:
+    add: "加{{name}}為好友" 
+    show: 好友
+    whoadd: 誰加好友
+    rank: 好友排行榜
+    blist: 回到你的朋友列表
+    adddesc: 請輸入妳想要新增的好友名稱
+    list: 你的好友列表
+    new: 新進朋友
 
   word:
-    new: "我也要貢獻"
+    new: 我也要貢獻
 
   date:
     formats:
@@ -126,6 +236,9 @@
     month_names: [~, 一月, 二月, 三月, 四月, 五月, 六月, 七月, 八月, 九月, 十月, 十一月, 十二月]
     abbr_month_names: [~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]
     order: [ :year, :month, :day ]
+    year: "年"
+    month: "月"
+    day: "日"
   
   time:
     formats:

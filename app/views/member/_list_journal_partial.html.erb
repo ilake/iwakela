@@ -14,8 +14,8 @@
               <div>
                 <%= link_to "#{r.title}", journal_url(:id => @user, :year => r.todo_time.year, :month => r.todo_time.month, :day => r.todo_time.day), :title => r.todo_time.to_s(:date) %>
 
-                <%= link_to '(編輯)', member_url(:action => 'edit_journal', :id => r, :from => 'list_journal', :year => r.todo_time.year, :month => r.todo_time.month) if own_right %>
-                <%= link_to '(刪除)', member_url(:action => 'destroy', :id => r, :from => 'list_journal', :year => r.todo_time.year, :month => r.todo_time.month), :confirm => '妳確定要刪除嗎?' if own_right %>
+                <%= link_to "(#{t('action.edit')})", member_url(:action => 'edit_journal', :id => r, :from => 'list_journal', :year => r.todo_time.year, :month => r.todo_time.month) if own_right %>
+                <%= link_to "(#{t('action.destroy')})", member_url(:action => 'destroy', :id => r, :from => 'list_journal', :year => r.todo_time.year, :month => r.todo_time.month), :confirm => "#{t('action.destroyornot')}" if own_right %>
 
               <span class='list-journal-time'><%= r.todo_time.to_s(:date) %></span>
             </div>
@@ -23,7 +23,7 @@
               <% if !r.content.blank? %>
                 <%= format_content(truncate(r.content, :length => 200)) %>
               <% else %>
-                今日日誌是空的<%= "要填寫嗎 #{link_to 'YES', member_url(:action => 'edit_journal', :id => r, :anchor => 'tjournal' )}" if own_right %>
+                <%= "#{t('journal.t_jour')}#{t('journal.is_blank')}" %><%= "#{t('journal.addornot')} #{link_to 'YES', member_url(:action => 'edit_journal', :id => r, :anchor => 'tjournal' )}" if own_right %>
               <% end %>
             </div>
             </div>
@@ -36,9 +36,9 @@
               <span class='journal-state'>　</span>
               <div>
                 <% if own_right %>
-                  <%= link_to '補上日誌', member_url(:action => 'new_journal', :todo_time => date, :from => 'list_journal', :year => date.year, :month => date.month ), :title => date.to_s(:ymd) %>
+                  <%= link_to t('journal.add'), member_url(:action => 'new_journal', :todo_time => date, :from => 'list_journal', :year => date.year, :month => date.month ), :title => date.to_s(:ymd) %>
                 <% else %>
-                  <% content = r ? '隱藏日誌' : '日誌未填寫'%>
+                  <% content = r ? t('journal.jou_hide') : t('journal.jour_none')%>
                   <%= link_to content, journal_url(:id => @user, :year => date.year, :month => date.month, :day => date.day), :title => date.to_s(:ymd) %>
                 <% end %>
               </div>

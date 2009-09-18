@@ -48,7 +48,7 @@ Record.find(:all).each do |record|
       goal_type = goal_id ? 'daily' : 'once'
 
       if goal_type == 'once'
-        goal_id = record.user.goals.find_or_create_by_name('once').id
+        goal_id = record.user.goals.find_or_create_by_name('單次目標').id
       end
 
       #once 的幫他create 一個叫做  once 的 goal, 沒name 的就用comment 代 都沒的就刪掉

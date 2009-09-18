@@ -1,15 +1,15 @@
       <%= hidden_field_tag :type, type%>
     <div>
-      <div class='journal-content-title'>標題</div>
+      <div class='journal-content-title'><%= t'journal.title'%></div>
       <p class='journal-edit-title'>
-        <% title = record.title ? record.title : "#{record.todo_time.to_s(:md)}日誌"%>
+        <% title = record.title ? record.title : "#{record.todo_time.to_s(:md)}#{t('journal.jtemp')}"%>
         <%= text_field :record, :title, :value => title %>
       </p>
-      <div class='journal-content-title'>時間</div>
+      <div class='journal-content-title'><%= t'journal.time'%></div>
       <div id='edit_time_form' style='display:none'>
         <% form_remote_tag :url => {:action => 'edit_record_time', :id => @record} do %>
           <%= datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year %>
-          <%= submit_tag "設定" %>
+          <%= submit_tag t('member.setting') %>
         <% end %>
       </div>
       <p class='journal-edit-time' id='edit_remote_result'>
@@ -24,7 +24,7 @@
       </p>
       <%= hidden_field :record, :state%>
 
-      <div class='journal-content-title'>公開/隱藏</div>
+      <div class='journal-content-title'><%= t'journal.puborhide'%></div>
       <p class='journal-edit-title'>
         <% SEALED.each do |k, v| %>
           <%= v %>
@@ -32,32 +32,32 @@
         <% end %>
       </p>
 
-      <div class='journal-content-title'><a name='yjournal'></a>昨日檢討</div>
+      <div class='journal-content-title'><a name='yjournal'></a><%= t'journal.y_inquest'%></div>
       <p><%= text_area :record, 'content2', :rows => '20', :cols => '36', :class => 'mceEditor' %></p>
-      <div class='journal-content-title'><a name='tjournal'></a>今日日誌</div>
+      <div class='journal-content-title'><a name='tjournal'></a><%= t'journal.t_jour'%></div>
       <p><%= text_area :record, 'content', :rows => '20', :cols => '36', :class => 'mceEditor' %></p>
     </div>
 
-    <span class='journal-content-title'><a name='tgoals'></a>今日目標</span>
-    <a href='#once-goal-form' class='once-goal-add'>新增今日目標</a>
+    <span class='journal-content-title'><a name='tgoals'></a><%= t'journal.t_target'%></span>
+    <a href='#once-goal-form' class='once-goal-add'><%= t'journal.addtodaygoal'%></a>
     <span class='daily-goals-add'>
       <%= b_image_tag('toggle_plus.gif', :class => 'toggle_plus')%>
       <%= b_image_tag('toggle_minus.gif', :class => 'toggle_minus')%>
-      <a href='#daily-goals-submit'>加進習慣性目標</a>
+      <a href='#daily-goals-submit'><%= t'journal.addtodaygoal'%></a>
     </span>
     <div name='once-goal-form' class='once-goal-form' style='display:none'>
-      <span class='w-red fw-bold'>目標名稱:</span> 
+      <span class='w-red fw-bold'><%= t'todo.gname'%>:</span> 
       <span class="once_goal_name">
-        <input name="comment" type="text" value="只有今天要做的目標" />
+        <input name="comment" type="text" value="<%= t'journal.dotoday'%>" />
       </span>
-      <input type='button' value="新增" id="once_goal_submit" />
+      <input type='button' value="<%= t'action.add' %>" id="once_goal_submit" />
     </div>
     <table id='today_goals'>
       <thead class='have-goals'>
-        <th></th> <th>已完成</th> <th>名稱</th> <th>註解</th> <th>數量</th> <th>順序</th> 
+        <th></th> <th><%= t'journal.done'%></th> <th><%= t'todo.name'%></th> <th><%= t'todo.name'%></th> <th><%= t'todo.tnum'%></th> <th><%= t'todo.order'%></th> 
       </thead>
       <tbody class='today-goals-list'>
-        <tr class='no-goals w-red fw-bold'><td class='pad-10'> 您還沒有任何的目標喔 </td></tr>
+        <tr class='no-goals w-red fw-bold'><td class='pad-10'> <%= t'journal.nogoal'%></td></tr>
           <% @today_goals.each do |g|%>
             <% goal_id = g.goal ? g.goal.id : 'once' %>
             <tr goal_id=<%=goal_id%>>
@@ -92,6 +92,6 @@
       </tbody>
     </table>
     <div class='journal-submit'>
-      <%= submit_tag '儲存' %>
-      <%= link_to_cancel('member', '取消') %>
+      <%= submit_tag t('action.save') %>
+      <%= link_to_cancel('member', t('action.cancel')) %>
     </div>

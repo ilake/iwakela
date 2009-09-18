@@ -2,7 +2,7 @@
 <div class='top-function-menu rounded'>
   <%= link_to_user(@user, @user.name, nil, true)%>
   | 
-  <%= link_to '留言', new_message_path(:id => @user ) %>
+  <%= link_to t('msg.add'), new_message_path(:id => @user ) %>
 </div>
 <div class='clear'></div>
 <div id="comments_list">
@@ -15,7 +15,7 @@
         </div>
       <% elsif message.reply %>
         <div class='comment_reply_content'>
-           私密留言
+           <%= t'msg.pri'%> 
         </div>
       <% end %>
     </div>

@@ -54,38 +54,38 @@
     </thead>
     <tbody>
       <tr>
-        <td>積分</td>
+        <td><%=t'census.score'%></td>
         <td><strong><%= @user.status.score %></strong></td>
       </tr>
       <tr class='even'>
-        <td>日誌總數</td>
+        <td><%= t'census.jtotal'%></td>
         <td><strong><%= @diary_count %></strong></td>
       </tr>
       <tr>
-        <td>紀錄總數</td>
+        <td><%= t'census.rtotal'%></td>
         <td><strong><%= @record_count %></strong></td>
       </tr>
       <tr class='even'>
-        <td><%= t('sider.rate') %></td>
+        <td><%= t('census.rate') %></td>
         <td><strong><%= number_to_percentage(@user.status.success_rate, :precision => 1) || 0%></strong></td>
       </tr>
       <tr>
-        <td>連續次數</td>
+        <td><%= t'census.cont'%></td>
         <td><strong><%= continuous_success_num(@user)%></strong></td>
       </tr>
       <tr class='even'>
-        <td><%= t('sider.average') %></td>
+        <td><%= t('census.avg') %></td>
         <td><strong><%= @user.status.average.strftime("%H:%M") if @user.status.average%></strong></td>
       </tr>
     </tbody>
   </table>
-    <span class='fw-bold w-black'>最後紀錄是:</span>
+  <span class='fw-bold w-black'><%= t'census.lastr'%>:</span>
     <%= journal_link(@last_record, @user)%>
   <br />
   <br />
   <div class='mar-b-40'>
-    <span class='fw-bold w-black'>一週目標起床時間</span>
-    <%= link_to '目標設定', user_url(:action => 'edit', :anchor => 'wake_goal') if is_owner? %>
+    <span class='fw-bold w-black'><%= t'census.wtarget'%></span>
+    <%= link_to t('census.tset'), user_url(:action => 'edit', :anchor => 'wake_goal') if is_owner? %>
     <table cellspacing="0" class='pad-10'>
       <thead><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></thead>
       <tbody>
@@ -99,8 +99,8 @@
   </div>
 
   <div>
-    <span class='fw-bold w-black'>一週目標睡覺時間</span>
-    <%= link_to '目標設定', user_url(:action => 'edit', :anchor => 'sleep_goal') if is_owner? %>
+    <span class='fw-bold w-black'><%= t'census.starget'%></span>
+    <%= link_to t('census.tset'), user_url(:action => 'edit', :anchor => 'sleep_goal') if is_owner? %>
     <table cellspacing="0" class='pad-10'>
       <thead><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></thead>
       <tbody>
@@ -115,7 +115,7 @@
 <% else %>
   <div id="journal-all" class="no-journal">
     <div class='no-content'>
-      被設為隱藏
+      <%= t'census.hide'%>
     </div>
   </div>
 <% end %>

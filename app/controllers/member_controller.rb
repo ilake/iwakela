@@ -598,7 +598,7 @@ class MemberController < ApplicationController
           goal_id = g.id
         end
       elsif v['goal_type'] == 'once'
-        goal_id = @user.goals.find_or_create_by_name('once').id
+        goal_id = @user.goals.find_or_create_by_name('單次目標').id
       end
       
       goal_detail = record.goal_details.find_or_initialize_by_name(v['name'])

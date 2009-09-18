@@ -1,14 +1,8 @@
 <%= render :partial => 'shared/sub_nav' %>
 <% if user_content_right(:friend_pri) %>
-<div class='top-function-menu rounded'>
-  <%= link_to_user(@user, @user.name, nil, true)%>
-  | 
-<%= content_tag(:span, (link_to "加#{@user.name}為好友", friend_url(:action => 'add_friend', :name => @user.name), :method => :post)) unless is_owner? %>
- <%= content_tag(:span, (link_to t('member.friend_set'), friend_url(:action => 'add_friend'))) if is_owner?  %>
- <%= content_tag(:span, (link_to "好友", friend_url(:action => 'list', :id => @user)))  %>
- <%= content_tag(:span, (link_to "誰加好友", friend_url(:action => 'list_friends', :id => @user)))  %>
- <%= content_tag(:span, (link_to "好友排行榜", friend_url(:action => 'list_user_rank', :id => @user)))  %>
-</div>
+  <div class='top-function-menu rounded'>
+    <%= render :partial => 'friend_menu' %>
+  </div>
 
 <p>
   <%= today_show %>

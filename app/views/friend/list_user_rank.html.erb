@@ -1,11 +1,7 @@
 <%= render :partial => 'shared/sub_nav' %>
-<div class='mar-t-10 pad-10 fw-bold bg-lb rounded'>
-<%= content_tag(:span, (link_to "加#{@user.name}為好友", friend_url(:action => 'add_friend', :name => @user.name), :method => :post)) unless is_owner? %>
- <%= content_tag(:span, (link_to t('member.friend_set'), friend_url(:action => 'add_friend'))) if is_owner?  %>
- <%= content_tag(:span, (link_to "誰加#{@user.name}好友", friend_url(:action => 'list_friends', :id => @user)))  %>
- <%= content_tag(:span, (link_to "#{@user.name}好友", friend_url(:action => 'list', :id => @user)))  %>
- <%= content_tag(:span, (link_to "#{@user.name}好友排行榜", friend_url(:action => 'list_user_rank', :id => @user)))  %>
-</div>
+  <div class='top-function-menu rounded'>
+    <%= render :partial => 'friend_menu' %>
+  </div>
 <table>  
   <thead>
     <th><%= t 'member.rank' %></th>

@@ -2,18 +2,18 @@
 
   <div id='daily-goals' style='display:none'>
     <div class='daily-goals-list'>
-      <span class='daily-goals-title'>習慣性目標列表</span>
+      <span class='daily-goals-title'><%= t'todo.list'%></span>
       <div name='daily-goals-submit' class='daily-goals-submit' > 
-        <span class='w-red fw-bold'>目標名稱:</span> <%= text_field :goals, :name, :value => '您以後想常做的' %> <%= submit_tag "新增目標", :id => "goal_submit" %> 
+        <span class='w-red fw-bold'><%= t'todo.gname'%>:</span> <%= text_field :goals, :name, :value => t('todo.dodaily') %> <%= submit_tag t('todo.add'), :id => "goal_submit" %> 
       </div>
         <table>
           <thead id='new_goal_pos'>
-            <th>目標名稱</th>
-            <th>完成</th>
-            <th>放棄</th>
-            <th>刪除</th>
-            <%= content_tag(:th, '今天要做') if show %>
-            <th>總計次數</th>
+            <th><%= t'todo.gname'%></th>
+            <th><%= t'todo.done'%></th>
+            <th><%= t'todo.giveup'%></th>
+            <th><%= t'todo.destroy'%></th>
+            <%= content_tag(:th, t('todo.tdo')) if show %>
+            <th><%= t'todo.total'%></th>
           </thead>
           <tbody class='active_goals_list'>
           <% @daily_goals.each do |g|%>
@@ -23,22 +23,10 @@
         </table>
 
         <table>
-          <tr id='new_goal_pos'>
-            <th>已放棄的目標</th>
-            <th>還要做</th>
-            <th>總計次數</th>
-          </tr>
-          <tbody class='giveup_goals_list'>
-          <% @daily_giveup_goals.each do |g|%>
-            <%= render :partial => '/goals/unactive_goal', :locals => {:g => g}%>
-          <% end %>
-          </tbody>
-        </table>
-        <table>
           <thead id='new_goal_pos'>
-            <th>已完成的目標</th>
-            <th>還要做</th>
-            <th>累計總數</th>
+            <th><%=t'todo.dgoal'%></th>
+            <th><%=t'todo.back'%></th>
+            <th><%=t'todo.total'%></th>
           </thead>
           <tbody class='comlete_goals_list'>
             <% @daily_complete_goals.each do |g|%>
@@ -47,20 +35,33 @@
           </tbody>
         </table>
 
+        <table>
+          <tr id='new_goal_pos'>
+            <th><%=t'todo.ggoal'%></th>
+            <th><%=t'todo.back'%></th>
+            <th><%=t'todo.total'%></th>
+          </tr>
+          <tbody class='giveup_goals_list'>
+          <% @daily_giveup_goals.each do |g|%>
+            <%= render :partial => '/goals/unactive_goal', :locals => {:g => g}%>
+          <% end %>
+          </tbody>
+        </table>
+
     </div>
     <div class='daily-goals-help'>
       <div>
-        什麼是習慣性目標勒?
+        <%= t'todo.desc1'%>
       </div>
       <div>
-        習慣性目標就是讓您用來設定 你想養成的習慣 或者 是你想持續努力的目標
+        <%= t'todo.desc2'%>
       </div>
       <br />
       <div>
-        除此之外習慣性目標還提供了次數累計的功能, 在數量表填入數目後就會自動累計該目標的數量
+        <%= t'todo.desc3'%>
       </div>
       <div>
-        PS: 您可以在每天的日誌裡添加您該天的目標
+        <%= t'todo.desc4'%>
       </div>
     </div>
   </div>
@@ -174,7 +175,7 @@
            pos = '.giveup_goals_list';
            break;
          case '-1':
-           answer = confirm("該目標已往的紀錄也會被刪除喔, 確定要刪除嗎？");
+           answer = confirm('<%= t('todo.destroyall') %>');
            if (!answer) {
              return false;
            }

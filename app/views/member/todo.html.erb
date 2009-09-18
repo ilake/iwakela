@@ -6,7 +6,7 @@
     <span class='daily-goals-add'>
       <%= b_image_tag('toggle_plus.gif', :class => 'toggle_plus')%>
       <%= b_image_tag('toggle_minus.gif', :class => 'toggle_minus')%>
-      <a href='#daily-goals-submit'>習慣性目標</a>
+      <a href='#daily-goals-submit'><%= t'todo.daily'%></a>
     </span>
   <% end %>
 </div>
@@ -14,15 +14,15 @@
 <div class='clear mar-t-10'></div>
 <% if @goal %>
 <%= select("goal", "id", @goal_lists)%>
-todo數: <%= @total %>
-累計總數: <%= @goal.total %>
+<%= t'todo.daily'%>: <%= @total %>
+<%= t'todo.total'%>: <%= @goal.total %>
 <table>
   <thead>
-    <th>時間</th>
-    <th>成功</th>
-    <th>名稱</th>
-    <th>備註</th>
-    <th>數量</th>
+    <th><%= t'todo.time'%></th>
+    <th><%= t'todo.success'%></th>
+    <th><%= t'todo.name'%></th>
+    <th><%= t'todo.comment'%></th>
+    <th><%= t'todo.tnum'%></th>
   </thead>
   <tbody>
     <% @group_details.keys.sort{|a,b| b <=> a}.each do |g|%>
@@ -46,7 +46,7 @@ todo數: <%= @total %>
 </table>
 <%= will_paginate @details unless @details.blank? %>
 <% else %>
-  現在沒有設定任何的目標
+  <%= t'todo.nogoal' %>
 <% end %>
 <% content_for :js_ready do %>
   <script type='text/javascript'>
@@ -64,7 +64,7 @@ todo數: <%= @total %>
 <% else %>
   <div id="journal-all" class="no-journal">
     <div class='no-content'>
-      被設為隱藏
+      <%= t'todo.hide' %>
     </div>
   </div>
 <% end %>
