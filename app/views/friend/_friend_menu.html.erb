@@ -1,0 +1,8 @@
+  <%= link_to_user(@user, @user.name, nil, true)%>
+  | 
+  <%= content_tag(:span, (link_to_unless_current t("friend.add", :name => @user.name), friend_url(:action => 'add_friend', :name => @user.name), :method => :post)) unless is_owner? %>
+  | 
+ <%= content_tag(:span, (link_to_unless_current t('member.friend_set'), friend_url(:action => 'add_friend'))) if is_owner?  %>
+ <%= content_tag(:span, (link_to_unless_current t('friend.show'), friend_url(:action => 'list', :id => @user)))  %>
+ <%= content_tag(:span, (link_to_unless_current t('friend.whoadd'), friend_url(:action => 'list_friends', :id => @user)))  %>
+ <%= content_tag(:span, (link_to_unless_current t('friend.rank'), friend_url(:action => 'list_user_rank', :id => @user)))  %>
