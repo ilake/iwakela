@@ -3,7 +3,7 @@ class MemberController < ApplicationController
   uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:edit_journal, :wake_up, :sleep, :create, :new_journal])
 
   layout "application"
-  before_filter :check_auth, :except =>[:show_today_results, :list, :list_all_records, :widget, :show, :pie_widget, :state_widget, :journal, :list_journal, :census, :night_journal, :todo]
+  before_filter :check_auth, :except =>[:show_today_results, :list, :list_all_records, :widget, :show, :pie_widget, :state_widget, :journal, :list_journal, :census, :night_journal, :todo, :daylight_journal]
   before_filter :date_select, :only => [:list, :census, :list_journal]
   before_filter :find_user, :except => [:show]
 
