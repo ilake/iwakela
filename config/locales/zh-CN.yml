@@ -33,6 +33,13 @@
     destroy: 删除
     encourage: 鼓励
     destroyornot: 你确定要删除吗
+    send: 送出
+    change: 变更
+    set: 设定
+    setdone: 设定完成
+    confirm: 确定
+    edit_done: 编辑完成
+    confirm_done: 确定完成
 
   menu:
     user: 使用者列表
@@ -99,6 +106,45 @@
     open: 我要开团
     latest: 最新的团
     desc: 私人团需由 团长 主动邀请团员加入, 公开团则否
+    normal_quit: 我要退团
+    owner_quit: 移交团长
+    fire: 确定要将他移出早起团吗
+    invite: 邀请会员
+    setting: 团队设定
+    join: 我要参加这个团
+    wabsence: 我要请假
+    confirm_absence: 你确定要请假吗？
+    cancel_absence: 取消请假
+    confirm_cancel: 你确定要取消吗？
+    member_set: 团员设定
+    destroy: "[解散早起团]"
+    confirm_destroy: 确定要解散早起团吗
+    post: 我要发文
+    post_area: 发表区
+    pri: 私人
+    full: 已满
+    list: 早起团列表
+    name: 团名
+    owner: 团长
+    rule: 团规
+    members: 团员
+    more: ">>更多"
+    board: 公布栏
+    newest: 最新文章
+    success: 早起
+    fail: 晚起
+    absence: 没到
+    sick: 请假
+    isay: 我说
+    score_rank: 积分
+    absence_rank: 出席率(半夜结算)
+    head: 团队头像
+    change_head: 更改团队图像
+    stop_hire: 停止征人
+    desc1: (必填,最多十个字)
+    desc2: 团员人数上限(必填,目前最多50人,要在更多请跟站长申请)
+    pri_set: 私人团体
+    desc3: 团员通通需由团长加入 
 
   rank: 
     desc: 最近3天有纪录而且有设定目标时间的排行榜
@@ -113,6 +159,13 @@
     rsp_num: 回应数
     last_rsp: 最后回应
     status: 文章还在审核中, 目前只有您看得见
+    desc1: 请选择要发布的分类
+    category: 分类
+    content: 内容
+    list: 列表
+    ipost: 我要发文
+    all: 全部
+    backgroup: 回到早起团
 
   journal:
     jtemp: 日记
@@ -219,6 +272,85 @@
     list: 你的好友列表
     new: 新进朋友
 
+  tutorial:
+    time_offset: 什么是时间校正
+    important: 重要
+    set_target_time: 如何设定早起的目标时间
+    census_effect: 如何知道早起的成果
+    addback: 起床忘记纪录,如何补上起床时间
+    goal: 什么是习惯性目标,今日目标
+    group: 什么是早鸟团
+    status: 什么是状态
+    time_shift: 什么是换日线
+    desc1: 因为早鸟的使用者遍布海内外,使用者的平台也是五花八门,所以早鸟提供了时间校正的功能,无论您当地的时间 与早鸟偏差多少,都能帮您校正
+    desc2: 红色时间部份乃是你现在在早鸟的时间,如与您当地时间不合请马上使用
+    desc3: 将早鸟时间调整到与您当地时间相同为止
+    edit_offset: 校正功能
+    set_now: 马上设定
+    desc4: 可以在设定页面,设定早起的目标,
+    desc5: 可以在统计页面看到一周的目标
+    desc6: 可以在统计页面看到知道自己的成功率,连续天数,平均时间
+    desc7: 每月的早起纪录图
+    desc8: 从每天日志旁都可以看到一面旗帜跟符号,勾勾就是代表有早起,打叉就是晚起啦
+    desc9: 绿旗
+    desc10: 则是代表您是按闹钟用当下时间起床的,黄旗
+    desc11: 则是代表您有修改过时间或者是补上的纪录
+    desc12: 可以在自己的早起纪录,补上之前的纪录
+    desc13: 你的每篇日志,你都可以附上该日的目标而目标又分为两种一种是您想要长期努力的习惯型(例如运动),一种是 偶发型(例如下班去买酱油)
+    desc14: 习惯性目标就是让您用来设定你想养成的习惯或者是你想持续努力的目标 
+    desc15: 除此之外习惯性目标还提供了次数累计的功能,在数量表填入数目后就会自动累计该目标的数量当目标完成后,或者是你暂时不想做了,可以将它放进完成区或者是放弃区
+    desc16: 你可以开属于自己的团,可以参加别人的团,跟朋友一起加油,一起保持早起的好习惯。
+    desc17: 根据妳最近的纪录有着简单的评分机制,每个分数就会有相对应的状态,共有十种,这不是公仔,我想不要收集>比较好@@
+    desc18:  "自己睡觉时间的曲线看起来很乱吗?改变一下'换日线'就可以让你的曲线看起来简洁一点喔"
+    desc19: 使用前
+    desc20: 使用后 
+
+  setting:
+    time_offset: 时间校正
+    target_time: 设定目标起床时间
+    sleep_target_time: 设定目标睡觉时间
+    priv: 隐私设定
+    photo: 更改图像
+    nickname: 修改昵称
+    password: 修改密码
+    email: 修改帐号(信箱)
+    profile: 修改个人档案
+    time_shift: 修改换日线时间
+    plurk: Plurk帐密
+    widget: blog贴纸
+    desc1: 档名请尽量使用纯英文字母的档名
+    desc2: 上传图片
+    desc3: 昵称
+    desc4: 旧密码
+    desc5: 新密码
+    desc6: 请再输入一次
+    desc7: 帐号(信箱)
+    desc8: "您现在的换日线时间是『{{time}}』点"
+    desc9: 我要设定换日线
+    desc10: "凌晨{{time}}点"
+    desc11: 都没我要的时间
+    desc12: "我要的换日线是{{time}}点"
+    desc13: 我要调整时间(把早鸟时间校正成跟您的时间相同)
+    desc14: 你现在的早鸟时间是 
+    desc15: 我的早鸟时间需要再(＋/－)这个时间,才会等于我这边的时间
+    desc16: 部落格贴纸
+    desc17: "可设定一个礼拜内不同{{type}}时间,如果这边有设定就是以这边的目标为准"
+    desc18: 每天
+    desc19: 每周
+    desc20: 星期
+    desc21: "{{type}}目标时间"
+    desc22: 帐号
+    desc23: 密码
+    desc24: 您设定的起床目标时间
+    desc25: 您尚未设定起床目标时间
+    desc26: 您设定的睡觉目标时间
+    desc27: 您尚未设定睡觉目标时间
+  
+  constant:
+    info: 早起资讯
+    study: 进修资讯
+    chat: 谈天说地
+
   word:
     new: 我也要贡献
 
@@ -235,6 +367,8 @@
     year: "年"
     month: "月"
     day: "日"
+    hour: "时"
+    min: "分"
   
   time:
     formats:

@@ -1,19 +1,19 @@
-<h1>編輯</h1>
+<h1><%= t'action.edit'%></h1>
 
 <% form_for :forum, :url => {:action => 'update', :id => @forum } do |f|%>
   <%= error_messages_for 'forum' %>
 
-  <p><label for="forum_subject">標題</label><br/>
+  <p><label for="forum_subject"><%= t'forum.title'%></label><br/>
     <%= f.text_field :subject %></p>
 
-  <p><label for="forum_category">分類</label><br/>
-    <%= select("forum", "category", CATEGORIES.map{|k,v|[v,k]})%>
+  <p><label for="forum_category"><%= t'forum.category'%></label><br/>
+    <%= select("forum", "category", CATEGORIES.map{|k,v|[t(v),k]})%>
 
-  <p><label for="forum_content">內容</label><br/>
+  <p><label for="forum_content"><%= t'forum.content'%></label><br/>
     <%= f.text_area :content, :class => "mceEditor" %></p>
-  <%= submit_tag '編輯完成' %>
+  <%= submit_tag t('action.edit_done') %>
 <% end %>
 
-<%= link_to '取消', :action => 'show', :id => @forum %> |
-<%= link_to '列表', :action => 'index' %>
+<%= link_to t('action.cancel'), :action => 'show', :id => @forum %> |
+<%= link_to t('forum.list'), :action => 'index' %>
 

@@ -1,15 +1,15 @@
-  <p><label for="group_title">團名(必填, 最多十個字)</label><br/>
+<p><label for="group_title"><%= t'group.name'%><%= t'group.desc1'%></label><br/>
     <%= text_field 'group', 'name' %></p>
 
-  <p><label for="group_condition">團規</label><br/>
+  <p><label for="group_condition"><%= t'group.rule'%></label><br/>
     <%= text_area 'group', 'condition', :rows => '6', :cols => '60'  %></p>
 
-  <p><label for="group_board">公告欄</label><br/>
+  <p><label for="group_board"><%= t'group.board'%></label><br/>
     <%= text_area 'group', 'board', :rows => '8', :cols => '60'  %></p>
 
-  <p><label for="group_user_num">團員人數上限(必填, 目前最多50人, 要在更多請跟站長申請)</label><br/>
+  <p><label for="group_user_num"><%= t'group.desc2'%></label><br/>
     <%= text_field 'group', 'user_num' %></p>
 
 
-  <p><label for="group_user_num">私人團體(<b style='color:#FF0000'>團員通通需由團長加入</b>)</label><br/>
+  <p><label for="group_user_num"><%= t'group.pri_set'%>(<b style='color:#FF0000'><%= t'group.desc3'%></b>)</label><br/>
     <%= check_box 'group', 'pri' %></p>

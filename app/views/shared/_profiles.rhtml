@@ -1,15 +1,15 @@
 <table>
-  <tr><td>頭像</td><td><%= big_mugshot(user) %></td></tr>
-  <tr><td>暱稱</td><td><%=h user.name %></td></tr>
-  <tr><td>自介</td><td><%=h profile.others %></td></tr>
-  <tr><td>性別</td><td><%=h profile.sex %></td></tr>
-  <tr><td>興趣</td><td><%=h profile.interest %></td></tr>
-  <tr><td>連絡方式</td><td><%=h profile.connect %></td></tr>
-  <tr><td>相簿</td><td><%=h profile.photo %></td></tr>
-  <tr><td>生日</td><td><%=h profile.birth %></td></tr>
-  <tr><td>星座</td><td><%=h profile.star %></td></tr>
-  <tr><td>血型</td><td><%=h profile.blood %></td></tr>
-  <tr><td>住址</td><td><%=h profile.address %></td></tr>
-  <tr><td>學校</td><td><%=h profile.school%></td></tr>
-  <tr><td>職業</td><td><%=h profile.job%></td></tr>
+  <tr><td><%= t'user.head'%></td><td><%= big_mugshot(user) %></td></tr>
+  <tr><td><%= t'user.nickname'%></td><td><%=h user.name %></td></tr>
+  <tr><td><%= t'user.profile'%></td><td><%=h profile.others %></td></tr>
+  <tr><td><%= t'user.gender'%></td><td><%=h profile.sex %></td></tr>
+  <tr><td><%= t'user.interest'%></td><td><%=h profile.interest %></td></tr>
+  <tr><td><%= t'user.contact'%></td><td><%=h profile.connect %></td></tr>
+  <tr><td><%= t'user.album'%></td><td><%=h profile.photo %></td></tr>
+  <tr><td><%= t'user.birth'%></td><td><%=h profile.birth %></td></tr>
+  <tr><td><%= t'user.star'%></td><td><%=h profile.star %></td></tr>
+  <tr><td><%= t'user.blood'%></td><td><%=h profile.blood %></td></tr>
+  <tr><td><%= t'user.address'%></td><td><%=h profile.address %></td></tr>
+  <tr><td><%= t'user.school'%></td><td><%=h profile.school%></td></tr>
+  <tr><td><%= t'user.career'%></td><td><%=h profile.job%></td></tr>
 </table>

@@ -4,9 +4,9 @@ feelings:
   appreciate: 感謝
 
 categories:
-  info: 早起資訊
-  study: 進修資訊
-  chat: 談天說地
+  info: 'constant.info'
+  study: 'constant.study'
+  chat: 'constant.chat'
   
 confirm_category:
   - bad
@@ -14,7 +14,7 @@ confirm_category:
 pri_options:
   record_pri: 日誌預設
   census_pri: 統計
-  todo_pri: TODO
+  todo_pri: 目標
   friend_pri: 朋友
 
 sealed:

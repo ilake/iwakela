@@ -8,7 +8,7 @@
 
   <% if session[:uid]%>
   <div class='group_feature rounded'>
-    <%= link_to '早起團列表', :action => 'index' %> |
+    <%= link_to t('group.list'), :action => 'index' %> |
     <span><%= link_to_join(@group) %></span>
     <span><%= link_to_post(@group) %></span> 
     <span><%= link_to_absence(@group) %></span> 
@@ -22,42 +22,42 @@
 <div class='group_setting'>
   <div class='group_image'><%= big_mugshot(@group) %></div>
   <div>
-    <div>團名: <%= @group.name %><%= group_status(@group)%></div>
-    <div>團長: <%= link_to_user(@group.owner, @group.owner.name) %></div>
-    <div>團規: <%= @group.condition%></div>
-    <div>團員(<%= @group.members_count %>人): <%= link_to_all_members(@members)%><%= link_to '>>更多', :action => 'list', :id => @group %></div>
+    <div><%= t'group.name'%>: <%= @group.name %><%= group_status(@group)%></div>
+    <div><%= t'group.owner'%>: <%= link_to_user(@group.owner, @group.owner.name) %></div>
+    <div><%= t'group.rule'%>: <%= @group.condition%></div>
+    <div><%= t'group.members'%>(<%= @group.members_count %>人): <%= link_to_all_members(@members)%><%= link_to t("group.more"), :action => 'list', :id => @group %></div>
   </div>
 </div>
 <br />
-  <div class='group_setting'>公佈欄: <%= format_content(@group.board)%></div>
+<div class='group_setting'><%= t'group.board'%>: <%= format_content(@group.board)%></div>
 
 <div class='clear'></div>
   <div class='group_news'>
-    最新文章: <% @forums.each do |f| %>
+    <%= t'group.newest'%>: <% @forums.each do |f| %>
       <%= link_to f.subject,:controller => 'forums', :action => 'show', :id => f.id %>&nbsp;&nbsp;
     <% end %>
-    <%= link_to '>>更多', :controller => 'forums', :action => 'group_forum_list', :id => @group %> |
-    <%= link_to '我要發文',:controller => 'forums', :action => 'new', :id => @group %>
+    <%= link_to t('group.more'), :controller => 'forums', :action => 'group_forum_list', :id => @group %> |
+    <%= link_to t('group.post'),:controller => 'forums', :action => 'new', :id => @group %>
   </div>
 <div class='member_result'>
   <div>
-    <div class='ban'>早起</div><%= render :partial => 'result_partial', :locals => {:members => @success_members}%>
+    <div class='ban'><%= t'group.success'%></div><%= render :partial => 'result_partial', :locals => {:members => @success_members}%>
   </div>
   <div>
-    <div class='ban'>晚起</div><%= render :partial => 'result_partial', :locals => {:members => @fail_members}%>
+    <div class='ban'><%= t'group.fail'%></div><%= render :partial => 'result_partial', :locals => {:members => @fail_members}%>
   </div>
   <div>
-    <div class='ban'>沒到</div><%= render :partial => 'result_partial', :locals => {:members => @absence_members}%>
+    <div class='ban'><%= t'group.absence'%></div><%= render :partial => 'result_partial', :locals => {:members => @absence_members}%>
   </div>
   <div>
-    <div class='ban'>請假</div><%= render :partial => 'result_partial', :locals => {:members => @sick_members}%>
+    <div class='ban'><%= t'group.sick'%></div><%= render :partial => 'result_partial', :locals => {:members => @sick_members}%>
   </div>
 </div>
 <div class='talk'>
   <% if @me %>
     <% form_tag :controller => 'chats', :action => 'create', :group_id => @group.id do %>
-      我說 :<%= text_field :chats, :content, :size => 50, :maxlength => 50 %>
-      <%= submit_tag '送出'%>
+      <%= t'group.isay'%>:<%= text_field :chats, :content, :size => 50, :maxlength => 50 %>
+      <%= submit_tag t('action.send')%>
     <% end %>
   <% end %>
   <div class='result-comment'>
@@ -74,8 +74,8 @@
 </div>
 <div class='attendance_rate'>
   <ul>
-    <li><a href="#group_score_rank"><span>積分</span></a></li>
-    <li><a href="#group_absence_rank"><span>出席率(半夜結算)</span></a></li>
+    <li><a href="#group_score_rank"><span><%= t'group.score_rank'%></span></a></li>
+    <li><a href="#group_absence_rank"><span><%= t'group.absence_rank'%></span></a></li>
   </ul>
 
   <div id="group_score_rank">

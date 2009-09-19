@@ -15,11 +15,11 @@
   <body id="advimage" style="display: none">
 
     <div id="image-upload">
-      <fieldset>
+      <fieldset style='font-size:14px; font-weight:bold;'>
         <legend><%= t 'curblyadvimage.upload_tilte' %></legend>
         <form id='image_upload_form' enctype="multipart/form-data" method="post" onsubmit="ts_onload(); return true;" target="html_editor_image_upload_frame">
-          <input class="input-file" id="media_photo" name="media[photo]" size="22" type="file"/>
-          <input class="submit" name="commit" type="submit" value="<%= t 'curblyadvimage.upload_submit' %>"/>
+          <input style='font-size:14px; font-weight:bold;' class="input-file" id="media_photo" name="media[photo]" size="22" type="file"/>
+          <input style='font-size:14px; font-weight:bold;' class="submit" name="commit" type="submit" value="<%= t 'curblyadvimage.upload_submit' %>"/>
         </form>
       </fieldset>
     </div>

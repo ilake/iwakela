@@ -1,4 +1,4 @@
-<h1><%= CATEGORIES[params[:category]] %></h1>
+<h1><%= t(CATEGORIES[params[:category]]) %></h1>
 
 <% form_tag :action => 'create', :group_id => params[:id], :category => params[:category] do %>
   <%= error_messages_for 'forum' %>
@@ -8,12 +8,12 @@
       </p-->
     <% end %>
 
-  <p class='br-lb bg-lb'><label for="forum_subject">標題</label><br/>
+    <p class='br-lb bg-lb'><label for="forum_subject"><%= t'forum.title'%></label><br/>
     <%= text_field 'forum', 'subject' %></p>
 
-  <p class='br-lb bg-lb'><label for="forum_content">內容</label><br/>
+  <p class='br-lb bg-lb'><label for="forum_content"><%= t'forum.content'%></label><br/>
     <%= text_area 'forum', 'content', :class => "mceEditor" %></p>
 
-  <%= submit_tag "確定完成" %>
-  <%= link_to '取消', :action => 'index' %>
+  <%= submit_tag t("action.confirm_done") %>
+  <%= link_to t('action.cancel'), :action => 'index' %>
 <% end %>

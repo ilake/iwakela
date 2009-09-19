@@ -2,9 +2,9 @@ module GroupsHelper
 
   def link_to_quit(group)
     if @me.own_group == group
-      link_to '移交團長', :action => 'transfer_choose'
+      link_to t('group.owner_quit'), :action => 'transfer_choose'
     elsif @me.group == group
-      link_to '我要退團', :action => 'quit'
+      link_to t('group.normal_quit'), :action => 'quit'
     end
   end
 
@@ -14,35 +14,34 @@ module GroupsHelper
                       :border => "0",
                       :mouseover => image_path("delete_over.gif")),
                       {:action => 'fire', :id => user.id},
-                             :confirm => '妳確定要將他移出早起團嗎', :method => :post
+                             :confirm => t('group.fire'), :method => :post
     end
   end
 
   def link_to_invite(group)
     if @me.own_group == group
-      link_to '邀請會員', :action => 'invite_who', :id => group.id
+      link_to t('group.invite'), :action => 'invite_who', :id => group.id
     end
   end
 
   def link_to_edit(group)
     if @me.own_group == group
-      link_to '團隊設定', :action => 'edit', :id => group.id
+      link_to t('group.setting'), :action => 'edit', :id => group.id
     end
   end
 
   def link_to_join(group)
     unless group_user?(group)
-      link_to '我要參加這個團', :action => 'join', :id => group
+      link_to t('group.join'), :action => 'join', :id => group
     end 
   end
 
   def link_to_absence(group)
     if (@me.own_group == group || @me.group == group) && @me.status.fight
-      link_to '我要請假',{ :action => 'absence', :id => group.id, :absence => '1'},
-                          :confirm => '你確定要請假嗎？', :method => :post
+      link_to t('group.wabsence'),{ :action => 'absence', :id => group.id, :absence => '1'},
+                          :confirm => t('group.confirm_absence'), :method => :post
     elsif (@me.own_group == group || @me.group == group) && !@me.status.fight
-      link_to '<span class="alert_red">取消請假</span>',{ :action => 'absence', :id => group.id},
-        :confirm => '你確定要取消嗎？', :method => :post
+      link_to "<span class='alert_red'>#{t('group.cancel_absence')}</span>",{ :action => 'absence', :id => group.id}, :confirm => t('group.confirm_cancel'), :method => :post
     end
   end
 
@@ -54,26 +53,26 @@ module GroupsHelper
 
   def link_to_group_user(group)
     if @me.own_group == group
-      link_to "團員設定", :action => 'list', :id => group.id
+      link_to t("group.member_set"), :action => 'list', :id => group.id
     end
   end
 
   def link_to_destroy(group)
     if @me.own_group == group
-      link_to '[解散早起團]', {:action => 'destroy', :id => group.id},
-                             :confirm => '妳確定要解散早起團嗎', :method => :post
+      link_to t('group.destroy'), {:action => 'destroy', :id => group.id},
+                             :confirm => t('group.confirm_destroy'), :method => :post
     end
   end
 
   def link_to_post(group)
     if @me.own_group == group || @me.group == group
-      link_to '我要發文',:controller => 'forums', :action => 'new', :id => group.id 
+      link_to t('group.post'), :controller => 'forums', :action => 'new', :id => group.id 
     end
   end
 
   def link_to_post(group)
     if @me.own_group == group || @me.group == group
-      link_to '發表區',:controller => 'forums', :action => 'group_forum_list', :id => group.id
+      link_to t('group.post_area'), :controller => 'forums', :action => 'group_forum_list', :id => group.id
     end
   end
 
@@ -129,8 +128,8 @@ module GroupsHelper
 
   def group_status(group)
     title = []
-    title << "<span class='alert'>私人</span>" if group.pri 
-    title << "<span class='alert'>已滿</span>" if group.fill
+    title << "<span class='alert'>#{t('group.pri')}</span>" if group.pri 
+    title << "<span class='alert'>#{t('group.full')}</span>" if group.fill
 
     title.join("")
   end

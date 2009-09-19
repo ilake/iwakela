@@ -254,7 +254,7 @@ module AllHelper
     end
   end
 
-  def link_to_cancel(col = "member", text = '取消')
+  def link_to_cancel(col = "member", text = I18n.t('action.cancel'))
     link_to text, :controller => col, :action => 'journal'
   end
 

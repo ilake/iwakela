@@ -45,196 +45,178 @@
 <div>
   <div id='user-settings'>
       <div class='edit_time_offset'>
-        <a href='#edit_time_offset'>時間校正</a>
+        <a href='#edit_time_offset'><%= t'setting.time_offset'%></a>
       </div>
       <div class='wake_goal'>
-        <a href='#wake_goal'>設定目標起床時間</a>
+        <a href='#wake_goal'><%= t'setting.target_time'%></a>
       </div>
       <div class='sleep_goal'>
-        <a href='#sleep_goal'>設定目標睡覺時間</a>
+        <a href='#sleep_goal'><%= t'setting.sleep_target_time'%></a>
       </div>
       <div class='pri_settings'>
-        <a href='#pri_settings'>隱私設定</a>
+        <a href='#pri_settings'><%= t'setting.priv'%></a>
       </div>
       <div class='change_pic'>
-        <a href='#change_pic'>更改圖像</a>
+        <a href='#change_pic'><%= t'setting.photo'%></a>
       </div>
       <div class='edit_username'>
-        <a href='#edit_username'>修改暱稱</a>
+        <a href='#edit_username'><%= t'setting.nickname'%></a>
       </div>
       <div class='edit_password'>
-        <a href='#edit_password'>修改密碼</a>
+        <a href='#edit_password'><%= t'setting.password'%></a>
       </div>
       <div class='edit_email'>
-        <a href='#edit_email'>修改帳號(信箱)</a>
+        <a href='#edit_email'><%= t'setting.email'%></a>
       </div>
       <div class='edit_profile'>
-        <a href='#edit_profile'>修改個人檔案</a>
+        <a href='#edit_profile'><%= t'setting.profile'%></a>
       </div>
       <div class='edit_time_shift' class=''>
-        <a href='#edit_time_shift'>修改換日線時間</a>
+        <a href='#edit_time_shift'><%= t'setting.time_shift'%></a>
       </div>
       <div class='edit_plurk'>
-        <a href='#edit_plurk'>Plurk 帳密</a>
+        <a href='#edit_plurk'><%= t'setting.plurk'%></a>
       </div>
       <div class='blog_stick'>
-        <a href='#blog_stick'>blog 貼紙</a>
+        <a href='#blog_stick'><%= t'setting.widget'%></a>
       </div>
     </div>
   </div>
   <div class='user-setting-content' id='change_pic' style='display:none'>
     <%= error_messages_for :mugshot %>
-    <div class='bg-lg w-black pad-10 rounded'>檔名請儘量使用純英文字母的檔名</div>
+    <div class='bg-lg w-black pad-10 rounded'><%= t'setting.desc1'%></div>
     <br />
     <% form_for(:mugshot, :url => {:controller => 'mugshots', :action => 'create'}, :html => { :multipart => true} ) do |f| -%>
       <p>
-        <label for="mugshot">上傳圖片:</label>
+        <label for="mugshot"><%= t'setting.desc2'%>:</label>
         <%= f.file_field :uploaded_data %>
       </p>
       <p>
-        <%= submit_tag '送出' %>
+        <%= submit_tag t('action.send') %>
       </p>
     <% end -%>
   </div>
   <div class='user-setting-content ' id='edit_username' style='display:none'>
     <% form_for :user, @me, :url => {:action => 'edit', :id => @me.id} do |f|%>
-      暱稱:<br />
+      <%= t'setting.desc3'%>:<br />
       <%= f.text_field :name %>
-      <%= submit_tag "變更"%>
-      <%= link_to '取消', :controller => 'member', :action => 'list', :id => @me %>
+      <%= submit_tag t('action.change')%>
+      <%= link_to t('action.cancel'), :controller => 'member', :action => 'list', :id => @me %>
     <% end %>
   </div>
   <div class='user-setting-content' id='edit_password' style='display:none'>
     <% form_for :user, :url => {:action => 'edit_password'} do |f|%>
       <ul>
-        <li>舊密碼<%= password_field :current_user, :old_password %></li>
-        <li>新密碼<%= password_field :user, :password %></li>
-        <li>請再輸入一次<%= password_field :user, :password_confirmation %></li>
+        <li><%= t'setting.desc4'%><%= password_field :current_user, :old_password %></li>
+        <li><%= t'setting.desc5'%><%= password_field :user, :password %></li>
+        <li><%= t'setting.desc6'%><%= password_field :user, :password_confirmation %></li>
       </ul>
-      <%= submit_tag "變更"%>
+      <%= submit_tag t('action.change')%>
     <% end %>
   </div>
   <div class='user-setting-content' id='edit_email' style='display:none'>
     <% form_for :user, @me, :url => {:action => 'edit'} do |f|%>
-      帳號(信箱):<br />
+      <%= t'setting.desc7'%>:<br />
       <%= f.text_field :email %>
-      <%= submit_tag "變更"%>
+      <%= submit_tag t('action.change')%>
     <% end %>
   </div>
   <div class='user-setting-content' id='edit_profile' style='display:none'>
     <% form_for :profile, @me.profile, :url => {:action => 'edit_profile'} do |f|%>
-      <div>自介:</div>
+      <div><%= t'user.profile'%>:</div>
       <%= f.text_area :others, :rows => '4', :cols => '40' %>
-      <div>性別:</div>
+      <div><%= t'user.gender'%>:</div>
       <%= f.text_field :sex %>
-      <div>興趣:</div>
+      <div><%= t'user.interest'%>:</div>
       <%= f.text_field :interest %>
-      <div>連絡方式:</div>
+      <div><%= t'user.contact'%>:</div>
       <%= f.text_field :connect %>
-      <div>相簿:</div>
+      <div><%= t'user.album'%>:</div>
       <%= f.text_field :photo %>
-      <div>生日:</div>
+      <div><%= t'user.birth'%>:</div>
       <%= f.text_field :birth %>
-      <div>星座:</div>
+      <div><%= t'user.star'%>:</div>
       <%= f.text_field :star %>
-      <div>血型:</div>
+      <div><%= t'user.blood'%>:</div>
       <%= f.text_field :blood %>
-      <div>住址:</div>
+      <div><%= t'user.address'%>:</div>
       <%= f.text_field :address %>
-      <div>學校:</div>
+      <div><%= t'user.school'%>:</div>
       <%= f.text_field :school%>
-      <div>職業:</div>
+      <div><%= t'user.career'%>:</div>
       <%= f.text_field :job %>
-      <div><%= submit_tag "變更"%>
-        <%= link_to '取消', :controller => 'main', :action => 'index' %></div>
+      <div><%= submit_tag t('action.change')%>
+        <%= link_to t('action.cancel'), :controller => 'main', :action => 'index' %></div>
     <% end %>
   </div>
   <div class='user-setting-content' id='edit_time_shift' style='display:none'>
     <div class='w-black bg-or pad-10 mar-10'>
-      您現在的換日線時間是『<%= @me.setting.time_shift %>』點
+      <%= t('setting.desc8', :time => @me.setting.time_shift)%>
     </div>
     <div class='fl-l pad-5' style='border-right:2px dotted #BABABA;'>
-      <h1>我要設定換日線</h1>
+      <h1><%= t'setting.desc9'%></h1>
       <% form_for :time_shift, :url => {:action => 'edit_time_shift'} do |f|%>
-        <div class='pad-5'>
-          <%= label :setting, :time_shift, '凌晨0點'%>: <%= radio_button :setting, :time_shift, 0 %>
-        </div> 
-        <div class='pad-5'>
-          <%= label :setting, :time_shift, '凌晨1點'%>: <%= radio_button :setting, :time_shift, 1 %>
-        </div>
-        <div class='pad-5'>
-          <%= label :setting, :time_shift, '凌晨2點'%>: <%= radio_button :setting, :time_shift, 2 %>
-        </div>
-        <div class='pad-5'>
-          <%= label :setting, :time_shift, '凌晨3點'%>: <%= radio_button :setting, :time_shift, 3 %>
-        </div>
-        <div class='pad-5'>
-          <%= label :setting, :time_shift, '凌晨4點'%>: <%= radio_button :setting, :time_shift, 4 %>
-        </div>
-        <div class='pad-5'>
-          <%= label :setting, :time_shift, '凌晨5點'%>: <%= radio_button :setting, :time_shift, 5 %>
-        </div>
-        <div class='pad-5'>
-          <%= label :setting, :time_shift, '凌晨6點'%>: <%= radio_button :setting, :time_shift, 6 %>
-        </div>
-        <%= submit_tag "設定"%>
+        <% (0...6).each do |i|%>
+          <div class='pad-5'>
+            <%= label :setting, :time_shift, t('setting.desc10', :time => i)%>: <%= radio_button :setting, :time_shift, i %>
+          </div> 
+        <% end %>
+        <%= submit_tag t('action.set')%>
       <% end %>
     </div>
     <div class='fl-l pad-5' >
-      <h1>都沒我要的時間</h1>
+      <h1><%= t'setting.desc11'%></h1>
       <% form_for :time_shift, :url => {:action => 'edit_time_shift'} do |f|%>
         <div class='padding-10'>
-          我要的換日線是<%= select :setting, :time_shift, (0..23).inject([]){|h, v| h << [v,v]; h} %>點
+          <%= t('setting.desc12', :time => select(:setting, :time_shift, (0..23).inject([]){|h, v| h << [v,v]; h}) ) %>
         </div>
-        <%= submit_tag "設定"%>
+        <%= submit_tag t('action.set')%>
       <% end %>
     </div>
 
     <div class='fl-r'>
-      <div class='pad-10 bg-lb mar-10 w-black rounded'>什麼是換日線</div>
-      <div class='pad-10 bg-lg mar-10 w-black'>
-        自己睡覺時間的曲線看起來很亂嗎? 改變一下"換日線" 就可以讓你的曲線看起來簡潔一點喔
-      </div>
+      <div class='pad-10 bg-lb mar-10 w-black rounded'><%= t'tutorial.time_shift'%></div>
+      <div class='pad-10 bg-lg mar-10 w-black'><%= t'tutorial.desc18'%></div>
       <br />
-      <p>使用前</p>
+      <p><%= t'tutorial.desc19'%></p>
       <%= b_image_tag('time_shift_demo2.png')%>
 
       <br />
-      <p>使用後</p>
+      <p><%= t'tutorial.desc20'%></p>
       <%= b_image_tag('time_shift_demo.png')%>
     </div>
   </div>
   <div class='user-setting-content' id='edit_time_offset' style='display:none'>
     <div class='w-black bg-or pad-10 mar-10'>
-      <h1>我要調整時間(把早鳥時間校正成跟您的時間相同)</h1>
-      <h4 class='fl-l'>你現在的早鳥時間是<span class='eb_offset_time w-red mar-r-10'><%= @time_now.to_s(:date) %></span></h4>
+      <h1><%= t'setting.desc13'%></h1>
+      <h4 class='fl-l'><%= t'setting.desc14'%><span class='eb_offset_time w-red mar-r-10'><%= @time_now.to_s(:date) %></span></h4>
       <%= b_image_tag("ajaxloading/ajax-loader.gif") %>
       <br />
       <br />
-      <span class='w-black'>我的早鳥時間需要再(＋/－)這個時間, 才會等於我這邊的時間</span>
+      <span class='w-black'><%= t'setting.desc15'%></span>
       <% form_for :time_offset, :url => {:action => 'edit_time_offset'} do |f|%>
         <%= select :date, :plus_minus, [['+', 'add'], ['－', 'minus']] %>
-        <%= select_hour 0 %>時
-        <%= select_minute 0 %>分
-        <%= submit_tag "設定"%>
-        <%= link_to '設定完成', user_url(:action => 'edit')%>
+        <%= select_hour 0 %><%= t'date.hour'%>
+        <%= select_minute 0 %><%= t'date.min'%>
+        <%= submit_tag t('action.set')%>
+        <%= link_to t('action.setdone'), user_url(:action => 'edit')%>
       <% end %>
     </div>
   </div>
   <div class='user-setting-content' id='edit_plurk' style='display:none'>
     <% form_for :service_profile, :url => {:action => 'edit_service_profile'} do |f|%>
       <%= f.hidden_field :service, :value => 'plurk' %>
-      <div>帳號:</div>
+      <div><%= t'setting.desc22'%>:</div>
       <%= f.text_field :name %>
-      <div>密碼:</div>
+      <div><%= t'setting.desc23'%>:</div>
       <%= f.password_field :password %>
       <br />
-      <%= submit_tag '確定' %>
+      <%= submit_tag t('action.confirm') %>
     <% end %>
   </div>
 
   <div class='user-setting-content' id='blog_stick' style='display:none'>
-    <h3>部落格貼紙</h3><br />
+    <h3><%= t'setting.desc16'%></h3><br />
     <div style='padding:0px 10px 0px 10px;float:left;'>
       <div style='border-right:1px solid #EFEFEF; padding:0px 10px 0px 0px;float:left;' >
         <%= b_image_tag('ebwidget1.png')%>
@@ -255,7 +237,7 @@
   </div>
   <div class='user-setting-content' id='wake_goal' style='display:none'>
     <div class='setting-bg'>
-      <b class='w-black'>我的起床目標時間</b>
+      <b class='w-black'><%= t'census.wtarget'%></b>
       <table cellspacing="0" class='pad-10'>
         <thead><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></thead>
         <tbody>
@@ -270,19 +252,18 @@
       <br />
       <div class='w-black'>
         <% if @me.target_time_now %>
-          您設定的起床目標時間是<%= extract_target_time(@me.target_time_now) %>
+          <%= t'setting.desc24'%><%= extract_target_time(@me.target_time_now) %>
         <% else %>
-          您尚未設定目標起床時間
+          <%= t'setting.desc25'%>
         <% end %>
       </div>
       <p>
         <div id = "select">
           <% form_tag :controller => 'member', :action => 'target_time_now' do |f|%>
-            每天
-
-            <%= select_hour Time.now %>時
-            <%= select_minute Time.now %>分
-            <%= submit_tag "設定完成" %>
+            <%= t'setting.desc18'%>
+            <%= select_hour Time.now %><%= t'date.hour'%>
+            <%= select_minute Time.now %><%= t'date.min'%>
+            <%= submit_tag t('action.setdone') %>
             <%= link_to_cancel  %>
           <% end %>
         </div>
@@ -290,20 +271,21 @@
       <br />
       <hr>
       <p>
-        可設定一個禮拜內不同起床時間, 如果這邊有設定就是以這邊的目標為準
+        <%= t('setting.desc17', :type => '起床')%>
         <div id = "select">
           <% form_tag :controller => 'targets', :action => 'target_time_week' do |f|%>
-            每週
+            <%= t'setting.desc19'%>
             <%= select_week %>
-            <%= select_hour Time.now %>時
-            <%= select_minute Time.now %>分
-            <%= submit_tag "設定完成" %>
+            <%= select_hour Time.now %><%= t'date.hour'%>
+            <%= select_minute Time.now %><%= t'date.min'%>
+            <%= submit_tag t('action.setdone') %>
             <%= link_to_cancel %>
           <% end %>
           <table>
-            <th>星期</th>
-            <th>起床目標時間</th>
-            <th>刪除</th>
+            <th><%= t'setting.desc20'%></th>
+            
+            <th><%= t('setting.desc21', :type => '起床')%></th>
+            <th><%= t('action.destroy') %></th>
             <% @targets.each do |t|%>
               <tr>
                 <td><%= AllHelper::WEEK_DAYS[t.week] %></td>
@@ -318,7 +300,7 @@
   </div>
   <div class='user-setting-content' id='sleep_goal' style='display:none'>
     <div class='setting-bg'>
-      <b class='w-black'>我的睡覺目標時間</b>
+      <b class='w-black'><%= t'census.starget'%></b>
       <table cellspacing="0" class='pad-10'>
         <thead><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td><td>五</td><td>六</td></thead>
         <tbody>
@@ -333,19 +315,18 @@
       <br />
       <div class='w-black'>
         <%if @me.sleep_target_time %>
-          您設定的睡覺目標時間是<%= extract_target_time(@me.sleep_target_time)%>
+          <%= t'setting.desc26'%><%= extract_target_time(@me.sleep_target_time)%>
         <% else %>
-          您尚未設定目標睡覺時間
+          <%= t'setting.desc27'%>
         <% end %>
       </div>
       <p>
         <div id = "select">
           <% form_tag :controller => 'member', :action => 'sleep_target_time' do |f|%>
-            每天
-
-            <%= select_hour Time.now %>時
-            <%= select_minute Time.now %>分
-            <%= submit_tag "設定完成" %>
+            <%= t'setting.desc18'%>
+            <%= select_hour Time.now %><%= t'date.hour'%>
+            <%= select_minute Time.now %><%= t'date.min'%>
+            <%= submit_tag t('action.setdone') %>
             <%= link_to_cancel  %>
           <% end %>
         </div>
@@ -353,20 +334,20 @@
       <br />
       <hr>
       <p>
-        可設定一個禮拜內不同目標睡覺時間, 如果這邊有設定就是以這邊的目標為準
+        <%= t('setting.desc17', :type => '睡覺')%>
         <div id = "select">
           <% form_tag :controller => 'targets', :action => 'sleep_target_time_week' do |f|%>
-            每週
+            <%= t'setting.desc19'%>
             <%= select_week %>
-            <%= select_hour Time.now %>時
-            <%= select_minute Time.now %>分
-            <%= submit_tag "設定完成" %>
+            <%= select_hour Time.now %><%= t'date.hour'%>
+            <%= select_minute Time.now %><%= t'date.min'%>
+            <%= submit_tag t('action.setdone') %>
             <%= link_to_cancel %>
           <% end %>
           <table>
-            <th>星期</th>
-            <th>睡覺目標時間</th>
-            <th>刪除</th>
+            <th><%= t'setting.desc20'%></th>
+            <th><%= t('setting.desc21', :type => '睡覺')%></th>
+            <th><%= t('action.destroy')%></th>
             <% @sleep_targets.each do |t|%>
               <tr>
                 <td><%= AllHelper::WEEK_DAYS[t.week] %></td>
@@ -391,7 +372,7 @@
         </div>
         <br />
       <% end %>
-        <%= submit_tag '送出' %>
+        <%= submit_tag t('action.send') %>
     <% end %>
   </div>
 

@@ -1,13 +1,13 @@
 <div class='top-function-menu rounded'>
   <% if params[:id] %>
-    <%= link_to '回到早起團', :controller => 'groups', :action => 'show', :id => params[:id] %>
+    <%= link_to t('forum.backgroup'), :controller => 'groups', :action => 'show', :id => params[:id] %>
   <% end %>
 
-  <%= link_to_unless_current '全部', {:action => 'index', :category => 'all'} %>
+  <%= link_to_unless_current t('forum.all'), {:action => 'index', :category => 'all'} %>
   <% CATEGORIES.each do |key, value| %>
-    <%= link_to_unless_current value, {:action => 'index', :category => key} %>
+    <%= link_to_unless_current t(value), {:action => 'index', :category => key} %>
   <% end %>
-  | <%= link_to '我要發文', :action => 'categories', :id => params[:id] %>
+  | <%= link_to t('forum.ipost'), :action => 'categories', :id => params[:id] %>
   | <%= link_to_unless_current '待審核區', {:action => 'list'} if @me && @me.id == ADMIN_ID %>
 </div>
 <table>

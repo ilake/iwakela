@@ -36,6 +36,13 @@
     destroy: 刪除
     encourage: 鼓勵
     destroyornot: 你確定要刪除嗎
+    send: 送出
+    change: 變更
+    set: 設定
+    setdone: 設定完成
+    confirm: 確定
+    edit_done: 編輯完成
+    confirm_done: 確定完成
 
   menu:
     user: 使用者列表
@@ -103,6 +110,45 @@
     open: 我要開團
     latest: 最新的團
     desc: 私人團需由 團長 主動邀請團員的加入, 公開團則否
+    normal_quit:  我要退團
+    owner_quit: 移交團長
+    fire: 確定要將他移出早起團嗎
+    invite: 邀請會員
+    setting: 團隊設定
+    join: 我要參加這個團
+    wabsence: 我要請假
+    confirm_absence: 你確定要請假嗎？
+    cancel_absence: 取消請假
+    confirm_cancel: 你確定要取消嗎？
+    member_set: 團員設定
+    destroy: "[解散早起團]"
+    confirm_destroy: 確定要解散早起團嗎
+    post: 我要發文
+    post_area: 發表區
+    pri: 私人
+    full: 已滿
+    list: 早起團列表
+    name: 團名
+    owner: 團長
+    rule: 團規
+    members: 團員
+    more: ">>更多"
+    board: 公佈欄
+    newest: 最新文章
+    success: 早起
+    fail: 晚起
+    absence: 沒到
+    sick: 請假
+    isay: 我說 
+    score_rank: 積分
+    absence_rank: 出席率(半夜結算)
+    head: 團隊頭像
+    change_head: 更改團隊圖像
+    stop_hire: 停止徵人
+    desc1: (必填, 最多十個字)
+    desc2: 團員人數上限(必填, 目前最多50人, 要在更多請跟站長申請)
+    pri_set: 私人團體
+    desc3: 團員通通需由團長加入
 
   rank: 
     desc: 最近3天有紀錄而且有設定目標時間的排行榜
@@ -117,6 +163,13 @@
     rsp_num: 回應數
     last_rsp: 最後回應
     status: 文章還在審核中, 目前只有您看得見
+    desc1: 請選擇要發佈的分類
+    category: 分類
+    content: 內容
+    list: 列表
+    ipost: 我要發文
+    all: 全部
+    backgroup: 回到早起團
 
   journal:
     jtemp: 日誌
@@ -223,6 +276,85 @@
     list: 你的好友列表
     new: 新進朋友
 
+  tutorial:
+    time_offset: 什麼是時間校正
+    important: 重要
+    set_target_time: 如何設定早起的目標時間
+    census_effect: 如何知道早起的成果
+    addback: 起床忘記紀錄, 如何補上起床時間
+    goal: 什麼是習慣性目標, 今日目標
+    group: 什麼是早鳥團
+    status: 什麼是狀態
+    time_shift: 什麼是換日線
+    desc1: 因為早鳥的使用者遍布海內外, 使用者的平台也是五花八門, 所以早鳥提供了時間校正的功能, 無論您當地的時間與早鳥偏差多少, 都能幫您校正
+    desc2: 紅色時間部份乃是你現在在早鳥的時間, 如與您當地時間不合請馬上使用
+    desc3: 將早鳥時間調整到與您當地時間相同為止
+    edit_offset: 校正功能
+    set_now: 馬上設定
+    desc4: 可以在設定頁面, 設定早起的目標, 
+    desc5: 可以在統計頁面看到一週的目標
+    desc6: 可以在統計頁面看到知道自己的成功率, 連續天數, 平均時間
+    desc7: 每月的早起紀錄圖
+    desc8: 從每天日誌旁都可以看到一面旗幟 跟符號, 勾勾就是代表有早起, 打叉就是晚起啦
+    desc9: 綠旗
+    desc10: 則是代表您是按鬧鐘用當下時間起床的, 黃旗
+    desc11: 則是代表您有修改過時間或者是補上的紀錄
+    desc12: 可以在自己的早起紀錄, 補上之前的紀錄 
+    desc13: 你的每篇日誌, 你都可以附上該日的目標而目標又分為兩種一種是 您想要長期努力的習慣型(例如運動), 一種是偶發型(例如下班去買醬油)
+    desc14: 習慣性目標就是讓您用來設定 你想養成的習慣 或者 是你想持續努力的目標 
+    desc15: 除此之外習慣性目標還提供了次數累計的功能, 在數量表填入數目後就會自動累計該目標的數量 當目標完成後, 或者是你暫時不想做了, 可以將它放進完成區或者是放棄區
+    desc16: 你可以開屬於自己的團, 可以參加別人的團, 跟朋友一起加油, 一起保持早起的好習慣。
+    desc17: 根據妳最近的紀錄有著簡單的評分機制, 每個分數就會有相對應的狀態, 共有十種, 這不是公仔, 我想不要收集比較好 @@
+    desc18: "自己睡覺時間的曲線看起來很亂嗎? 改變一下 '換日線' 就可以讓你的曲線看起來簡潔一點喔"
+    desc19: 使用前
+    desc20: 使用後
+
+  setting:
+    time_offset: 時間校正
+    target_time: 設定目標起床時間
+    sleep_target_time: 設定目標睡覺時間
+    priv: 隱私設定
+    photo: 更改圖像
+    nickname: 修改暱稱
+    password: 修改密碼
+    email: 修改帳號(信箱)
+    profile: 修改個人檔案
+    time_shift: 修改換日線時間
+    plurk: Plurk 帳密
+    widget: blog 貼紙
+    desc1: 檔名請儘量使用純英文字母的檔名
+    desc2: 上傳圖片
+    desc3: 暱稱
+    desc4: 舊密碼
+    desc5: 新密碼
+    desc6: 請再輸入一次
+    desc7: 帳號(信箱)
+    desc8: "您現在的換日線時間是『{{time}}』點"
+    desc9: 我要設定換日線
+    desc10: "凌晨{{time}}點"
+    desc11: 都沒我要的時間
+    desc12: "我要的換日線是{{time}}點"
+    desc13: 我要調整時間(把早鳥時間校正成跟您的時間相同)
+    desc14: 你現在的早鳥時間是
+    desc15: 我的早鳥時間需要再(＋/－)這個時間, 才會等於我這邊的時間 
+    desc16: 部落格貼紙
+    desc17: "可設定一個禮拜內不同{{type}}時間, 如果這邊有設定就是以這邊的目標為準"
+    desc18: 每天
+    desc19: 每週
+    desc20: 星期
+    desc21: "{{type}}目標時間"
+    desc22: 帳號
+    desc23: 密碼
+    desc24: 您設定的起床目標時間
+    desc25: 您尚未設定起床目標時間
+    desc26: 您設定的睡覺目標時間
+    desc27: 您尚未設定睡覺目標時間
+
+  constant:
+    info: 早起資訊
+    study: 進修資訊
+    chat:  談天說地
+
   word:
     new: 我也要貢獻
 
@@ -239,6 +371,8 @@
     year: "年"
     month: "月"
     day: "日"
+    hour: "時"
+    min: "分"
   
   time:
     formats:
