@@ -42,7 +42,7 @@
     <td width = 15%><%= link_to_user(record.user, record.user.name, nil, true) %></td>
     <td width = 15%><%= record.todo_time.strftime("%H:%M") %>起床</td>
     <td width = 35%><%= link_to h(truncate(record.title, :length => 10)),
-      journals_url(:id => record.user, :record_id => record) %></td>
+      journal_url(:id => record.user, :year => record.todo_time.year, :month => record.todo_time.month, :day => record.todo_time.day) %></td>
   </tr> 
 <% end %>
 </table>
