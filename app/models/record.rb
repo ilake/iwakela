@@ -24,6 +24,7 @@
 #state 0 是即時, 1是補上
 class Record < ActiveRecord::Base
   include Common
+  validates_presence_of :title
   belongs_to :user
 
   has_many :comments, :as => :record
@@ -322,19 +323,6 @@ class Record < ActiveRecord::Base
     end
   end
   
-  def self.lake_report
-    u= User.find_by_email('lake.ilakela@gmail.com')
-    #50.times do |i|
-#      if i%50 == 0 and i != 0
-#        Kernel.sleep(180)
-#      end
-      email = EbMail.create_weekly_report(u)
-      EbMail.deliver(email)
-    #end
-#    email.set_content_type("text/html")
-  end
-
-
   def self.find_week_record
     record = self.wake.find(:all, :conditions => ["todo_time > ?", Time.now.beginning_of_week])
     average = self.count_average(false)

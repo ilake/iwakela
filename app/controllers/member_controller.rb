@@ -244,7 +244,7 @@ class MemberController < ApplicationController
     elsif @record =  @me.records.todo('wake_up', params[:record])
       notice_stickie("設定完成")
     else
-      error_stickie("設定失敗, 已有紀錄, 或者設定了未來的時間喔= =")
+      error_stickie("失敗, 沒有填title或已有紀錄")
       redirect_to :action => 'journal', :id => @me and return
     end
 

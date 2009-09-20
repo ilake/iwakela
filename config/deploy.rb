@@ -44,7 +44,7 @@ namespace :iwakela do
   end
 
   task :rebuild_asset do
-    run "cd #{current_path} ; rake asset:packager:build_all;"
+    run "cd #{latest_release} && rake asset:packager:build_all;"
   end
 
   task :start do 
