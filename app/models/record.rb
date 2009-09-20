@@ -43,7 +43,7 @@ class Record < ActiveRecord::Base
 
   after_create :set_records_num_and_last_record_time
   after_destroy :set_records_num_and_last_record_time
-  after_create  :send_plurk_msg
+  #after_create  :send_plurk_msg
 
   named_scope :success, :conditions => {:success => true}
   named_scope :fail, :conditions => {:success => false}
