@@ -173,6 +173,9 @@ class Record < ActiveRecord::Base
 
   def self.set_continuous_num(status, user)
     last_success = self.wake.success.last
+    #最後一次 沒來或最後一次失敗來當最後失敗的時間
+    #今天到第一筆紀錄的日子不等於紀錄數  就表示中間有缺
+    #兩筆紀錄時間超過兩天就表示有紀錄沒寫
     last_fail = self.wake.fail.last
 
     all_days = last_success ? Common.cal_days_interval(last_success.todo_time, user.time_now) : 0

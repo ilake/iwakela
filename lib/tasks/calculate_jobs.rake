@@ -44,10 +44,10 @@ namespace :cal do
 
   desc 'step4: reset_all_state'
   task :reset_state => :performance do
-    #最近一個月都沒紀錄的fight 設成false, state 設成4
-    User.find(:all).each do |u|
+    #最近一星期 fight 設成false, state 設成4
+    User.find(:all, :include => :status, :conditions => 'statuses.state <> 4').each do |u|
       if u.status.last_record_created_at 
-        if u.status.last_record_created_at > Time.now.ago(1.month)
+        if u.status.last_record_created_at > Time.now.ago(1.week)
           u.status.update_attribute(:fight, true)
         else
           u.status.update_attribute(:fight, false)

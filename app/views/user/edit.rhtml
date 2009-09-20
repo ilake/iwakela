@@ -259,7 +259,7 @@
       </div>
       <p>
         <div id = "select">
-          <% form_tag :controller => 'member', :action => 'target_time_now' do |f|%>
+          <% form_tag :controller => 'member', :action => 'target_time_now' do %>
             <%= t'setting.desc18'%>
             <%= select_hour Time.now %><%= t'date.hour'%>
             <%= select_minute Time.now %><%= t'date.min'%>
@@ -273,7 +273,7 @@
       <p>
         <%= t('setting.desc17', :type => '起床')%>
         <div id = "select">
-          <% form_tag :controller => 'targets', :action => 'target_time_week' do |f|%>
+          <% form_tag :controller => 'targets', :action => 'target_time_week' do %>
             <%= t'setting.desc19'%>
             <%= select_week %>
             <%= select_hour Time.now %><%= t'date.hour'%>
@@ -322,7 +322,7 @@
       </div>
       <p>
         <div id = "select">
-          <% form_tag :controller => 'member', :action => 'sleep_target_time' do |f|%>
+          <% form_tag :controller => 'member', :action => 'sleep_target_time' do %>
             <%= t'setting.desc18'%>
             <%= select_hour Time.now %><%= t'date.hour'%>
             <%= select_minute Time.now %><%= t'date.min'%>
@@ -336,7 +336,7 @@
       <p>
         <%= t('setting.desc17', :type => '睡覺')%>
         <div id = "select">
-          <% form_tag :controller => 'targets', :action => 'sleep_target_time_week' do |f|%>
+          <% form_tag :controller => 'targets', :action => 'sleep_target_time_week' do %>
             <%= t'setting.desc19'%>
             <%= select_week %>
             <%= select_hour Time.now %><%= t'date.hour'%>

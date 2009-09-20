@@ -17,6 +17,7 @@ class Comment < ActiveRecord::Base
   belongs_to :user
 
   named_scope :valid, :conditions => "comments.user_id is not NULL"
+  named_scope :by_time, :order => "created_at"
 
   after_save :add_forum_comment_count
 

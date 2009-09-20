@@ -3,7 +3,7 @@
 <br />
 <div id="comments_list">
 <% unless item.comments.nil? %>
-  <% item.comments.valid.each_with_index do |c, index| %>
+  <% item.comments.valid.by_time.each_with_index do |c, index| %>
     <%= render :partial => 'shared/comments', :locals => {:comment => c, :index => index+1}%>
   <% end %>
 <% end %>

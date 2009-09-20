@@ -12,7 +12,7 @@
       <td class="user-name"><%= link_to_user(c.user, c.user.name, nil, true) %></td>    
       <td class="comment-content">
         <%= (format_content(c.content)) %>
-        <%= link_to '...<<全文>>', member_url(:action => 'journal', :record_id => c.record) %>
+        <%= link_to '...<<全文>>', member_url(:action => 'journal', :id => @user, :record_id => c.record) %>
       </td> 
       <td><%= c.created_at.to_s(:date)%></td>
     </tr>
