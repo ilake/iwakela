@@ -90,6 +90,12 @@ class Record < ActiveRecord::Base
     user.records.set_average(@status)
     user.records.set_diff_time(@status)
 
+
+    #好像很多人習慣馬上知道起床數據, 所以只好再搬回來
+    user.records.set_successful_rate(@status)
+    user.records.set_continuous_num(@status, user)
+    user.records.set_score(@status, user)
+
     true
   end
 
