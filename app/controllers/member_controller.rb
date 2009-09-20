@@ -72,16 +72,17 @@ class MemberController < ApplicationController
   end
 
   def list
-    @from, @to = month_range
-    @records = @user.records.find_all_todo_time(params[:page], @from, @to, "DESC")
-
-    records = @user.records.find_all_todo_time(params[:page], @from, @to, "", 'wake')
-    sleep_records = @user.records.find_all_todo_time(params[:page], @from, @to, "", 'sleep')
-
-    @time, @sleep_time, @target_time, @sleep_target_time = record_to_string(records, sleep_records)
-
-    @last_record = @user.records.last(:order => "todo_time")
-    @friend_list = @user.friends.map{|u| [u.name, u.id]}
+    redirect_to :action => 'journal', :id => @user
+#    @from, @to = month_range
+#    @records = @user.records.find_all_todo_time(params[:page], @from, @to, "DESC")
+#
+#    records = @user.records.find_all_todo_time(params[:page], @from, @to, "", 'wake')
+#    sleep_records = @user.records.find_all_todo_time(params[:page], @from, @to, "", 'sleep')
+#
+#    @time, @sleep_time, @target_time, @sleep_target_time = record_to_string(records, sleep_records)
+#
+#    @last_record = @user.records.last(:order => "todo_time")
+#    @friend_list = @user.friends.map{|u| [u.name, u.id]}
   end
 
   def target_time_now
