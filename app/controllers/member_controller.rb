@@ -120,7 +120,8 @@ class MemberController < ApplicationController
       redirect_to :action => 'list'
     else
       begin 
-        @record = @me.records.create(:todo_time => Time.now.since(@me.time_offset.hours))
+        time = Time.now.since(@me.setting.time_offset.hours)
+        @record = @me.records.create(:todo_time => time, :title => "#{time.to_s(:md)}日誌")
       rescue Exception => e
         logger.debug "DEBUG!! #{e}"
         @record = @me.records.create
@@ -142,7 +143,8 @@ class MemberController < ApplicationController
 
   def sleep
     begin 
-      @record = @me.records.create(:todo_name => 'sleep', :todo_time => Time.now.since(@me.time_offset.hours))
+      time = Time.now.since(@me.setting.time_offset.hours)
+      @record = @me.records.create(:todo_name => 'sleep', :todo_time => time, :title => "#{time.to_s(:md)}日誌")
     rescue Exception => e
       logger.debug "DEBUG!! #{e}"
       @record = @me.records.create(:todo_name => 'sleep')
