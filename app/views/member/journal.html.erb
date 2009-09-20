@@ -157,7 +157,7 @@
           <div style='padding:6px 0px 6px 0px;'>
             <div><span class='no_line_name'><%= link_to_user(c.user, c.user.name) %></span> : </div>
             <span class='no_line_name'>
-              <%= link_to truncate(c.content, :length => 10), member_url(:action => 'journal', :record_id => c.record)%>
+              <%= link_to truncate(c.content, 10), member_url(:action => 'journal', :record_id => c.record)%>
             </span>
           </div>
         <% end %>
