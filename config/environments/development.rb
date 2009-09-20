@@ -26,3 +26,15 @@ if File.exists?(File.join(RAILS_ROOT,'tmp', 'debug.txt'))
 end
 
 EB_HOST = 'localhost:3000'
+
+ActionMailer::Base.delivery_method = :smtp 
+ActionMailer::Base.smtp_settings = {
+  #enable_starttls_auto is FOR Rails 2.3.2
+  :enable_starttls_auto => true,
+  :address => "smtp.gmail.com",
+  :port => "587",
+  :domain => "localhost.localdomain",
+  :authentication => :plain,
+  :user_name => "lake.ilakela@gmail.com",
+  :password => "poiuytr4321",
+}
