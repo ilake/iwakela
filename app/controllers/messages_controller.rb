@@ -57,9 +57,9 @@ class MessagesController < ApplicationController
     respond_to do |format|
       if @message.save
         notice_stickie('發表成功')
-        spawn do
+        #spawn do
           EbMail.deliver_message_response(@message) 
-        end
+        #end
 
         format.html { redirect_to(messages_path(:id => @user)) }
         format.xml  { render :xml => @message, :status => :created, :location => @message }
