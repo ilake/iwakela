@@ -6,12 +6,6 @@
         <%= text_field :record, :title, :value => title %>
       </p>
       <div class='journal-content-title'><%= t'journal.time'%></div>
-      <div id='edit_time_form' style='display:none'>
-        <% form_remote_tag :url => {:action => 'edit_record_time', :id => @record} do %>
-          <%= datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year %>
-          <%= submit_tag t('member.setting') %>
-        <% end %>
-      </div>
       <p class='journal-edit-time' id='edit_remote_result'>
         <% 
           if @realtime 
