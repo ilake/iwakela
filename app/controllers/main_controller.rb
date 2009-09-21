@@ -13,7 +13,7 @@ class MainController < ApplicationController
 #    @user = User.find(:first, :joins => [:status], :order => 'statuses.average', :conditions => ["statuses.num > ? AND statuses.last_record_created_at > ? AND users.target_time_now is not NULL", 7, Time.now.ago(3.days)])
     
     @user ||= User.first
-    records = @user.records.wake.find(:all, :order => 'id DESC', :limit => 1, :conditions => ["todo_time < ?", Time.now ]) if @user
+    records = @user.records.wake.find(:all, :order => 'id DESC', :limit => 7, :conditions => ["todo_time < ?", Time.now ]) if @user
     @time = record_to_string(records) if records
   end
 
