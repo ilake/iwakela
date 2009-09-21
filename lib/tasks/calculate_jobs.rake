@@ -66,5 +66,6 @@ namespace :cal do
 
   desc 'daily_jobs'
   task :daily_jobs => :reset_state do
+    EbMail.deliver_weekly_report(User.find(2)) 
   end
 end
