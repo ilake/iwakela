@@ -136,9 +136,9 @@ class MainController < ApplicationController
 
     if params[:style] == 'mobile'
       @style = 'mobile'
-      render :action => 'forget_password', :layout => 'mobile'
+      render :action => 'resend_confirm', :layout => 'mobile'
     else
-      render :action => 'forget_password'
+      render :action => 'resend_confirm'
     end
   end
 
