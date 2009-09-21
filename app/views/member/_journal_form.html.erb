@@ -9,9 +9,10 @@
       <p class='journal-edit-time' id='edit_remote_result'>
         <% 
           if @realtime 
-            concat record.todo_time.to_s(:mdate)
+            concat "<b>#{record.todo_time.to_s(:mdate)}</b>"
             #datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year 
             concat hidden_field(:record, :todo_time)
+            concat " (這個時間不對嗎? 你可能需要做時間校正 #{link_to '前往校正', :controller => 'user', :action => 'edit', :anchor => 'edit_time_offset'})"
           else
             concat datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year
           end

@@ -97,8 +97,8 @@ class User < ActiveRecord::Base
     errors.add_to_base("Wrong Email style") unless email =~ /^([_A-Za-z0-9-]+)(\.[_A-Za-z0-9-]+)*(\+[_A-Za-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/
   end
 
-  def target_time(time=Time.now)
-    user_time = time.since(self.setting.time_offset.hours)
+  def target_time(time=nil)
+    user_time = time ? time : Time.now.since(self.setting.time_offset.hours)
     if target = self.targets.wake.find_by_week(user_time.wday)
       target_time = target.todo_target_time
       Time.local(user_time.year.to_i, user_time.month.to_i, user_time.day.to_i, target_time.hour, target_time.min, 0)
@@ -107,8 +107,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def target_sleep_time(time=Time.now)
-    user_time = time.since(self.setting.time_offset.hours)
+  def target_sleep_time(time=nil)
+    user_time = time ? time : Time.now.since(self.setting.time_offset.hours)
     if target = self.targets.sleep.find_by_week(user_time.wday)
       target_time = target.todo_target_time
       Time.local(user_time.year.to_i, user_time.month.to_i, user_time.day.to_i, target_time.hour, target_time.min, 0)
