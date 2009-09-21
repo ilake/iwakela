@@ -10,7 +10,8 @@
         <% 
           if @realtime 
             concat record.todo_time.to_s(:mdate)
-            datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year 
+            #datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year 
+            concat hidden_field(:record, :todo_time)
           else
             concat datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year
           end
