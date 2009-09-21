@@ -84,7 +84,7 @@ module AllHelper
   end
 
   def diff_value(user)
-      "#{t('sider.diff')}#{user.status.diff}分" if user.status.diff and user.target_time_now
+      "#{user.status.diff}分" if user.status.diff and user.target_time_now
   end
 
   def exact_score(user)

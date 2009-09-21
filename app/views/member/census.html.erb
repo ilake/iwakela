@@ -78,6 +78,10 @@
         <td><%= t('census.avg') %></td>
         <td><strong><%= @user.status.average.strftime("%H:%M") if @user.status.average%></strong></td>
       </tr>
+      <tr>
+        <td><%= t'census.diff'%></td>
+        <td><strong><%= diff_value(@user)%></strong></td>
+      </tr>
     </tbody>
   </table>
   <span class='fw-bold w-black'><%= t'census.lastr'%>:</span>

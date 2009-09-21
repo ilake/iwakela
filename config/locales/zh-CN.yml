@@ -204,6 +204,7 @@
     rate: 成功率
     cont: 连续次数
     avg: 平均时间
+    diff: 平均离目标
     lastr: 最后纪录是
     wtarget: 一周目标起床时间
     starget: 一周目标睡觉时间
