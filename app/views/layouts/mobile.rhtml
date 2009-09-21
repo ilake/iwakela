@@ -15,11 +15,12 @@
     <div class="top_bar">
       <div class="auth">
         <% if @me %>
-          <%= link_to t('site.logout'), :controller => 'main', :action => 'logout', :style => 'mobile' %> | 
-          <%= link_to t('member.setting'), :controller => 'mobile', :action => 'edit', :id => @me.id %>
+          <%= link_to_unless_current t('site.logout'), :controller => 'main', :action => 'logout', :style => 'mobile' %> | 
+          <%= link_to_unless_current t('member.setting'), :controller => 'mobile', :action => 'edit', :id => @me.id %>
         <% else%>
-          <%= link_to t('site.login'), :controller => 'main', :action => 'login', :style => 'mobile'  %> | 
-          <%= link_to t('site.forget_password'), :controller => 'main', :action => 'forget_password', :style => 'mobile'  %>
+          <%= link_to_unless_current t('site.login'), :controller => 'main', :action => 'login', :style => 'mobile'  %> | 
+          <%= link_to_unless_current t('site.forget_password'), :controller => 'main', :action => 'forget_password', :style => 'mobile'  %>
+          <%= link_to_unless_current t('site.resend_confirm'), :controller => 'main', :action => 'resend_confirm', :style => 'mobile'  %>
         <%end%>
       </div>
     </div>

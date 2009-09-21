@@ -56,6 +56,8 @@ class MainController < ApplicationController
             redirect_to :controller => 'main', :action => 'index' and return
           end
         else
+          flash[:info] = "您的email還沒經過認證 #{@template.link_to t('site.resend_confirm'), :controller => 'main', :action => 'resend_confirm'}"
+
           error_stickie("您的email還沒經過認證 #{@template.link_to t('site.resend_confirm'), :controller => 'main', :action => 'resend_confirm'}, 如果您的帳號當初是亂填的, 請來信iwakela@gmail.com跟站長要求更正 ")
         end
       else
@@ -107,6 +109,7 @@ class MainController < ApplicationController
   def forget_password
     if request.post?
       if user = User.send_reset_email(params[:user][:email])
+        flash[:info] = "密碼重設的信件已經寄到您的信箱 #{user.email}"
         notice_stickie("密碼重設的信件已經寄到您的信箱 #{user.email}")
       else
         warning_stickie("沒有這個人: #{params[:email]}")
@@ -124,10 +127,18 @@ class MainController < ApplicationController
   def resend_confirm
     if request.post?
       if user = User.send_confirm_email(params[:user][:email])
+        flash[:info] = "帳號確認的信件已經寄到您的信箱 #{user.email}"
         notice_stickie("帳號確認的信件已經寄到您的信箱 #{user.email}")
       else
         warning_stickie("沒有這個人: #{params[:email]}")
       end
+    end
+
+    if params[:style] == 'mobile'
+      @style = 'mobile'
+      render :action => 'forget_password', :layout => 'mobile'
+    else
+      render :action => 'forget_password'
     end
   end
 
