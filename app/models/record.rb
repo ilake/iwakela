@@ -188,11 +188,11 @@ class Record < ActiveRecord::Base
     all_days = last_success ? Common.cal_days_interval(last_success.todo_time, user.time_now) : 0
     #沒來的就算晚起
     if all_days > 1
-      if last_fail && (last_fail.todo_time.at_beginning_of_day == user.time_now.at_beginning_of_day)
-        num = -1*(all_days)
-      else
+#      if last_fail && (last_fail.todo_time.at_beginning_of_day == user.time_now.at_beginning_of_day)
+#        num = -1*(all_days)
+#      else
         num = -1*(all_days-1)
-      end
+#      end
     elsif last_fail.nil?
       num = self.wake.count
     elsif last_success.nil? 
