@@ -10,6 +10,7 @@ javascripts:
   - jrails
   - jquery.flot.pack
   - stickies
+  - autopopulate
 stylesheets: 
 - base: 
   - eb

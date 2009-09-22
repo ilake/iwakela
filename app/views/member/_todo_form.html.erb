@@ -1,10 +1,10 @@
   <div class='clear'></div>
 
-  <div id='daily-goals' style='display:none'>
+  <div id='daily-goals'>
     <div class='daily-goals-list'>
       <span class='daily-goals-title'><%= t'todo.list'%></span>
       <div name='daily-goals-submit' class='daily-goals-submit' > 
-        <span class='w-red fw-bold'><%= t'todo.gname'%>:</span> <%= text_field :goals, :name, :value => t('todo.dodaily') %> <%= submit_tag t('todo.add'), :id => "goal_submit" %> 
+        <span class='w-red fw-bold'><%= t'todo.gname'%>:</span> <%= text_field :goals, :name, :title => t('todo.dodaily'), :class => 'populate' %> <%= submit_tag t('todo.add'), :id => "goal_submit" %> 
       </div>
         <table>
           <thead id='new_goal_pos'>
