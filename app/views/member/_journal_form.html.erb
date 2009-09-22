@@ -14,7 +14,7 @@
             concat hidden_field(:record, :todo_time)
             concat " (這個時間不對嗎? 你可能需要做時間校正 #{link_to '前往校正', :controller => 'user', :action => 'edit', :anchor => 'edit_time_offset'})"
           else
-            concat datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year
+            concat datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year , :include_seconds => true
           end
         %>
       </p>
@@ -39,7 +39,7 @@
     <span class='daily-goals-add'>
       <%= b_image_tag('toggle_plus.gif', :class => 'toggle_plus')%>
       <%= b_image_tag('toggle_minus.gif', :class => 'toggle_minus')%>
-      <a href='#daily-goals-submit'><%= t'journal.addtodaygoal'%></a>
+      <a href='#daily-goals-submit'><%= t'journal.adddailygoal'%></a>
     </span>
     <div name='once-goal-form' class='once-goal-form' style='display:none'>
       <span class='w-red fw-bold'><%= t'todo.gname'%>:</span> 
@@ -50,7 +50,7 @@
     </div>
     <table id='today_goals'>
       <thead class='have-goals'>
-        <th></th> <th><%= t'journal.done'%></th> <th><%= t'todo.name'%></th> <th><%= t'todo.name'%></th> <th><%= t'todo.tnum'%></th> <th><%= t'todo.order'%></th> 
+        <th></th> <th><%= t'journal.done'%></th> <th><%= t'todo.name'%></th> <th><%= t'todo.comment'%></th> <th><%= t'todo.tnum'%></th> <th><%= t'todo.order'%></th> 
       </thead>
       <tbody class='today-goals-list'>
         <tr class='no-goals w-red fw-bold'><td class='pad-10'> <%= t'journal.nogoal'%></td></tr>
