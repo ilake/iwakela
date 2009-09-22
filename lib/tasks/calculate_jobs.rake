@@ -31,7 +31,7 @@ namespace :cal do
       #下面算績效的統一做
       #平均雖然也是績效之一  可是沒來的不知道要怎樣算, 所以搬回record 存 wake_up的時候算
       #user.records.set_average(status)
-      user.records.set_successful_rate(status)
+      user.records.set_successful_rate(status, user)
       user.records.set_continuous_num(status, user)
 
       #搬回record 存時算     

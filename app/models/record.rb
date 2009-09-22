@@ -92,7 +92,7 @@ class Record < ActiveRecord::Base
 
 
     #好像很多人習慣馬上知道起床數據, 所以只好再搬回來
-    user.records.set_successful_rate(@status)
+    user.records.set_successful_rate(@status, user)
     user.records.set_continuous_num(@status, user)
     user.records.set_score(@status, user)
 
@@ -173,8 +173,8 @@ class Record < ActiveRecord::Base
     status.update_attribute(:diff, diff)
   end
 
-  def self.set_successful_rate(status)
-    records_success_percent = self.find_success_percent
+  def self.set_successful_rate(status, user)
+    records_success_percent = self.find_success_percent(user)
     status.update_attribute(:success_rate, records_success_percent)
   end
 
@@ -290,10 +290,10 @@ class Record < ActiveRecord::Base
     end
   end
 
-  def self.find_success_percent
+  def self.find_success_percent(user)
     records_success = self.wake.success.count
     if self.wake.first
-      all_days = Common.cal_days_interval(self.wake.first.todo_time, Time.now)
+      all_days = Common.cal_days_interval(self.wake.by_time.last.todo_time, user.time_now)
       100*(records_success / all_days.to_f)
     else
       0
