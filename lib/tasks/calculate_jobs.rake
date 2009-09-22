@@ -25,7 +25,8 @@ namespace :cal do
   desc 'step3: calculate performance'
   task :performance => :group_chat_num do 
     #state 4 是太久沒來的, 每天在reset_all_state rake 裡做更新
-    User.find(:all, :include => :status, :conditions => "statuses.state <> 4").each do |user|
+    #只是缺席或請假的才算, 今天有來(state 1 or 2)的也不算
+    User.find(:all, :include => :status, :conditions => "statuses.state <> 4 AND statuses <> 1 AND statuses.state <> 2").each do |user|
       status  = user.status
 
       #下面算績效的統一做
@@ -45,7 +46,9 @@ namespace :cal do
   desc 'step4: reset_all_state'
   task :reset_state => :performance do
     #最近一星期 fight 設成false, state 設成4
-    User.find(:all, :include => :status, :conditions => 'statuses.state <> 4').each do |u|
+    #今天有來(state = 1 or 2)
+    #反正只是缺席或請假的才算
+    User.find(:all, :include => :status, :conditions => 'statuses.state <> 4 AND statuses.state <> 1 AND statuses.state <> 2').each do |u|
       if u.status.last_record_created_at 
         if u.status.last_record_created_at > Time.now.ago(1.week)
           u.status.update_attribute(:fight, true)
@@ -54,7 +57,10 @@ namespace :cal do
           u.status.update_attribute(:state, 4)
         end
       else
+        #因為有可能很多一次都沒紀錄的, 只要每天檢查有沒紀錄的state 就先設成4 
+        #只要他有做紀錄就會state 變成1 or 2, fight也會變成true
         u.status.update_attribute(:fight, false)
+        u.status.update_attribute(:state, 4)
       end
     end
 
@@ -66,6 +72,11 @@ namespace :cal do
 
   desc 'daily_jobs'
   task :daily_jobs => :reset_state do
+    EbMail.deliver_weekly_report(User.find(2)) 
+  end
+
+  desc 'use mail to test cron'
+  task :test_cron => :environment do
     EbMail.deliver_weekly_report(User.find(2)) 
   end
 end
