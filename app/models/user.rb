@@ -347,7 +347,7 @@ class User < ActiveRecord::Base
 
   private 
   def self.random_str
-    [Array.new(6){rand(256).chr}.join].pack("m").chomp.delete!('\\')
+    [Array.new(6){rand(256).chr}.join].pack("m").chomp.delete('\\')
   end
 
   def self.encode(content, salt)
