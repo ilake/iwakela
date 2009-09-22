@@ -4,7 +4,7 @@ namespace :cal do
     now = Time.now
     Group.find(:all).each do |g|
         g.members.find(:all).each do |m|
-        total_join_days = ((now.at_beginning_of_day - m.status.group_join_date)/86400).to_i
+        total_join_days = ((now.at_beginning_of_day - m.status.group_join_date)/86400).ceil
         total_join_days = 1 if total_join_days.zero?
         record_nums =  m.records.wake.count(:all, :conditions => ['todo_time > ? ', m.status.group_join_date.tomorrow])
         attendance = record_nums/total_join_days.to_f
@@ -26,7 +26,7 @@ namespace :cal do
   task :performance => :group_chat_num do 
     #state 4 是太久沒來的, 每天在reset_all_state rake 裡做更新
     #只是缺席或請假的才算, 今天有來(state 1 or 2)的也不算
-    User.find(:all, :include => :status, :conditions => "statuses.state <> 4 AND statuses <> 1 AND statuses.state <> 2").each do |user|
+    User.find(:all, :include => :status, :conditions => ["statuses.state <> ? AND statuses.state <> ? AND statuses.state <> ?", 1, 2, 4]).each do |user|
       status  = user.status
 
       #下面算績效的統一做
@@ -48,7 +48,7 @@ namespace :cal do
     #最近一星期 fight 設成false, state 設成4
     #今天有來(state = 1 or 2)
     #反正只是缺席或請假的才算
-    User.find(:all, :include => :status, :conditions => 'statuses.state <> 4 AND statuses.state <> 1 AND statuses.state <> 2').each do |u|
+    User.find(:all, :include => :status, :conditions => ["statuses.state <> ? AND statuses.state <> ? AND statuses.state <> ?", 1, 2, 4]).each do |u|
       if u.status.last_record_created_at 
         if u.status.last_record_created_at > Time.now.ago(1.week)
           u.status.update_attribute(:fight, true)

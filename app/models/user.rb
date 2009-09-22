@@ -265,32 +265,6 @@ class User < ActiveRecord::Base
     self.find(:all, :include => :status, :conditions => ['statuses.state = ?', state])
   end
 
-#TODO REMOVE
-  #最近一個月有紀錄 fight => true, 否則 fight => false
-#  def self.find_user_no_records
-#    self.find(:all).each do |u|
-#      if u.status.last_record_created_at 
-#        if u.status.last_record_created_at > Time.now.ago(1.month)
-#          u.status.update_attribute(:fight, true)
-#        else
-#          u.status.update_attribute(:fight, false)
-#        end
-#      else
-#        u.status.update_attribute(:fight, false)
-#      end
-#    end
-#  end
-
-  #daily 
-  #每天把還有在來的做狀態的處理, fight true 基本上是有在來的, 所以每天臨晨把 state 初始化
-  #就是說還沒來 所以是缺席
-#TODO REMOVE
-#  def self.reset_all_state
-#    Status.update_all("state = 0", "fight = true")
-#    Status.update_all("state = 3", "fight = false")
-#    Game.update_all("today_num = 0")
-#  end
-
   def self.find_user_rank(page, sort)
     sort ||= 'diff'
     if ["success_rate", "continuous_num"].include?(sort)
@@ -373,7 +347,7 @@ class User < ActiveRecord::Base
 
   private 
   def self.random_str
-    [Array.new(6){rand(256).chr}.join].pack("m").chomp
+    [Array.new(6){rand(256).chr}.join].pack("m").chomp.delete!('\\')
   end
 
   def self.encode(content, salt)
