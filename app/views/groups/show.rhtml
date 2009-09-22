@@ -52,6 +52,9 @@
   <div>
     <div class='ban'><%= t'group.sick'%></div><%= render :partial => 'result_partial', :locals => {:members => @sick_members}%>
   </div>
+  <div>
+    <div class='ban'><%= t'group.leave'%></div><%= render :partial => 'result_partial', :locals => {:members => @leave_members}%>
+  </div>
 </div>
 <div class='talk'>
   <% if @me %>

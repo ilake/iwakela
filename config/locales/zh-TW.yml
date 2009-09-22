@@ -139,6 +139,7 @@
     fail: 晚起
     absence: 沒到
     sick: 請假
+    leave: 一段時間沒來
     isay: 我說 
     score_rank: 積分
     absence_rank: 出席率(半夜結算)

@@ -31,6 +31,7 @@ class GroupsController < ApplicationController
     @success_members = @group.members.find_group_user_result(1)
     @fail_members = @group.members.find_group_user_result(2)
     @sick_members = @group.members.find_group_user_result(3)
+    @leave_members = @group.members.find_group_user_result(4)
 
   end
 
