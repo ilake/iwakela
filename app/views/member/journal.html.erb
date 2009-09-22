@@ -100,6 +100,7 @@
 
 <div class='fl-r'>
   <div id='side-journal-list-top'>
+    <%= link_to t('journal.addjour'), member_url(:action => 'new_journal', :todo_time => @last_day, :type => @journal_status), :title => @last_day.to_s(:ymd) if own_right %> | 
     <%= link_to t('journal.t_jour'), member_url(:action => "#{@journal_status}_journal", :id => @user )%>
     <%= link_to t('journal.list'), member_url(:action => 'list_journal', :id => @user )%>
     <% anchor = @journal_status == 'daylight' ? 'wake_goal' : 'sleep_goal' %>
