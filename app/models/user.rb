@@ -262,7 +262,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_group_user_result(state=0)
-    self.find(:all, :include => :status, :conditions => ['statuses.state = ?', state])
+    self.find(:all, :include => [:mugshot], :joins => :status, :conditions => ['statuses.state = ?', state])
   end
 
   def self.find_user_rank(page, sort)
