@@ -1,6 +1,6 @@
 <%= render :partial => 'shared/sub_nav' %>
 <div class='top-function-menu rounded'>
-  <%= link_to_user(@user, @user.name, nil, true)%>
+  <%= link_to_user(@user, @user.name, nil, true)%>的留言板
   | 
   <%= link_to t('msg.add'), new_message_path(:id => @user ) %>
 </div>
