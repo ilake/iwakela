@@ -86,14 +86,15 @@
       <% if own_right &&  @user_today == @last_day%>
         <div class='alarm_clock'>
 
-          <div class='w-red w-bold'>紀錄現在的時間(請點鬧鐘)<%t'journal.add_now'%></div>
-          <%= link_to b_image_tag('clock.gif'), member_url(:action => 'new_journal', :realtime => 'real', :todo_time => @user_now , :type => @journal_status)  %>
+          <h2>
+            <div class='w-red w-bold'><%= link_to t("journal.#{@journal_status}_click"), member_url(:action => 'new_journal', :realtime => 'real', :todo_time => @user_now , :type => @journal_status), :title => t('journal.add_now')  %></div>
+          </h2>
+          <% img = @journal_status == 'night' ? 'sleep_time.png' : 'clock.gif' %>
+          <%= link_to b_image_tag(img), member_url(:action => 'new_journal', :realtime => 'real', :todo_time => @user_now , :type => @journal_status), :title => t('journal.add_now')  %>
         </div>
         或<br />
       <% end %>
-      <h2>
         <%= link_to t('journal.add'), member_url(:action => 'new_journal', :todo_time => @last_day, :type => @journal_status) if own_right %>
-      </h2>
     </div>
   </div>
 <% end %>

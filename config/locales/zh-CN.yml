@@ -197,6 +197,8 @@
     dotoday: 只有今天要做的目标
     done: 已完成
     nogoal: 还没有任何的目标
+    daylight_click: 我起床啦
+    night_click: 我要睡啦
 
   census:
     score: 积分
