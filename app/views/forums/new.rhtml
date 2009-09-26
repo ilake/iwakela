@@ -1,4 +1,4 @@
-<h1><%= t(CATEGORIES[params[:category]]) %></h1>
+<h1><%= t(CATEGORIES[params[:category]]) if params[:category]%></h1>
 
 <% form_tag :action => 'create', :group_id => params[:id], :category => params[:category] do %>
   <%= error_messages_for 'forum' %>

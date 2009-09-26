@@ -34,7 +34,7 @@
 <div class='clear'></div>
   <div class='group_news'>
     <%= t'group.newest'%>: <% @forums.each do |f| %>
-      <%= link_to f.subject,:controller => 'forums', :action => 'show', :id => f.id %>&nbsp;&nbsp;
+      <%= forum_status(f)%><%= link_to f.subject,:controller => 'forums', :action => 'show', :id => f.id %>&nbsp;&nbsp;
     <% end %>
     <%= link_to t('group.more'), :controller => 'forums', :action => 'group_forum_list', :id => @group %> |
     <%= link_to t('group.post'),:controller => 'forums', :action => 'new', :id => @group %>
