@@ -294,7 +294,8 @@ class Record < ActiveRecord::Base
     records_success = self.wake.success.count
     if self.wake.first
       all_days = Common.cal_days_interval(self.wake.by_time.last.todo_time, user.time_now)
-      100*(records_success / all_days.to_f)
+      rate = 100*(records_success / all_days.to_f)
+      rate > 100 ? 100 : rate
     else
       0
     end
