@@ -10,7 +10,6 @@ class MainController < ApplicationController
     @records = Record.find_all_wake_up_today(params[:page])
 
     @user = @records[0].user if @records[0]
-#    @user = User.find(:first, :joins => [:status], :order => 'statuses.average', :conditions => ["statuses.num > ? AND statuses.last_record_created_at > ? AND users.target_time_now is not NULL", 7, Time.now.ago(3.days)])
     
     @user ||= User.first
     records = @user.records.wake.find(:all, :order => 'todo_time DESC', :limit => 7, :conditions => ["todo_time < ?", Time.now ]) if @user
