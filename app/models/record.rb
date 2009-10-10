@@ -311,7 +311,8 @@ class Record < ActiveRecord::Base
     self.wake.public.paginate :page => params,
                   :per_page => per_page,
                   :include => [:user, {:user => :mugshot}],
-                  :conditions => cond
+                  :conditions => cond,
+                  :order => 'id'
   end
 
   def self.find_yesterday_records
