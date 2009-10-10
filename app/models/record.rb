@@ -312,7 +312,7 @@ class Record < ActiveRecord::Base
                   :per_page => per_page,
                   :include => [:user, {:user => :mugshot}],
                   :conditions => cond,
-                  :order => 'id DESC'
+                  :order => 'push_count DESC'
   end
 
   def self.find_yesterday_records
