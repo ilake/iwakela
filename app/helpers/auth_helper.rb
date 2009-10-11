@@ -6,10 +6,10 @@ module AuthHelper
   end
 
   def is_owner?(user=nil)
-    if @me
-      @is_owner ||= @me == @user ? true : false
-    elsif user
+    if user
       @is_owner ||= @me == user ? true : false
+    elsif @me 
+      @is_owner ||= @me == @user ? true : false
     else
       false
     end
