@@ -11,7 +11,7 @@
   float: left;
   width: 700px;
   border: 1px solid #CACACA;
-  padding: 3px;
+  padding: 5px;
   margin-top:5px;
 }
 
@@ -33,7 +33,7 @@
   font-weight: bold;
   font-size:16px;
   margin-bottom:5px;
-  color:#FAE977;
+  color:#FFFFFF;
 }
 .journal-content{
   padding: 10px;
@@ -138,7 +138,7 @@
 
 #edit-journal {
   border: 1px solid #CACACA;
-  padding: 3px;
+  padding: 5px;
   margin-top:5px;
 }
 

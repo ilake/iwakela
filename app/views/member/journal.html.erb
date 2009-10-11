@@ -28,15 +28,15 @@
   </span>
   <div class='clear'></div>
   <div id='journal-all'>
-    <div class='journal-content-title'><%= t 'journal.title'%></div>
+      <div><span class='journal-content-title'><%= t'journal.title'%></span></div>
     <p class='journal-title'>
       <%= "#{@record.title}" %>
     </p>
-    <div class='journal-content-title'><%= t 'journal.time'%></div>
+      <div><span class='journal-content-title'><%= t'journal.time'%></span></div>
     <p class='journal-time'>
       <%= @record.todo_time.to_s(:mdate) %>
     </p>
-    <div class='journal-content-title'><%= t 'journal.y_inquest'%></div>
+    <div><span class='journal-content-title'><%= t'journal.y_inquest'%></span></div>
     <div class='journal-content'>
       <% if !@record.content2.blank? %>
         <%= format_content(@record.content2) %>
@@ -44,7 +44,7 @@
         <%= "#{t('journal.y_inquest')}#{t('journal.is_blank')}"%><%= "#{t('journal.addornot')}  #{link_to 'YES', member_url(:action => 'edit_journal', :id => @record, :anchor => 'yjournal' )}" if own_right %>
       <% end %>
     </div>
-    <div class='journal-content-title'><%= t 'journal.t_jour' %></div>
+      <div><span class='journal-content-title'><%= t'journal.t_jour'%></span></div>
         
     <div class='journal-content'>
       <% if !@record.content.blank? %>
@@ -53,7 +53,7 @@
         <%= "#{t('journal.t_jour')}#{t('journal.is_blank')}" %><%= "#{t('journal.addornot')} #{link_to 'YES', member_url(:action => 'edit_journal', :id => @record, :anchor => 'tjournal' )}" if own_right %>
       <% end %>
       </div>
-      <div class='journal-content-title'><%= t 'journal.t_target'%></div>
+      <div><span class='journal-content-title'><%= t'journal.t_target'%></span></div>
     <% unless @today_goals.blank? %>
       <%= render :partial => 'journal_goal', :locals => {:today_goals => @today_goals} %>
     <% else %>

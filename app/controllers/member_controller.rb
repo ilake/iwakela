@@ -247,12 +247,12 @@ class MemberController < ApplicationController
 
   def create_journal
     if params[:type] == 'night' && @record = @me.records.todo('sleep', params[:record])
-      notice_stickie("設定完成")
+      notice_stickie("完成")
     elsif @record =  @me.records.todo('wake_up', params[:record])
-      notice_stickie("設定完成")
+      notice_stickie("完成")
     else
-      error_stickie("失敗, 沒有填title或已有紀錄")
-      redirect_to :action => 'journal', :id => @me and return
+      error_stickie("失敗, 標題是空的 再忙也要寫點東西喔")
+      redirect_to :back and return
     end
 
     parse_hash_goal_to_user_goal(params[:item], @record) if params[:item]
