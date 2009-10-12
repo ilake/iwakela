@@ -23,14 +23,14 @@
 #!/usr/math/bin/ruby
 class User < ActiveRecord::Base
 
-  has_many :records
-  has_many :targets
-  has_many :chats
-  has_many :goals
-  has_many :forums
-  has_many :comments
-  has_many :great_words
-  has_many :service_profiles
+  has_many :records, :dependent => :destroy
+  has_many :targets, :dependent => :destroy
+  has_many :chats, :dependent => :destroy
+  has_many :goals, :dependent => :destroy
+  has_many :forums, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
+  has_many :great_words, :dependent => :destroy
+  has_many :service_profiles, :dependent => :destroy
   has_many :leave_messages, :class_name => 'Message', :foreign_key => :user_id
   has_many :own_messages, :class_name => 'Message', :foreign_key => :master_id, :conditions => {:message_id => nil}, :include => :reply
   has_many :own_messages_and_reply, :class_name => 'Message', :foreign_key => :master_id, :include => :reply
