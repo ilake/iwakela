@@ -71,4 +71,21 @@ class GoalsController < ApplicationController
       end
     end
   end
+
+  def delete_all
+    if goal = @me.goals.find_by_id(params[:id])
+      goal.goal_details.delete_all
+      goal.total = goal.goal_details.be_done.sum(:value)
+      goal.save!
+    end
+    redirect_to :back
+  end
+
+  def delete
+    if goal = @me.goals.find_by_id(params[:id])
+      goal.goal_details.delete_all
+      goal.total = goal.goal_details.be_done.sum(:value)
+      goal.save!
+    end
+  end
 end

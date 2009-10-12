@@ -11,11 +11,16 @@
   <% end %>
 </div>
 <%= render :partial => 'todo_form', :locals => {:show => false}  %>
-<div class='clear mar-t-10'></div>
+<div class='clear'></div>
+<br />
+<br />
 <% if @goal %>
 <%= select("goal", "id", @goal_lists)%>
 <%= t'todo.daily'%>: <%= @total %>
-<%= t'todo.total'%>: <%= @goal.total %>
+<%= t'todo.total'%>: <%= @goal.total %> | 
+<%= link_to_unless_current '只顯示成功的', :action => 'todo', :goal_id => @goal, :done => '1' %>
+<%= link_to '顯示全部', :action => 'todo', :goal_id => @goal, :done => '0' if current_page?(:action => 'todo', :goal_id => @goal, :done => '1') %> | 
+<%= link_to '全部清除', {:controller => 'goals', :action => 'delete_all', :id => @goal}, :confirm => '確定要刪除嗎?', :method => :post%>
 <table>
   <thead>
     <th><%= t'todo.time'%></th>

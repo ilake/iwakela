@@ -7,6 +7,11 @@
   text-decoration:none;
 }
 
+.forum-content a {
+  text-decoration:none;
+  color: #0066FF;
+}
+
 #day {
   margin-left:700px;
 }
