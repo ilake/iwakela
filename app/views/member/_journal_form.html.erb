@@ -25,16 +25,26 @@
 
       <div><span class='journal-content-title'><%= t'journal.title'%></span></div>
       <p class='journal-edit-title'>
-        <%# title = record.title ? record.title : "#{record.todo_time.to_s(:md)}#{t('journal.jtemp')}"%>
-        <%= text_field :record, :title %>
+        <span class='journal-title'><%= text_field :record, :title %></span><span class='w-red fw-bold'>( 必填 )</span>
       </p>
 
-      <div><span class='journal-content-title'><a name='yjournal'></a><%= t'journal.y_inquest'%></span></div>
-      <p><%= text_area :record, 'content2', :rows => '20', :cols => '36', :class => 'mceEditor' %></p>
-      <div><span class='journal-content-title'><a name='tjournal'></a><%= t'journal.t_jour'%></span></div>
-      <p><%= text_area :record, 'content', :rows => '20', :cols => '36', :class => 'mceEditor' %></p>
+      <div>
+        <div class='fl-l pad-5'>
+          <div>
+            <span class='journal-content-title'><a name='yjournal'></a><%= t'journal.y_inquest'%></span>
+          </div>
+          <p><%= text_area :record, 'content2', :rows => '15', :cols => '36', :class => 'mceEditor' %></p>
+        </div>
+        <div class='fl-l pad-5'>
+          <div>
+            <span class='journal-content-title'><a name='tjournal'></a><%= t'journal.t_jour'%></span>
+          </div>
+          <p><%= text_area :record, 'content', :rows => '15', :cols => '36', :class => 'mceEditor' %></p>
+        </div>
+      </div>
     </div>
-
+    <div class='clear'></div>
+  
     <span class='journal-content-title'><a name='tgoals'></a><%= t'journal.t_target'%></span>
     <a href='#once-goal-form' class='once-goal-add'><%= t'journal.addtodaygoal'%></a>
     <span class='daily-goals-add'>
@@ -92,3 +102,15 @@
       <%= submit_tag t('action.save') %>
       <%= link_to_cancel('member', t('action.cancel')) %>
     </div>
+    <% content_for :js_ready do %>
+      <script>
+        $(function() {
+          $('.journal-submit input').click(function(){
+            if ($('.journal-title input').val() == ""){
+              alert('標題不能是空的');
+              return false;
+            }
+          });
+        });
+      </script>
+    <% end %>
