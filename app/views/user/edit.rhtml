@@ -59,14 +59,8 @@
       <div class='change_pic'>
         <a href='#change_pic'><%= t'setting.photo'%></a>
       </div>
-      <div class='edit_username'>
-        <a href='#edit_username'><%= t'setting.nickname'%></a>
-      </div>
       <div class='edit_password'>
         <a href='#edit_password'><%= t'setting.password'%></a>
-      </div>
-      <div class='edit_email'>
-        <a href='#edit_email'><%= t'setting.email'%></a>
       </div>
       <div class='edit_profile'>
         <a href='#edit_profile'><%= t'setting.profile'%></a>
@@ -96,14 +90,6 @@
       </p>
     <% end -%>
   </div>
-  <div class='user-setting-content ' id='edit_username' style='display:none'>
-    <% form_for :user, @me, :url => {:action => 'edit', :id => @me.id} do |f|%>
-      <%= t'setting.desc3'%>:<br />
-      <%= f.text_field :name %>
-      <%= submit_tag t('action.change')%>
-      <%= link_to t('action.cancel'), :controller => 'member', :action => 'list', :id => @me %>
-    <% end %>
-  </div>
   <div class='user-setting-content' id='edit_password' style='display:none'>
     <% form_for :user, :url => {:action => 'edit_password'} do |f|%>
       <ul>
@@ -111,13 +97,6 @@
         <li><%= t'setting.desc5'%><%= password_field :user, :password %></li>
         <li><%= t'setting.desc6'%><%= password_field :user, :password_confirmation %></li>
       </ul>
-      <%= submit_tag t('action.change')%>
-    <% end %>
-  </div>
-  <div class='user-setting-content' id='edit_email' style='display:none'>
-    <% form_for :user, @me, :url => {:action => 'edit'} do |f|%>
-      <%= t'setting.desc7'%>:<br />
-      <%= f.text_field :email %>
       <%= submit_tag t('action.change')%>
     <% end %>
   </div>

@@ -45,7 +45,7 @@ class UserController < ApplicationController
     end
   end
 
-  alias_method :edit_username, :edit
+  #alias_method :edit_username, :edit
   def edit_profile
     if request.post?
       if @me.profile.update_attributes(params[:profile])

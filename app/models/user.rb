@@ -90,6 +90,10 @@ class User < ActiveRecord::Base
   validates_length_of       :name, :within => 1..10
 
   validates_uniqueness_of   :email, :case_sensitive => false
+  validate_on_create do |u|
+    u.errors.add(:name, '暱稱不能有空白') if  u.name.match(/\s/)
+  end
+
 
   attr_reader :password
 
