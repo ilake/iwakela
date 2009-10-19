@@ -1,5 +1,10 @@
 class AddMissingIndexes < ActiveRecord::Migration
   def self.up
+    create_table :service_profiles do |t|
+      t.belongs_to :user
+      t.string :service, :name, :password
+    end
+
     check_add_index :groups, :id
     check_add_index :about_states, :confirm_email_code
     check_add_index :messages, :id
@@ -55,6 +60,8 @@ class AddMissingIndexes < ActiveRecord::Migration
   end
 
   def self.down
+    drop_table :service_profiles
+
     check_remove_index :groups, :id
     check_remove_index :about_states, :confirm_email_code
     check_remove_index :messages, :id
