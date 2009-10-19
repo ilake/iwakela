@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090909054105) do
+ActiveRecord::Schema.define(:version => 20091019034306) do
 
   create_table "about_states", :force => true do |t|
     t.integer "user_id"
@@ -18,10 +18,15 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.boolean "confirm_email"
   end
 
+  add_index "about_states", ["confirm_email_code"], :name => "index_about_states_on_confirm_email_code"
+  add_index "about_states", ["user_id"], :name => "index_about_states_on_user_id"
+
   create_table "attrs", :force => true do |t|
     t.integer "game_id"
     t.string  "name"
   end
+
+  add_index "attrs", ["game_id"], :name => "index_attrs_on_game_id"
 
   create_table "calls", :force => true do |t|
     t.integer  "demander_id"
@@ -30,12 +35,19 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.datetime "time"
   end
 
+  add_index "calls", ["accepter_id"], :name => "index_calls_on_accepter_id"
+  add_index "calls", ["demander_id"], :name => "index_calls_on_demander_id"
+  add_index "calls", ["id"], :name => "index_calls_on_id"
+
   create_table "chats", :force => true do |t|
     t.integer  "user_id"
     t.datetime "created_at"
     t.text     "content"
     t.integer  "group_id"
   end
+
+  add_index "chats", ["group_id"], :name => "index_chats_on_group_id"
+  add_index "chats", ["user_id"], :name => "index_chats_on_user_id"
 
   create_table "comments", :force => true do |t|
     t.datetime "created_at"
@@ -45,8 +57,10 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.integer  "user_id"
   end
 
+  add_index "comments", ["record_id", "record_type"], :name => "index_comments_on_record_id_and_record_type"
   add_index "comments", ["record_id", "user_id"], :name => "index_comments_on_record_id_and_user_id"
   add_index "comments", ["record_type"], :name => "index_comments_on_record_type"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "emails", :force => true do |t|
     t.string   "from"
@@ -73,6 +87,9 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.integer "value",      :default => 0
   end
 
+  add_index "fight_methods", ["game_id"], :name => "index_fight_methods_on_game_id"
+  add_index "fight_methods", ["id"], :name => "index_fight_methods_on_id"
+
   create_table "foos", :force => true do |t|
     t.integer  "forum_id"
     t.string   "title"
@@ -92,12 +109,16 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.string   "category"
   end
 
+  add_index "forums", ["group_id"], :name => "index_forums_on_group_id"
+  add_index "forums", ["id"], :name => "index_forums_on_id"
   add_index "forums", ["user_id"], :name => "index_forums_on_user_id"
 
   create_table "friends", :id => false, :force => true do |t|
     t.integer "user_id",   :null => false
     t.integer "friend_id", :null => false
   end
+
+  add_index "friends", ["friend_id", "user_id"], :name => "index_friends_on_friend_id_and_user_id"
 
   create_table "games", :force => true do |t|
     t.integer  "user_id"
@@ -110,6 +131,8 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.text     "desc"
     t.string   "pass_code"
   end
+
+  add_index "games", ["id"], :name => "index_games_on_id"
 
   create_table "goal_details", :force => true do |t|
     t.integer  "record_id"
@@ -127,6 +150,7 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
   end
 
   add_index "goal_details", ["goal_id"], :name => "index_goal_details_on_goal_id"
+  add_index "goal_details", ["record_id"], :name => "index_goal_details_on_record_id"
 
   create_table "goals", :force => true do |t|
     t.integer "user_id"
@@ -139,12 +163,16 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.integer "status",  :default => 0
   end
 
+  add_index "goals", ["id"], :name => "index_goals_on_id"
   add_index "goals", ["user_id"], :name => "index_goals_on_user_id"
 
   create_table "great_words", :force => true do |t|
     t.text    "content"
     t.integer "user_id"
   end
+
+  add_index "great_words", ["id"], :name => "index_great_words_on_id"
+  add_index "great_words", ["user_id"], :name => "index_great_words_on_user_id"
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -158,6 +186,9 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.integer  "members_count"
   end
 
+  add_index "groups", ["id"], :name => "index_groups_on_id"
+  add_index "groups", ["owner_id"], :name => "index_groups_on_owner_id"
+
   create_table "messages", :force => true do |t|
     t.integer  "user_id"
     t.integer  "master_id"
@@ -168,6 +199,11 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "messages", ["id"], :name => "index_messages_on_id"
+  add_index "messages", ["master_id"], :name => "index_messages_on_master_id"
+  add_index "messages", ["message_id"], :name => "index_messages_on_message_id"
+  add_index "messages", ["user_id"], :name => "index_messages_on_user_id"
 
   create_table "mugshots", :force => true do |t|
     t.integer  "user_id"
@@ -182,6 +218,9 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.integer  "group_id"
   end
 
+  add_index "mugshots", ["group_id"], :name => "index_mugshots_on_group_id"
+  add_index "mugshots", ["id"], :name => "index_mugshots_on_id"
+  add_index "mugshots", ["parent_id"], :name => "index_mugshots_on_parent_id"
   add_index "mugshots", ["user_id"], :name => "index_mugshots_on_user_id"
 
   create_table "profiles", :force => true do |t|
@@ -201,12 +240,17 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.text    "dream_word"
   end
 
+  add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
+
   create_table "pushes", :force => true do |t|
     t.integer  "user_id"
     t.integer  "record_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "pushes", ["record_id"], :name => "index_pushes_on_record_id"
+  add_index "pushes", ["user_id"], :name => "index_pushes_on_user_id"
 
   create_table "records", :force => true do |t|
     t.string   "todo_name"
@@ -226,6 +270,7 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.integer  "pri",              :default => 0
   end
 
+  add_index "records", ["id"], :name => "index_records_on_id"
   add_index "records", ["todo_name"], :name => "index_records_on_todo_name"
   add_index "records", ["todo_time"], :name => "index_records_on_todo_time"
   add_index "records", ["user_id"], :name => "index_records_on_user_id"
@@ -236,12 +281,16 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.integer "value"
   end
 
+  add_index "scores", ["user_id"], :name => "index_scores_on_user_id"
+
   create_table "service_profiles", :force => true do |t|
     t.integer "user_id"
     t.string  "service"
     t.string  "name"
     t.string  "password"
   end
+
+  add_index "service_profiles", ["user_id"], :name => "index_service_profiles_on_user_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id"
@@ -289,6 +338,8 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.datetime "created_at"
   end
 
+  add_index "talks", ["game_id"], :name => "index_talks_on_game_id"
+
   create_table "targets", :force => true do |t|
     t.integer  "user_id",                         :null => false
     t.datetime "todo_target_time"
@@ -296,6 +347,8 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.integer  "month"
     t.integer  "todo_type",        :default => 0
   end
+
+  add_index "targets", ["user_id"], :name => "index_targets_on_user_id"
 
   create_table "tiny_mce_photos", :force => true do |t|
     t.string   "name"
@@ -311,6 +364,9 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "tiny_mce_photos", ["parent_id"], :name => "index_tiny_mce_photos_on_parent_id"
+  add_index "tiny_mce_photos", ["user_id"], :name => "index_tiny_mce_photos_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -328,5 +384,10 @@ ActiveRecord::Schema.define(:version => 20090909054105) do
     t.string   "time_zone",                 :default => "Taipei"
     t.datetime "sleep_target_time"
   end
+
+  add_index "users", ["group_id"], :name => "index_users_on_group_id"
+  add_index "users", ["id"], :name => "index_users_on_id"
+  add_index "users", ["name"], :name => "index_users_on_name"
+  add_index "users", ["yahoo_userhash"], :name => "index_users_on_yahoo_userhash"
 
 end
