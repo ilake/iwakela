@@ -34,7 +34,7 @@ class UserController < ApplicationController
     @time_now = user_now
     @setting = @me.setting
 
-    @wake_target_time_array = Array.new(7, @user.target_time)
+    @wake_target_time_array = Array.new(7, @user.target_time_now)
     @user.targets.wake.each do |t|
       @wake_target_time_array[t.week] = t.todo_target_time
     end

@@ -193,7 +193,7 @@ class MemberController < ApplicationController
     @record_count = @user.records.count
     @diary_count =  @user.records.have_content.count
 
-    @wake_target_time_array = Array.new(7, @user.target_time)
+    @wake_target_time_array = Array.new(7, @user.target_time_now)
     @user.targets.wake.each do |t|
       @wake_target_time_array[t.week] = t.todo_target_time
     end
