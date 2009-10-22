@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091019034306) do
+ActiveRecord::Schema.define(:version => 20091022042114) do
 
   create_table "about_states", :force => true do |t|
     t.integer "user_id"
@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(:version => 20091019034306) do
     t.string  "name"
     t.text    "comment"
     t.integer "rank",    :default => 0
-    t.integer "total",   :default => 0
+    t.float   "total",   :default => 0.0
     t.integer "status",  :default => 0
   end
 
