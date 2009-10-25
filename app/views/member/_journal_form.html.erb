@@ -4,7 +4,7 @@
       <p class='journal-edit-time' id='edit_remote_result'>
         <% 
           if @realtime 
-            concat "<b>#{record.todo_time.to_s(:mdate)}</b>"
+            concat "<b style='font-size: 120%;'>#{record.todo_time.to_s(:mdate)}</b>"
             #datetime_select :record, :todo_time, :use_month_numbers => true, :end_year => Time.now.year 
             concat hidden_field(:record, :todo_time)
             concat " (這個時間不對嗎? 你可能需要做時間校正 #{link_to '前往校正', :controller => 'user', :action => 'edit', :anchor => 'edit_time_offset'})"
@@ -13,6 +13,17 @@
           end
         %>
       </p>
+      <div style='margin-bottom:10px;'>
+        <h1 style='display:inline;'>格言佳句</h1>
+        <%= link_to_remote ">>還要看",:update => 'nice_words', :url => {:action => 'update_words'}%>
+        |  
+        <%= link_to "我也要貢獻", word_path(:action => 'new'), {:popup => true} %>
+         <%= b_image_tag("ajaxloading/ajax-loader.gif", :id => 'loading') %>
+      </div>
+    <div id='nice_words' class='rounded'>
+
+      <p><%= format_content(@word.content) if @word %></p>
+    </div>
       <%= hidden_field :record, :state%>
 
       <div><span class='journal-content-title'><%= t'journal.puborhide'%></span></div>

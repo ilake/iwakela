@@ -7,7 +7,7 @@ class MemberController < ApplicationController
   before_filter :date_select, :only => [:list, :census, :list_journal]
   before_filter :find_user, :except => [:show]
 
-  before_filter :rand_word, :only => [:wake_up, :sleep, :create, :write_diary]
+  before_filter :rand_word, :only => [:wake_up, :sleep, :create, :write_diary, :new_journal, :edit_journal]
   before_filter :latest_diary, :only => [:wake_up, :sleep, :create, :write_diary]
 
   before_filter :user_now, :only => [:journal, :night_journal]
