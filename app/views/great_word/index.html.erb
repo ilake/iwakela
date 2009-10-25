@@ -11,6 +11,11 @@
       <% user = word.user %>
       <td><%= link_to_user user, user.name %></td>
       <td><%= format_content word.content %></td>
+      <% admin_area do%>
+        <td>
+          <%= button_to '刪除', {:action => 'destroy', :id => word }, :confirm => '妳確定要刪除嗎?' %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 </table>

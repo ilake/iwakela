@@ -18,7 +18,14 @@
       <%= link_to t('action.destroy'), member_url(:action => 'destroy', :id => @record), :confirm => "#{t('action.destroyornot')}" if own_right %>
       <%= link_to t('action.encourage'), member_url(:action => 'push', :id => @record ), :class => 'journal-encourage', :title => "#{@record.push_count}人#{t('action.encourage')}" unless own_right %>
     </span>
-    <%= content_tag(:span, link_to("#{@record.push_count}人#{t('action.encourage')}", :action => :push_users, :id => @record)) %>
+    <%= content_tag(:span, link_to("#{@record.push_count}人#{t('action.encourage')}", :action => :push_users, :id => @record)) %>  |  
+      <% anchor = @journal_status == 'daylight' ? 'wake_goal' : 'sleep_goal' %> 
+      <%= link_to t("journal.add#{anchor}"), member_url(:action => 'new_journal', :todo_time => @last_day, :type => @journal_status), :title => @last_day.to_s(:ymd) if own_right %>  
+      <% 
+        target = @journal_status == 'daylight' ? @user.target_time_now : @user.sleep_target_time
+        setting_name =  target ? t('member.setting') : "<span class='w-red'>#{t('journal.noset')}</span>"
+      %>
+      <%= link_to setting_name, user_url(:action => 'edit', :anchor => anchor ) if own_right %>
   </div>
   <span class='journal-time-target'>
     <%= @today_target_time ? t('journal.target_time') : "<span class='w-red'>#{t'journal.no_target_time'}</span>"%>
@@ -69,6 +76,13 @@
       <%= t "journal.#{@journal_status}" %>
       <%= @last_day.to_s(:ymd) %>
     </span>
+      <% anchor = @journal_status == 'daylight' ? 'wake_goal' : 'sleep_goal' %>
+      <%= link_to t("journal.add#{anchor}"), member_url(:action => 'new_journal', :todo_time => @last_day, :type => @journal_status), :title => @last_day.to_s(:ymd) if own_right %>
+      <% 
+        target = @journal_status == 'daylight' ? @user.target_time_now : @user.sleep_target_time
+        setting_name =  target ? t('member.setting') : "<span class='w-red'>#{t('journal.noset')}</span>"
+      %>
+      <%= link_to setting_name, user_url(:action => 'edit', :anchor => anchor ) if own_right %>
     <span class='journal-status <%= "journal-logo-#{@journal_status}" %>'></span>
   </div>
   <span class='journal-time-target'>

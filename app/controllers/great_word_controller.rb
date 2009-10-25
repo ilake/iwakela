@@ -32,7 +32,11 @@ class GreatWordController < ApplicationController
   end
 
   def destroy
-    great_word = @me.great_words.find(params[:id])
+    if @me && @me.id == ADMIN_ID
+      great_word = GreatWord.find(params[:id])
+    else
+      great_word = @me.great_words.find(params[:id])
+    end
     if great_word.destroy
       redirect_to :back
     else

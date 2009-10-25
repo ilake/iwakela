@@ -67,7 +67,7 @@
     sick: 请假中
     record_title: 的早起日志 
     group_title: 的早鸟团
-    setting: 设定
+    setting: 目標设定
     friend: 我的好友
     friend_set: 好友设定
     nickname: 昵称
@@ -188,6 +188,8 @@
     is_blank: 是空的
     addornot: 要补上吗
     addjour: 补上日志
+    addwake_goal: 補上起床時間
+    addsleep_goal: 補上睡覺時間
     jou_hide: 日志隐藏
     jour_none: 日志未填写
     isee: 我要看

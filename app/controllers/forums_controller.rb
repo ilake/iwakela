@@ -55,7 +55,13 @@ class ForumsController < ApplicationController
   end
 
   def destroy
-    @me.forums.find(params[:id]).destroy
+    if @me && @me.id == ADMIN_ID
+      forum = Forum.find(params[:id])
+    else
+      forum = @me.forums.find(params[:id])
+    end
+
+    forum.destroy
     redirect_to :controller => 'forums', :action => 'index'
   end
 
