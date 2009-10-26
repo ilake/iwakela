@@ -98,6 +98,7 @@
   </table>
 <script type="text/javascript">
   (function($){
+     var once_index = 0;
      function check_goals_exist() {
        if($('.today-goals-list tr:not(.no-goals)').size() > 0 ) {
          $('.no-goals').hide();
@@ -214,7 +215,8 @@
        var new_goal;
 
        if (click == 'once') {
-         var g_id = 'once';
+         var g_id = 'once]['+once_index;
+         once_index = once_index + 1;
          var text = $(".once_goal_name input").val();
          var comment = '';
          var type = 'once';

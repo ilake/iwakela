@@ -89,7 +89,7 @@
       <tbody class='today-goals-list'>
         <tr class='no-goals w-red fw-bold'><td class='pad-10'> <%= t'journal.nogoal'%></td></tr>
           <% @today_goals.each do |g|%>
-            <% goal_id = g.goal ? g.goal.id : 'once' %>
+            <% goal_id = g.goal ? (g.goal_type == 'daily' ? g.goal.id : g.id) : 'once' %>
             <tr goal_id=<%=goal_id%>>
               <td class='goal_detail' detail_id=<%= g.id %>></td>
               <td class="goal_done">

@@ -607,12 +607,23 @@ class MemberController < ApplicationController
         end
       elsif v['goal_type'] == 'once'
         goal_id = @user.goals.find_or_create_by_name('單次目標').id
+      elsif k == 'once' 
+        goal_id = @user.goals.find_or_create_by_name('單次目標').id
+
+        v.values.each do |vv|
+          goal_detail = record.goal_details.find_or_initialize_by_name(vv['name'])
+          vv.merge!(:done => vv['done'], :goal_id => goal_id, :user_id => @user.id)
+          goal_detail.attributes = vv
+          goal_detail.save!
+        end
       end
       
-      goal_detail = record.goal_details.find_or_initialize_by_name(v['name'])
-      v.merge!(:done => v['done'], :goal_id => goal_id, :user_id => @user.id)
-      goal_detail.attributes = v
-      goal_detail.save!
+      if k != 'once'
+        goal_detail = record.goal_details.find_or_initialize_by_name(v['name'])
+        v.merge!(:done => v['done'], :goal_id => goal_id, :user_id => @user.id)
+        goal_detail.attributes = v
+        goal_detail.save!
+      end
     end
   end
 end
