@@ -181,17 +181,6 @@ class MainController < ApplicationController
   end
 
   def test 
-    feed_url = 'http://www.bnext.com.tw/RssFeedPreferred_Focus'
-    output = "<h1>My RSS Reader</h1>" 
-    open(feed_url) do |http|
-      response = http.read
-      @result = RSS::Parser.parse(response, false)
-      #title display link date
-#      @result.items.each_with_index do |item, i|
-#        output += "#{link_to} #{i+1}. #{item.title}<br />" if i < 10  
-#      end  
-    end
-
   end
 
   def ajax

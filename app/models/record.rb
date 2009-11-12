@@ -119,7 +119,7 @@ class Record < ActiveRecord::Base
   def self.set_score(status, user)
     #最近21天的成功次數有多少
     success_count = self.wake.success.count(:all, :order => "id DESC", :conditions => "records.todo_time > '#{user.time_now.ago(21.days).at_beginning_of_day.to_s(:db)}'")
-    total_score = success_count*4
+    total_score = success_count*5
     total_score = 100 if total_score > 100
     status.update_attribute(:score, total_score)
   end
