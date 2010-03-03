@@ -13,4 +13,4 @@ db/schema.rb
 public/dispatch.rb
 public/h.rb
 tags
-
+tmp
