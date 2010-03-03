@@ -14,3 +14,7 @@ public/dispatch.rb
 public/h.rb
 tags
 tmp
+db/schema.rb.backup
+*.swp
+*.swo
+.rdebugrc
