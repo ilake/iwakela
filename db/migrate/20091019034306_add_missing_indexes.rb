@@ -1,9 +1,9 @@
 class AddMissingIndexes < ActiveRecord::Migration
   def self.up
-    create_table :service_profiles do |t|
-      t.belongs_to :user
-      t.string :service, :name, :password
-    end
+#    create_table :service_profiles do |t|
+#      t.belongs_to :user
+#      t.string :service, :name, :password
+#    end
 
     check_add_index :groups, :id
     check_add_index :about_states, :confirm_email_code
