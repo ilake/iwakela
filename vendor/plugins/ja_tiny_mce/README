@@ -1,0 +1,76 @@
+JaTinyMce
+===========
+
+This plugin based on j_tiny_mce plugin, thanks for his great job, and modify and update this plugin for my project, now this plugin for work with jquery and attachment_fu.
+
+1, Install ja_tiny_mce
+
+cd vendor/plugins
+git clone git://github.com/ilake/ja_tiny_mce.git
+
+script/generate ja_tiny_mce_migration
+rake db:migrate
+
+
+2, Install dependent plugins(if you didn't):
+
+rake ja_tiny_mce:plugins
+
+this command would copy attachment_fu, responds_to_parent, will_paginate to your plugin directory, and the jrails you could install it or just include a jquery file
+
+attachment_fu git://github.com/technoweenie/attachment_fu.git
+responds_to_parent http://responds-to-parent.googlecode.com/svn/trunk
+will_paginate git://github.com/mislav/will_paginate.git
+jrails (Recommend) http://ennerchi.com/projects/jrails
+
+Also, you need 'login_required' method and 'current_user' object in your application. (I recommend you use restful_authentication). http://github.com/technoweenie/restful-authentication/tree/master
+
+3, In your layout:
+<%= javascript_include_tiny_mce_if_used %> 
+<%= tiny_mce if using_tiny_mce? %>
+
+4, In your controller:
+
+uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit])
+
+This AppConfig.default_mce_options is in config/initializers/tiny_mce_plus_config.rb, you could change the setting there
+
+5. In your view
+Then append the following to the text area you want to transform into a TinyMCE editor. You can change the name by editing the ‘editor_selector’ param in the controller code options.
+
+:class => "mceEditor"
+
+6. Install file lists
+==================
+
+rake ja_tiny_mce:install 
+
+will Install following files:
+
+app
+  |-- controller
+    |-- tiny_mce_photos_controller.rb
+  |-- helpers
+    |-- remote_link_renderer.rb
+  |-- models
+    |-- tiny_mce_photo.rb
+  |-- views
+    |-- tiny_mce_photos
+       |-- _photo_list.html.erb
+config
+  |-- initializers
+    |-- tiny_mce_plus_config.rb
+
+public
+  |-- images
+    |-- tiny_mce
+  |-- javascripts
+    |-- tiny_mce
+
+You may custom the config in tiny_mce_plus_config.rb.
+
+Attention:
+1, do not put <p> </p> around the textarea.
+2, If you use old will_paginate plugin, maybe change the url_for to url_option in remote_link_renderer.rb
+
+any sugestions? lake.ilakela at gmail.com, released under the MIT license
