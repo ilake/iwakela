@@ -2,14 +2,20 @@ set :application, 'iwakela'
 #user for ssh login
 task :stage do 
   set :user, 'iwakela0'
-  set :domain, 'iwakela.com'
+  #set :domain, 'iwakela.com'
   set :deploy_to, "/home/#{user}/deploy"
+  role :web, 'iwakela.com'
+  role :app, 'iwakela.com'
+  role :db,  'iwakela.com', :primary => true
 end
 
 task :production do 
   set :user, 'root'
-  set :domain, 'fb.iwakela.com'
+  #set :domain, 'fb.iwakela.com'
   set :deploy_to, "/var/rails/eb_deploy"
+  role :web, 'fb.iwakela.com'
+  role :app, 'fb.iwakela.com'
+  role :db, 'fb.iwakela.com', :primary => true
 end
 
 default_run_options[:pty] = true
@@ -28,11 +34,6 @@ set :use_sudo, false
 set :shared_children, %w(system log pids mugshots tiny_mce_photos)
 
 after 'deploy:symlink',  'iwakela:extra_setting'
-
-role :web, domain
-role :app, domain
-role :db,  domain, :primary => true
-
 
 namespace :iwakela do 
   task :extra_setting do
