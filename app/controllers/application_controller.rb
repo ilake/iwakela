@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   helper :all
 
-  include HoptoadNotifier::Catcher
+ # include HoptoadNotifier::Catcher
   require "sanitize"
 
   filter_parameter_logging :password
