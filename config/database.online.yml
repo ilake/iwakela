@@ -1,7 +1,9 @@
 production:
   adapter: mysql
   database: iwakela0_iwakela
-  username: iwakela0_iwakela
-  password: plokmiju1
+#  username: iwakela0_iwakela
+#  password: plokmiju1
+  username: root
+  password: 0okm9ijn
   encoding: utf8
 
