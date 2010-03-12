@@ -1,9 +1,16 @@
 set :application, 'iwakela'
 #user for ssh login
-#set :user, 'iwakela0'
-#set :domain, 'iwakela.com'
-set :user, 'root'
-set :domain, 'fb.iwakela.com'
+task :stage do 
+  set :user, 'iwakela0'
+  set :domain, 'iwakela.com'
+  set :deploy_to, "/home/#{user}/deploy"
+end
+
+task :production do 
+  set :user, 'root'
+  set :domain, 'fb.iwakela.com'
+  set :deploy_to, "/var/rails/eb_deploy"
+end
 
 default_run_options[:pty] = true
 
@@ -17,8 +24,6 @@ set :deploy_via, :remote_cache
 set :git_shallow_clone, 1
 set :git_enable_submodules, 1
 set :use_sudo, false
-#set :deploy_to, "/home/#{user}/deploy"
-set :deploy_to, "/var/rails/eb_deploy"
 
 set :shared_children, %w(system log pids mugshots tiny_mce_photos)
 
