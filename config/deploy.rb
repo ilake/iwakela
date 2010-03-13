@@ -1,8 +1,17 @@
+#----------------------------------------
+#
+#Memo: install rmagick for attachment_fu to resize image
+#sudo apt-get install imagemagick
+#sudo apt-get install libmagick9-dev
+#sudo gem install rmagick
+#http://github.com/dalibor/ubuntu_ror_installation
+#
+#----------------------------------------
 set :application, 'iwakela'
 #user for ssh login
 task :stage do 
   set :user, 'iwakela0'
-  #set :domain, 'iwakela.com'
+  set :hosting, 'hostingrails'
   set :deploy_to, "/home/#{user}/deploy"
   role :web, 'iwakela.com'
   role :app, 'iwakela.com'
@@ -11,7 +20,7 @@ end
 
 task :production do 
   set :user, 'root'
-  #set :domain, 'fb.iwakela.com'
+  set :hosting, 'webbynode'
   set :deploy_to, "/var/rails/eb_deploy"
   role :web, 'fb.iwakela.com'
   role :app, 'fb.iwakela.com'
@@ -49,6 +58,13 @@ namespace :iwakela do
     run "cp #{db_config} #{latest_release}/config/database.yml;"
   end
 
+  task :chown do
+    run "cd #{latest_release} && chown www-data #{latest_release} -R;"
+#    run "cd #{latest_release} && chown www-data #{latest_release}/config/environment.rb;"
+#    run "cd #{latest_release} && chown www-data #{latest_release}/public -R;"
+#    run "cd #{latest_release} && chown www-data #{latest_release}/tmp -R;"
+  end
+
   task :update do 
     deploy::update
   end
@@ -60,6 +76,7 @@ namespace :iwakela do
   task :start do 
     deploy::migrate
     rebuild_asset
+    chown if hosting == 'webbynode'
     restart
   end
 

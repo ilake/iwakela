@@ -65,6 +65,8 @@ Rails::Initializer.run do |config|
   #config.action_mailer.delivery_method = :activerecord
 
   #config.gem "adzap-ar_mailer", :lib => 'action_mailer/ar_mailer', :source => 'http://gems.github.com'
+  #config.gem "RMagick"
+  config.gem 'hoptoad_notifier'
 end
 require 'json'
 require "errors"
