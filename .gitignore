@@ -20,4 +20,5 @@ db/schema.rb.backup
 .rdebugrc
 public/javascripts/base_packaged.js
 public/stylesheets/base_packaged.css
-
+config/deploy
+config/database.online.yml
