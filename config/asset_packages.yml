@@ -10,6 +10,7 @@ javascripts:
   - jrails
   - jquery.flot.pack
   - stickies
+  - iwakela-graph.js
   - autopopulate
 stylesheets: 
 - base: 
@@ -21,3 +22,4 @@ stylesheets:
   - eb_images
   - stickies
   - journal
+  - iwakela.graph.css
