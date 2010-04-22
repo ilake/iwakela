@@ -70,16 +70,6 @@ ActiveRecord::Schema.define(:version => 20091022042114) do
     t.datetime "created_on"
   end
 
-  create_table "feature_methods", :force => true do |t|
-    t.integer "fight_method_id"
-    t.integer "fight_group_id"
-  end
-
-  create_table "fight_groups", :force => true do |t|
-    t.integer "game_id"
-    t.string  "name"
-  end
-
   create_table "fight_methods", :force => true do |t|
     t.integer "game_id"
     t.string  "name"
@@ -89,13 +79,6 @@ ActiveRecord::Schema.define(:version => 20091022042114) do
 
   add_index "fight_methods", ["game_id"], :name => "index_fight_methods_on_game_id"
   add_index "fight_methods", ["id"], :name => "index_fight_methods_on_id"
-
-  create_table "foos", :force => true do |t|
-    t.integer  "forum_id"
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "forums", :force => true do |t|
     t.string   "subject"
@@ -182,7 +165,7 @@ ActiveRecord::Schema.define(:version => 20091022042114) do
     t.integer  "state",         :default => 0
     t.datetime "created_at"
     t.integer  "owner_id"
-    t.integer  "chats_num"
+    t.integer  "chats_num",     :default => 0
     t.integer  "members_count"
   end
 
@@ -353,14 +336,14 @@ ActiveRecord::Schema.define(:version => 20091022042114) do
   create_table "tiny_mce_photos", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "user_id"
+    t.integer  "user_id",      :limit => 11
     t.string   "content_type"
     t.string   "filename"
-    t.integer  "size"
-    t.integer  "parent_id"
+    t.integer  "size",         :limit => 11
+    t.integer  "parent_id",    :limit => 11
     t.string   "thumbnail"
-    t.integer  "width"
-    t.integer  "height"
+    t.integer  "width",        :limit => 11
+    t.integer  "height",       :limit => 11
     t.datetime "created_at"
     t.datetime "updated_at"
   end
