@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   uses_tiny_mce(:options => AppConfig.message_mce_options, :only => [:new, :edit, :reply])
   helper :all
+  before_filter :check_auth, :only => [:new, :create, :reply, :edit, :update, :destroy]
   before_filter :find_user
   # GET /messages
   # GET /messages.xml
