@@ -20,11 +20,12 @@ config.action_controller.perform_caching             = true
 #
 EB_HOST = 'iwakela.com'
 #ActionController::Base.asset_host = "iwakela.com"
-require 'smtp_tls'
+#require 'smtp_tls'
 
 ActionMailer::Base.delivery_method = :smtp 
 
 ActionMailer::Base.smtp_settings = {
+  :enable_starttls_auto => true,
   :address => "smtp.gmail.com",
   :port => "587",
   :domain => "localhost.localdomain",
