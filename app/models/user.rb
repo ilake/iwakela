@@ -148,9 +148,9 @@ class User < ActiveRecord::Base
 
   def self.authenticate(h)
       user = find_by_email(h[:email])
-      if user && encode(h[:password], user.password_salt) == user.password_hash && user.about_state.confirm_email
+      if user && encode(h[:password], user.password_salt) == user.password_hash# && user.about_state.confirm_email
         user
-      elsif user && !user.about_state.confirm_email
+      elsif user# && !user.about_state.confirm_email
         user.errors.add(:email, "no_confirm") 
         user
       end

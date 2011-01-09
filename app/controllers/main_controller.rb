@@ -26,8 +26,9 @@ class MainController < ApplicationController
 #      end
 
       if @user.save
-        User.send_confirm_email(@user.email)
-        notice_stickie("註冊成功了, 確認信已寄出, 請前往信箱確認開通帳號")
+        #User.send_confirm_email(@user.email)
+        #notice_stickie("註冊成功了, 確認信已寄出, 請前往信箱確認開通帳號")
+        notice_stickie("註冊成功了")
         redirect_to :controller => 'main',:action => 'index'
       end
     end
